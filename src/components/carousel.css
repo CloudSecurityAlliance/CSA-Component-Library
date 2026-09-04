@@ -1,0 +1,53 @@
+/* =========================================================
+   CSA Component Library — Carousel
+   Extracted as-is from the "AI insights & events" carousel in
+   csai-foundation-hub.html — same drag/momentum behavior, tokens
+   renamed. See carousel.js for the companion behavior.
+
+   The edge fade needs to match whatever background the carousel
+   actually sits on, or it reads as a visible white seam on anything
+   that isn't a plain white section. --csa-carousel-bg drives it —
+   defaults to #fff, auto-corrects on [data-surface="dark"], and can be
+   overridden on .csa-carousel (or any ancestor) to match any other
+   background, e.g. a gray section: `.my-section .csa-carousel { --csa-carousel-bg: var(--n25); }`
+   ========================================================= */
+.csa-carousel { position: relative; --csa-carousel-bg: #fff; }
+[data-surface="dark"] .csa-carousel { --csa-carousel-bg: var(--b700); }
+.csa-carousel-viewport { overflow: hidden; }
+.csa-carousel::before, .csa-carousel::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+}
+.csa-carousel::before { left: 0;  background: linear-gradient(90deg,  var(--csa-carousel-bg) 0%, transparent 100%); }
+.csa-carousel::after  { right: 0; background: linear-gradient(270deg, var(--csa-carousel-bg) 0%, transparent 100%); }
+
+.csa-carousel-track { display: flex; gap: 20px; cursor: grab; will-change: transform; touch-action: pan-y; }
+.csa-carousel-track.csa-dragging { cursor: grabbing; }
+
+.csa-carousel-card {
+  flex: 0 0 calc(33.333% - 14px);
+  background: #fff; border: 1px solid var(--n50); border-radius: 14px;
+  overflow: hidden; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+}
+.csa-carousel-card img { width: 100%; height: auto; display: block; pointer-events: none; -webkit-user-drag: none; }
+.csa-carousel-card .csa-carousel-card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+.csa-carousel-card h3 { font-size: 17px; margin-bottom: 8px; }
+.csa-carousel-card p { font-size: 13.5px; color: var(--n300); flex: 1; }
+/* .csa-go is a shared utility now — see cards.css */
+
+.csa-carousel-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: #fff; border: 1px solid var(--n50); box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 3;
+}
+.csa-carousel-arrow svg { width: 22px; height: 22px; color: var(--b800); }
+.csa-carousel-arrow-prev { left: -26px; }
+.csa-carousel-arrow-next { right: -26px; }
+
+@media (max-width: 900px) { .csa-carousel-card { flex: 0 0 calc(70% - 14px); } }
+@media (max-width: 560px) {
+  .csa-carousel-card { flex: 0 0 88%; }
+  .csa-carousel::before, .csa-carousel::after { width: 30px; }
+}

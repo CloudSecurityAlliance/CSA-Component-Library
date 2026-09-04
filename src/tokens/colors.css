@@ -1,0 +1,39 @@
+/* =========================================================
+   CSA Component Library — Color Tokens
+   Source of truth: csa-component-library-SPEC.md, section 1
+   Naming: --{letter}{ramp}, letter = color family, ramp = 25–800
+   No semantic aliases (--csa-blue, --navy, --ink, etc. are retired —
+   see the spec's retirement map if porting old page code).
+   ========================================================= */
+:root {
+  /* BLUE */
+  --b25:#E1F2FF; --b50:#C4E6FF; --b75:#99D4FF; --b100:#66BEFF; --b200:#33A9FF;
+  --b300:#0093FF; --b400:#0072C7; --b500:#00549F; --b600:#003E77; --b700:#102A55; --b800:#0C2040;
+
+  /* ORANGE */
+  --o25:#FFF3DE; --o50:#FFE7BD; --o75:#FFDB99; --o100:#FFCA66; --o200:#FFB833;
+  --o300:#FFA600; --o400:#FF9100; --o500:#FF7A00; --o600:#F25D00; --o700:#CF4300; --o800:#B03100;
+
+  /* TEAL */
+  --t25:#C2FFFF; --t50:#8CFAFA; --t75:#50F0ED; --t100:#14D1D1; --t200:#00B1B4;
+  --t300:#00989C; --t400:#1A8488; --t500:#006A69; --t600:#00504F; --t700:#003C3C; --t800:#002828;
+
+  /* PURPLE */
+  --p25:#F3E8FF; --p50:#ECD6FF; --p75:#DCB3FF; --p100:#C890FF; --p200:#B170FF;
+  --p300:#9962DF; --p400:#8938D9; --p500:#6700CF; --p600:#4D009B; --p700:#2F006E; --p800:#200047;
+
+  /* GREEN */
+  --g25:#AAFFDA; --g50:#70FFC2; --g75:#00DF9B; --g100:#00C181; --g200:#00A36F;
+  --g300:#008757; --g400:#007141; --g500:#005D31; --g600:#004926; --g700:#00381B; --g800:#002713;
+
+  /* RED */
+  --r25:#FFD6CF; --r50:#FFBAAF; --r75:#FF9B8E; --r100:#FF7267; --r200:#FD4D4F;
+  --r300:#EE0E34; --r400:#CB002B; --r500:#9D0016; --r600:#760010; --r700:#4F000B; --r800:#380009;
+
+  /* NEUTRAL */
+  --n25:#EEF3F8; --n50:#DDE6EF; --n75:#C3D1DE; --n100:#A5B7C6; --n200:#899CAC;
+  --n300:#697A89; --n400:#59626F; --n500:#454C5B; --n600:#383C4C; --n700:#282C38; --n800:#191929;
+
+  /* WHITE / BLACK — standalone constants, not steps in a 25–800 ramp */
+  --white:#FFFFFF; --black:#101019;
+}

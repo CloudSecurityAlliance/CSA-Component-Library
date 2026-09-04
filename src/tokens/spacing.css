@@ -1,0 +1,17 @@
+/* =========================================================
+   CSA Component Library — Spacing / Layout Tokens
+   Source: SPEC section 1, "LAYOUT"
+   ========================================================= */
+:root {
+  --maxw: 1200px;
+}
+
+.csa-wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.csa-section {
+  padding: 92px 0;
+}

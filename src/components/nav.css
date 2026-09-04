@@ -1,0 +1,42 @@
+/* =========================================================
+   CSA Component Library — Nav
+   Extracted as-is from the 4 reference pages, tokens renamed.
+   Two real variants exist in the wild:
+     1. Hub nav   — logo lockup + link row + primary CTA button
+                    (csai-foundation-hub.html only)
+     2. Subpage nav — logo lockup + single "← back" link
+                    (ai-resilience-center / catastrophic-risk-annex /
+                     mythos-cyber-capable-ai)
+   Both share the same brand lockup and sticky header shell.
+   Nav content (links, CTA target, back destination) is a per-page
+   placeholder — the real site's own nav will replace this shell
+   once these pages are live on cloudsecurityalliance.org.
+   ========================================================= */
+.csa-nav {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--n50);
+}
+.csa-nav-inner { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+
+/* Brand lockup: CSA mark + divider + CSAI mark + "Foundation" tag */
+.csa-brand { display: flex; align-items: center; gap: 13px; }
+.csa-brand-logo { height: 38px; width: auto; display: block; }
+.csa-brand-sublogo { height: 29px; width: auto; display: block; }
+.csa-brand-divider { width: 1px; height: 28px; background: var(--n50); }
+.csa-brand-lockup { display: flex; align-items: center; gap: 9px; }
+.csa-brand-tag {
+  font-size: 11px; font-weight: 800; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--o700);
+}
+
+/* Variant 1: hub nav link row + CTA */
+.csa-nav-links { display: flex; gap: 30px; font-size: 14.5px; font-weight: 500; }
+.csa-nav-links a { color: var(--n500); }
+.csa-nav-links a:hover { color: var(--b500); }
+@media (max-width: 940px) { .csa-nav-links { display: none; } }
+
+/* Variant 2: subpage back-link */
+.csa-nav-backlink { font-size: 14px; color: var(--n300); font-weight: 600; }
+.csa-nav-backlink:hover { color: var(--b500); }

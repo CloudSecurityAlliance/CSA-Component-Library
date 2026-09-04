@@ -1,0 +1,329 @@
+/* =========================================================
+   CSA Component Library — Cards
+   .csa-card shell (radius/padding/shadow) built fresh: no single
+   reference page used one shared card class, they all had bespoke
+   one-off card variants (.whycard, .road, .rcard, .step, etc.) with
+   radius 14–16px and padding 28–32px — .csa-card synthesizes a
+   sensible shared default from that range. Background/border are
+   surface-aware — see surfaces.css.
+   card-glass replaces the old duplicate-named .hero-card / .involve-card.
+   The spec's literal card-glass CSS omitted border-radius, but both of
+   its real predecessors had one — .hero-card (standalone, not nested
+   in another rounded box) used 16px; .involve-card (nested inside the
+   20px-rounded .involve band) used 12px. Default here is 16px, the
+   standalone case; if you nest card-glass inside another rounded
+   container, scale its radius down to keep corners proportional —
+   see the general nesting note this file's radii follow.
+   ========================================================= */
+.csa-card {
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+}
+/* h3 is left unset at the token level (typography.css) on purpose — its
+   real usages differ enough (a full card, a reveal panel's compact
+   strip, a glass panel, the Surfaces section's demo heading) that they
+   don't share a layout, so the size lives per-context here instead of
+   forcing one h1/h2-style clamp on all of them. The size itself,
+   though, is the same 20px in every one of those contexts on purpose —
+   was previously an inline style on every single card heading in the
+   docs, drifting between 19px/20px with no real reason; consolidated
+   here (see .csa-card-glass/.csa-card-reveal-head below, and #surfaces
+   h3 in the docs page's own <style> block) so every context uses the
+   same size while keeping its own margin, since spacing genuinely
+   differs by layout even though size doesn't. */
+.csa-card h3, .csa-card-media-body h3 { font-size: 20px; margin: 12px 0 10px; }
+
+.csa-card-glass {
+  border-radius: 16px;
+  background: rgba(255,255,255,.8);
+  box-shadow: 0 4px 30px rgba(0,0,0,.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255,255,255,.5);
+  color: var(--b800);
+}
+.csa-card-glass h1, .csa-card-glass h2, .csa-card-glass h3, .csa-card-glass h4 { color: var(--b800); }
+.csa-card-glass p { color: var(--n500); }
+/* Same 20px as .csa-card h3 above — own margin only, see that rule's
+   comment for why h3 is sized per-context but kept at one shared size. */
+.csa-card-glass h3 { font-size: 20px; margin: 8px 0 6px; }
+
+[data-surface="dark"] .csa-card-glass,
+[data-surface="black"] .csa-card-glass {
+  background: rgba(12,32,64,.8);
+  box-shadow: 0 4px 30px rgba(0,0,0,.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(0,62,119,.5);
+  color: #fff;
+}
+[data-surface="dark"] .csa-card-glass h1, [data-surface="dark"] .csa-card-glass h2,
+[data-surface="dark"] .csa-card-glass h3, [data-surface="dark"] .csa-card-glass h4,
+[data-surface="black"] .csa-card-glass h1, [data-surface="black"] .csa-card-glass h2,
+[data-surface="black"] .csa-card-glass h3, [data-surface="black"] .csa-card-glass h4 { color: #fff; }
+[data-surface="dark"] .csa-card-glass p, [data-surface="black"] .csa-card-glass p { color: var(--n75); }
+
+/* Icon sitting at the top of a card — .csa-card + a .csa-icon needs no
+   new class, just spacing between the icon and the text below it. */
+.csa-card .csa-icon { margin-bottom: 16px; }
+
+/* CTA link — b500 by default (matches the reference pages' .go/.rel
+   link color everywhere: .conn .go, .ann .go, .rcard .go, etc.), b300 on
+   hover and on dark surfaces (kept in sync with the arrow-link precedent,
+   distinct from the o500 used for kickers/buttons on dark). Arrow is
+   typed directly into the link text ("Learn more →"), same as the 4 pages.
+   On dark/black, resting color is ALSO b300, so hover needs its own
+   step lighter (b100) — otherwise hovering would show no visible change
+   at all, since :hover's b300 would just match the resting color. */
+.csa-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 14.5px; font-weight: 500; color: var(--b500); transition: .15s; }
+.csa-go:hover { color: var(--b300); }
+[data-surface="dark"] .csa-go, [data-surface="black"] .csa-go { color: var(--b300); }
+[data-surface="dark"] .csa-go:hover, [data-surface="black"] .csa-go:hover { color: var(--b100); }
+
+/* Hover card — a .csa-card modifier. Lift + shadow + border-color on
+   hover, matching the identical pattern used across all 4 reference
+   pages for interactive cards (.conn a:hover, .ann:hover, .rcard:hover —
+   translateY(-2 to -3px) + var(--shadow) + border-color #00549f/b500). */
+.csa-card-hover { transition: .18s; cursor: pointer; }
+.csa-card-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--b500); }
+/* --shadow is a navy-tinted, low-opacity shadow — reads fine lifting off
+   a light/gradient page, but that same navy-on-navy has too little
+   contrast to read against the dark surface's own navy background.
+   Same offsets/blur/spread, just black and notably more opaque. */
+[data-surface="dark"] .csa-card-hover:hover, [data-surface="black"] .csa-card-hover:hover { box-shadow: 0 2px 6px rgba(0,0,0,.25), 0 18px 40px -18px rgba(0,0,0,.55); }
+
+/* Media card — image fills the top edge-to-edge (16:9 by default), text
+   sits below in its own padded body. Unlike .csa-card, the outer shell
+   carries no padding of its own — .csa-card-media-body does instead —
+   so the image can bleed to the rounded corners. Background/border are
+   surface-aware, same rules as .csa-card (see surfaces.css). */
+.csa-card-media { border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-sm); }
+.csa-card-media-img { aspect-ratio: 16 / 9; overflow: hidden; }
+.csa-card-media-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.csa-card-media-body { padding: 24px; }
+
+/* Reveal card — a photo card whose kicker + heading sit permanently on a
+   thin frosted-glass strip pinned to the bottom edge (the image stays
+   visible above it). On hover, that strip grows upward to also reveal
+   the body copy and CTA. Not surface-aware on purpose — the overlay is
+   always dark regardless of the page surface, since its job is contrast
+   against the photo, not matching the page. 4:3 by default.
+   The reveal itself uses a grid-template-rows 0fr->1fr transition
+   rather than max-height, so it grows to fit copy of any length without
+   guessing a cutoff or clipping longer paragraphs.
+   min-height is a safety floor for narrow widths: aspect-ratio alone
+   means a narrow card also gets short, and right before this sits in a
+   grid narrow enough to force 1 column, it can get too short for the
+   revealed kicker+heading+copy+CTA to fit without clipping. Above this
+   floor nothing changes — the card stays a clean 4:3 tile; below it, the
+   card just reads slightly more portrait at that one pinch width, and
+   the photo still covers cleanly via object-fit. */
+.csa-card-reveal { position: relative; width: 100%; aspect-ratio: 4 / 3; min-height: 280px; min-width: 0; border-radius: 16px; overflow: hidden; cursor: pointer; } /* width: 100% makes the inline size definite (locked to the grid track) instead of auto — with width auto, the aspect-ratio + min-height combo derives width FROM the min-height floor (280 * 4/3 = 373px) and overflows into neighboring columns whenever the track is narrower than that; an explicit width removes that feedback loop so min-height only ever grows the card's height, never its width */
+.csa-card-reveal img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* The overlay itself spans the full card (invisible — no background of its
+   own) so it can never push its contents past the card's edges; the glass
+   background lives on .csa-card-reveal-panel instead, sized to its own
+   content and pinned to the bottom via justify-content. This decouples
+   "how tall the glass panel wants to be" from "the card's fixed height":
+   the kicker+heading never move or clip (flex-shrink: 0), and if the
+   revealed paragraph+CTA don't fit the remaining space, only that inner
+   block scrolls (see .csa-card-reveal-more-inner) instead of the panel
+   spilling above the card and getting sliced off by its rounded corners. */
+.csa-card-reveal-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.csa-card-reveal-panel {
+  display: flex; flex-direction: column; max-height: 100%;
+  padding: 22px 32px 32px; /* less on top than the sides/bottom — the strip's resting height is just kicker+heading, so a full 32px above reads as more empty space than the 32px beside/below actual text */
+  background: rgba(12,32,64,.8);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+.csa-card-reveal-head { flex-shrink: 0; }
+.csa-card-reveal-overlay h3 { color: #fff; }
+/* Same 20px as .csa-card h3 above — margin:8px 0 0 rather than a
+   bottom margin, though: this heading sits directly above the
+   reveal-on-hover copy, which has its own top spacing
+   (.csa-card-reveal-more-inner's padding-top) instead. */
+.csa-card-reveal-head h3 { font-size: 20px; margin: 8px 0 0; }
+.csa-card-reveal-overlay .csa-kicker-sub { color: var(--o500); }
+
+/* EXPERIMENTAL — light glass on dark surface only. The reveal card is
+   intentionally NOT surface-aware everywhere else (see the note above):
+   it's a photo card, so the dark glass panel is there for contrast
+   against the image, not to match the page. This is a one-off swap to
+   try a light panel specifically when the page itself is already dark
+   (mirrors .csa-card-glass's own light variant). Self-contained — to
+   revert to the standard dark glass here too, just delete this block. */
+[data-surface="dark"] .csa-card-reveal-panel,
+[data-surface="black"] .csa-card-reveal-panel {
+  background: rgba(255,255,255,.82);
+  border: 1px solid rgba(255,255,255,.5);
+}
+[data-surface="dark"] .csa-card-reveal-overlay h3, [data-surface="black"] .csa-card-reveal-overlay h3 { color: var(--b800); }
+[data-surface="dark"] .csa-card-reveal-overlay .csa-kicker-sub, [data-surface="black"] .csa-card-reveal-overlay .csa-kicker-sub { color: var(--o700); }
+
+.csa-card-reveal-more { display: grid; grid-template-rows: 0fr; min-height: 0; transition: grid-template-rows .4s ease; }
+/* overflow-y defaults to hidden; cards.js adds .csa-needs-scroll once, up
+   front, only on cards whose content genuinely won't fit the available
+   space — a static geometry check, not something toggled reactively
+   during/after the hover animation. That's deliberate: the card's own
+   height never changes on hover (only this row's height does), so
+   "will this fit" is knowable before any animation runs. Toggling it
+   reactively on a timer meant guessing when the grow transition was
+   "done enough" — any guess landing before the row's actual final height
+   showed a false scrollbar that then vanished once the row caught up.
+   Deciding up front sidesteps that: cards that fit stay hidden forever
+   (no flash, ever), and cards that don't get auto permanently, so the
+   scrollbar just tracks the row's live height every frame — in step
+   with the frosted-glass reveal, with no timing code involved at all. */
+.csa-card-reveal-more-inner {
+  overflow-y: hidden; min-height: 0; max-height: 100%;
+  padding-right: 4px; /* gap so the scrollbar thumb doesn't sit flush against the text */
+}
+/* padding-top only while open, NOT unconditionally: padding can't be
+   shrunk by min-height:0 the way content can, so an unconditional
+   padding-top:14px here would force this row's collapsed (resting)
+   height to a permanent 14px floor instead of true 0 — invisible with
+   overflow:hidden, but on cards.js's needs-scroll cards (permanently
+   overflow-y:auto) that stray 14px sliver was rendering a tiny resting
+   scrollbar nub. Scoping it to :hover means it only ever applies while
+   the row is actually growing/open, so the resting collapse stays 0. */
+.csa-card-reveal:hover .csa-card-reveal-more-inner { padding-top: 14px; }
+.csa-card-reveal-more-inner.csa-needs-scroll { overflow-y: auto; }
+.csa-card-reveal-more-inner p { color: var(--n75); }
+.csa-card-reveal-more-inner .csa-go { color: var(--b300); }
+/* Resting is already b300 here (the panel's own dark glass needs a
+   lighter blue than the library default, regardless of page surface),
+   so the general .csa-go:hover rule (also b300) was a no-op on hover —
+   same bug as the dark-surface case below, just in the default state. */
+.csa-card-reveal-more-inner .csa-go:hover { color: var(--b100); }
+.csa-card-reveal:hover .csa-card-reveal-more { grid-template-rows: 1fr; }
+
+/* EXPERIMENTAL light-glass-on-dark, continued (see .csa-card-reveal-panel
+   above) — same n75/b300 light-on-dark pairing flipped to the standard
+   n500/b500 dark-on-light pairing used everywhere else in the library. */
+[data-surface="dark"] .csa-card-reveal-more-inner p, [data-surface="black"] .csa-card-reveal-more-inner p { color: var(--n500); }
+[data-surface="dark"] .csa-card-reveal-more-inner .csa-go, [data-surface="black"] .csa-card-reveal-more-inner .csa-go { color: var(--b500); }
+/* Explicit override, not a fallthrough: without this, the new dark/black
+   .csa-go:hover → b100 rule above would win here too (matching
+   specificity, later in the file) — but b100 is too pale to read against
+   this panel's light glass background, unlike everywhere else .csa-go
+   appears on dark/black. Keep this one hovering to b300 instead. */
+[data-surface="dark"] .csa-card-reveal-more-inner .csa-go:hover, [data-surface="black"] .csa-card-reveal-more-inner .csa-go:hover { color: var(--b300); }
+
+/* =========================================================
+   Brand Cards — one per CSA sub-brand (Cloud, AI, Zero Trust). White-
+   background only by design (no [data-surface] variants) — sit below
+   card-glass in the showcase, outside the data-surface="light" demo
+   wrapper the standard/hover/media/reveal cards use above.
+   Built from .csa-card + .csa-card-hover + a .csa-icon, same shell as
+   the "Hover cards with CTA" above, plus a per-brand modifier class
+   here for background/border color, and .csa-go recolored to match
+   each brand's accent instead of the library-wide default blue.
+
+   Background + border are both gradients, drawn with the same
+   double-background-clip trick Primary/Secondary buttons use for a
+   gradient border (see buttons.css): the fill gradient is clipped to
+   padding-box (stops at the border's inner edge), the border gradient
+   is clipped to border-box (fills all the way out), and a matching
+   `border-width`/transparent `border-color` carves out the ring
+   between them. Two things extend that same base trick here:
+
+   1. Non-uniform border-width (4px top, 1px right/bottom/left) instead
+      of a uniform ring, so the border-box layer is naturally 4px thick
+      only along the top edge.
+   2. A hard color-stop at 16px into the border gradient — solid accent
+      color from 0–16px, then an immediate jump into the real b100→b50-
+      style fade from 16px to 100%. 16px, not 4px, deliberately — .csa-
+      card's border-radius is 16px, so the border's actual thickness
+      doesn't drop straight from 4px to 1px at the corner; it tapers
+      across that whole 16px curve. Stopping the solid color at just
+      4px cut it off mid-curve, an awkward seam where the color already
+      switched to the b100 gradient start but the border was still
+      visibly tapering. Extending the solid color through the full
+      16px lets it cover the entire curve, so the gradient only begins
+      once the border has settled into its final uniform 1px thickness
+      on the straight vertical side — beyond the flat top edge's own
+      4px height, nothing is painted there anyway (that's the card's
+      interior, no border pixels exist past y:4px in the flat middle),
+      so extending the stop to 16px only affects the corners, which is
+      exactly where it needed to. (The same 1px-wide top sliver of the
+      left/right edges also renders in the solid accent color this way,
+      since border-width only controls thickness, not which pixels the
+      color gradient touches — negligible at 1px.)
+
+   border-color stays fully transparent in BOTH rest and :hover here,
+   set explicitly in the :hover rule too — .csa-card-hover:hover (same
+   specificity: one class + :hover) sets border-color to a real blue,
+   and it would otherwise win by source order (it comes first in this
+   file) and paint an opaque flat border on top of, and hiding, this
+   gradient entirely.
+
+   Hover changes the border gradient's colors (not the fill, and not
+   the constant top accent) via a plain :hover background-image
+   override — this snaps instantly rather than crossfading, since
+   background-image can't interpolate between two different gradients
+   through a `transition` (the same limition buttons.css works around
+   with a ::before opacity crossfade). Left as a snap here: the lift +
+   shadow from .csa-card-hover is the dominant, already-smooth hover
+   cue, and animating a 1px–4px ring's color on top of that reads as a
+   minor enough detail not to be worth the extra overlay complexity —
+   revisit with the same overlay technique if that snap ever reads as
+   janky rather than crisp. */
+.csa-card-brand-cloud {
+  border-width: 4px 1px 1px 1px;
+  border-style: solid;
+  border-color: transparent;
+  background-image: linear-gradient(to bottom, var(--b25), var(--white)),
+                     linear-gradient(to bottom, var(--b500) 16px, var(--b100) 16px, var(--b50) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+.csa-card-brand-cloud:hover {
+  border-color: transparent;
+  background-image: linear-gradient(to bottom, var(--b25), var(--white)),
+                     linear-gradient(to bottom, var(--b500) 16px, var(--b500) 16px, var(--b300) 100%);
+}
+.csa-card-brand-cloud .csa-kicker-sub { color: var(--b500); }
+.csa-card-brand-cloud .csa-go { color: var(--b500); }
+.csa-card-brand-cloud .csa-go:hover { color: var(--b300); }
+
+.csa-card-brand-ai {
+  border-width: 4px 1px 1px 1px;
+  border-style: solid;
+  border-color: transparent;
+  background-image: linear-gradient(to bottom, var(--o25), var(--white)),
+                     linear-gradient(to bottom, var(--o700) 16px, var(--o100) 16px, var(--o50) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+.csa-card-brand-ai:hover {
+  border-color: transparent;
+  background-image: linear-gradient(to bottom, var(--o25), var(--white)),
+                     linear-gradient(to bottom, var(--o700) 16px, var(--o700) 16px, var(--o300) 100%);
+}
+.csa-card-brand-ai .csa-kicker-sub { color: var(--o700); }
+.csa-card-brand-ai .csa-go { color: var(--o700); }
+.csa-card-brand-ai .csa-go:hover { color: var(--o500); }
+
+.csa-card-brand-zt {
+  border-width: 4px 1px 1px 1px;
+  border-style: solid;
+  border-color: transparent;
+  background-image: linear-gradient(to bottom, var(--t25), var(--white)),
+                     linear-gradient(to bottom, var(--t500) 16px, var(--t100) 16px, var(--t50) 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+.csa-card-brand-zt:hover {
+  border-color: transparent;
+  background-image: linear-gradient(to bottom, var(--t25), var(--white)),
+                     linear-gradient(to bottom, var(--t500) 16px, var(--t500) 16px, var(--t200) 100%);
+}
+.csa-card-brand-zt .csa-kicker-sub { color: var(--t500); }
+.csa-card-brand-zt .csa-go { color: var(--t500); }
+.csa-card-brand-zt .csa-go:hover { color: var(--t300); }

@@ -1,0 +1,33 @@
+/* =========================================================
+   CSA Component Library — Icon glyph (shared primitive)
+   A small icon glyph that lives inside a pill/label component (tag,
+   badge, ...), recolored via mask + currentColor rather than a plain
+   <img>: a raster image can't be recolored by CSS at all, so it'd need
+   a separate pre-baked file per color AND per surface AND per state
+   (hover/pressed) to track the text color above it — masking tracks
+   it automatically, everywhere, for free, from a single flat-glyph
+   SVG file. Sized independent of the source SVG's own viewBox via
+   mask-size:contain, so any icon file works, not just ones sharing
+   one particular icon's dimensions.
+
+   This is the fallback route, not the default: when a component
+   already has a pre-colored file variant for the exact color it needs
+   (e.g. badges' Calendar-b100/b300/b500.svg), use a plain <img> instead
+   — it's the simpler markup and gives exact, designer-controlled
+   control over that one file. Reach for this glyph when no matching
+   color file exists, or the icon's color needs to track an arbitrary/
+   dynamic text color rather than one fixed file per surface.
+
+   Was duplicated verbatim per-component (.csa-tag-icon-glyph,
+   .csa-badge-icon-glyph) before being pulled out here — same mechanics,
+   just a different custom-property name and size in each copy, which
+   is exactly how the two sizes drifted out of sync once. One
+   definition now; each component sets only its own size (see
+   tags.css/badges.css) scoped under its own ancestor class. */
+.csa-icon-glyph {
+  display: inline-block; flex-shrink: 0;
+  width: 14px; height: 14px;
+  background-color: currentColor;
+  mask-image: var(--icon-glyph); mask-size: contain; mask-repeat: no-repeat; mask-position: center;
+  -webkit-mask-image: var(--icon-glyph); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
+}

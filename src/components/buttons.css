@@ -1,0 +1,209 @@
+/* =========================================================
+   CSA Component Library — Buttons
+   Source: SPEC section 3, amended per your call: primary is always
+   --o500 (no blue variant at all, no surface-conditional switching).
+   .btn-gold/.btn-gold-outline are retired.
+
+   4 standardized variants, in emphasis order — use .csa-btn-primary,
+   .csa-btn-secondary, .csa-btn-tertiary, or .csa-btn-disabled:
+     Primary   — gradient fill, highest emphasis, one per view ideally
+     Secondary — o500 outline, works unmodified on light AND dark
+     Tertiary  — o500 text only, lowest emphasis, for inline/dense rows
+     Disabled  — non-interactive; surface-aware (see its own comment)
+   .csa-btn-light and .csa-btn-onnavy are retired — Disabled replaces
+   Light, and Secondary replaces Onnavy on dark surfaces (already
+   worked there unmodified, so Onnavy was a redundant variant).
+   ========================================================= */
+/* min-width keeps a short label ("Go", "Save") from looking cramped/
+   squat next to longer-labeled buttons in the same row — justify-
+   content:center re-centers the label+icon within that wider box
+   instead of leaving them hugging the left edge once min-width, not
+   content, is what's setting the button's actual width. Per-size
+   overrides below scale it with the size variant's own padding/
+   font-size rather than one flat value looking oversized on Small or
+   negligible on Large. .csa-btn-block's width:100% simply wins over
+   this whenever it's larger — min-width is only ever a floor. */
+.csa-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 13px 22px; border-radius: 8px;
+  font-weight: 400; font-size: 14.5px;
+  border: 1px solid transparent; transition: .18s; cursor: pointer;
+  min-width: 120px;
+}
+.csa-btn svg { width: 15px; height: 15px; }
+/* Same slot as svg above, for buttons whose icon is a standalone asset
+   file (src/assets/icons/*.svg) rather than markup drawn inline — the
+   flex row + gap already places it before or after the label by source
+   order alone, so no separate icon-button variant class is needed. */
+.csa-btn img { width: 15px; height: 15px; display: block; }
+
+/* Gradient fill (o300→o600) + gradient border (o100→o400), both left to
+   right — the double-background trick: the fill gradient is clipped to
+   padding-box (stops at the border's inner edge) and the border gradient
+   is clipped to border-box (fills all the way out), with the 2px
+   `border: solid transparent` below carving out the ring between them.
+   Border stops are 2 ramp steps down from the fill's (lighter/softer
+   than the 1-step-down o200→o500 this shipped with originally — tried
+   both side by side and this one won).
+
+   Hover fades to a flat o600 fill + flat o400 border via a ::before
+   overlay rather than swapping background-image directly — gradients
+   can't cross-fade through a plain `transition`, they'd snap instantly,
+   so the overlay's opacity is what actually animates. The border keeps
+   its own hover tone (same -2-step relationship the resting o300/o100
+   and o600/o400 pairs use) rather than flattening into the exact same
+   color as the fill and disappearing. This is a plain opacity crossfade,
+   compositor-friendly and with nothing to gate behind
+   prefers-reduced-motion, unlike animating background-position.
+   The overlay reuses the same double-background-clip trick as the
+   element itself (needs its own 2px transparent border for that to
+   work — otherwise its padding-box and border-box would be identical
+   and the second layer would just paint over the first with no ring
+   showing through) — flat "gradients" (two identical color stops) act
+   as solid fills through that same clip split. It's inset -2px
+   (matching the border width) so it extends out over the gradient
+   border too, and sits behind the label text but above the button's own
+   gradient background — negative z-index within the local stacking
+   context .csa-btn-primary establishes via position: relative +
+   z-index:0. */
+.csa-btn-primary {
+  position: relative;
+  z-index: 0;
+  border-width: 2px;
+  background-image: linear-gradient(to right, var(--o300), var(--o600)),
+                     linear-gradient(to right, var(--o100), var(--o400));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  color: #fff;
+  box-shadow: 0 0 0 0 rgba(242,93,0,0); /* animatable 0-state — see :hover */
+  transition: box-shadow .35s ease;
+}
+.csa-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  border: 2px solid transparent;
+  background-image: linear-gradient(var(--o600), var(--o600)),
+                     linear-gradient(var(--o400), var(--o400));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.csa-btn-primary:hover::before { opacity: 1; }
+/* Soft glow, faded in alongside the ::before overlay — rgba since
+   box-shadow can't reference custom properties through color-mix in
+   every supported browser; #F25D00/#FFA600 are o600/o300's literal
+   values (see colors.css). o300 reads better than o600 against a dark/
+   black page background, so dark surfaces get their own brighter glow. */
+.csa-btn-primary:hover { box-shadow: 0 0 24px 2px rgba(242,93,0,.5); }
+/* .csa-hero/.csa-cta are the always-dark bespoke backgrounds noted in
+   hero.css — they don't carry data-surface, so they need to be listed
+   here explicitly too or a primary button inside them (e.g. the hero CTA)
+   would silently fall through to the light-surface o600 glow above. */
+[data-surface="dark"] .csa-btn-primary:hover,
+[data-surface="black"] .csa-btn-primary:hover,
+.csa-hero .csa-btn-primary:hover,
+.csa-cta .csa-btn-primary:hover {
+  box-shadow: 0 0 24px 2px rgba(255,166,0,.5);
+}
+/* .csa-hero-glass-light is a light glass PANEL sitting inside an
+   always-dark .csa-hero, so the rule right above this one (which keys
+   off .csa-hero itself) would otherwise give its Primary button the
+   dark-surface o300 glow — wrong for a panel that reads as light.
+   Same specificity as that rule (two classes), so this only wins
+   because it's declared later in the file; keep it below, not above. */
+.csa-hero-glass-light .csa-btn-primary:hover {
+  box-shadow: 0 0 24px 2px rgba(242,93,0,.5);
+}
+
+/* transition overrides the base .csa-btn's .18s — Primary's hover fades
+   over .35s (its ::before opacity/box-shadow transitions), and at the
+   base .18s Secondary's hover was visibly snappier than Primary's right
+   next to it, so this matches Primary's pace instead. */
+.csa-btn-secondary { background: transparent; border: 2px solid var(--o500); color: var(--o500); transition: .35s ease; }
+/* Border keeps its own hover tone (2 ramp steps down from the fill,
+   same -2-step relationship Primary's hover overlay now uses) instead
+   of flattening to the same color as the fill — border-color and
+   background-color are plain solid values here, so this needs no
+   crossfade workaround, unlike Primary's gradient fill/border. */
+.csa-btn-secondary:hover { background: var(--o600); border-color: var(--o400); color: #fff; }
+/* works unmodified on both light and dark surfaces */
+
+/* No fill, no border (kept as a matching 2px transparent so it lines up
+   at the same height as Primary/Secondary in a row) — o500 text, and a
+   soft 20%-opacity o500 wash fills in on hover. rgba since background
+   can't reference --o500 through color-mix in every supported browser;
+   #FF7A00 → rgb(255,122,0) (see colors.css). transition overrides the
+   base .csa-btn's .18s to match Primary/Secondary's .35s pace. */
+.csa-btn-tertiary { background: transparent; border: 2px solid transparent; color: var(--o500); transition: .35s ease; }
+.csa-btn-tertiary:hover { background: rgba(255,122,0,.2); }
+/* Persistent underline (not just on :hover) — a text-only button has no
+   fill or border to read as clickable at rest, so the line is the
+   resting affordance. On hover it retracts away and disappears (the
+   wash alone carries the hover cue at that point) rather than staying
+   put or growing. A literal border rather than text-decoration: exact,
+   consistent thickness/offset across browsers, unlike relying on
+   text-decoration-thickness support. Drawn as an absolutely-positioned
+   ::after rather than a border on .csa-btn-label itself — a real
+   border/padding on an inline element can only sit flush against its
+   content box (no sub-pixel gap control), where an absolutely
+   positioned line's `bottom` offset can be nudged by exact 1px steps
+   independent of the text's own box, with no risk of it ever affecting
+   the label's line-height/baseline the way padding or margin tweaks did
+   during earlier passes at this. Scoped to a wrapping .csa-btn-label
+   span so it sizes to the label text only, not the button's full padded
+   flex box (which would sit far below the text) or an icon beside it.
+   The retraction animates via transform: scaleX rather than width — a
+   compositor property, so it animates smoothly without triggering
+   layout/paint on every frame the way animating width would.
+   transform-origin: right anchors the RIGHT edge in place, so
+   scaleX(1)→scaleX(0) shrinks away from the left, reading as the line
+   sliding out and off to the right as it vanishes, rather than
+   collapsing in place from both ends or from the left. Eased in with
+   cubic-bezier(0.55,0.055,0.675,0.19) instead of the plain `ease` used
+   elsewhere in this file — a deliberately custom, more pronounced
+   accelerating curve (starts slow, then speeds away toward the end) so
+   this one detail reads as intentional/bespoke rather than a stock
+   transition, distinct from Primary/Secondary's timing. */
+.csa-btn-tertiary .csa-btn-label { position: relative; }
+.csa-btn-tertiary .csa-btn-label::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 1px;
+  border-bottom: 1.5px solid currentColor;
+  transform: scaleX(1);
+  transform-origin: right;
+  transition: transform .35s cubic-bezier(0.55,0.055,0.675,0.19);
+}
+.csa-btn-tertiary:hover .csa-btn-label::after { transform: scaleX(0); }
+
+/* Non-interactive — pointer-events:none so it's inert regardless of
+   whether the real element is an <a> or a <button disabled>, plus
+   aria-disabled for anything reachable via the same class without the
+   native attribute. No :hover rule at all, on purpose (the ask was "no
+   hover change"). Surface-aware like the other 3 variants: light pages
+   use n50/n300, dark/black (and the always-dark .csa-hero/.csa-cta,
+   which don't carry data-surface — see the Primary glow rule above for
+   why those need explicit scoping too) use b800/b500 instead, since n50
+   would be nearly invisible against a dark background. */
+.csa-btn-disabled, .csa-btn[aria-disabled="true"] {
+  background: var(--n50); color: var(--n300); border: 2px solid transparent;
+  cursor: not-allowed; pointer-events: none;
+}
+[data-surface="dark"] .csa-btn-disabled, [data-surface="black"] .csa-btn-disabled,
+.csa-hero .csa-btn-disabled, .csa-cta .csa-btn-disabled,
+[data-surface="dark"] .csa-btn[aria-disabled="true"], [data-surface="black"] .csa-btn[aria-disabled="true"],
+.csa-hero .csa-btn[aria-disabled="true"], .csa-cta .csa-btn[aria-disabled="true"] {
+  background: var(--b800); color: var(--b500);
+}
+
+.csa-btn-sm { padding: 9px 16px; font-size: 13px; min-width: 96px; }
+.csa-btn-sm svg, .csa-btn-sm img { width: 13px; height: 13px; }
+
+.csa-btn-lg { padding: 16px 28px; font-size: 16px; min-width: 140px; }
+.csa-btn-lg svg, .csa-btn-lg img { width: 17px; height: 17px; }
+
+.csa-btn-block { display: flex; width: 100%; justify-content: center; }
