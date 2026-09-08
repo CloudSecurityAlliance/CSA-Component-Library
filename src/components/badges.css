@@ -1,0 +1,89 @@
+/* =========================================================
+   CSA Component Library — Badges
+   The original extraction had one glass-pill badge (.csa-badge-hot,
+   the spec's "Eyebrow") shared identically across all 4 reference
+   pages. It's been retired in favor of the Primary/Secondary/Outlined
+   variants below — this file now only carries the fresh-designed set.
+   ========================================================= */
+.csa-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+
+/* Sized ~10% up from .csa-tag (12px/6px 13px) on purpose — before this,
+   badges and tags were pixel-identical in size, leaving border/italic
+   as the only things telling them apart at a glance. */
+.csa-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 400; letter-spacing: .03em;
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.24);
+  color: #dbe6f2;
+}
+
+/* =========================================================
+   Badge variants — Primary / Secondary / Outlined
+   Designed fresh (not extracted): solid/outlined pills with an icon +
+   italic label. Two color groups, not four — light/gradient-ish
+   backgrounds (white, n25) share one treatment, dark backgrounds
+   (dark, black) share another, matching how every other surface-aware
+   component in this library only branches on "light-ish" vs
+   "dark-ish", never on the individual surface name.
+
+   Icon delivery is a per-instance choice between two techniques, not
+   a single fixed rule: a plain <img> when a pre-colored file variant
+   already exists for the exact color needed (as with Calendar's
+   b500/b100/b300/white files below), or the shared .csa-icon-glyph
+   mask primitive (base/icon-glyph.css) when it doesn't — e.g. an
+   arbitrary content icon with no color-matched file generated for it.
+   The <img> route gives exact, designer-controlled files where they
+   already exist; the glyph route tracks an arbitrary text color for
+   free without needing a new file generated per color. See the "on
+   dark" hero-glass-dark example in the docs for the glyph route in use.
+
+   Calendar-b500/b100/b300.svg are new files generated for this spec
+   (not part of the original 6-file brand-guide icon export): the brand
+   guide only ships colored "chip" icons (a solid background circle +
+   white glyph — see Calendar-CSA-blue.svg) or flat glyph-only icons in
+   navy/white (Calendar.svg / Calendar-white.svg). These badges need a
+   flat colored glyph with NO background shape of its own, so each was
+   made by copying Calendar.svg (glyph-only) and swapping its one
+   hardcoded navy fill to the target token's hex — not by recoloring
+   the chip icon, which would carry an unwanted background shape along
+   with it. */
+.csa-badge-primary, .csa-badge-secondary, .csa-badge-outlined { font-style: italic; }
+.csa-badge-primary img, .csa-badge-secondary img, .csa-badge-outlined img,
+.csa-badge-primary .csa-icon-glyph, .csa-badge-secondary .csa-icon-glyph, .csa-badge-outlined .csa-icon-glyph {
+  width: 15px; height: 15px; display: block;
+}
+
+.csa-badge-primary { background: var(--b500); border-color: var(--b400); color: #fff; }
+
+.csa-badge-secondary { background: var(--b700); border-color: var(--b500); color: #fff; }
+/* .csa-hero/.csa-cta listed alongside the [data-surface] pair for the
+   same reason buttons.css's Primary glow needs it too: those two are
+   always-dark bespoke backgrounds that deliberately never carry
+   data-surface (see hero.css), so without this a badge-secondary
+   dropped into a hero would fall through to the light-surface b700
+   fill — b700 sits close enough to the hero's own navy background to
+   nearly disappear into it. */
+[data-surface="dark"] .csa-badge-secondary, [data-surface="black"] .csa-badge-secondary,
+.csa-hero .csa-badge-secondary, .csa-cta .csa-badge-secondary {
+  background: rgba(0,84,159,.5); /* --b500 (#00549F) at 50% */
+  border-color: var(--b400);
+  color: var(--b100);
+}
+/* .csa-hero-light is the one hero background that ISN'T dark, so the
+   rule above (which keys off .csa-hero itself) would otherwise give its
+   badges the translucent-navy dark treatment — wrong on a light bg, and
+   low-contrast (light b100 text needs a dark backdrop). Same
+   specificity as that rule (two classes), so this only wins by sitting
+   later in this file; falls back to the plain light-surface default
+   just above (background:b700, border:b500, color:#fff). */
+.csa-hero-light .csa-badge-secondary {
+  background: var(--b700);
+  border-color: var(--b500);
+  color: #fff;
+}
+
+.csa-badge-outlined { background: transparent; border-color: var(--b400); color: var(--b500); }
+[data-surface="dark"] .csa-badge-outlined, [data-surface="black"] .csa-badge-outlined {
+  color: var(--b300);
+}

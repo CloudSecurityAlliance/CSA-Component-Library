@@ -1,0 +1,103 @@
+/* =========================================================
+   CSA Component Library — Action
+   A surface-aware interactive tile applied to <a> or <button>.
+   Looks like a card outline at rest; hover lifts it slightly;
+   aria-selected="true" switches to an orange border with a
+   warm background tint to signal a chosen/active state.
+
+   Markup contract:
+     <a class="csa-action" href="…">…</a>
+     <button type="button" class="csa-action" aria-selected="false">…</button>
+
+   Selected state is driven by aria-selected="true" — the ARIA
+   attribute for selected items in listboxes, grids, and tab lists.
+   Toggle it in JS; every visual change below is keyed off that
+   attribute alone, so the JS contract is one attribute flip.
+   ========================================================= */
+
+/* Container — stacks actions in a single full-width column */
+.csa-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.csa-actions .csa-action { width: 100%; }
+
+.csa-action {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  /* Shape */
+  border-radius: 12px;
+  border: 1px solid var(--n50);
+  /* Color */
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  /* Button reset — makes <button> render identically to <a> */
+  font: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  /* Transitions */
+  transition: border-color .15s, box-shadow .15s, background .15s;
+  text-align: left;
+  font-size: 90%;
+}
+
+/* Hover — border steps one ramp darker, gains a subtle lift */
+.csa-action:hover {
+  border-color: var(--n100);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Focus ring for keyboard navigation */
+.csa-action:focus-visible {
+  outline: 2px solid var(--b500);
+  outline-offset: 2px;
+}
+
+/* ── Selected state ─────────────────────────────────────── */
+.csa-action[aria-selected="true"] {
+  border-color: var(--o700);
+  background: var(--o25);
+}
+.csa-action[aria-selected="true"]:hover {
+  border-color: var(--o600);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Surface-aware — dark ───────────────────────────────── */
+[data-surface="dark"] .csa-action {
+  border-color: var(--b600);
+  color: #fff;
+}
+[data-surface="dark"] .csa-action:hover {
+  border-color: var(--b500);
+}
+[data-surface="dark"] .csa-action[aria-selected="true"] {
+  border-color: var(--o500);
+  /* o500 (#FF7A00) at 8% opacity — no ramp token at this depth */
+  background: rgba(255, 122, 0, .08);
+}
+[data-surface="dark"] .csa-action[aria-selected="true"]:hover {
+  border-color: var(--o400);
+}
+
+/* ── Surface-aware — black ──────────────────────────────── */
+[data-surface="black"] .csa-action {
+  border-color: var(--n700);
+  color: #fff;
+}
+[data-surface="black"] .csa-action:hover {
+  border-color: var(--n600);
+}
+[data-surface="black"] .csa-action[aria-selected="true"] {
+  border-color: var(--o500);
+  background: rgba(255, 122, 0, .08);
+}
+[data-surface="black"] .csa-action[aria-selected="true"]:hover {
+  border-color: var(--o400);
+}
