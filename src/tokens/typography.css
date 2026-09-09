@@ -94,5 +94,7 @@ h4 { font-weight: 700; }
    kicker-accent used everywhere else instead — same surface-aware
    split as .csa-kicker (o700 light/gradient, o500 dark/black), since
    the rule is doing the same "accent mark near the kicker" job. */
-.csa-rule { width: 44px; height: 3px; border-radius: 2px; margin-top: 8px; margin-bottom: 24px; background: var(--o700); }
+.csa-rule { width: 44px; height: 3px; border-radius: 2px; margin-top: 8px; margin-bottom: 8px; background: var(--o700); }
 [data-surface="dark"] .csa-rule, [data-surface="black"] .csa-rule { background: var(--o500); }
+h1:has(+ .csa-rule), h2:has(+ .csa-rule), h3:has(+ .csa-rule),
+h4:has(+ .csa-rule), h5:has(+ .csa-rule), h6:has(+ .csa-rule) { margin-bottom: 0; }

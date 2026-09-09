@@ -1,0 +1,34 @@
+/* =========================================================
+   CSA Component Library — Sep
+   A flex row that automatically places a 1 px vertical bar
+   between its direct children — no extra markup needed.
+   Uses the same border color as .csa-card on every surface.
+
+   Markup contract:
+     <div class="csa-sep">
+       <span>Item one</span>
+       <span>Item two</span>
+       <span>Item three</span>
+     </div>
+
+   The 12 px padding on each child creates the visual gap on
+   either side of the bar. Override --sep-gap to adjust.
+   ========================================================= */
+
+.csa-sep {
+  --sep-gap: 24px;
+  display: flex;
+}
+
+.csa-sep > * {
+  padding: 0 var(--sep-gap);
+}
+.csa-sep > *:first-child { padding-left: 0; }
+.csa-sep > *:last-child  { padding-right: 0; }
+
+.csa-sep > * + * {
+  border-left: 1px solid var(--n75);
+}
+
+[data-surface="dark"]  .csa-sep > * + * { border-left-color: var(--b600); }
+[data-surface="black"] .csa-sep > * + * { border-left-color: var(--n700); }

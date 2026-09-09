@@ -37,6 +37,17 @@
   object-fit: contain;
 }
 
+.csa-icon-small {
+  width: 32px;
+  height: 32px;
+}
+
+.csa-icon-large {
+  width: 56px;
+  height: 56px;
+}
+
+
 .csa-icon-mono { transform: scale(.6); }
 
 /* Flat light-blue tint backdrop — the "B25–B50" approved background

@@ -27,11 +27,11 @@
   /* Layout */
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   padding: 10px 16px;
   /* Shape */
   border-radius: 12px;
-  border: 1px solid var(--n50);
+  border: 1px solid var(--n75);
   /* Color */
   background: transparent;
   color: inherit;
@@ -63,11 +63,41 @@
 .csa-action[aria-selected="true"] {
   border-color: var(--o700);
   background: var(--o25);
+  border-left-width: 4px;
 }
 .csa-action[aria-selected="true"]:hover {
   border-color: var(--o600);
   box-shadow: var(--shadow-sm);
 }
+
+/* ── Arrow modifier ─────────────────────────────────────── */
+/* color on ::after feeds currentColor into the chevron's borders,
+   tracking every state the parent border goes through. */
+.csa-action-arrow::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--n75);
+}
+.csa-action-arrow:hover::after                              { color: var(--n100); }
+.csa-action-arrow[aria-selected="true"]::after              { color: var(--o700); }
+.csa-action-arrow[aria-selected="true"]:hover::after        { color: var(--o600); }
+
+[data-surface="dark"] .csa-action-arrow::after              { color: var(--b600); }
+[data-surface="dark"] .csa-action-arrow:hover::after        { color: var(--b500); }
+[data-surface="dark"] .csa-action-arrow[aria-selected="true"]::after       { color: var(--o500); }
+[data-surface="dark"] .csa-action-arrow[aria-selected="true"]:hover::after { color: var(--o400); }
+
+[data-surface="black"] .csa-action-arrow::after             { color: var(--n700); }
+[data-surface="black"] .csa-action-arrow:hover::after       { color: var(--n600); }
+[data-surface="black"] .csa-action-arrow[aria-selected="true"]::after       { color: var(--o500); }
+[data-surface="black"] .csa-action-arrow[aria-selected="true"]:hover::after { color: var(--o400); }
 
 /* ── Surface-aware — dark ───────────────────────────────── */
 [data-surface="dark"] .csa-action {
