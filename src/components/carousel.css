@@ -101,6 +101,22 @@
 }
 .csa-carousel-arrow svg { width: 20px; height: 20px; color: var(--b800); }
 
+/* Prev/next chevrons — buttons need no inner markup, just aria-label */
+.csa-carousel-arrow-prev::before,
+.csa-carousel-arrow-next::before {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid var(--b800);
+  border-right: 2px solid var(--b800);
+}
+/* translate(-1.5px, 1.5px) shifts the chevron ~2px toward its tip in
+   screen space, compensating for the open end's lack of visual weight.
+   The same translate works for both rotations by rotational symmetry. */
+.csa-carousel-arrow-next::before { transform: rotate(45deg)   translate(-1.5px, 1.5px); }
+.csa-carousel-arrow-prev::before { transform: rotate(-135deg) translate(-1.5px, 1.5px); }
+
 /* Active dot is a wider pill, not just a color swap — reads clearly as
    "current" even for someone not distinguishing the orange from the
    surrounding neutral at a glance. appearance/border are reset
