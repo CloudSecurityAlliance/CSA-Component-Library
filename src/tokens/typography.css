@@ -29,12 +29,31 @@
 
 body { font-family: var(--font); }
 
-h1, h2, h3, h4 {
+.csa-title {
+  color: var(--b800);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: initial;
+  font-size: initial;
+}
+
+.csa-subtitle {
+  color: var(--n300);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.csa-title:has(+ .csa-subtitle) { margin-bottom: 8px; }
+
+h1, h2, h3, h4,
+h1.csa-title, h2.csa-title, h3.csa-title, h4.csa-title,
+h1.csa-subtitle, h2.csa-subtitle, h3.csa-subtitle, h4.csa-subtitle {
   color: var(--b800);
   letter-spacing: -.02em;
   line-height: 1.12;
   font-weight: 900; /* unified per spec — live pages had a 900/750 split */
 }
+
 /* h1 only ever appears inside .hero across all 4 reference pages — there
    is no smaller "generic" h1 anywhere to copy. Their hero h1 clamps run
    38–42px min / 60–76px max; this is the average across all 4, so a
@@ -44,9 +63,10 @@ h1, h2, h3, h4 {
    extend — sizing elsewhere in this library matches this plain h1
    directly rather than any one source page's specific value, since
    this doc outlives the source HTML it was extracted from). */
-h1 { font-size: clamp(40px, 5.8vw, 66px); letter-spacing: -.03em; }
-h2 { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; }
-h4 { font-weight: 700; }
+h1, h1.csa-title, h1.csa-subtitle { font-size: clamp(40px, 5.8vw, 66px); letter-spacing: -.03em; }
+h2, h2.csa-title, h2.csa-subtitle { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; }
+h3, h3.csa-title, h3.csa-subtitle { font-size: 22px; letter-spacing: -.02em; }
+h4, h4.csa-title, h4.csa-subtitle { font-weight: 700; }
 
 .csa-muted { color: var(--n300); }
 
@@ -98,3 +118,5 @@ h4 { font-weight: 700; }
 [data-surface="dark"] .csa-rule, [data-surface="black"] .csa-rule { background: var(--o500); }
 h1:has(+ .csa-rule), h2:has(+ .csa-rule), h3:has(+ .csa-rule),
 h4:has(+ .csa-rule), h5:has(+ .csa-rule), h6:has(+ .csa-rule) { margin-bottom: 0; }
+
+

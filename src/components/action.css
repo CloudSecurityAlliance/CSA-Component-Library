@@ -33,7 +33,7 @@
   border-radius: 12px;
   border: 1px solid var(--n75);
   /* Color */
-  background: transparent;
+  background: rgba(255,255,255,.02);
   color: inherit;
   text-decoration: none;
   /* Button reset — makes <button> render identically to <a> */

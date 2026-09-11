@@ -32,3 +32,13 @@
 
 [data-surface="dark"]  .csa-sep > * + * { border-left-color: var(--b600); }
 [data-surface="black"] .csa-sep > * + * { border-left-color: var(--n700); }
+
+@media (max-width: 640px) {
+  .csa-sep { flex-direction: column; }
+  .csa-sep > * { padding: var(--sep-gap) 0; }
+  .csa-sep > *:first-child { padding-top: 0; }
+  .csa-sep > *:last-child  { padding-bottom: 0; }
+  .csa-sep > * + * { border-left: none; border-top: 1px solid var(--n75); }
+  [data-surface="dark"]  .csa-sep > * + * { border-top-color: var(--b600); }
+  [data-surface="black"] .csa-sep > * + * { border-top-color: var(--n700); }
+}
