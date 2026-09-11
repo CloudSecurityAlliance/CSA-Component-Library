@@ -561,15 +561,25 @@
       <div class="csa-rule"></div>
     </div>
     <div class="docs-panel">
-      <div class="docs-type-row"><span class="docs-type-tag">h1</span><div class="docs-type-sample"><h1 style="max-width:none">AI Resilience Center</h1></div></div>
-      <div class="docs-type-row"><span class="docs-type-tag">h2</span><div class="docs-type-sample"><h2>Enterprise AI is entering a new era</h2></div></div>
-      <div class="docs-type-row"><span class="docs-type-tag">h3</span><div class="docs-type-sample"><h3 style="font-size:22px">Practitioners set the agenda</h3></div></div>
-      <div class="docs-type-row"><span class="docs-type-tag">h4</span><div class="docs-type-sample"><h4 style="font-size:18px">Board &amp; executive briefings</h4></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">h1.csa-title</span><div class="docs-type-sample"><h1 class="csa-title">AI Resilience Center</h1></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">h2.csa-title</span><div class="docs-type-sample"><h2 class="csa-title">Enterprise AI is entering a new era</h2></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">h3.csa-title</span><div class="docs-type-sample"><h3 class="csa-title">Practitioners set the agenda</h3></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">h4.csa-title</span><div class="docs-type-sample"><h4 class="csa-title">Board &amp; executive briefings</h4></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">body / p</span><div class="docs-type-sample"><p style="font-size:16px">Data loss, destructive automation, and failed recovery will rise sharply as AI agents spread — resilience is what lets an organization take the hit and keep operating.</p></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-kicker</span><div class="docs-type-sample"><span class="csa-kicker">Why now</span></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-kicker-sub</span><div class="docs-type-sample"><span class="csa-kicker-sub">Founding Benefactor</span></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-rule</span><div class="docs-type-sample"><div class="csa-rule"></div></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-go</span><div class="docs-type-sample"><a class="csa-go" href="#" style="margin-top:0">Learn more →</a></div></div>
+      <div class="docs-type-row">
+        <span class="docs-type-tag">.csa-title<br>.csa-subtitle</span>
+        <div class="docs-type-sample">
+          <h2 class="csa-title">Title on any heading level</h2>
+          <h3 class="csa-subtitle">A subtitle paired immediately after — margin-bottom collapses to 8px between them</h3>
+          <p style="font-size:13px;color:var(--n400);margin-top:8px">
+            <code>.csa-title</code> resets <code>font-size</code> and <code>line-height</code> to the heading's own defaults (h1–h4 keep their clamp sizes) and locks weight to 700. <code>.csa-subtitle</code> sets color to <code>--n300</code> and weight 400. When <code>.csa-title</code> is immediately followed by <code>.csa-subtitle</code>, the gap between them tightens to 8px via <code>:has()</code>.
+          </p>
+        </div>
+      </div>
       <div class="docs-type-row" style="border:none;padding-bottom:0">
         <span class="docs-type-tag">on dark</span>
         <div class="docs-type-sample docs-dark-swatch" data-surface="dark" style="padding:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
