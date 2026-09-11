@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="../components/tables.css">
 <link rel="stylesheet" href="../components/columns.css">
 <link rel="stylesheet" href="../components/grid.css">
+<link rel="stylesheet" href="../components/sep.css">
 
 <style>
 /* =========================================================
@@ -1919,7 +1920,7 @@
 <!-- ============================================================ -->
 <!-- SEP                                                            -->
 <!-- ============================================================ -->
-<section class="docs-section" id="sep">
+<section class="csa-section" id="sep" data-surface="gradient">
   <div class="csa-wrap">
     <div class="docs-head">
       <span class="csa-kicker">Components</span>
@@ -1927,10 +1928,10 @@
       <p>A flex row that automatically places a 1 px vertical bar between its direct children — no extra markup needed. Uses the same border color as <code>.csa-card</code> on every surface. Override <code>--sep-gap</code> to adjust the spacing around the bar.</p>
     </div>
 
-    <div class="docs-grid">
+    <div class="csa-grid csa-grid-2">
 
-      <div class="docs-panel">
-        <div class="docs-label">Light surface</div>
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Light surface</div>
         <div data-surface="light" style="padding:24px;border-radius:12px">
           <div class="csa-sep">
             <span>120 Members</span>
@@ -1940,35 +1941,35 @@
         </div>
       </div>
 
-      <div class="docs-panel">
-        <div class="docs-label">Dark surface</div>
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Dark surface</div>
         <div data-surface="dark" style="padding:24px;border-radius:12px">
-          <div class="csa-sep" style="color:#fff">
-            <span>120 Members</span>
-            <span>45 Events</span>
-            <span>12 Chapters</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="docs-panel">
-        <div class="docs-label">Black surface</div>
-        <div data-surface="black" style="padding:24px;border-radius:12px">
-          <div class="csa-sep" style="color:#fff">
-            <span>120 Members</span>
-            <span>45 Events</span>
-            <span>12 Chapters</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="docs-panel">
-        <div class="docs-label">With badges</div>
-        <div data-surface="light" style="padding:24px;border-radius:12px">
           <div class="csa-sep">
-            <span class="csa-badge csa-badge-primary">Cloud Security</span>
-            <span class="csa-badge csa-badge-secondary">AI Security</span>
-            <span class="csa-badge csa-badge-outlined">Zero Trust</span>
+            <span>120 Members</span>
+            <span>45 Events</span>
+            <span>12 Chapters</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Black surface</div>
+        <div data-surface="black" style="padding:24px;border-radius:12px">
+          <div class="csa-sep">
+            <span>120 Members</span>
+            <span>45 Events</span>
+            <span>12 Chapters</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Gradient surface</div>
+        <div data-surface="gradient" style="padding:24px;border-radius:12px">
+          <div class="csa-sep">
+            <span>120 Members</span>
+            <span>45 Events</span>
+            <span>12 Chapters</span>
           </div>
         </div>
       </div>
