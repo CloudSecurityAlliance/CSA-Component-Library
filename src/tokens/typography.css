@@ -70,6 +70,14 @@ h4, h4.csa-title, h4.csa-subtitle { font-weight: 700; }
 
 .csa-muted { color: var(--n300); }
 
+.csa-block { 
+  font-size: 18px; 
+  margin-top: 12px; 
+  margin-bottom: 12px; 
+  line-height: 1.6em; 
+  color: var(--n500); 
+}
+
 /* Kicker — short punchy section eyebrow label ("THE PROGRAM").
    Surface-aware: orange-700 on light/gradient, orange-500 on dark.
 

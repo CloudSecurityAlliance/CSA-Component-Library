@@ -1,0 +1,216 @@
+/* =========================================================
+   CSA Component Library — Forms
+   Text input, textarea, select, checkbox, and radio — the controls
+   RiskRubric.ai's "Get in Touch" form and its search-page filter
+   sidebar both needed, with nothing in this library to build them
+   from before now. reset.css already gives button/input/select/
+   textarea `font: inherit; color: inherit`, so nothing here needs to
+   restate font-family.
+
+   Markup contract:
+     <div class="csa-field">
+       <label class="csa-label" for="name">Full name</label>
+       <input class="csa-input" type="text" id="name" placeholder="Jane Doe">
+       <span class="csa-field-hint">Optional helper text.</span>
+     </div>
+
+     <div class="csa-field">
+       <label class="csa-label" for="msg">Message</label>
+       <textarea class="csa-textarea" id="msg" rows="4"></textarea>
+     </div>
+
+     <div class="csa-field">
+       <label class="csa-label" for="topic">Topic</label>
+       <select class="csa-select" id="topic">
+         <option>Option A</option>
+       </select>
+     </div>
+
+     <label class="csa-checkbox">
+       <input type="checkbox">
+       <span class="csa-checkbox-box">
+         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+       </span>
+       <span>Label text</span>
+     </label>
+
+     <label class="csa-radio">
+       <input type="radio" name="group">
+       <span class="csa-radio-box"></span>
+       <span>Label text</span>
+     </label>
+
+   Error state is `aria-invalid="true"` on the input/textarea/select
+   itself (the same "state lives in one real attribute" contract every
+   other interactive component in this library uses — aria-selected,
+   aria-pressed, aria-current) plus an optional `.csa-field-error`
+   message element in the field stack.
+
+   BEHAVIOR SPEC — not implemented here: a consuming app sets
+   aria-invalid="true" on submit-time validation failure (and back to
+   "false"/removes it once corrected); nothing here reacts to input
+   automatically. Checkbox/radio need no behavior spec at all — the
+   native :checked state drives every visual change below, no
+   attribute-flipping JS required the way aria-pressed/aria-selected
+   controls elsewhere in this library do.
+   ========================================================= */
+
+/* ---- Shared field stack ---- */
+.csa-field { display: flex; flex-direction: column; gap: 6px; }
+.csa-label { font-size: 14px; font-weight: 600; color: var(--n500); }
+.csa-field-hint { font-size: 13px; color: var(--n300); }
+/* r400, not r500 — r500 is calibrated for large-area fills (a filled
+   badge/button), too dark and low-contrast for small running text. */
+.csa-field-error { font-size: 13px; color: var(--r400); font-weight: 600; }
+
+/* ---- Text input, textarea, select ----
+   One shared base: same border/radius/padding/transition regardless of
+   which of the three this is, so a form mixing all three reads as one
+   consistent row of controls rather than three subtly different shapes. */
+.csa-input, .csa-textarea, .csa-select {
+  display: block; width: 100%;
+  padding: 12px 16px; border-radius: 10px;
+  border: 1px solid var(--n75); background: #fff; color: var(--n500);
+  font-size: 15px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.csa-input::placeholder, .csa-textarea::placeholder { color: var(--n200); }
+.csa-textarea { resize: vertical; min-height: 110px; }
+/* Custom chevron: a native <select>'s own arrow can't be restyled
+   directly (it's platform chrome, not a paintable box), so appearance:
+   none removes it and this SVG background-image draws a replacement —
+   n300 (#697A89) baked into the data URI since currentColor doesn't
+   reach into a background-image. Right padding clears room for it so
+   the arrow never overlaps long option text. */
+.csa-select {
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23697A89' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+.csa-input:hover, .csa-textarea:hover, .csa-select:hover { border-color: var(--n100); }
+/* Recolored border + a 1px inset box-shadow standing in for the extra
+   pixel of thickness, instead of an actual border-width change — a
+   real border-width change shrinks the content box by a pixel
+   (box-sizing:border-box keeps the control's own outer size fixed,
+   but the content area inside it shrinks to compensate), which was
+   just enough to visibly shift the text on focus. A box-shadow paints
+   without touching the box model at all, so the ring reads as 2px
+   thick with nothing inside it moving. outline:none suppresses the
+   browser's own default focus ring — without it, that default draws
+   its own outline just outside this border, right back into the
+   original two-ring problem this is meant to fix. */
+.csa-input:focus-visible, .csa-textarea:focus-visible, .csa-select:focus-visible {
+  border-color: var(--b500); outline: none;
+  box-shadow: inset 0 0 0 1px var(--b500);
+}
+.csa-input[aria-invalid="true"], .csa-textarea[aria-invalid="true"], .csa-select[aria-invalid="true"] {
+  border-color: var(--r400);
+}
+/* Higher specificity than the plain :focus-visible rule above (an
+   extra attribute selector), so an invalid field stays red on focus
+   instead of the focus ring's b500 overriding it — the same red as
+   its own resting state, not a second, competing color. */
+.csa-input[aria-invalid="true"]:focus-visible, .csa-textarea[aria-invalid="true"]:focus-visible, .csa-select[aria-invalid="true"]:focus-visible {
+  border-color: var(--r400);
+  box-shadow: inset 0 0 0 1px var(--r400);
+}
+.csa-input:disabled, .csa-textarea:disabled, .csa-select:disabled {
+  background: var(--n25); color: var(--n300); border-color: var(--n50); cursor: not-allowed;
+}
+
+/* ---- Checkbox ----
+   A real <input type="checkbox"> stays in the DOM (keyboard/screen-
+   reader/form-submission all keep working unmodified) but is visually
+   hidden via opacity:0 rather than display:none — display:none would
+   pull it out of tab order in some browsers, opacity:0 keeps it
+   present and focusable, just invisible, with .csa-checkbox-box (a
+   plain sibling span) painted in its place and keyed off the real
+   input's :checked/:focus-visible state via the ~ sibling combinator. */
+.csa-checkbox, .csa-radio {
+  display: inline-flex; align-items: center; gap: 10px;
+  cursor: pointer; font-size: 14.5px; color: var(--n500);
+}
+.csa-checkbox input, .csa-radio input {
+  position: absolute; opacity: 0; width: 18px; height: 18px; margin: 0;
+}
+.csa-checkbox-box, .csa-radio-box {
+  position: relative; flex-shrink: 0;
+  width: 18px; height: 18px; border: 1.5px solid var(--n100); background: #fff;
+  transition: background .15s, border-color .15s;
+}
+.csa-checkbox-box { border-radius: 5px; display: flex; align-items: center; justify-content: center; }
+.csa-radio-box { border-radius: 50%; }
+.csa-checkbox:hover .csa-checkbox-box, .csa-radio:hover .csa-radio-box { border-color: var(--n200); }
+.csa-checkbox input:focus-visible ~ .csa-checkbox-box,
+.csa-radio input:focus-visible ~ .csa-radio-box {
+  outline: 2px solid var(--b500); outline-offset: 2px;
+}
+.csa-checkbox input:checked ~ .csa-checkbox-box,
+.csa-radio input:checked ~ .csa-radio-box { background: var(--b500); border-color: var(--b500); }
+/* Checkmark is a real SVG child (the same path .csa-toggle-icon-
+   confirm's own checkmark glyph uses — toggles.css — reused here for
+   a consistent checkmark shape across the library), not the border-
+   rotation trick this used before. flex-centering the box (above)
+   centers a real element exactly, rather than a hand-tuned pixel
+   offset on a ::after that read as slightly off-center. */
+.csa-checkbox-box svg { width: 11px; height: 11px; opacity: 0; transition: opacity .1s; }
+.csa-checkbox input:checked ~ .csa-checkbox-box svg { opacity: 1; }
+.csa-radio-box::after {
+  content: ''; position: absolute; inset: 4px; border-radius: 50%;
+  background: #fff; opacity: 0; transition: opacity .1s;
+}
+.csa-radio input:checked ~ .csa-radio-box::after { opacity: 1; }
+.csa-checkbox input:disabled ~ .csa-checkbox-box,
+.csa-radio input:disabled ~ .csa-radio-box { background: var(--n25); border-color: var(--n50); }
+.csa-checkbox:has(input:disabled), .csa-radio:has(input:disabled) { color: var(--n300); cursor: not-allowed; }
+
+/* ---- Surface-aware — dark ----
+   Same b-scale pairing surfaces.css's own [data-surface="dark"] .csa-
+   card uses (b800 fill / b600 border) for the fields themselves; the
+   checkbox/radio box instead stays a step lighter (transparent + b600
+   border) since a small control reads better as an outline against a
+   filled field than as another filled box next to one. */
+[data-surface="dark"] .csa-input, [data-surface="dark"] .csa-textarea, [data-surface="dark"] .csa-select {
+  background: var(--b800); border-color: var(--b600); color: #fff;
+}
+[data-surface="dark"] .csa-input::placeholder, [data-surface="dark"] .csa-textarea::placeholder { color: var(--b400); }
+[data-surface="dark"] .csa-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A5B7C6' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+[data-surface="dark"] .csa-input:hover, [data-surface="dark"] .csa-textarea:hover, [data-surface="dark"] .csa-select:hover { border-color: var(--b500); }
+[data-surface="dark"] .csa-label { color: var(--n100); }
+[data-surface="dark"] .csa-field-hint { color: var(--n200); }
+[data-surface="dark"] .csa-checkbox, [data-surface="dark"] .csa-radio { color: var(--n75); }
+[data-surface="dark"] .csa-checkbox-box, [data-surface="dark"] .csa-radio-box { background: transparent; border-color: var(--b500); }
+[data-surface="dark"] .csa-checkbox:hover .csa-checkbox-box, [data-surface="dark"] .csa-radio:hover .csa-radio-box { border-color: var(--b400); }
+/* b300, not b500 (the light-surface checked fill) — b500 sits close
+   to this surface's own b600 border/b700 page tones and reads as
+   muddy against navy; b300 is bright enough to read clearly as
+   "checked" here. */
+[data-surface="dark"] .csa-checkbox input:checked ~ .csa-checkbox-box,
+[data-surface="dark"] .csa-radio input:checked ~ .csa-radio-box { background: var(--b300); border-color: var(--b300); }
+
+/* ---- Surface-aware — black ---- */
+[data-surface="black"] .csa-input, [data-surface="black"] .csa-textarea, [data-surface="black"] .csa-select {
+  background: var(--n800); border-color: var(--n700); color: #fff;
+}
+[data-surface="black"] .csa-input::placeholder, [data-surface="black"] .csa-textarea::placeholder { color: var(--n500); }
+[data-surface="black"] .csa-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A5B7C6' stroke-width='2.4'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+[data-surface="black"] .csa-input:hover, [data-surface="black"] .csa-textarea:hover, [data-surface="black"] .csa-select:hover { border-color: var(--n600); }
+[data-surface="black"] .csa-label { color: var(--n100); }
+[data-surface="black"] .csa-field-hint { color: var(--n300); }
+[data-surface="black"] .csa-checkbox, [data-surface="black"] .csa-radio { color: var(--n75); }
+[data-surface="black"] .csa-checkbox-box, [data-surface="black"] .csa-radio-box { background: transparent; border-color: var(--n600); }
+[data-surface="black"] .csa-checkbox:hover .csa-checkbox-box, [data-surface="black"] .csa-radio:hover .csa-radio-box { border-color: var(--n400); }
+/* b300 here too, not an n-scale tone — checked state reads as a form
+   input's own "selected" semantic rather than a surface decoration,
+   so it stays the same blue as the dark-surface checked fill above
+   rather than following black's usual n-scale convention. */
+[data-surface="black"] .csa-checkbox input:checked ~ .csa-checkbox-box,
+[data-surface="black"] .csa-radio input:checked ~ .csa-radio-box { background: var(--b300); border-color: var(--b300); }

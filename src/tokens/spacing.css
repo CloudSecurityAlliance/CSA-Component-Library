@@ -16,6 +16,10 @@
   padding: 92px 0;
 }
 
+/* Named size variants — lighter-weight alternatives to the 92px default
+   rhythm, for a band that shouldn't take a full section's worth of
+   breathing room (a thin banner, a tight intro strip, an oversized
+   closing CTA). */
 .csa-section-small  { padding: 32px 0; }
 .csa-section-medium { padding: 64px 0; }
 .csa-section-large  { padding: 128px 0; }

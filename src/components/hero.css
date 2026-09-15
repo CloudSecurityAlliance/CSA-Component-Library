@@ -211,6 +211,70 @@
 .csa-hero-glass-dark .csa-card-glass .csa-sub { color: var(--n75); }
 .csa-hero-glass-dark .csa-card-glass .csa-mission { color: var(--n100); }
 
+/* Hero-glass, graphic variant — extracted from the STAR Program
+   Overview page's hero: a wide glass panel with a large graphic
+   (illustration/badge art) overlapping its right edge, instead of the
+   plain fit-content panel .csa-hero-glass uses alone. Composes with
+   EITHER .csa-hero-glass-light or .csa-hero-glass-dark — this modifier
+   only adds the graphic column and widens the panel to make room for
+   it; color is still entirely owned by whichever light/dark modifier
+   is also present (the source page only ever shipped the dark
+   pairing, but nothing here is dark-specific).
+
+   Markup:
+     <div class="csa-hero csa-hero-photo csa-hero-glass csa-hero-glass-dark csa-hero-glass-graphic" style="background-image:url(...)">
+       <div class="csa-wrap csa-hero-graphic-row">
+         <div class="csa-card-glass">
+           <div class="csa-hero-graphic-content"> ...badges/h1/sub/cta... </div>
+         </div>
+         <div class="csa-hero-graphic-img"><img src="..." alt=""></div>
+       </div>
+     </div>
+
+   .csa-hero-graphic-row is a plain flex row, not a grid — the graphic
+   is taken out of flow entirely (position:absolute below), so it never
+   actually occupies a column track; flex is enough to just place the
+   glass panel. The panel is widened (950px cap, up from the plain
+   hero-glass fit-content default) so its own right edge reaches
+   roughly halfway across the graphic, letting it visually overlap the
+   card's edge instead of floating fully apart from it — same
+   class-count specificity tie as .csa-hero-glass .csa-card-glass{width:
+   fit-content} above, broken by this rule sitting later in the file.
+   Because the panel now has a real fixed-ish width instead of fit-
+   content, its children don't need the fit-content-chain treatment
+   .csa-hero-glass's own comment describes — .csa-hero-graphic-content
+   is a plain block, just capped at 640px so the wide panel doesn't
+   stretch copy across its full width.
+
+   .csa-hero-graphic-img is pinned with a real 24px inset from the
+   wrap's own edge (not right:0, which is flush against the true
+   viewport/wrap edge whenever the wrap isn't wider than the viewport),
+   taken out of flow so its size/position never depends on the panel's
+   width. Its width shrinks continuously with viewport instead of
+   snapping to display:none — clamp(300px, 120vw - 960px, 480px) is a
+   linear function solved to hit 480px at a 1200px wrap and 300px at a
+   1050px wrap, holding at 480px above that and hiding below it.
+   z-index:1 puts it above the glass panel's own non-positioned box, so
+   it paints over the card's edge rather than being hidden behind it —
+   that's the intended "graphic breaking out of the frame" look, not a
+   mistake to fix.
+   Below 1050px the graphic hides entirely and the panel reverts to
+   .csa-hero-glass's own fit-content default (set explicitly here, not
+   left unset — the unconditional width rule above is the same
+   selector, so it's a source-order tie this query's later rule needs
+   to win). */
+
+.csa-hero-graphic-row { display: flex; align-items: center; gap: 0; flex-wrap: wrap; position: relative; }
+.csa-hero-glass-graphic .csa-card-glass { width: min(950px, 80%); }
+.csa-hero-graphic-content { max-width: 640px; }
+.csa-hero-graphic-img { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); width: clamp(300px, 120vw - 960px, 480px); z-index: 1; }
+.csa-hero-graphic-img img { width: 100%; height: auto; display: block; }
+@media (max-width: 1050px) {
+  .csa-hero-graphic-img { display: none; }
+  .csa-hero-glass-graphic .csa-card-glass { width: fit-content; }
+  .csa-hero-graphic-content { max-width: none; }
+}
+
 /* Closing CTA band */
 .csa-cta {
   position: relative; overflow: hidden;

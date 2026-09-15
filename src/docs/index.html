@@ -29,6 +29,11 @@
 <link rel="stylesheet" href="../components/tabs.css">
 <link rel="stylesheet" href="../components/toggles.css">
 <link rel="stylesheet" href="../components/tables.css">
+<link rel="stylesheet" href="../components/filters.css">
+<link rel="stylesheet" href="../components/pagination.css">
+<link rel="stylesheet" href="../components/forms.css">
+<link rel="stylesheet" href="../components/progress.css">
+<link rel="stylesheet" href="../components/accordion.css">
 <link rel="stylesheet" href="../components/columns.css">
 <link rel="stylesheet" href="../components/grid.css">
 <link rel="stylesheet" href="../components/sep.css">
@@ -206,6 +211,13 @@
 .docs-dark-swatch { background: var(--b700); border-radius: 16px; padding: 30px; }
 .docs-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch; }
 @media (max-width: 700px) { .docs-2x2 { grid-template-columns: 1fr; } }
+.docs-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+@media (max-width: 900px) { .docs-3col { grid-template-columns: 1fr; } }
+.docs-field-demo { display: flex; flex-direction: column; gap: 16px; }
+.docs-progress-demo { display: flex; flex-direction: column; gap: 18px; }
+.docs-progress-demo-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--n300); margin-bottom: 6px; }
+.docs-progress-demo-label { font-weight: 500; }
+[data-surface="dark"] .docs-progress-demo-row, [data-surface="black"] .docs-progress-demo-row { color: var(--n200); }
 
 /* Icon cards: swap to the CSA-blue icon variant on the dark preview —
    two <img>s in the markup, CSS just shows one or the other. Docs-only:
@@ -477,6 +489,11 @@
         <a href="#carousel">Carousel</a>
         <a href="#tabs">Tabs</a>
         <a href="#tables">Tables</a>
+        <a href="#filters">Filters</a>
+        <a href="#pagination">Pagination</a>
+        <a href="#forms">Forms</a>
+        <a href="#progress">Progress</a>
+        <a href="#accordions">Accordions</a>
         <a href="#columns">Columns</a>
         <a href="#grid">Grid</a>
         <a href="#sep">Sep</a>
@@ -566,7 +583,7 @@
       <div class="docs-type-row"><span class="docs-type-tag">h2.csa-title</span><div class="docs-type-sample"><h2 class="csa-title">Enterprise AI is entering a new era</h2></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">h3.csa-title</span><div class="docs-type-sample"><h3 class="csa-title">Practitioners set the agenda</h3></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">h4.csa-title</span><div class="docs-type-sample"><h4 class="csa-title">Board &amp; executive briefings</h4></div></div>
-      <div class="docs-type-row"><span class="docs-type-tag">body / p</span><div class="docs-type-sample"><p style="font-size:16px">Data loss, destructive automation, and failed recovery will rise sharply as AI agents spread — resilience is what lets an organization take the hit and keep operating.</p></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">body / p</span><div class="docs-type-sample"><p>Data loss, destructive automation, and failed recovery will rise sharply as AI agents spread — resilience is what lets an organization take the hit and keep operating.</p></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-kicker</span><div class="docs-type-sample"><span class="csa-kicker">Why now</span></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-kicker-sub</span><div class="docs-type-sample"><span class="csa-kicker-sub">Founding Benefactor</span></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-rule</span><div class="docs-type-sample"><div class="csa-rule"></div></div></div>
@@ -1663,6 +1680,386 @@
           <tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FILTERS                                                        -->
+<!-- ============================================================ -->
+<section class="docs-section" id="filters">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2>Filters</h2>
+      <p>A filter sidebar — <code>.csa-filters</code> groups a <code>.csa-filter-grade</code> quick-filter and any number of <code>.csa-filter-group</code> checkbox (or radio) lists under a "Clear all" header. A bare layout shell like <code>.csa-actions</code>/<code>.csa-tags</code> — no background or border of its own; checkbox/radio styling itself lives in Forms.</p>
+      <div class="csa-rule"></div>
+    </div>
+    <div class="docs-3col">
+      <div class="docs-panel">
+        <div class="docs-label">White background</div>
+        <div class="csa-filters">
+          <div class="csa-filters-head">
+            <span class="csa-filters-title">Filters</span>
+            <a href="#" class="csa-filters-clear">Clear all</a>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Grade</div>
+            <div class="csa-filter-grade">
+              <button type="button" class="csa-filter-grade-btn" data-grade="a" aria-pressed="true">A</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="b" aria-pressed="false">B</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="c" aria-pressed="false">C</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="d" aria-pressed="false">D</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="f" aria-pressed="false">F</button>
+            </div>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Confidence</div>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>1 scanner</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>2 scanners</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>3 or more scanners</span></label>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Provider</div>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Anthropic</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>CohereLabs</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>OpenAI</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-panel docs-dark-swatch" data-surface="dark">
+        <div class="docs-label">Dark background</div>
+        <div class="csa-filters">
+          <div class="csa-filters-head">
+            <span class="csa-filters-title">Filters</span>
+            <a href="#" class="csa-filters-clear">Clear all</a>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Grade</div>
+            <div class="csa-filter-grade">
+              <button type="button" class="csa-filter-grade-btn" data-grade="a" aria-pressed="true">A</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="b" aria-pressed="false">B</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="c" aria-pressed="false">C</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="d" aria-pressed="false">D</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="f" aria-pressed="false">F</button>
+            </div>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Confidence</div>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>1 scanner</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>2 scanners</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>3 or more scanners</span></label>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Provider</div>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Anthropic</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>CohereLabs</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>OpenAI</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-panel docs-black-swatch" data-surface="black">
+        <div class="docs-label">Black background</div>
+        <div class="csa-filters">
+          <div class="csa-filters-head">
+            <span class="csa-filters-title">Filters</span>
+            <a href="#" class="csa-filters-clear">Clear all</a>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Grade</div>
+            <div class="csa-filter-grade">
+              <button type="button" class="csa-filter-grade-btn" data-grade="a" aria-pressed="true">A</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="b" aria-pressed="false">B</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="c" aria-pressed="false">C</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="d" aria-pressed="false">D</button>
+              <button type="button" class="csa-filter-grade-btn" data-grade="f" aria-pressed="false">F</button>
+            </div>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Confidence</div>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>1 scanner</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>2 scanners</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>3 or more scanners</span></label>
+          </div>
+          <div class="csa-filter-group">
+            <div class="csa-filter-group-title">Provider</div>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Anthropic</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>CohereLabs</span></label>
+            <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>OpenAI</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAGINATION                                                    -->
+<!-- ============================================================ -->
+<section class="docs-section" id="pagination">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2>Pagination</h2>
+      <p>Numbered page buttons framed by a Prev/Next pair — <code>.csa-pagination-btn</code>, with <code>aria-current="page"</code> marking the active page and a plain <code>disabled</code> attribute on Prev/Next at either end of the range.</p>
+      <div class="csa-rule"></div>
+    </div>
+    <div class="docs-3col">
+      <div class="docs-panel">
+        <div class="docs-label">White background</div>
+        <nav class="csa-pagination" aria-label="Pagination">
+          <button type="button" class="csa-pagination-btn csa-pagination-prev" disabled>← Prev</button>
+          <button type="button" class="csa-pagination-btn" aria-current="page">1</button>
+          <button type="button" class="csa-pagination-btn">2</button>
+          <button type="button" class="csa-pagination-btn">3</button>
+          <button type="button" class="csa-pagination-btn csa-pagination-next">Next →</button>
+        </nav>
+      </div>
+      <div class="docs-panel docs-dark-swatch" data-surface="dark">
+        <div class="docs-label">Dark background</div>
+        <nav class="csa-pagination" aria-label="Pagination">
+          <button type="button" class="csa-pagination-btn csa-pagination-prev">← Prev</button>
+          <button type="button" class="csa-pagination-btn">1</button>
+          <button type="button" class="csa-pagination-btn" aria-current="page">2</button>
+          <button type="button" class="csa-pagination-btn">3</button>
+          <button type="button" class="csa-pagination-btn csa-pagination-next">Next →</button>
+        </nav>
+      </div>
+      <div class="docs-panel docs-black-swatch" data-surface="black">
+        <div class="docs-label">Black background</div>
+        <nav class="csa-pagination" aria-label="Pagination">
+          <button type="button" class="csa-pagination-btn csa-pagination-prev">← Prev</button>
+          <button type="button" class="csa-pagination-btn">1</button>
+          <button type="button" class="csa-pagination-btn">2</button>
+          <button type="button" class="csa-pagination-btn" aria-current="page">3</button>
+          <button type="button" class="csa-pagination-btn csa-pagination-next" disabled>Next →</button>
+        </nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- FORMS                                                         -->
+<!-- ============================================================ -->
+<section class="docs-section" id="forms">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2>Forms</h2>
+      <p>Text input, textarea, select, checkbox, and radio — <code>.csa-input</code>, <code>.csa-textarea</code>, <code>.csa-select</code>, <code>.csa-checkbox</code>, <code>.csa-radio</code>. Wrap a label + control + optional hint in <code>.csa-field</code>. Error state is <code>aria-invalid="true"</code> on the control itself, the same one-attribute contract every other interactive component in this library uses. All five are surface-aware.</p>
+      <div class="csa-rule"></div>
+    </div>
+
+    <div class="docs-3col">
+      <div class="docs-panel">
+        <div class="docs-label">White background</div>
+        <div class="docs-field-demo">
+          <div class="csa-field">
+            <label class="csa-label" for="forms-name-light">Full name</label>
+            <input class="csa-input" type="text" id="forms-name-light" placeholder="Jane Doe">
+          </div>
+          <label class="csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Subscribe to updates</span></label>
+          <div class="docs-field-demo" style="gap:10px">
+            <label class="csa-radio"><input type="radio" name="forms-radio-light" checked><span class="csa-radio-box"></span><span>Option A</span></label>
+            <label class="csa-radio"><input type="radio" name="forms-radio-light"><span class="csa-radio-box"></span><span>Option B</span></label>
+            <label class="csa-radio"><input type="radio" name="forms-radio-light"><span class="csa-radio-box"></span><span>Option C</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-panel docs-dark-swatch" data-surface="dark">
+        <div class="docs-label">Dark background</div>
+        <div class="docs-field-demo">
+          <div class="csa-field">
+            <label class="csa-label" for="forms-name-dark">Full name</label>
+            <input class="csa-input" type="text" id="forms-name-dark" placeholder="Jane Doe">
+          </div>
+          <label class="csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Subscribe to updates</span></label>
+          <div class="docs-field-demo" style="gap:10px">
+            <label class="csa-radio"><input type="radio" name="forms-radio-dark" checked><span class="csa-radio-box"></span><span>Option A</span></label>
+            <label class="csa-radio"><input type="radio" name="forms-radio-dark"><span class="csa-radio-box"></span><span>Option B</span></label>
+            <label class="csa-radio"><input type="radio" name="forms-radio-dark"><span class="csa-radio-box"></span><span>Option C</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="docs-panel docs-black-swatch" data-surface="black">
+        <div class="docs-label">Black background</div>
+        <div class="docs-field-demo">
+          <div class="csa-field">
+            <label class="csa-label" for="forms-name-black">Full name</label>
+            <input class="csa-input" type="text" id="forms-name-black" placeholder="Jane Doe">
+          </div>
+          <label class="csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Subscribe to updates</span></label>
+          <div class="docs-field-demo" style="gap:10px">
+            <label class="csa-radio"><input type="radio" name="forms-radio-black" checked><span class="csa-radio-box"></span><span>Option A</span></label>
+            <label class="csa-radio"><input type="radio" name="forms-radio-black"><span class="csa-radio-box"></span><span>Option B</span></label>
+            <label class="csa-radio"><input type="radio" name="forms-radio-black"><span class="csa-radio-box"></span><span>Option C</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="docs-2x2" style="margin-top:18px">
+      <div class="docs-panel">
+        <div class="docs-label">Textarea</div>
+        <div class="csa-field">
+          <label class="csa-label" for="forms-message">Message</label>
+          <textarea class="csa-textarea" id="forms-message" placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+      </div>
+      <div class="docs-panel">
+        <div class="docs-label">Select</div>
+        <div class="csa-field">
+          <label class="csa-label" for="forms-topic">Topic</label>
+          <select class="csa-select" id="forms-topic">
+            <option>General inquiry</option>
+            <option>Partnership</option>
+            <option>Press</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="docs-2x2" style="margin-top:18px">
+      <div class="docs-panel">
+        <div class="docs-label">Error state — aria-invalid="true"</div>
+        <div class="csa-field">
+          <label class="csa-label" for="forms-email-error">Email address</label>
+          <input class="csa-input" type="email" id="forms-email-error" value="not-an-email" aria-invalid="true">
+          <span class="csa-field-error">Enter a valid email address.</span>
+        </div>
+      </div>
+      <div class="docs-panel">
+        <div class="docs-label">Disabled</div>
+        <div class="csa-field">
+          <label class="csa-label" for="forms-disabled">Company name</label>
+          <input class="csa-input" type="text" id="forms-disabled" value="Cloud Security Alliance" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PROGRESS                                                      -->
+<!-- ============================================================ -->
+<section class="docs-section" id="progress">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2>Progress</h2>
+      <p>A determinate meter bar — <code>.csa-progress</code> wraps a <code>.csa-progress-fill</code> sized by an inline <code>width</code>. Default reads brand blue; <code>.csa-progress-success</code>, <code>.csa-progress-warning</code>, and <code>.csa-progress-danger</code> recolor the whole bar. Pair with <code>role="progressbar"</code> and <code>aria-value*</code> for assistive tech — those carry the real number independent of the fill's visual width.</p>
+      <div class="csa-rule"></div>
+    </div>
+    <div class="docs-surfaces">
+      <div class="docs-surface-demo" style="background:#fff">
+        <div class="docs-label" style="margin-bottom:14px">White background</div>
+        <div class="docs-progress-demo">
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Security</span><span class="docs-progress-demo-value">820 / 1000</span></div>
+            <div class="csa-progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:82%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Privacy</span><span class="docs-progress-demo-value">953 / 1000</span></div>
+            <div class="csa-progress csa-progress-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:95%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Reliability</span><span class="docs-progress-demo-value">410 / 1000</span></div>
+            <div class="csa-progress csa-progress-warning" role="progressbar" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:41%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-surface-demo" style="background:var(--n25)">
+        <div class="docs-label" style="margin-bottom:14px">N25 background</div>
+        <div class="docs-progress-demo">
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Security</span><span class="docs-progress-demo-value">820 / 1000</span></div>
+            <div class="csa-progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:82%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Privacy</span><span class="docs-progress-demo-value">953 / 1000</span></div>
+            <div class="csa-progress csa-progress-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:95%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Reliability</span><span class="docs-progress-demo-value">410 / 1000</span></div>
+            <div class="csa-progress csa-progress-warning" role="progressbar" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:41%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-surface-demo" data-surface="dark">
+        <div class="docs-label" style="margin-bottom:14px">Dark background</div>
+        <div class="docs-progress-demo">
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Security</span><span class="docs-progress-demo-value">820 / 1000</span></div>
+            <div class="csa-progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:82%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Privacy</span><span class="docs-progress-demo-value">953 / 1000</span></div>
+            <div class="csa-progress csa-progress-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:95%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Reliability</span><span class="docs-progress-demo-value">410 / 1000</span></div>
+            <div class="csa-progress csa-progress-warning" role="progressbar" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:41%"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="docs-surface-demo" data-surface="black">
+        <div class="docs-label" style="margin-bottom:14px">Black background</div>
+        <div class="docs-progress-demo">
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Security</span><span class="docs-progress-demo-value">820 / 1000</span></div>
+            <div class="csa-progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:82%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Privacy</span><span class="docs-progress-demo-value">953 / 1000</span></div>
+            <div class="csa-progress csa-progress-success" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:95%"></div></div>
+          </div>
+          <div>
+            <div class="docs-progress-demo-row"><span class="docs-progress-demo-label">Reliability</span><span class="docs-progress-demo-value">410 / 1000</span></div>
+            <div class="csa-progress csa-progress-warning" role="progressbar" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"><div class="csa-progress-fill" style="width:41%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ACCORDIONS                                                    -->
+<!-- ============================================================ -->
+<section class="docs-section" id="accordions">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2>Accordions</h2>
+      <p>Extracted from the September 2026 Membership Drive page's FAQ. Built on native <code>&lt;details&gt;/&lt;summary&gt;</code> — no shipped JS, ever, unlike this library's other interactive components. Open/close animates via <code>max-height</code> instead of the browser's default instant show/hide — a fixed ceiling (<code>--csa-accordion-max-height</code>, 900px default) rather than sizing to content automatically, overridable per item for an unusually long answer.</p>
+      <div class="csa-rule"></div>
+    </div>
+    <div class="csa-accordion">
+      <details class="csa-accordion-item" open>
+        <summary class="csa-accordion-trigger">We renewed at $10,000 a few weeks ago. Did we just lose $1,000?<span class="csa-accordion-icon"></span></summary>
+        <div class="csa-accordion-panel">
+          <p>No. Any organization that renewed or joined on or after July 1st, 2026 gets the Frontier Ready Support added to their current term at no charge — the same package this offer includes. Email membership@cloudsecurityalliance.org and we will apply it. We are not going to punish members for renewing on time.</p>
+        </div>
+      </details>
+      <details class="csa-accordion-item">
+        <summary class="csa-accordion-trigger">We are already a member. Can we use this?<span class="csa-accordion-icon"></span></summary>
+        <div class="csa-accordion-panel">
+          <p>Yes. You can add a year to your existing term at $9,000, and the Frontier Ready Support applies from the day you buy rather than the day your extension starts. Your renewal date moves out twelve months.</p>
+        </div>
+      </details>
+      <details class="csa-accordion-item">
+        <summary class="csa-accordion-trigger">On the quarterly or monthly plans, do we get everything straight away?<span class="csa-accordion-icon"></span></summary>
+        <div class="csa-accordion-panel">
+          <p>Almost. Briefings, analyst access, working groups, your member listing and logo placement, licensing discounts and research access all start on day one, exactly as they would if you paid in full.</p>
+          <p>The one benefit that follows the payment is training credits. Membership includes twelve. On the quarterly plan three release with each payment; on the monthly plan one releases with each payment. Unused credits roll forward and expire at the end of your term. A small number of benefits that carry real delivery cost on our side, such as free Valid-AI-ted submissions and the Trusted Cloud Provider and STAR Enabled Solutions designations, become available after your second quarterly payment, or from month four.</p>
+          <p><b>If your team has training to book now, pay in full and all twelve credits unlock the day you join.</b></p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
