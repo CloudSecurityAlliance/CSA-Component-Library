@@ -30,6 +30,9 @@
   border: 1px solid transparent; transition: .18s; cursor: pointer;
   min-width: 120px;
 }
+.csa-btn:hover {
+  color: white;
+}
 .csa-btn svg { width: 15px; height: 15px; }
 /* Same slot as svg above, for buttons whose icon is a standalone asset
    file (src/assets/icons/*.svg) rather than markup drawn inline — the
