@@ -1,0 +1,64 @@
+/* =========================================================
+   CSA Component Library — Progress
+   A determinate meter bar — extracted from RiskRubric.ai's per-pillar
+   score bars (Transparency/Reliability/Security/etc., each a value out
+   of 1000). The grade-lettered badge that sits next to those bars on
+   the real site is its own, separate concern (out of scope here) —
+   this is just the bar: a track plus a fill sized by inline width.
+
+   Markup contract:
+     <div class="csa-progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+       <div class="csa-progress-fill" style="width:70%; --csa-progress-value:70"></div>
+     </div>
+   The percentage is a plain inline style on the fill — this component
+   only draws the bar, it doesn't compute a value/max into a width.
+   role="progressbar" + aria-value* carry the real number to assistive
+   tech independent of the fill's visual width.
+
+   --csa-progress-value (a bare number, same as aria-valuenow when max
+   is 100) is what makes the fill's gradient read as a slice of one
+   continuous gradient spanning the FULL track, not the full gradient
+   compressed into however wide the fill happens to be — a 40%-full bar
+   shows the first 40% of the b300→b500 range, not the complete range
+   squeezed into a shorter box. See the .csa-progress-fill comment
+   below for the mechanism. Omitting it just falls back to treating the
+   fill's own width as the full gradient range (this library's plain
+   default before this existed).
+
+   Color is a modifier on the outer .csa-progress, not the fill, so a
+   consuming app only ever toggles one class to recolor the whole bar:
+     .csa-progress               → b300→b500, the default/neutral reading
+     .csa-progress-success       → g100→g300
+     .csa-progress-warning       → o300→o600
+     .csa-progress-danger        → r300→r600
+   ========================================================= */
+.csa-progress { width: 100%; height: 8px; border-radius: 999px; background: var(--n50); overflow: hidden; }
+/* The gradient image is drawn at the TRACK's full width, not the
+   fill's own — background-size in a percentage is relative to the
+   element's own box, so sizing it to 100% here would just repaint the
+   same b300→b500 range no matter how narrow the fill is. Scaling it up
+   to (10000 / value)% instead means 100% of that oversized image = the
+   full track width; background-position:left then anchors the image's
+   0% (b300) to the fill's own left edge, which is also the track's
+   left edge, so the visible slice — 0% through the fill's own width —
+   is always the correct corresponding segment of the one virtual
+   track-wide gradient, never the whole range rescaled. */
+.csa-progress-fill {
+  height: 100%; border-radius: 999px;
+  background-image: linear-gradient(to right, var(--b300), var(--b500));
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: calc(10000% / var(--csa-progress-value, 100)) 100%;
+  transition: width .3s ease;
+}
+
+.csa-progress-success .csa-progress-fill { background-image: linear-gradient(to right, var(--g100), var(--g300)); }
+.csa-progress-warning .csa-progress-fill { background-image: linear-gradient(to right, var(--o300), var(--o600)); }
+.csa-progress-danger .csa-progress-fill { background-image: linear-gradient(to right, var(--r300), var(--r600)); }
+
+/* Track steps up a ramp — same "one level off the page" convention
+   toggles.css's own track colors use on these two surfaces (b800/n700,
+   see .csa-toggle-icon-track) — the fill colors themselves stay as-is,
+   already bright enough to read on either. */
+[data-surface="dark"] .csa-progress { background: var(--b800); }
+[data-surface="black"] .csa-progress { background: var(--n700); }

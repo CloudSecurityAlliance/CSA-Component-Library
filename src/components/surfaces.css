@@ -1,0 +1,43 @@
+/* =========================================================
+   CSA Component Library — Surface System
+   Source: SPEC section 2. Three surfaces, each with its own card
+   treatment and text-color defaults. Applied via data-surface, a
+   plain data attribute (not a class) — no csa- prefix needed since
+   it can't collide with the host site's own CSS classes.
+   ========================================================= */
+[data-surface="light"]    { background: #fff; }
+/* b50, not b75: the spec's own summary table (section 2) calls for b50
+   here, but the literal CSS snippet right below that table in the same
+   doc used b75 — an inconsistency within the spec itself. We'd copied
+   the snippet; the table is the more deliberate source, so b50 wins. */
+[data-surface="gradient"] { background: linear-gradient(120deg, var(--b50) 0%, var(--n25) 35%, var(--n25) 65%, var(--o25) 100%); }
+[data-surface="dark"]     { background: var(--b700); color: #fff; }
+/* Black — a 4th surface, near-black rather than navy. Text colors match
+   the dark (navy) surface exactly, per the fourth surface's own request;
+   only the background and card treatment differ (see below). */
+[data-surface="black"]    { background: var(--black); color: #fff; }
+
+/* Surface text-color defaults (finalized table) */
+[data-surface="light"] h1, [data-surface="light"] h2, [data-surface="light"] h3, [data-surface="light"] h4,
+[data-surface="gradient"] h1, [data-surface="gradient"] h2, [data-surface="gradient"] h3, [data-surface="gradient"] h4 {
+  color: var(--b800);
+}
+[data-surface="light"] p, [data-surface="gradient"] p { color: var(--n500); }
+
+[data-surface="dark"] h1, [data-surface="dark"] h2, [data-surface="dark"] h3, [data-surface="dark"] h4,
+[data-surface="black"] h1, [data-surface="black"] h2, [data-surface="black"] h3, [data-surface="black"] h4 { color: #fff; }
+[data-surface="dark"] p, [data-surface="black"] p { color: var(--n75); }
+
+/* Card — surface-aware background/border
+   Light/gradient use --n50 (neutral) borders, not --b50 — corrected
+   from the spec's literal text, which called for --b50 here.
+   .csa-card-media shares this treatment — same shell, just with an
+   image bled to the top edge instead of uniform padding (see cards.css). */
+[data-surface] .csa-card, [data-surface] .csa-card-media { background: var(--n25); border: 1px solid var(--n50); }
+[data-surface="gradient"] .csa-card, [data-surface="gradient"] .csa-card-media,
+[data-surface="light"].csa-bg-n25 .csa-card, [data-surface="light"].csa-bg-n25 .csa-card-media { background: #fff; border: 1px solid var(--n50); }
+[data-surface="dark"] .csa-card, [data-surface="dark"] .csa-card-media { background: var(--b800); border: 1px solid var(--b600); }
+/* Black surface's card is a neutral n800/n700 pair rather than the dark
+   surface's navy b800/b600 — n800 is lighter than the near-black page
+   background, so the card still reads as a raised, distinct surface. */
+[data-surface="black"] .csa-card, [data-surface="black"] .csa-card-media { background: var(--n800); border: 1px solid var(--n700); }

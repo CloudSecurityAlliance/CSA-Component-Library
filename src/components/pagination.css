@@ -1,0 +1,69 @@
+/* =========================================================
+   CSA Component Library — Pagination
+   Numbered page buttons (the CSA STAR Registry's own pattern) framed
+   by a Prev/Next pair (RiskRubric.ai's own wording, shortened from
+   "Previous" to match "Next" as a one-word pair) — same rounded-card
+   button shape as .csa-action, one row.
+
+   Markup contract:
+     <nav class="csa-pagination" aria-label="Pagination">
+       <button type="button" class="csa-pagination-btn csa-pagination-prev" disabled>← Prev</button>
+       <button type="button" class="csa-pagination-btn" aria-current="page">1</button>
+       <button type="button" class="csa-pagination-btn">2</button>
+       <button type="button" class="csa-pagination-btn">3</button>
+       <button type="button" class="csa-pagination-btn csa-pagination-next">Next →</button>
+     </nav>
+   Every button is a real <button>, not a link — pagination changes
+   what's shown on the same view rather than navigating to a new
+   document. aria-current="page" marks the active page, the same
+   "state lives in one real attribute" contract every other
+   interactive component in this library uses.
+
+   BEHAVIOR SPEC — not implemented here: clicking a page button moves
+   aria-current="page" to it (removing it from whichever button had
+   it); clicking Prev/Next moves aria-current to the previous/next
+   page button in the same way. The app disables Prev when the first
+   page is current and Next when the last page is current — a plain
+   disabled attribute, not a class, so :disabled below is all the
+   styling either state needs.
+   ========================================================= */
+.csa-pagination { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.csa-pagination-btn {
+  appearance: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 40px; height: 40px; padding: 0 14px;
+  border-radius: 10px; border: 1px solid var(--n50); background: #fff;
+  font-weight: 400; font-size: 14px; color: var(--n500);
+  transition: border-color .15s, background-color .15s, color .15s;
+}
+.csa-pagination-btn:hover { border-color: var(--n100); }
+.csa-pagination-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; }
+/* Current page is a solid b500 fill with white text — the one filled
+   control in the row, so it reads as "you are here" at a glance rather
+   than needing a second look to spot a color-only difference. Every
+   other button (plain numbers, Prev, and Next — Next has no color
+   accent of its own, its arrow glyph is what marks it, not a text
+   color) keeps the base n500. */
+.csa-pagination-btn[aria-current="page"] { background: var(--b500); border-color: var(--b500); color: #fff; }
+.csa-pagination-btn:disabled { color: var(--n200); border-color: var(--n50); cursor: not-allowed; }
+/* Prev's disabled state (page 1) borrows .csa-btn-disabled's exact
+   colors (buttons.css) rather than this component's own plain-
+   disabled treatment above — same fill-not-just-faded-text look as
+   every other disabled control in this library, and higher
+   specificity (two classes) than the plain :disabled rule above wins
+   it automatically. */
+.csa-pagination-prev:disabled { background: var(--n50); color: var(--n300); border-color: transparent; }
+
+/* ---- Surface-aware — dark ---- */
+[data-surface="dark"] .csa-pagination-btn { border-color: var(--b600); color: var(--n75); background: transparent; }
+[data-surface="dark"] .csa-pagination-btn:hover { border-color: var(--b500); }
+[data-surface="dark"] .csa-pagination-btn[aria-current="page"] { background: var(--b300); border-color: var(--b300); color: #fff; }
+[data-surface="dark"] .csa-pagination-btn:disabled { color: var(--b600); border-color: var(--b700); }
+[data-surface="dark"] .csa-pagination-prev:disabled { background: var(--b800); color: var(--b500); border-color: transparent; }
+
+/* ---- Surface-aware — black ---- */
+[data-surface="black"] .csa-pagination-btn { border-color: var(--n700); color: var(--n75); background: transparent; }
+[data-surface="black"] .csa-pagination-btn:hover { border-color: var(--n600); }
+[data-surface="black"] .csa-pagination-btn[aria-current="page"] { background: var(--b300); border-color: var(--b300); color: #fff; }
+[data-surface="black"] .csa-pagination-btn:disabled { color: var(--n600); border-color: var(--n800); }
+[data-surface="black"] .csa-pagination-prev:disabled { background: var(--n800); color: var(--n500); border-color: transparent; }

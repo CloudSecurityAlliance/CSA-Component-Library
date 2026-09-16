@@ -1,0 +1,132 @@
+/* =========================================================
+   CSA Component Library — Typography Tokens
+   Source: SPEC section 1 (Typography) + "Two distinct small-label
+   components" + "kicker-sub" subsections.
+
+   Font loading is NOT done here (CSS can't add <link> tags) — the
+   two required <link> tags live in dist/csa-library.html's <head>
+   and must be copied into any page that uses this library:
+     <link rel="stylesheet" href="https://use.typekit.net/tsm2vln.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;600;700&display=swap">
+   Typekit kit tsm2vln supplies both azo-sans-web and peridot-pe-variable.
+   Red Hat Text tops out at weight 700 on Google Fonts (no 900 cut) —
+   browsers synthesize the extra boldness for h1–h4 in the fallback case,
+   which only matters if Typekit fails to load.
+
+   These must stay live <link> tags in the consuming page's own <head>
+   — never copy/inline the kit's underlying @font-face CSS instead.
+   Adobe's kit is domain-restricted (only approved domains can actually
+   load the font files it points to) and can change its served CSS/font
+   URLs over time; a live <link> tracks both automatically, a pasted
+   snapshot doesn't and can silently stop working. If the <link> is
+   missing, --font/--font-kicker fall back to the next name in their
+   stack with no visible error, so this is easy to miss on a quick look.
+   ========================================================= */
+:root {
+  --font: 'azo-sans-web','Red Hat Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --font-kicker: "peridot-pe-variable", sans-serif;
+}
+
+body { font-family: var(--font); }
+
+.csa-title {
+  color: var(--b800);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: initial;
+  font-size: initial;
+}
+
+.csa-subtitle {
+  color: var(--n300);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.csa-title:has(+ .csa-subtitle) { margin-bottom: 8px; }
+
+h1, h2, h3, h4,
+h1.csa-title, h2.csa-title, h3.csa-title, h4.csa-title,
+h1.csa-subtitle, h2.csa-subtitle, h3.csa-subtitle, h4.csa-subtitle {
+  color: var(--b800);
+  letter-spacing: -.02em;
+  line-height: 1.12;
+  font-weight: 900; /* unified per spec — live pages had a 900/750 split */
+}
+
+/* h1 only ever appears inside .hero across all 4 reference pages — there
+   is no smaller "generic" h1 anywhere to copy. Their hero h1 clamps run
+   38–42px min / 60–76px max; this is the average across all 4, so a
+   plain h1 reads at the same punchy scale you'd see on those pages.
+   .csa-hero h1 in hero.css layers its own close variant on top (a
+   deliberate exception for its own longer heading, not a pattern to
+   extend — sizing elsewhere in this library matches this plain h1
+   directly rather than any one source page's specific value, since
+   this doc outlives the source HTML it was extracted from). */
+h1, h1.csa-title, h1.csa-subtitle { font-size: clamp(40px, 5.8vw, 66px); letter-spacing: -.03em; }
+h2, h2.csa-title, h2.csa-subtitle { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; }
+h3, h3.csa-title, h3.csa-subtitle { font-size: 22px; letter-spacing: -.02em; }
+h4, h4.csa-title, h4.csa-subtitle { font-weight: 700; }
+
+.csa-muted { color: var(--n300); }
+
+.csa-hr { border: none; border-top: 1px solid var(--n50); margin: 0; }
+
+.csa-block { 
+  font-size: 18px; 
+  margin-top: 12px; 
+  margin-bottom: 12px; 
+  line-height: 1.6em; 
+  color: var(--n500); 
+}
+
+/* Kicker — short punchy section eyebrow label ("THE PROGRAM").
+   Surface-aware: orange-700 on light/gradient, orange-500 on dark.
+
+   Which one to use, .csa-kicker or .csa-kicker-sub below: it's chosen by
+   the heading it introduces, not by nesting depth alone —
+     - Above an h1 or h2 (hero, section-level headings) → .csa-kicker
+     - Above an h3, or with no heading at all (a standalone label inside
+       a card/component — "Sample card", "Rules") → .csa-kicker-sub
+   This isn't enforced by a selector like `.csa-kicker:has(+ h3)` on
+   purpose: kicker-sub's no-heading cases mean that wouldn't even be
+   correct, just differently incomplete — it'd catch the h3 pairing but
+   still render the standalone labels as the big kicker by default,
+   trading one class of mistake for another and making the class render
+   invisibly-differently by DOM context, unlike every other variant in
+   this library (always an explicit class the author picks). */
+.csa-kicker {
+  font-family: var(--font-kicker);
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-variation-settings: 'wght' 500, 'wdth' 125, 'ital' 0;
+  color: var(--o700);
+}
+[data-surface="dark"] .csa-kicker, [data-surface="black"] .csa-kicker { color: var(--o500); }
+
+/* Kicker-sub — see the usage rule in the .csa-kicker comment above. */
+.csa-kicker-sub {
+  font-family: var(--font-kicker);
+  font-size: 11.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-variation-settings: 'wght' 400, 'wdth' 125, 'ital' 0;
+  color: var(--o700);
+}
+[data-surface="dark"] .csa-kicker-sub, [data-surface="black"] .csa-kicker-sub { color: var(--o500); }
+
+/* Rule — small accent bar sitting under a kicker+heading+paragraph
+   intro. Extracted as-is for shape/size (.rule, identical across all 4
+   reference pages: 44×3px, 2px radius). Color is NOT extracted as-is,
+   though: the source used a page-specific teal (var(--csai)) that has
+   no equivalent in this system, so it's reassigned to the same orange
+   kicker-accent used everywhere else instead — same surface-aware
+   split as .csa-kicker (o700 light/gradient, o500 dark/black), since
+   the rule is doing the same "accent mark near the kicker" job. */
+.csa-rule { width: 44px; height: 3px; border-radius: 2px; margin-top: 8px; margin-bottom: 8px; background: var(--o700); }
+[data-surface="dark"] .csa-rule, [data-surface="black"] .csa-rule { background: var(--o500); }
+h1:has(+ .csa-rule), h2:has(+ .csa-rule), h3:has(+ .csa-rule),
+h4:has(+ .csa-rule), h5:has(+ .csa-rule), h6:has(+ .csa-rule) { margin-bottom: 0; }
+
+

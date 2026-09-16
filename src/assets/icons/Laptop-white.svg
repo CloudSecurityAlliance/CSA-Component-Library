@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+<symbol  id="Laptop_-_white" viewBox="-15 -10.94 30 21.88">
+	<path fill="#FFFFFF" d="M13.99-5.12h-1.6V8.85c0,1.16-0.94,2.09-2.09,2.09h-20.6c-1.16,0-2.09-0.94-2.09-2.09V-5.12h-1.6
+		c-0.56,0-1.01-0.45-1.01-1.01v-2.94c0-1.03,0.84-1.87,1.87-1.87h26.25c1.03,0,1.87,0.84,1.87,1.87v2.94
+		C15-5.57,14.55-5.12,13.99-5.12z M-10.37,8.85c0,0.04,0.03,0.07,0.07,0.07h7.78V8.29c0-0.29,0.24-0.53,0.53-0.53h3.99
+		c0.29,0,0.53,0.24,0.53,0.53v0.64h7.78c0.04,0,0.07-0.03,0.07-0.07V-5.12h-20.75V8.85z M12.98-8.92h-25.96v1.79h0.59v0h9.87V-7.4
+		c0-0.29,0.24-0.53,0.53-0.53h3.99c0.29,0,0.53,0.24,0.53,0.53v0.26h9.87v0h0.59V-8.92z"/>
+</symbol>
+<use xlink:href="#Laptop_-_white"  width="30" height="21.88" x="-15" y="-10.94" transform="matrix(4 0 0 -4 60 60)" overflow="visible"/>
+</svg>

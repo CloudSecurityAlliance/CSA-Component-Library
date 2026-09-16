@@ -1,0 +1,88 @@
+/* =========================================================
+   CSA Component Library — Tabs
+   Designed fresh: no tabs UI exists in any of the 4 reference pages
+   (checked — no tablist/tab-panel pattern anywhere), so this follows
+   the system's existing conventions rather than extracting real markup:
+     - underline-indicator style, echoing .csa-rule's accent-bar motif
+     - active-state color follows the same data-surface-aware pattern
+       as .csa-btn-primary: --b500 accent on light/gradient, --o500 on dark
+     - inactive tab color matches --n300 (.csa-muted), same as body copy
+
+   BEHAVIOR SPEC — not implemented here. This library defines the look;
+   each consuming app wires up the interaction in whatever fits its own
+   stack (vanilla JS, React, Rails/Stimulus, etc.). Implement the
+   WAI-ARIA "tabs" pattern (https://www.w3.org/WAI/ARIA/apg/patterns/tabs/):
+     - Click a tab: set its aria-selected="true" (all siblings "false"),
+       add/remove .csa-tab-active to match, set tabindex="0" on it and
+       "-1" on every other tab (roving tabindex), and show/hide the
+       matching panel via .csa-tabpanel-active + the `hidden` attribute.
+     - ArrowRight/ArrowLeft on a focused tab: move focus AND activate
+       the next/previous tab (wrapping at the ends).
+     - Home/End on a focused tab: jump to the first/last tab.
+   Markup contract per tab group:
+     <div class="csa-tabs">
+       <div class="csa-tablist" role="tablist" aria-label="...">
+         <button class="csa-tab csa-tab-active" role="tab" id="tab-a"
+                 aria-selected="true" aria-controls="panel-a">Label A</button>
+         <button class="csa-tab" role="tab" id="tab-b"
+                 aria-selected="false" aria-controls="panel-b" tabindex="-1">Label B</button>
+       </div>
+       <div class="csa-tabpanel csa-tabpanel-active" role="tabpanel" id="panel-a" aria-labelledby="tab-a">...</div>
+       <div class="csa-tabpanel" role="tabpanel" id="panel-b" aria-labelledby="tab-b" hidden>...</div>
+     </div>
+   (The showcase's tab demos run a small demo-only script purely so the
+   page is interactive to browse — see src/docs/index.html. That script
+   is not part of the library and isn't bundled by build.mjs.)
+   ========================================================= */
+.csa-tabs { width: 100%; }
+
+.csa-tablist {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--n50);
+  margin-bottom: 28px;
+}
+[data-surface="dark"] .csa-tablist { border-bottom-color: var(--b600); }
+/* Black-surface parity — added after an audit found dark had full
+   support here but black had none at all: the light-surface defaults
+   (n300 text, n50 underline; b800 active-tab text) were falling
+   through unopposed, and b800 in particular is a dark navy that reads
+   as nearly invisible against the near-black page background — the
+   active tab's own label would all but disappear. Border/text values
+   mirror the black-surface choices toggles.css already established for
+   this same "row of interactive labels" shape (n700 border, n300
+   resting text) rather than inventing new ones. */
+[data-surface="black"] .csa-tablist { border-bottom-color: var(--n700); }
+
+.csa-tab {
+  appearance: none; background: transparent; border: none; cursor: pointer;
+  font-family: inherit; font-size: 14.5px; font-weight: 600;
+  color: var(--n300); padding: 12px 16px 14px;
+  border-bottom: 2px solid transparent;
+  transition: .18s;
+}
+[data-surface="dark"] .csa-tab { color: var(--n100); }
+[data-surface="black"] .csa-tab { color: var(--n300); }
+
+.csa-tab:hover { color: var(--b500); }
+[data-surface="dark"] .csa-tab:hover { color: #fff; }
+[data-surface="black"] .csa-tab:hover { color: #fff; }
+
+.csa-tab-active,
+.csa-tab-active:hover {
+  color: var(--b800); border-bottom-color: var(--b500);
+}
+[data-surface="dark"] .csa-tab-active,
+[data-surface="dark"] .csa-tab-active:hover {
+  color: #fff; border-bottom-color: var(--o500);
+}
+[data-surface="black"] .csa-tab-active,
+[data-surface="black"] .csa-tab-active:hover {
+  color: #fff; border-bottom-color: var(--o500);
+}
+
+.csa-tab:focus-visible {
+  outline: 2px solid var(--b300); outline-offset: 2px;
+}
+
+.csa-tabpanel { display: none; }
+.csa-tabpanel-active { display: block; }

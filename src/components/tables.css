@@ -1,0 +1,74 @@
+/* =========================================================
+   CSA Component Library — Tables
+   A generic data table: n50 row dividers, a b500 header row, and
+   alternating white/n25 body rows for scannability across a wide row
+   count. Styling technique (wrapper border + row-only dividers, no
+   per-cell borders) matches the rounded bordered list RiskRubric.ai
+   uses under "How it works" — see the comment on .csa-table-wrap.
+
+   Markup contract:
+     <div class="csa-table-wrap">
+       <table class="csa-table">
+         <thead>
+           <tr><th>...</th>...</tr>
+         </thead>
+         <tbody>
+           <tr><td>...</td>...</tr>
+           ...
+         </tbody>
+       </table>
+     </div>
+   .csa-table-wrap carries the n50 border, border-radius, AND
+   overflow:hidden together on purpose — this is what avoids a subtle
+   but real bug an earlier version of this file had: giving every cell
+   its own full 4-side border (th/td { border: 1px solid ... }) meant
+   the outermost cells' own straight corners fought the wrapper's
+   rounded clip, since overflow:hidden clips whatever paints past the
+   rounded edge, including a cell's own square corner — which reads as
+   the corner looking "cropped" rather than cleanly rounded. Cells here
+   only ever get border-bottom (a row divider, not a cell border, and
+   never on the very last row), and there's no vertical divider between
+   columns at all — nothing but the wrapper's own border ever touches
+   the rounded edge, so there's nothing left for the clip to cut into.
+   ========================================================= */
+.csa-table-wrap { border: 1px solid var(--n50); border-radius: 12px; overflow: hidden; }
+.csa-table { width: 100%; border-collapse: collapse; }
+.csa-table th, .csa-table td {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid var(--n50);
+}
+.csa-table tbody tr:last-child td { border-bottom: none; }
+.csa-table thead tr { background: var(--b500); }
+.csa-table thead th { color: #fff; font-weight: 700; }
+.csa-table tbody td { color: var(--n500); }
+.csa-table tbody tr:nth-child(odd) { background: #fff; }
+.csa-table tbody tr:nth-child(even) { background: var(--n25); }
+
+/* Dark/black surface support — added after an audit found this was the
+   only component in the library with none at all. Without it, td/th
+   inherited the page's own dark/black-surface text color (white) with
+   nothing inside the table to override it, landing white text on the
+   table's own white/n25 row backgrounds — invisible.
+   Row alternation mirrors light mode's own logic (odd matches the
+   page's own background so it "blends in"; even is one ramp step off
+   so it "pops") rather than inventing new tones: dark's page bg is
+   b700, its one-step-elevated tone is b800 — the same pair .csa-card
+   already uses on dark (surfaces.css); black's page bg is the near-
+   black --black token, its elevated tone is n800 — same pair .csa-card
+   uses on black. The wrapper border and row dividers reuse those same
+   b600/n700 tokens .csa-card's own dark/black borders use, so a table
+   reads as the same "elevated surface" identity as every other
+   component. The b500 header is left untouched on purpose — a solid
+   mid-blue fill with white text already reads fine against light,
+   dark, or black alike, so it needs no override. */
+[data-surface="dark"] .csa-table-wrap { border-color: var(--b600); }
+[data-surface="black"] .csa-table-wrap { border-color: var(--n700); }
+[data-surface="dark"] .csa-table th, [data-surface="dark"] .csa-table td { border-bottom-color: var(--b600); }
+[data-surface="black"] .csa-table th, [data-surface="black"] .csa-table td { border-bottom-color: var(--n700); }
+[data-surface="dark"] .csa-table tbody td, [data-surface="black"] .csa-table tbody td { color: var(--n75); }
+[data-surface="dark"] .csa-table tbody tr:nth-child(odd) { background: var(--b700); }
+[data-surface="dark"] .csa-table tbody tr:nth-child(even) { background: var(--b800); }
+[data-surface="black"] .csa-table tbody tr:nth-child(odd) { background: var(--black); }
+[data-surface="black"] .csa-table tbody tr:nth-child(even) { background: var(--n800); }

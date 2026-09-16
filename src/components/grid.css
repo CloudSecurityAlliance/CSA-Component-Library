@@ -1,0 +1,82 @@
+/* =========================================================
+   CSA Component Library — Grid
+   Equivalent of Bulma's .grid / .cell CSS Grid system.
+
+   .csa-grid auto-fills columns using --col-count (default 12).
+   --cell-min is calculated as one column's exact share of the
+   container width (gap-aware), so auto-fill always creates
+   exactly --col-count tracks — at any container width. This
+   means spans behave predictably as precise fractions of the
+   row (e.g. .csa-cell-col-6 is always half the row on a
+   12-col grid), while still being flex-responsive: the track
+   formula re-evaluates as the container narrows.
+
+   Use .csa-grid-{2–6} for common equal-column card grids.
+   Override --col-count inline for any other count.
+   Keep cell spans ≤ --col-count; larger spans wrap to a new
+   row since there are no tracks to place them in.
+   ========================================================= */
+
+.csa-grid {
+  --grid-gap: 20px;
+  --col-count: 12;
+  /* One column's share of the container: (total + gap) / count - gap.
+     max(0px,...) prevents negative values on very narrow containers. */
+  --cell-min: max(0px, calc((100% + var(--grid-gap)) / var(--col-count) - var(--grid-gap)));
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: repeat(auto-fill, minmax(var(--cell-min), 1fr));
+}
+
+/* Default cell — 1 column, 1 row */
+.csa-cell {
+  min-width: 0; /* prevent overflow from non-breaking content */
+}
+
+/* ── Column spans ────────────────────────────────────────── */
+.csa-cell-col-1  { grid-column: span 1; }
+.csa-cell-col-2  { grid-column: span 2; }
+.csa-cell-col-3  { grid-column: span 3; }
+.csa-cell-col-4  { grid-column: span 4; }
+.csa-cell-col-5  { grid-column: span 5; }
+.csa-cell-col-6  { grid-column: span 6; }
+.csa-cell-col-7  { grid-column: span 7; }
+.csa-cell-col-8  { grid-column: span 8; }
+.csa-cell-col-9  { grid-column: span 9; }
+.csa-cell-col-10 { grid-column: span 10; }
+.csa-cell-col-11 { grid-column: span 11; }
+.csa-cell-col-12 { grid-column: span 12; }
+
+/* ── Row spans ───────────────────────────────────────────── */
+.csa-cell-row-1 { grid-row: span 1; }
+.csa-cell-row-2 { grid-row: span 2; }
+.csa-cell-row-3 { grid-row: span 3; }
+.csa-cell-row-4 { grid-row: span 4; }
+.csa-cell-row-5 { grid-row: span 5; }
+.csa-cell-row-6 { grid-row: span 6; }
+
+/* ── Column-count presets ────────────────────────────────── */
+/* Convenience classes for the most common card-grid counts.
+   Any other count: set --col-count via inline style. */
+.csa-grid-1 { --col-count: 1; }
+.csa-grid-2 { --col-count: 2; }
+.csa-grid-3 { --col-count: 3; }
+.csa-grid-4 { --col-count: 4; }
+.csa-grid-5 { --col-count: 5; }
+.csa-grid-6 { --col-count: 6; }
+
+/* ── Cell modifiers ──────────────────────────────────────── */
+/* Makes the cell's direct child stretch to the full cell
+   height — useful when a .csa-card or similar component
+   should match the height of its tallest row-sibling without
+   adding height:100% to the component itself. */
+.csa-cell-fill {
+  display: flex;
+  flex-direction: column;
+}
+.csa-cell-fill > * {
+  flex: 1;
+}
+
+/* ── Container modifiers ─────────────────────────────────── */
+.csa-grid-gapless { --grid-gap: 0px; }

@@ -1,0 +1,58 @@
+/* =========================================================
+   CSA Component Library — Icons
+   Source: CSA Brand Guide 20260421.pdf, "Icon Color Variations" +
+   "Approved Icon Color & Background Combinations" (pages 15–16).
+
+   The color/chip treatment is baked directly into each SVG file in
+   src/assets/icons/ — there are 6 files per icon, one per approved
+   style. Picking the right FILE for a given background is a decision
+   the page author makes (see the showcase's Icons section for the
+   full approved-combination table) — this file only handles sizing.
+
+     {name}.svg                 Monochrome          navy glyph, no chip
+     {name}-white.svg           Inverse Monochrome  white glyph, no chip
+     {name}-light-blue.svg      Light Blue          --b50 chip, navy glyph
+     {name}-CSA-blue.svg        CSA Blue            --b500 chip, white glyph
+     {name}-yellow-orange.svg   Yellow Orange       --o300-ish chip, navy glyph
+     {name}-red-orange.svg      Red Orange          --b800 chip, --o700 glyph
+
+   48px is the default per the 4 reference pages. Internal viewBoxes
+   vary slightly between an icon's no-chip and chip variants (checked —
+   e.g. -15,-15,30,30 vs -15,-13.7,30,27.39), so object-fit:contain
+   keeps every icon uniformly sized and undistorted regardless.
+
+   The chip variants (light-blue/CSA-blue/yellow-orange/red-orange) draw
+   their glyph at 60% of their own canvas, leaving room for the chip's
+   padding — checked across all 101 icons, exactly 0.6 every time, no
+   exceptions. Monochrome/white have no chip, so their glyph fills the
+   canvas edge to edge — at the same 48px box, that reads noticeably
+   bigger than a chip icon's glyph. .csa-icon-mono scales it back down
+   to that same 60%, so a monochrome icon's ink matches a chip icon's
+   ink at a glance, rather than matching box-for-box.
+   ========================================================= */
+.csa-icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  object-fit: contain;
+}
+
+.csa-icon-small {
+  width: 32px;
+  height: 32px;
+}
+
+.csa-icon-large {
+  width: 56px;
+  height: 56px;
+}
+
+
+.csa-icon-mono { transform: scale(.6); }
+
+/* Flat light-blue tint backdrop — the "B25–B50" approved background
+   named in the brand guide for Monochrome and CSA Blue icons. Doesn't
+   correspond to any of the 3 named page surfaces (light/gradient/dark),
+   so it's a small standalone utility rather than a new data-surface value. */
+.csa-bg-tint { background: var(--b50); }
+

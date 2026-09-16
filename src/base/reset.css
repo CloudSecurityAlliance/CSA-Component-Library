@@ -1,0 +1,25 @@
+/* =========================================================
+   CSA Component Library — Base Reset
+   Bare-element selectors, matching all 4 reference pages exactly.
+   This library targets whole standalone pages (not fragments dropped
+   into an existing cloudsecurityalliance.org page), so global resets
+   on *, html, body, a, and section are intentional — see README.
+   ========================================================= */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #fff;
+  color: var(--n500);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+}
+a { color: inherit; text-decoration: none; }
+/* Every real .csa-btn example in this library is built on <a href>, so
+   this gap went unnoticed until the STAR comparison table's "Get Listed
+   with this path" CTA used a real <button> instead: browsers don't
+   inherit font-family/font-size into form controls the way they do for
+   a plain element, so an unstyled <button> falls back to the platform
+   UI font (Arial) rather than the page's real body font. */
+button, input, select, textarea { font: inherit; color: inherit; }
+section { padding: 92px 0; }

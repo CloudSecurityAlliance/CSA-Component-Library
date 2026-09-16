@@ -1,0 +1,202 @@
+/* =========================================================
+   CSA Component Library — Tags
+   Designed fresh (not extracted): small pill labels, no border (that's
+   what visually separates them from Badges) — color/weight alone carry
+   the distinction. Two types:
+     .csa-tag         — static, inert, a <span>
+     .csa-tag-filter  — clickable/toggleable, a real <button>, selected
+                        state driven by aria-pressed. BEHAVIOR SPEC, not
+                        implemented here: on click, flip aria-pressed
+                        between "true"/"false" — every visual state below
+                        is plain CSS keyed off that attribute alone, so
+                        that's the entire contract. Pressed state is
+                        usually wired to real filtering logic in the
+                        app, which is exactly the kind of app-specific
+                        behavior this library doesn't own — implement
+                        the click handler (or bind aria-pressed to
+                        whatever state your app already tracks) on the
+                        consuming side. "Filter tag/chip" is the closest universal
+                        term for this exact pattern (Material's "Filter
+                        chip"; Ant Design's CheckableTag and Carbon's
+                        Selectable Tag are the same idea under different
+                        names) — picked since these are for filtering
+                        result sets, not a general on/off toggle.
+   Color is a separate modifier — .csa-tag-neutral / .csa-tag-blue /
+   .csa-tag-orange — combined with either type: <span class="csa-tag
+   csa-tag-neutral"> or <button class="csa-tag csa-tag-filter
+   csa-tag-blue">. A filter tag's resting look is identical to the
+   static tag of the same color; only :hover and [aria-pressed="true"]
+   diverge.
+   Every rule below is written twice on purpose: once for a plain white
+   page, once escalated a ramp step for a literal n25 background (see
+   .csa-bg-n25, the same escalation hook .csa-card already uses in
+   surfaces.css) — without that step, an n25-background tag would be
+   invisible sitting on an n25 page. Dark and black share one set of
+   rules (identical per spec), diverging only in the pressed-state text
+   color (b800 on navy, true black on black).
+   .csa-tag-icon (see below) adds an optional leading glyph to either
+   type, in any color — see its own comment for why that's a CSS mask
+   rather than an <img>. */
+.csa-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* height:31px is explicit — a whole-pixel round-off of what it used to
+   render as implicitly (padding 6px×2 + 12px font × reset.css's base
+   1.6 line-height ≈ 31.1953125px, an ugly sub-pixel value the font's
+   own metrics produced with nothing clean about it). A whole integer
+   here also sidesteps the sub-pixel-snapping remainder a fractional
+   value like 31.2px still leaves on a 2x-DPI screen (31.2 × 2 = 62.4,
+   itself not a whole device pixel) — 31 × 2 = 62 lands exactly.
+   Pinning it here at all (rather than deriving it implicitly) gives
+   every tag variant (including .csa-tag-removable below) an exact,
+   predictable box to size against — box-sizing:border-box (reset.css)
+   is what makes this include the padding rather than add to it. */
+.csa-tag {
+  display: inline-flex; align-items: center;
+  font-size: 12px; font-weight: 500; letter-spacing: .02em;
+  padding: 6px 13px; border-radius: 999px;
+  height: 31px;
+}
+.csa-tag-filter { appearance: none; border: none; font-family: inherit; cursor: pointer; transition: background-color .15s; }
+
+/* ---- White background (default, unscoped) ---- */
+.csa-tag-neutral { background: var(--n25); color: var(--n400); }
+.csa-tag-blue    { background: var(--b25); color: var(--b500); }
+.csa-tag-orange  { background: var(--o25); color: var(--o700); }
+
+.csa-tag-filter.csa-tag-neutral:hover { background: var(--n50); }
+.csa-tag-filter.csa-tag-blue:hover    { background: var(--b50); }
+.csa-tag-filter.csa-tag-orange:hover  { background: var(--o50); }
+
+.csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
+.csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
+.csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
+
+/* ---- Neutral (n25) background — one ramp step up so tags stay visible against their own n25 host ---- */
+.csa-bg-n25 .csa-tag-neutral { background: var(--n50); }
+.csa-bg-n25 .csa-tag-blue    { background: var(--b50); }
+.csa-bg-n25 .csa-tag-orange  { background: var(--o50); }
+
+.csa-bg-n25 .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
+.csa-bg-n25 .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
+.csa-bg-n25 .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
+
+/* Pressed state here is identical to White's — but it still needs its
+   own .csa-bg-n25-scoped copy, not just the shared rule above, purely
+   for specificity: the hover rule right above it is 4 selectors deep
+   (.csa-bg-n25 + 2 classes + :hover) and beats the shared pressed rule's
+   3, so hovering a pressed tag was falling back to the light hover
+   background while pressed's white text stayed — illegible. Matching
+   the hover rule's specificity here (same 4 selectors) is what makes
+   pressed reliably win while the mouse is still over the tag. */
+.csa-bg-n25 .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
+.csa-bg-n25 .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
+.csa-bg-n25 .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
+
+/* ---- Dark + black backgrounds (identical except the pressed text color) ---- */
+[data-surface="dark"] .csa-tag-neutral, [data-surface="black"] .csa-tag-neutral {
+  background: rgba(165,183,198,.2); /* --n100 (#A5B7C6) at 20% */
+  color: var(--n100);
+}
+[data-surface="dark"] .csa-tag-blue, [data-surface="black"] .csa-tag-blue {
+  background: rgba(0,147,255,.2); /* --b300 (#0093FF) at 20% */
+  color: var(--b300);
+}
+[data-surface="dark"] .csa-tag-orange, [data-surface="black"] .csa-tag-orange {
+  background: rgba(255,166,0,.2); /* --o300 (#FFA600) at 20% */
+  color: var(--o300);
+}
+
+[data-surface="dark"] .csa-tag-filter.csa-tag-neutral:hover, [data-surface="black"] .csa-tag-filter.csa-tag-neutral:hover { background: rgba(165,183,198,.3); }
+[data-surface="dark"] .csa-tag-filter.csa-tag-blue:hover, [data-surface="black"] .csa-tag-filter.csa-tag-blue:hover { background: rgba(0,147,255,.3); }
+[data-surface="dark"] .csa-tag-filter.csa-tag-orange:hover, [data-surface="black"] .csa-tag-filter.csa-tag-orange:hover { background: rgba(255,166,0,.3); }
+
+[data-surface="dark"] .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n100); color: var(--b800); }
+[data-surface="dark"] .csa-tag-filter.csa-tag-blue[aria-pressed="true"]   { background: var(--b300); color: var(--b800); }
+[data-surface="dark"] .csa-tag-filter.csa-tag-orange[aria-pressed="true"] { background: var(--o300); color: var(--b800); }
+
+[data-surface="black"] .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n100); color: var(--black); }
+[data-surface="black"] .csa-tag-filter.csa-tag-blue[aria-pressed="true"]   { background: var(--b300); color: var(--black); }
+[data-surface="black"] .csa-tag-filter.csa-tag-orange[aria-pressed="true"] { background: var(--o300); color: var(--black); }
+
+/* Icon variant — .csa-tag-icon modifier adds a glyph before the label,
+   combined with any existing type/color class: <span class="csa-tag
+   csa-tag-neutral csa-tag-icon"><span class="csa-icon-glyph"
+   style="--icon-glyph:url(...)"></span>Label</span>. The glyph itself
+   (mask + currentColor, so it recolors for free with the tag's own
+   text color, including through hover/pressed) is the shared
+   .csa-icon-glyph primitive in base/icon-glyph.css — this just sizes
+   it for the tag context; its 14px default already matches what tags
+   need, so no override is required here. That's also why
+   Profile-white.svg (mentioned as already existing for the pressed
+   state) isn't wired in separately: masking already renders the glyph
+   in solid white the instant the pressed rules above set color:#fff,
+   so a second file would only reproduce what currentColor already
+   does on its own. */
+.csa-tag-icon { padding-left: 11px; gap: 4px; }
+
+/* Removable variant — .csa-tag-removable modifier adds a trailing X
+   button, combined with any existing color class (like .csa-tag-icon,
+   works on top of the base static .csa-tag): <span class="csa-tag
+   csa-tag-neutral csa-tag-removable">Label<button type="button"
+   class="csa-tag-remove" aria-label="Remove Label"><svg>...</svg>
+   </button></span>. The X is a real, separately-focusable <button> even
+   though the tag itself is a plain <span> — only the remove action is
+   interactive, the tag body isn't a control on its own (unlike
+   .csa-tag-filter, where the whole tag IS the control). BEHAVIOR SPEC,
+   not implemented here: clicking .csa-tag-remove should remove its
+   parent .csa-tag-removable, typically alongside whatever app state
+   that tag represents (a selected filter, an attached file, etc.) —
+   that data/state coupling is exactly why this library doesn't own the
+   removal itself. Every visual state here is plain CSS.
+   Reduced right padding since the X button already carries its own
+   visual weight — the base .csa-tag's full 13px would read as extra
+   dead space between the label and the button.
+   6.5px specifically, not a rounder-looking number: the circle's gap
+   to the tag's top/bottom edge is padding(6px) + half the leftover
+   slack between the tag's 19px content-box height and the circle's own
+   18px (0.5px) = 6.5px — matching that exactly here is what makes the
+   circle's clearance equal on all four sides instead of visibly
+   wider on the right, since the right gap has no equivalent centering
+   slack of its own to account for (the button is the flex row's last
+   child, so its right edge sits flush against this padding with
+   nothing else in between). */
+.csa-tag-removable { padding-right: 6.5px; }
+/* Sized as a 16px hit target (bigger than the 9px glyph inside it) so
+   it's comfortably clickable, not just the icon's own tiny outline —
+   same reasoning a native checkbox's click target extends past its
+   visible box. color:inherit + currentColor throughout is what makes
+   this automatically match every tag color/surface/pressed-state
+   combination above for free, with no per-variant override needed. */
+.csa-tag-remove {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  margin-left: 4px;
+  padding: 0; border: none; border-radius: 50%;
+  background: transparent; color: inherit;
+  cursor: pointer;
+}
+/* Capped at 18px, not bigger: .csa-tag's height is now pinned explicit
+   (31px total, see its own comment above) rather than derived from
+   content, so this button can no longer force the tag taller the way
+   it could before that change — but .csa-tag still doesn't clip
+   overflow, so a button taller than the tag's own 19px content box
+   (31px height minus 6px top/bottom padding) would visibly poke out
+   past the pill's rounded edge instead. 18px, not the full 19px: at
+   exactly 19px the circle sits flush against that ceiling with zero
+   margin, one sub-pixel rounding away from visibly overflowing; 18px
+   keeps a safe 1px cushion under it. */
+.csa-tag-remove svg { position: relative; z-index: 1; width: 13px; height: 13px; }
+/* The hover circle: a separate ::before layer (not background-color
+   directly on the button) so its opacity fades independently of the X
+   icon itself — the icon stays fully opaque, only the circle behind it
+   fades in. background:currentColor means this needs zero per-color
+   rules: it's always a tinted version of whatever the tag's own text
+   color already is, light or dark surface, pressed or not. */
+.csa-tag-remove::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: currentColor; opacity: 0;
+  transition: opacity .15s;
+}
+.csa-tag-remove:hover::before { opacity: .15; }

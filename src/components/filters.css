@@ -1,0 +1,144 @@
+/* =========================================================
+   CSA Component Library — Filters
+   A filter sidebar — extracted from RiskRubric.ai's search page
+   (Grade / Confidence / Provider / Platform), with a "Clear all" reset
+   above them. A bare layout shell, the same way .csa-actions/.csa-
+   badges/.csa-tags are: no background or border of its own, so it
+   drops into a plain page column or a .csa-card equally well —
+   checkbox/radio styling itself lives in forms.css.
+
+   Two group types:
+     1. A checkbox/radio list (Confidence, Provider, Platform) — each
+        row is .csa-filter-row, a label wrapping a .csa-checkbox or
+        .csa-radio, with its own hover background (RiskRubric's own
+        filter rows highlight on hover; a bare .csa-checkbox/.csa-radio
+        elsewhere in the library doesn't, since that hover treatment is
+        specific to a filter LIST row, not the control itself). Rows
+        sit flush against each other (no gap) — only each row's own
+        padding separates them, matching the reference exactly.
+     2. A Grade quick-filter (Grade) — five single-letter toggle
+        buttons in a row, RiskRubric's own compact grade filter, a
+        fixed 38x38px per the reference (not a stretch-to-fill flex
+        item — a filter control this small reads better at a fixed
+        size than one that grows with a wider sidebar). aria-pressed
+        marks the selected letter(s); selected state is one exact
+        color per letter — confirmed directly against the live site
+        (A g200, B b400, C p300, D o300, F o700 — F is a darker step of
+        the SAME orange ramp as D, not a red), rendered as that color
+        at 20% opacity for the fill plus the solid color for border and
+        text. Confirmed identical in both of the reference's own
+        light/dark modes, so this one rule applies unscoped by surface
+        — no separate dark/black variant needed for the selected state.
+
+   Markup contract:
+     <div class="csa-filters">
+       <div class="csa-filters-head">
+         <span class="csa-filters-title">Filters</span>
+         <a href="#" class="csa-filters-clear">Clear all</a>
+       </div>
+
+       <div class="csa-filter-group">
+         <div class="csa-filter-group-title">Grade</div>
+         <div class="csa-filter-grade">
+           <button type="button" class="csa-filter-grade-btn" data-grade="a" aria-pressed="false">A</button>
+           ...b/c/d/f...
+         </div>
+       </div>
+
+       <div class="csa-filter-group">
+         <div class="csa-filter-group-title">Confidence</div>
+         <label class="csa-filter-row csa-checkbox">
+           <input type="checkbox">
+           <span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span>
+           <span>1 scanner</span>
+         </label>
+         ...
+       </div>
+     </div>
+
+   BEHAVIOR SPEC — not implemented here: .csa-filter-grade-btn's
+   aria-pressed is flipped by the app on click, same minimal contract
+   as .csa-tag-filter (tags.css) — every visual change is plain CSS
+   keyed off that attribute alone.
+   ========================================================= */
+.csa-filters { display: flex; flex-direction: column; gap: 24px; }
+.csa-filters-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 16px; border-bottom: 1px solid var(--n50);
+}
+.csa-filters-title {
+  font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--n300);
+}
+.csa-filters-clear { font-size: 12px; font-weight: 700; color: var(--n300); text-decoration: underline; transition: color .15s; }
+.csa-filters-clear:hover { color: var(--n500); }
+
+/* No gap here — .csa-filter-row supplies its own 5px top/bottom
+   padding as the entire visual space between rows, matching the
+   reference exactly. A group with no rows (just the Grade buttons)
+   still gets a clean 8px under its title from the title's own
+   margin-bottom below. */
+.csa-filter-group { display: flex; flex-direction: column; }
+.csa-filter-group-title { font-size: 12px; font-weight: 700; color: var(--b700); margin-bottom: 8px; }
+
+/* Row hover — the whole row highlights, not just the checkbox/radio
+   control, so the entire label reads as the clickable hit target
+   RiskRubric's own filter list uses. Negative left/right margin +
+   matching padding lets the highlight bleed out to the group's own
+   edges rather than only as wide as the label's text. Padding matches
+   the reference's own 5px/8px exactly. */
+.csa-filter-row {
+  padding: 5px 8px; margin: 0 -8px; border-radius: 8px;
+  transition: background-color .15s;
+}
+.csa-filter-row:hover { background: var(--n25); }
+
+/* ---- Grade quick-filter ---- */
+.csa-filter-grade { display: flex; gap: 6px; }
+.csa-filter-grade-btn {
+  width: 38px; height: 38px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  appearance: none; cursor: pointer;
+  border: 1px solid var(--n75); border-radius: 4px; background: #fff;
+  font-weight: 700; font-size: 14px; color: var(--n300);
+  transition: border-color .15s, background-color .15s, color .15s;
+}
+.csa-filter-grade-btn:hover { border-color: var(--n200); }
+.csa-filter-grade-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; }
+.csa-filter-grade-btn[data-grade="a"][aria-pressed="true"] { background: rgba(0,163,111,.2); border-color: var(--g200); color: var(--g200); }
+.csa-filter-grade-btn[data-grade="b"][aria-pressed="true"] { background: rgba(0,114,199,.2); border-color: var(--b400); color: var(--b400); }
+.csa-filter-grade-btn[data-grade="c"][aria-pressed="true"] { background: rgba(153,98,223,.2); border-color: var(--p300); color: var(--p300); }
+.csa-filter-grade-btn[data-grade="d"][aria-pressed="true"] { background: rgba(255,166,0,.2); border-color: var(--o300); color: var(--o300); }
+.csa-filter-grade-btn[data-grade="f"][aria-pressed="true"] { background: rgba(207,67,0,.2); border-color: var(--o700); color: var(--o700); }
+
+/* ---- Surface-aware — dark/black ----
+   Filters/Clear all match this library's standard label-on-dark/black
+   color (--n100, the same token .docs-label uses site-wide) rather
+   than two different faded grays. Grade's RESTING (unselected) look is
+   this library's own surface-aware neutral-outline treatment — its
+   SELECTED state above is already surface-independent (confirmed
+   identical in both of the reference's own light/dark modes), so
+   there's nothing to override here for that part. */
+[data-surface="dark"] .csa-filters-head { border-bottom-color: var(--b600); }
+[data-surface="dark"] .csa-filters-title { color: var(--n100); }
+[data-surface="dark"] .csa-filter-group-title { color: #fff; }
+[data-surface="dark"] .csa-filters-clear { color: var(--n100); }
+[data-surface="dark"] .csa-filters-clear:hover { color: #fff; }
+/* b600, one step lighter than this surface's own b700 page background
+   (surfaces.css) — a hover fill needs to lift off the page, not sink
+   into it; b800 (darker than the page) read as a hole, not a highlight. */
+[data-surface="dark"] .csa-filter-row:hover { background: var(--b600); }
+[data-surface="dark"] .csa-filter-grade-btn { border-color: var(--b600); color: var(--n100); background: transparent; }
+[data-surface="dark"] .csa-filter-grade-btn:hover { border-color: var(--b500); }
+
+[data-surface="black"] .csa-filters-head { border-bottom-color: var(--n700); }
+[data-surface="black"] .csa-filters-title { color: var(--n100); }
+[data-surface="black"] .csa-filter-group-title { color: #fff; }
+[data-surface="black"] .csa-filters-clear { color: var(--n100); }
+[data-surface="black"] .csa-filters-clear:hover { color: #fff; }
+/* n700, one step lighter than this surface's own black page background
+   for the same reason the dark row above steps to b600 — n800 (this
+   library's usual "escalated" black-surface tone, .csa-card etc.) sits
+   even closer to true black and would read as barely-there here. */
+[data-surface="black"] .csa-filter-row:hover { background: var(--n700); }
+[data-surface="black"] .csa-filter-grade-btn { border-color: var(--n700); color: var(--n100); background: transparent; }
+[data-surface="black"] .csa-filter-grade-btn:hover { border-color: var(--n600); }

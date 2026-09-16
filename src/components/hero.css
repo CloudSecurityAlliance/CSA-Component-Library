@@ -1,0 +1,314 @@
+/* =========================================================
+   CSA Component Library — Hero & CTA band
+   Built fresh per spec (not in the "extract as-is" list), informed by
+   the shared structure across all 4 reference heroes: badges row,
+   kicker, h1, sub paragraph, cta button row — always on a dark surface.
+   Two real background treatments existed and both are kept as modifiers:
+     .csa-hero-navy  — diagonal navy gradient (ai-resilience-center)
+     .csa-hero-photo — full-bleed cover photo (the other 3 pages)
+   .csa-cta is the closing full-bleed promo band, identical pattern
+   across 3 of 4 pages (mythos/catastrophic/ai-resilience); folded in
+   here since it's the same "full-bleed dark band with cta buttons" shape.
+
+   .csa-hero and .csa-cta are always-dark, bespoke backgrounds — they
+   don't carry a data-surface attribute, so the generic
+   [data-surface="dark"] .csa-kicker rule never applies inside them.
+   Wire the dark kicker/kicker-sub color directly here instead, and
+   split hero from cta since their real precedent differs: all 4 pages
+   hardcode the HERO kicker specifically to --b300 (#0093ff); the other
+   dark blocks in those same pages (advisory/mission/sage — the same
+   shape as .csa-cta) use the spec's regular dark-surface orange. */
+.csa-hero .csa-kicker, .csa-hero .csa-kicker-sub { color: var(--b300); }
+.csa-cta .csa-kicker, .csa-cta .csa-kicker-sub { color: var(--o500); }
+
+.csa-hero { position: relative; overflow: hidden; color: #fff; }
+.csa-hero-navy  { background: linear-gradient(160deg, var(--b800), var(--b700) 48%, var(--b700)); }
+.csa-hero-photo { background-position: center; background-size: cover; background-repeat: no-repeat; }
+
+/* .csa-hero-light — same content shape as .csa-hero-navy (badges,
+   kicker, h1, sub, cta buttons floating directly on the background, not
+   inside a glass panel like .csa-hero-glass), just a light mesh-gradient
+   background instead of the navy diagonal. Every one of .csa-hero's own
+   defaults above (color:#fff, kicker b300) assumes a dark bg, so this
+   needs its own overrides the same way .csa-hero-glass-light overrides
+   .csa-card-glass's — see the h1/.csa-sub overrides further below
+   (they have to sit after .csa-hero h1/.csa-sub to win that tie), and
+   badges.css/buttons.css for the badge-secondary and primary-button-hover
+   overrides this same variant needs there.
+   Mesh gradient built from 4 sampled mesh points off a reference comp:
+   o50 top-left, n25 upper-right (subtle), b50/b75 at the two bottom
+   corners — b75 more saturated than b50, so bottom-right reads stronger
+   than bottom-left, matching the reference's own asymmetry. */
+.csa-hero-light {
+  background-color: var(--white);
+  background-image:
+    radial-gradient(circle at 16% 10%, var(--o50) 0%, rgba(255,231,189,0) 45%),
+    radial-gradient(circle at 68% 19%, var(--n25) 0%, rgba(238,243,248,0) 35%),
+    radial-gradient(circle at 20% 88%, var(--b50) 0%, rgba(196,230,255,.4) 30%, rgba(196,230,255,0) 48%),
+    radial-gradient(circle at 93% 89%, var(--b75) 0%, rgba(153,212,255,.55) 24%, rgba(153,212,255,0) 44%);
+  color: var(--n500);
+}
+.csa-hero-light .csa-kicker { color: var(--b500); }
+
+.csa-hero .csa-wrap { position: relative; z-index: 0; padding: 104px 24px 92px; }
+
+.csa-hero h1 {
+  color: #fff; letter-spacing: -.03em; line-height: 1.04;
+  font-size: clamp(38px, 5.6vw, 62px);
+  margin: 6px 0 20px; max-width: 18ch;
+}
+.csa-hero .csa-sub {
+  font-size: clamp(18px, 2vw, 22px); color: var(--n75);
+  max-width: 56ch; line-height: 1.55;
+}
+/* These two have to sit after .csa-hero h1/.csa-sub above to win the
+   specificity tie (both sides are one class + one type selector) —
+   b800/n500 match this library's usual "headings b800, body n500"
+   light-surface convention (see Surfaces above) rather than inventing
+   new values just for this variant. */
+.csa-hero-light h1 { color: var(--b800); }
+.csa-hero-light .csa-sub { color: var(--n500); }
+
+.csa-hero-cta { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; }
+/* Small screens: stack the CTA row and give each button the same
+   treatment as .csa-btn-block (display:flex; width:100%; justify-
+   content:center), so it spans the full width of whatever it's sitting
+   in — the hero's own .csa-wrap on hero-navy, or the glass panel
+   (.csa-card-glass) on hero-glass. Applied here automatically rather
+   than requiring every hero example to hardcode .csa-btn-block in its
+   markup. Same 640px breakpoint .csa-cta already uses below, for the
+   same "small screen" cutoff across this file. */
+@media (max-width: 640px) {
+  .csa-hero-cta { flex-direction: column; }
+  .csa-hero-cta .csa-btn { display: flex; width: 100%; justify-content: center; }
+}
+
+/* Hero-glass — content sits inside a frosted glass panel over a photo
+   background (.csa-hero-photo), instead of floating directly on it
+   like .csa-hero-navy does. Reuses .csa-card-glass's exact blur/
+   translucency recipe for the panel rather than redefining it: just
+   nest a plain .csa-card-glass inside a .csa-hero.csa-hero-photo. Two
+   of the 4 reference pages (mythos-cyber-capable-ai.html, csai-
+   foundation-hub.html) used this exact shape in an earlier iteration —
+   their currently-published versions simplified the hero down to a
+   plain gradient with no glass panel, but the original panel's values
+   are identical to .csa-card-glass's own dark variant, which is what
+   this recreates. width:fit-content on the panel (not full-bleed)
+   matches that original — it hugs its own content instead of spanning
+   the hero's full width.
+
+   .csa-hero-glass-light / .csa-hero-glass-dark supply the two color
+   directions (only one of the two pages actually shipped dark; light
+   is a new variant built the same way, swapping to .csa-card-glass's
+   light default instead of its dark override). Every override below is
+   explicit, not a fallthrough: .csa-hero's own h1/.csa-sub color rules
+   (white, for text floating directly on a dark hero) and .csa-card-
+   glass's own h1/p color rules (light-panel-appropriate) were never
+   written expecting to be nested inside each other, and doing so
+   creates a real specificity collision between them — `.csa-hero
+   .csa-sub` alone already outranks `.csa-card-glass p` by class count,
+   independent of file order — so rather than lean on however that
+   cascade happens to resolve, every text color the glass panel needs
+   is set here explicitly, scoped to .csa-hero-glass specifically. */
+/* Stays left-aligned (no margin-left:auto — panel hugs the wrap's left
+   edge like .csa-hero-navy's own content does). width:fit-content is
+   meant to shrink the panel to its widest child's actual content, but
+   on its own that doesn't work the way it looks like it should: h1/
+   .csa-sub/.csa-mission are plain blocks and .csa-hero-cta is a block-
+   level flex row, so by default ALL of them have width:auto, which
+   means "fill the available width of the containing block" — even
+   inside a fit-content parent, capped only by their own max-width
+   (18ch/56ch/52ch). That cap, not each element's actual longest
+   rendered line, is what fit-content sees as their "preferred" width,
+   so the panel sizes itself to the WIDEST cap among them and then
+   every other child stretches to match — a short badge row or a
+   heading that only needs two much-narrower lines still ends up
+   spanning the same bloated width, which is exactly the "glass is
+   wider than it needs to be" symptom.
+   The fix, and the rule to keep applying here going forward: every
+   direct text/content child of a glass panel gets width:fit-content
+   too (max-width:100% alongside it, so none can ever overflow the
+   panel on a narrow viewport) — that makes each one shrink to ITS OWN
+   actual content first, and only THEN does the panel's own
+   width:fit-content measure the true widest one among them. Add any
+   new child type to this same selector list rather than leaving it on
+   the block/flex default. */
+.csa-hero-glass .csa-card-glass { padding: 44px; width: fit-content; }
+.csa-hero-glass .csa-card-glass h1,
+.csa-hero-glass .csa-card-glass .csa-sub,
+.csa-hero-glass .csa-card-glass .csa-mission,
+.csa-hero-glass .csa-card-glass .csa-hero-cta,
+.csa-hero-glass .csa-card-glass .csa-badges {
+  width: fit-content; max-width: 100%;
+}
+/* Matches the plain established h1 (typography.css) exactly, not the
+   source pages' own literal per-page values — this doc outlives the
+   source HTML it was extracted from, so sizing rules live independent
+   of it from here on. (.csa-hero's own h1 override elsewhere in this
+   file is its own deliberate exception — ai-resilience-center's heading
+   runs longer, so it keeps a smaller clamp — not a pattern to extend.)
+
+   max-width:16ch, not the plain h1's 18ch: this is the one place
+   width:fit-content (above) genuinely can't shrink to the actual
+   rendered content the way it looks like it should. Once an h1's full
+   unwrapped text is wider than its max-width, that max-width becomes
+   the box's resolved width outright — CSS has no way to then re-measure
+   and shrink to whichever wrapped line ends up longest, so a 2-word
+   headline that wraps still gets a box as wide as the full cap allows,
+   not as wide as its actual (shorter) two lines. Tightening the cap
+   itself is the only lever available; 16ch is chosen to stay just wide
+   enough for this pattern's short headlines' longest real line (e.g.
+   "Frontier Ready" clears it) without cutting a line short by a word —
+   re-check this value if a much longer word ever appears in one. */
+.csa-hero-glass .csa-card-glass h1 {
+  font-size: clamp(40px, 5.8vw, 66px); letter-spacing: -.03em;
+  line-height: 1.05; margin: 14px 0 14px; max-width: 16ch;
+}
+/* 54ch, not the general 56ch — same underlying limitation h1's own
+   gap-tightening comment above describes, just a smaller trim here:
+   .csa-sub is allowed to end up wider than h1 (and so become what the
+   panel's own width:fit-content actually measures) rather than being
+   capped to match it. */
+.csa-hero-glass .csa-card-glass .csa-sub { font-size: clamp(18px, 2vw, 22px); max-width: 54ch; line-height: 1.5; }
+.csa-hero-glass .csa-card-glass .csa-mission { margin-top: 16px; font-size: 15.5px; max-width: 52ch; }
+.csa-hero-glass .csa-card-glass .csa-hero-cta { margin-top: 26px; }
+/* .csa-hero-cta is deliberately width:fit-content above (so the row
+   never forces the panel wider than its longest line on desktop) — but
+   at the mobile breakpoint (see .csa-hero-cta's own media query near
+   the top of this file) its buttons switch to width:100%, which needs
+   a real, definite width on this row to resolve against. A percentage
+   width against a fit-content ancestor doesn't shrink-then-stretch the
+   way it looks like it should (same underlying limitation the h1/
+   .csa-sub comments above describe) — the button just falls back to
+   its own content size instead, which is exactly why the buttons
+   weren't actually reaching the panel's edges. Same selector/
+   specificity as the fit-content rule above, winning only because it's
+   later in the file — keep this below that rule, not above it. */
+@media (max-width: 640px) {
+  .csa-hero-glass .csa-card-glass .csa-hero-cta { width: 100%; }
+}
+
+/* Kicker: b500 here specifically (not the b300 .csa-hero gives every
+   other hero's kicker) — b300 is a bright cyan-blue tuned for reading
+   on a dark hero background, and reads washed-out/low-contrast against
+   this panel's light, near-white glass instead. Same specificity as
+   .csa-hero .csa-kicker (two classes) — wins by sitting later in this
+   same file, not by out-ranking it. */
+.csa-hero-glass-light .csa-kicker { color: var(--b500); }
+.csa-hero-glass-light .csa-card-glass h1 { color: var(--b800); }
+.csa-hero-glass-light .csa-card-glass .csa-sub { color: var(--n500); }
+.csa-hero-glass-light .csa-card-glass .csa-mission { color: var(--n400); }
+
+/* Background/border copied from .csa-card-glass's own
+   [data-surface="dark"] override (cards.css) — not reused via that
+   attribute directly, since .csa-hero deliberately never carries
+   data-surface (see the comment at the top of this file). */
+.csa-hero-glass-dark .csa-card-glass {
+  background: rgba(12,32,64,.8);
+  border-color: rgba(0,62,119,.5);
+}
+.csa-hero-glass-dark .csa-card-glass h1 { color: #fff; }
+.csa-hero-glass-dark .csa-card-glass .csa-sub { color: var(--n75); }
+.csa-hero-glass-dark .csa-card-glass .csa-mission { color: var(--n100); }
+
+/* Hero-glass, graphic variant — extracted from the STAR Program
+   Overview page's hero: a wide glass panel with a large graphic
+   (illustration/badge art) overlapping its right edge, instead of the
+   plain fit-content panel .csa-hero-glass uses alone. Composes with
+   EITHER .csa-hero-glass-light or .csa-hero-glass-dark — this modifier
+   only adds the graphic column and widens the panel to make room for
+   it; color is still entirely owned by whichever light/dark modifier
+   is also present (the source page only ever shipped the dark
+   pairing, but nothing here is dark-specific).
+
+   Markup:
+     <div class="csa-hero csa-hero-photo csa-hero-glass csa-hero-glass-dark csa-hero-glass-graphic" style="background-image:url(...)">
+       <div class="csa-wrap csa-hero-graphic-row">
+         <div class="csa-card-glass">
+           <div class="csa-hero-graphic-content"> ...badges/h1/sub/cta... </div>
+         </div>
+         <div class="csa-hero-graphic-img"><img src="..." alt=""></div>
+       </div>
+     </div>
+
+   .csa-hero-graphic-row is a plain flex row, not a grid — the graphic
+   is taken out of flow entirely (position:absolute below), so it never
+   actually occupies a column track; flex is enough to just place the
+   glass panel. The panel is widened (950px cap, up from the plain
+   hero-glass fit-content default) so its own right edge reaches
+   roughly halfway across the graphic, letting it visually overlap the
+   card's edge instead of floating fully apart from it — same
+   class-count specificity tie as .csa-hero-glass .csa-card-glass{width:
+   fit-content} above, broken by this rule sitting later in the file.
+   Because the panel now has a real fixed-ish width instead of fit-
+   content, its children don't need the fit-content-chain treatment
+   .csa-hero-glass's own comment describes — .csa-hero-graphic-content
+   is a plain block, just capped at 640px so the wide panel doesn't
+   stretch copy across its full width.
+
+   .csa-hero-graphic-img is pinned with a real 24px inset from the
+   wrap's own edge (not right:0, which is flush against the true
+   viewport/wrap edge whenever the wrap isn't wider than the viewport),
+   taken out of flow so its size/position never depends on the panel's
+   width. Its width shrinks continuously with viewport instead of
+   snapping to display:none — clamp(300px, 120vw - 960px, 480px) is a
+   linear function solved to hit 480px at a 1200px wrap and 300px at a
+   1050px wrap, holding at 480px above that and hiding below it.
+   z-index:1 puts it above the glass panel's own non-positioned box, so
+   it paints over the card's edge rather than being hidden behind it —
+   that's the intended "graphic breaking out of the frame" look, not a
+   mistake to fix.
+   Below 1050px the graphic hides entirely and the panel reverts to
+   .csa-hero-glass's own fit-content default (set explicitly here, not
+   left unset — the unconditional width rule above is the same
+   selector, so it's a source-order tie this query's later rule needs
+   to win). */
+
+.csa-hero-graphic-row { display: flex; align-items: center; gap: 0; flex-wrap: wrap; position: relative; }
+.csa-hero-glass-graphic .csa-card-glass { width: min(950px, 80%); }
+.csa-hero-graphic-content { max-width: 640px; }
+.csa-hero-graphic-img { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); width: clamp(300px, 120vw - 960px, 480px); z-index: 1; }
+.csa-hero-graphic-img img { width: 100%; height: auto; display: block; }
+@media (max-width: 1050px) {
+  .csa-hero-graphic-img { display: none; }
+  .csa-hero-glass-graphic .csa-card-glass { width: fit-content; }
+  .csa-hero-graphic-content { max-width: none; }
+}
+
+/* Closing CTA band */
+.csa-cta {
+  position: relative; overflow: hidden;
+  border-radius: 20px; padding: 62px 56px;
+  color: #fff; text-align: center;
+  background-position: center; background-size: cover; background-repeat: no-repeat;
+}
+.csa-cta h2 { color: #fff; font-size: 34px; max-width: 20ch; margin: 0 auto; }
+.csa-cta p { color: var(--n75); font-size: 17px; margin: 14px auto 28px; max-width: 56ch; }
+.csa-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 640px) { .csa-cta { padding: 40px 26px; } }
+
+/* .csa-cta-photo-bg — an alternative to setting .csa-cta's background
+   as a plain `background: url(...)`, for when only an unprocessed
+   photo is on hand instead of a separately pre-blurred/darkened image
+   file: drop a plain <img> in as .csa-cta's first child and blur/darken
+   it live with filter, right in the browser. scale(1.15) oversizes the
+   image so .csa-cta's own overflow:hidden crops away the lighter halo
+   a blur leaves at an image's own literal edges (blurring samples past
+   the image's real bounds there, which would otherwise show as a soft
+   pale border around the CTA). brightness(.4) does the darkening
+   instead of a separate rgba() overlay layer — one filter, not two
+   stacked layers, and it darkens the busy photo evenly enough for the
+   CTA's white text to stay readable, same as a hand-darkened source
+   image would.
+   Needs .csa-cta-content wrapping the real CTA children (h2/p/
+   .csa-cta-row): position:absolute on the img makes it paint above
+   plain in-flow siblings by default regardless of source order, so the
+   text needs its own explicit stacking (position:relative + z-index)
+   to actually land on top of it. */
+.csa-cta-photo-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; transform: scale(1.15);
+  filter: blur(16px) brightness(.4);
+  z-index: 0;
+}
+.csa-cta-content { position: relative; z-index: 1; }

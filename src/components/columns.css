@@ -1,0 +1,87 @@
+/* =========================================================
+   CSA Component Library — Columns
+   Equivalent of Bulma's .columns / .column flex-row system.
+   A .csa-columns container distributes .csa-column children
+   as equal-width columns by default. Named-fraction and
+   12-column-grid width modifiers are available for asymmetric
+   layouts. Column spans that sum to 12 always fill the row
+   exactly without overflow or gap, regardless of how they're
+   mixed (e.g. 3+9, 4+4+4, 8+4, 6+3+3).
+
+   Default gap is 20px, matching the card-grid gap used
+   elsewhere in this library. Columns stack to a single
+   column below 640px unless .csa-columns-mobile is present.
+   ========================================================= */
+
+/* Container */
+.csa-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Default column — equal flexible share of available space.
+   flex-basis:0 (not auto) is what makes all unsized columns
+   exactly equal regardless of their content width. */
+.csa-column {
+  flex: 1 1 0;
+  min-width: 0; /* prevent long non-breaking content from overflowing */
+}
+
+/* ── Named-fraction widths ───────────────────────────────
+   Each value uses the same formula as the 12-column grid
+   below: K/12 × 100% − (12−K)/12 × 20px. Named fractions
+   map to their exact 12-column equivalent (half=6, third=4,
+   two-thirds=8, quarter=3, three-quarters=9), so mixing
+   named and numeric modifiers in the same row composes
+   correctly — .csa-column-two-thirds + .csa-column-4 fills
+   a row the same way .csa-column-8 + .csa-column-4 does. */
+.csa-column-narrow         { flex: 0 0 auto; }
+.csa-column-full           { flex: 0 0 100%; }
+.csa-column-three-quarters { flex: 0 0 calc(75%      -  5px);       } /* ≡ col-9  */
+.csa-column-two-thirds     { flex: 0 0 calc(66.6667% -  6.6667px); } /* ≡ col-8  */
+.csa-column-half           { flex: 0 0 calc(50%      - 10px);       } /* ≡ col-6  */
+.csa-column-third          { flex: 0 0 calc(33.3333% - 13.3333px); } /* ≡ col-4  */
+.csa-column-quarter        { flex: 0 0 calc(25%      - 15px);       } /* ≡ col-3  */
+
+/* ── 12-column integer grid ─────────────────────────────
+   Width = K/12 × 100% − (12−K)/12 × 20px, where 20px is
+   the container gap. Any set of columns whose spans sum to
+   12 will fill the row exactly — e.g. col-3 + col-9,
+   col-4 + col-4 + col-4, col-2 + col-6 + col-4. */
+.csa-column-1  { flex: 0 0 calc(8.3333%  - 18.3333px); }
+.csa-column-2  { flex: 0 0 calc(16.6667% - 16.6667px); }
+.csa-column-3  { flex: 0 0 calc(25%      - 15px);       }
+.csa-column-4  { flex: 0 0 calc(33.3333% - 13.3333px); }
+.csa-column-5  { flex: 0 0 calc(41.6667% - 11.6667px); }
+.csa-column-6  { flex: 0 0 calc(50%      - 10px);       }
+.csa-column-7  { flex: 0 0 calc(58.3333% -  8.3333px); }
+.csa-column-8  { flex: 0 0 calc(66.6667% -  6.6667px); }
+.csa-column-9  { flex: 0 0 calc(75%      -  5px);       }
+.csa-column-10 { flex: 0 0 calc(83.3333% -  3.3333px); }
+.csa-column-11 { flex: 0 0 calc(91.6667% -  1.6667px); }
+.csa-column-12 { flex: 0 0 100%; }
+
+/* ── Container modifiers ────────────────────────────────── */
+.csa-columns-vcentered  { align-items: center; }
+.csa-columns-centered   { justify-content: center; }
+.csa-columns-gapless    { gap: 0; }
+/* multiline is the default (flex-wrap:wrap is always on),
+   but naming it explicitly aids discoverability for authors
+   coming from Bulma who expect to set it intentionally. */
+.csa-columns-multiline  { flex-wrap: wrap; }
+
+/* ── Responsive — stack on mobile ───────────────────────
+   Below 640px all columns collapse to full-width and stack
+   vertically. Add .csa-columns-mobile to the container to
+   keep columns side-by-side at all widths. */
+@media (max-width: 640px) {
+  .csa-columns:not(.csa-columns-mobile) {
+    flex-direction: column;
+  }
+  .csa-columns:not(.csa-columns-mobile) > .csa-column,
+  .csa-columns:not(.csa-columns-mobile) > [class*="csa-column-"] {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}

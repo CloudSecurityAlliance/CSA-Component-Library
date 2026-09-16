@@ -1,0 +1,141 @@
+/* =========================================================
+   CSA Component Library — Carousel
+   Card/arrow/track visuals extracted as-is from the "AI insights &
+   events" carousel in csai-foundation-hub.html — tokens renamed.
+
+   BEHAVIOR SPEC — not implemented here. The reference implementation
+   was a hand-rolled pointer-drag carousel with momentum, arrow-button
+   paging, and a seamless infinite loop (3 copies of the card set, with
+   scroll position silently reset on wraparound). That's real app
+   behavior, not something this library owns — implement whichever
+   subset your app actually needs:
+     - Draggable + snap, no loop: the cheapest path is native CSS —
+       `overflow-x: auto; scroll-snap-type: x mandatory;` on
+       .csa-carousel-viewport and `scroll-snap-align: start;` on
+       .csa-carousel-card gets swipe/trackpad drag with real OS momentum
+       and zero JS. Arrow buttons then just need
+       `viewport.scrollBy({left: cardWidth, behavior: 'smooth'})`.
+     - Seamless infinite-loop wraparound has no CSS equivalent — it
+       needs JS to detect the scroll-position edge and jump back without
+       a visible seam. Only build this if the app genuinely needs it.
+   Markup contract per carousel:
+     <div class="csa-carousel">
+       <button class="csa-carousel-arrow csa-carousel-arrow-prev">...</button>
+       <div class="csa-carousel-viewport">
+         <div class="csa-carousel-track">
+           <!-- .csa-carousel-card items (3x clone sets if implementing
+                the infinite-loop pattern — see the showcase demo) -->
+         </div>
+       </div>
+       <button class="csa-carousel-arrow csa-carousel-arrow-next">...</button>
+     </div>
+   .csa-carousel itself is a flex row of exactly those three children
+   (arrow, viewport, arrow) — the arrows take up their own real space
+   in that row rather than sitting absolutely positioned on top of the
+   viewport, so they can never overlap the cards no matter how wide the
+   arrows or how narrow the cards are. .csa-carousel-viewport is the
+   flex-shrink target (flex:1; min-width:0 — the min-width is what lets
+   a flex item shrink below its content's natural width, which a
+   viewport that needs to clip a wider track always wants).
+   .csa-dragging is a hook this CSS already reads (switches the track's
+   cursor to grabbing) — toggle it while a drag is in progress, if your
+   implementation supports dragging.
+
+   .csa-carousel-dots (optional) is a row of progress dots below the
+   viewport — .csa-carousel-dot is the base state, .csa-carousel-dot-active
+   the current page. Which dot is active is real app state (it tracks
+   scroll/drag position, same as the drag/arrow behavior above) — this
+   library only styles the two states, your implementation decides how
+   many dots to render and which one gets the active class, and updates
+   it on scroll/drag/arrow-click.
+
+   No edge fade: cards are narrow enough relative to the viewport that
+   the next card visibly peeks in from the side, which reads as "more
+   to scroll" on its own — a prior version faded the track's edges to
+   its background color instead, which meant re-declaring that
+   background as a custom property (--csa-carousel-bg) every time a
+   carousel sat on something other than plain white. Peeking cards need
+   no such match-the-background bookkeeping.
+
+   (The showcase's carousel demo runs the full drag/momentum/infinite-
+   loop version, including live dot updates, as a demo-only script
+   purely so the page is interactive to browse — see src/docs/index.html.
+   That script is not part of the library and isn't bundled by build.mjs.)
+   ========================================================= */
+.csa-carousel { display: flex; align-items: center; gap: 16px; }
+.csa-carousel-viewport { flex: 1; min-width: 0; overflow: hidden; }
+
+.csa-carousel-track { display: flex; gap: 20px; cursor: grab; will-change: transform; touch-action: pan-y; }
+.csa-carousel-track.csa-dragging { cursor: grabbing; }
+
+/* 328px is a fixed width, not a percentage of the viewport — matching
+   a real reference size exactly (rather than "whatever fraction looks
+   similar") is the point here, so it doesn't drift if the viewport's
+   own width ever changes for unrelated reasons. */
+.csa-carousel-card {
+  flex: 0 0 328px;
+  background: #fff; border: 1px solid var(--n50); border-radius: 14px;
+  overflow: hidden; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column;
+}
+.csa-carousel-card img { width: 100%; height: auto; display: block; pointer-events: none; -webkit-user-drag: none; }
+.csa-carousel-card .csa-carousel-card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
+.csa-carousel-card h3 { font-size: 17px; margin-bottom: 8px; }
+.csa-carousel-card p { font-size: 13.5px; color: var(--n300); flex: 1; }
+/* .csa-go is a shared utility now — see cards.css */
+
+/* 44px (down from an earlier 52px) and a stronger two-layer shadow —
+   at 52px with only --shadow-sm's single 2px blur, the arrows read as
+   flush against the neighboring cards instead of floating above them,
+   which at a glance looked like it was cutting into the cards' edges.
+   Neither --shadow-sm nor --shadow (tokens/shadows.css) matches this
+   exact treatment, so it's written out directly here rather than
+   forcing a token that's subtly wrong. */
+.csa-carousel-arrow {
+  flex-shrink: 0;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #fff; border: 1px solid var(--n50);
+  box-shadow: 0 4px 12px rgba(16,42,85,.08), 0 1px 2px rgba(16,42,85,.04);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.csa-carousel-arrow svg { width: 20px; height: 20px; color: var(--b800); }
+
+/* Prev/next chevrons — buttons need no inner markup, just aria-label */
+.csa-carousel-arrow-prev::before,
+.csa-carousel-arrow-next::before {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid var(--b800);
+  border-right: 2px solid var(--b800);
+}
+/* translate(-1.5px, 1.5px) shifts the chevron ~2px toward its tip in
+   screen space, compensating for the open end's lack of visual weight.
+   The same translate works for both rotations by rotational symmetry. */
+.csa-carousel-arrow-next::before { transform: rotate(45deg)   translate(-1.5px, 1.5px); }
+.csa-carousel-arrow-prev::before { transform: rotate(-135deg) translate(-1.5px, 1.5px); }
+
+/* Active dot is a wider pill, not just a color swap — reads clearly as
+   "current" even for someone not distinguishing the orange from the
+   surrounding neutral at a glance. appearance/border are reset
+   explicitly since these are real <button>s and base/reset.css only
+   resets font/color on form controls, not appearance/border chrome
+   (font: inherit below is now redundant with that global reset, kept
+   anyway so this rule stays self-contained if it's ever copied out). */
+.csa-carousel-dots { display: flex; justify-content: center; align-items: center; gap: 7px; margin-top: 24px; }
+.csa-carousel-dot {
+  appearance: none; border: none; font: inherit;
+  width: 8px; height: 8px; padding: 0; border-radius: 99px;
+  background: var(--n75); cursor: pointer; transition: .18s;
+}
+.csa-carousel-dot-active { width: 22px; background: var(--o700); }
+
+@media (max-width: 900px) { .csa-carousel-card { flex: 0 0 min(328px, 70%); } }
+@media (max-width: 560px) {
+  .csa-carousel { gap: 10px; }
+  .csa-carousel-arrow { width: 40px; height: 40px; }
+  .csa-carousel-arrow svg { width: 18px; height: 18px; }
+  .csa-carousel-card { flex: 0 0 88%; }
+}

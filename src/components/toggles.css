@@ -1,0 +1,189 @@
+/* =========================================================
+   CSA Component Library — Toggle Switches
+   Two switch patterns extracted from RiskRubric.ai (an existing CSA
+   property): an icon toggle (the site's own dark-mode switch, top nav)
+   and a segmented toggle (its "10 highest scoring" / "10 lowest
+   scoring" filter, Browse Models section). The segmented toggle's
+   colors are copied exactly as they render there. The icon toggle's
+   resting-state track deliberately isn't: the reference's own value
+   (a semi-transparent n300 wash) is now flat tokens instead — n25 on
+   white, n50 on an n25 page (.csa-bg-n25, same escalation idea as
+   .csa-toggle-segmented and tags.css), b800 on the navy dark surface —
+   so it stays visually consistent with the rest of this library's
+   "one ramp step off the page" convention for a resting control
+   background, the same idea .csa-card uses on the dark surface via the
+   b800/b600 pairing reused here. The "on" state's orange stays exactly
+   as measured on both.
+
+   .csa-toggle-icon-confirm is a second icon-toggle variant, on the
+   same button (<button class="csa-toggle-icon csa-toggle-icon-confirm">):
+   X / checkmark instead of sun/moon, green (--g200 fill, --g100 border)
+   instead of orange for the "on" state — a generic enable/disable or
+   confirm/cancel toggle rather than one specifically about dark mode.
+
+   BEHAVIOR SPEC — not implemented here, same minimal contract as
+   .csa-tag-filter (tags.css): the entire visual state of both
+   components is driven by one attribute the app flips on click, no
+   other JS logic needed.
+     - .csa-toggle-icon: a <button aria-pressed="true|false">. Flip
+       aria-pressed on click; every other visual change (track color,
+       which icon shows) is plain CSS keyed off that attribute alone.
+     - .csa-toggle-segmented: a <div data-selected="a|b"> wrapping two
+       <button class="csa-toggle-segmented-option">. Set data-selected
+       to "a" or "b" on click depending on which option was clicked;
+       the sliding highlight's position and each option's text color
+       are plain CSS keyed off that attribute — first option is "a",
+       second is "b".
+
+   Markup contract:
+     <button type="button" class="csa-toggle-icon" aria-pressed="false" aria-label="Toggle dark mode">
+       <span class="csa-toggle-icon-track">
+         <span class="csa-toggle-icon-thumb">
+           <svg class="csa-toggle-icon-a">...(shown when aria-pressed="false")...</svg>
+           <svg class="csa-toggle-icon-b">...(shown when aria-pressed="true")...</svg>
+         </span>
+       </span>
+     </button>
+
+     <div class="csa-toggle-segmented" data-selected="a">
+       <div class="csa-toggle-segmented-highlight"></div>
+       <button type="button" class="csa-toggle-segmented-option">Option A</button>
+       <button type="button" class="csa-toggle-segmented-option">Option B</button>
+     </div>
+   .csa-toggle-segmented is a fixed 320px wide, matching the reference
+   exactly — the sliding highlight's shift is a literal pixel value
+   derived from that width (not a percentage, since translateX()'s own
+   percentage basis is the highlight's OWN box, not the track), so
+   widening this component means recalculating that one value too.
+   ========================================================= */
+
+/* ---- Icon toggle ---- */
+.csa-toggle-icon { appearance: none; border: none; background: none; padding: 0; cursor: pointer; width: 58px; height: 30px; flex-shrink: 0; }
+.csa-toggle-icon-track {
+  display: block; position: relative; width: 100%; height: 100%;
+  border-radius: 999px; border: 1px solid rgba(221,230,239,.5); /* --n50 (#DDE6EF) at 50% */
+  background: var(--n25);
+  transition: background .22s, border-color .22s;
+}
+/* Same n25→n50 escalation .csa-toggle-segmented uses right below, and
+   the same reasoning tags.css established: on a page whose background
+   is itself n25, this track needs to step up a ramp level to still
+   read as its own distinct shape. Border steps up alongside it (n50→n75,
+   still at 50% opacity) for the same reason. */
+.csa-bg-n25 .csa-toggle-icon-track { background: var(--n50); border-color: rgba(195,209,222,.35); /* --n75 (#C3D1DE) at 35% */ }
+/* Shadow color matches .csa-toggle-segmented-highlight's own per-surface
+   shadow below (same rgba values, just this component's own long-
+   standing 0 2px 6px offset/blur rather than copying that one's 0 1px
+   2px too) — the thumb and the highlight are the same "raised control"
+   role in their respective components, so their shadows read as cast
+   by the same light source. */
+.csa-toggle-icon-thumb {
+  position: absolute; top: 2px; left: 2px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: #fff; box-shadow: 0 2px 6px rgba(16,42,85,.12);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .22s;
+}
+.csa-toggle-icon-thumb svg { width: 16px; height: 16px; }
+/* 28px = track content width (58px outer − 2×1px border = 56px) minus
+   the thumb's own 24px minus the same 2px inset the resting position
+   uses on the left, so the thumb lands with an equal 2px gap on the
+   right instead of overshooting the track. The reference this was
+   pulled from doesn't actually slide its thumb — only the track color
+   and icon change there — but a toggle whose thumb stays put on click
+   reads as broken, so this deviates from the reference on purpose. */
+.csa-toggle-icon[aria-pressed="true"] .csa-toggle-icon-thumb { transform: translateX(28px); }
+/* "a" (e.g. sun) is the resting default; "b" (e.g. moon) only shows
+   once aria-pressed flips true — both are always in the DOM, this is
+   a pure visibility swap alongside the thumb's slide above. */
+.csa-toggle-icon-b { display: none; }
+.csa-toggle-icon[aria-pressed="true"] .csa-toggle-icon-a { display: none; }
+.csa-toggle-icon[aria-pressed="true"] .csa-toggle-icon-b { display: block; }
+/* "On" stays this same orange regardless of surface — it's the
+   universal accent for "active," not a surface-tinted color, so it's
+   written unscoped rather than repeated per surface below. Unlike
+   every resting-state border above and below, this one stays fully
+   opaque — a 50%-faded border on the one state that's meant to read
+   as a solid, confident "active" would undercut the point of it. The
+   pressed thumb also stays white regardless of surface (see the dark/
+   black thumb overrides below, which this outranks on specificity) —
+   only the resting-state thumb picks up a surface color. */
+.csa-toggle-icon[aria-pressed="true"] .csa-toggle-icon-track { background: var(--o700); border-color: var(--o600); }
+.csa-toggle-icon[aria-pressed="true"] .csa-toggle-icon-thumb { background: #fff; }
+
+[data-surface="dark"] .csa-toggle-icon-track { background: var(--b800); border-color: rgba(0,62,119,.5); /* --b600 (#003E77) at 50% */ }
+[data-surface="black"] .csa-toggle-icon-track { background: var(--n800); border-color: rgba(40,44,56,.5); /* --n700 (#282C38) at 50% */ }
+/* Resting-state thumb matches its surface's segmented-toggle highlight
+   color instead of staying white — the thumb and the highlight are the
+   same "raised control" role in their respective components, so this
+   keeps the two toggle types looking like one family on dark/black. */
+[data-surface="dark"] .csa-toggle-icon-thumb { background: var(--b600); box-shadow: 0 2px 6px rgba(0,0,0,.5); }
+[data-surface="black"] .csa-toggle-icon-thumb { background: var(--black); box-shadow: 0 2px 6px rgba(40,44,56,.75); /* --n700 (#282C38) at 75% */ }
+/* The sun glyph's own fill (set inline on the reference's <g>, carried
+   over as-is elsewhere) is --n500 — a dark gray that reads fine on a
+   white/light thumb but nearly disappears on the navy/black thumb
+   these two surfaces now use. A plain descendant selector on the <g>
+   beats that inline presentation attribute (CSS always outranks SVG
+   presentation attributes, regardless of selector specificity), no
+   !important needed. */
+[data-surface="dark"] .csa-toggle-icon-a g,
+[data-surface="black"] .csa-toggle-icon-a g { fill: #fff; }
+
+/* ---- Icon toggle, confirm variant (X / checkmark) ----
+   Same track/thumb mechanics as the sun/moon toggle above — this is
+   just a second glyph+accent pairing (green instead of orange) for a
+   generic enable/disable or confirm/cancel toggle, rather than one
+   specifically about dark mode. Resting-state track/border/thumb colors
+   are entirely shared with .csa-toggle-icon above, since nothing here
+   needs a different "off" look — only the "on" accent and the resting
+   X's own stroke color differ per surface (set inline as --n100 by
+   default — white/neutral both use it, so no extra selector needed for
+   those two — with dark/black overridden below; a plain path, not the
+   sun's <g>-wrapped fill, so it needs its own selector rather than
+   reusing that one). */
+.csa-toggle-icon.csa-toggle-icon-confirm[aria-pressed="true"] .csa-toggle-icon-track { background: var(--g200); border-color: var(--g100); }
+[data-surface="dark"] .csa-toggle-icon-confirm .csa-toggle-icon-a path { stroke: var(--b400); }
+[data-surface="black"] .csa-toggle-icon-confirm .csa-toggle-icon-a path { stroke: var(--n400); }
+
+/* ---- Segmented toggle ---- */
+.csa-toggle-segmented {
+  position: relative; display: flex; width: 320px; gap: 4px; padding: 4px;
+  background: var(--n25); border: 1px solid rgba(221,230,239,.5); /* --n50 (#DDE6EF) at 50%, matching .csa-toggle-icon-track's own resting border */
+  border-radius: 999px;
+}
+/* Same escalation idea tags.css already uses for .csa-tag-neutral: on a
+   page whose own background is literally n25 (.csa-bg-n25 — see that
+   file's comment on the convention), this track's default n25 would
+   blend straight into the page with no visible edge, so it bumps one
+   ramp step to n50 there instead. Border steps up alongside it (n50→n75,
+   still at 50% opacity), same pairing .csa-toggle-icon-track uses. */
+.csa-bg-n25 .csa-toggle-segmented { background: var(--n50); border-color: rgba(195,209,222,.35); /* --n75 (#C3D1DE) at 35% */ }
+.csa-toggle-segmented-highlight {
+  position: absolute; top: 4px; left: 4px;
+  width: calc(50% - 6px); height: calc(100% - 8px);
+  border-radius: 999px; background: #fff;
+  box-shadow: 0 1px 2px rgba(16,42,85,.12);
+  transition: transform .25s, background .25s;
+}
+.csa-toggle-segmented[data-selected="b"] .csa-toggle-segmented-highlight { transform: translateX(158px); }
+.csa-toggle-segmented-option {
+  position: relative; z-index: 1; flex: 1;
+  appearance: none; border: none; background: none; cursor: pointer;
+  font-family: var(--font); font-size: 13px; font-weight: 700;
+  padding: 9px 12px; border-radius: 999px;
+  color: var(--n300); transition: color .18s;
+}
+.csa-toggle-segmented[data-selected="a"] .csa-toggle-segmented-option:first-of-type,
+.csa-toggle-segmented[data-selected="b"] .csa-toggle-segmented-option:last-of-type { color: var(--b700); }
+
+[data-surface="dark"] .csa-toggle-segmented { background: var(--b800); border-color: rgba(0,62,119,.5); /* --b600 (#003E77) at 50%, matching .csa-toggle-icon-track's dark border */ }
+[data-surface="dark"] .csa-toggle-segmented-highlight { background: var(--b600); box-shadow: 0 1px 2px rgba(0,0,0,.5); }
+[data-surface="dark"] .csa-toggle-segmented-option { color: var(--n100); }
+[data-surface="dark"] .csa-toggle-segmented[data-selected="a"] .csa-toggle-segmented-option:first-of-type,
+[data-surface="dark"] .csa-toggle-segmented[data-selected="b"] .csa-toggle-segmented-option:last-of-type { color: #fff; }
+
+[data-surface="black"] .csa-toggle-segmented { background: var(--n800); border-color: rgba(40,44,56,.5); /* --n700 (#282C38) at 50%, matching .csa-toggle-icon-track's black border */ }
+[data-surface="black"] .csa-toggle-segmented-highlight { background: var(--black); box-shadow: 0 1px 2px rgba(40,44,56,.75); }
+[data-surface="black"] .csa-toggle-segmented-option { color: var(--n300); }
+[data-surface="black"] .csa-toggle-segmented[data-selected="a"] .csa-toggle-segmented-option:first-of-type,
+[data-surface="black"] .csa-toggle-segmented[data-selected="b"] .csa-toggle-segmented-option:last-of-type { color: #fff; }
