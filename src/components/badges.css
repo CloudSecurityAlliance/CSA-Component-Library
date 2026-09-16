@@ -5,7 +5,12 @@
    pages. It's been retired in favor of the Primary/Secondary/Outlined
    variants below — this file now only carries the fresh-designed set.
    ========================================================= */
-.csa-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.csa-badges { 
+  display: flex; 
+  gap: 10px; 
+  flex-wrap: wrap; 
+  margin-bottom: 20px; 
+}
 
 /* Sized ~10% up from .csa-tag (12px/6px 13px) on purpose — before this,
    badges and tags were pixel-identical in size, leaving border/italic
@@ -16,6 +21,7 @@
   padding: 6px 12px; border-radius: 999px;
   border: 1px solid rgba(255,255,255,.24);
   color: #dbe6f2;
+  line-height: 1.6;
 }
 
 /* =========================================================

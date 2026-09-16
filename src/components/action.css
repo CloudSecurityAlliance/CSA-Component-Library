@@ -104,6 +104,7 @@
 [data-surface="dark"] .csa-action {
   border-color: var(--b600);
   color: #fff;
+  backdrop-filter: blur(3px);
 }
 [data-surface="dark"] .csa-action:hover {
   border-color: var(--b500);

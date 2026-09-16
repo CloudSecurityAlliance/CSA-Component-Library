@@ -70,6 +70,8 @@ h4, h4.csa-title, h4.csa-subtitle { font-weight: 700; }
 
 .csa-muted { color: var(--n300); }
 
+.csa-hr { border: none; border-top: 1px solid var(--n50); margin: 0; }
+
 .csa-block { 
   font-size: 18px; 
   margin-top: 12px; 
