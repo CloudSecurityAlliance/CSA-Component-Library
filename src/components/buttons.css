@@ -33,6 +33,9 @@
 .csa-btn:hover {
   color: white;
 }
+.csa-btn:visited {
+  color: initial;
+}
 .csa-btn svg { width: 15px; height: 15px; }
 /* Same slot as svg above, for buttons whose icon is a standalone asset
    file (src/assets/icons/*.svg) rather than markup drawn inline — the
@@ -69,7 +72,7 @@
    gradient background — negative z-index within the local stacking
    context .csa-btn-primary establishes via position: relative +
    z-index:0. */
-.csa-btn-primary {
+.csa-btn-primary, .csa-btn-primary:visited { 
   position: relative;
   z-index: 0;
   border-width: 2px;
@@ -130,7 +133,7 @@
    over .35s (its ::before opacity/box-shadow transitions), and at the
    base .18s Secondary's hover was visibly snappier than Primary's right
    next to it, so this matches Primary's pace instead. */
-.csa-btn-secondary { background: transparent; border: 2px solid var(--o500); color: var(--o500); transition: .35s ease; }
+.csa-btn-secondary, .csa-btn-secondary:visited { background: transparent; border: 2px solid var(--o500); color: var(--o500); transition: .35s ease; }
 /* Border keeps its own hover tone (2 ramp steps down from the fill,
    same -2-step relationship Primary's hover overlay now uses) instead
    of flattening to the same color as the fill — border-color and
@@ -145,7 +148,7 @@
    can't reference --o500 through color-mix in every supported browser;
    #FF7A00 → rgb(255,122,0) (see colors.css). transition overrides the
    base .csa-btn's .18s to match Primary/Secondary's .35s pace. */
-.csa-btn-tertiary { background: transparent; border: 2px solid transparent; color: var(--o500); transition: .35s ease; }
+.csa-btn-tertiary, .csa-btn-tertiary:visited { background: transparent; border: 2px solid transparent; color: var(--o500); transition: .35s ease; }
 .csa-btn-tertiary:hover { background: rgba(255,122,0,.2); }
 /* Persistent underline (not just on :hover) — a text-only button has no
    fill or border to read as clickable at rest, so the line is the
