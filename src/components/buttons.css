@@ -29,6 +29,7 @@
   font-weight: 400; font-size: 14.5px;
   border: 1px solid transparent; transition: .18s; cursor: pointer;
   min-width: 120px;
+  transition: .35s ease;
 }
 .csa-btn:hover {
   color: white;
