@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+<symbol  id="Cancel" viewBox="-15 -15 30 30">
+	<path fill="#CF4300" d="M0,15c-8.28,0-15-6.72-15-15c0-8.28,6.72-15,15-15c8.28,0,15,6.72,15,15C15,8.28,8.28,15,0,15z M0-12.98
+		c-7.16,0-12.98,5.82-12.98,12.98S-7.16,12.98,0,12.98c7.16,0,12.98-5.82,12.98-12.98S7.16-12.98,0-12.98z"/>
+	<path fill="#CF4300" d="M5.17,5.17c-0.39,0.39-1.03,0.39-1.43,0L0,1.43l-3.74,3.74c-0.39,0.39-1.03,0.39-1.43,0
+		c-0.39-0.39-0.39-1.03,0-1.43L-1.43,0l-3.74-3.74c-0.39-0.39-0.39-1.03,0-1.43c0.2-0.2,0.45-0.3,0.71-0.3s0.52,0.1,0.71,0.3L0-1.43
+		l3.74-3.74c0.2-0.2,0.45-0.3,0.71-0.3c0.26,0,0.52,0.1,0.71,0.3c0.39,0.39,0.39,1.03,0,1.43L1.43,0l3.74,3.74
+		C5.56,4.13,5.56,4.77,5.17,5.17z"/>
+</symbol>
+<use xlink:href="#Cancel"  width="30" height="30" x="-15" y="-15" transform="matrix(4 0 0 -4 60 60)" overflow="visible"/>
+</svg>
