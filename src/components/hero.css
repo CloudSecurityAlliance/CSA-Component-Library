@@ -265,7 +265,7 @@
    to win). */
 
 .csa-hero-graphic-row { display: flex; align-items: center; gap: 0; flex-wrap: wrap; position: relative; }
-.csa-hero-glass-graphic .csa-card-glass { width: min(950px, 80%); }
+.csa-hero-glass-graphic .csa-card-glass { width: 80%; max-width: 950px; }
 .csa-hero-graphic-content { max-width: 640px; }
 .csa-hero-graphic-img { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); width: clamp(300px, 120vw - 960px, 480px); z-index: 1; }
 .csa-hero-graphic-img img { width: 100%; height: auto; display: block; }

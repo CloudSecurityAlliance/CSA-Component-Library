@@ -132,7 +132,7 @@
 }
 .csa-carousel-dot-active { width: 22px; background: var(--o700); }
 
-@media (max-width: 900px) { .csa-carousel-card { flex: 0 0 min(328px, 70%); } }
+@media (max-width: 900px) { .csa-carousel-card { flex: 0 0 70%; max-width: 328px; } }
 @media (max-width: 560px) {
   .csa-carousel { gap: 10px; }
   .csa-carousel-arrow { width: 40px; height: 40px; }
