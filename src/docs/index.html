@@ -1547,6 +1547,7 @@
       <div class="csa-rule"></div>
     </div>
     <div class="csa-carousel">
+      <div class="csa-carousel-row">
       <button class="csa-carousel-arrow csa-carousel-arrow-prev" aria-label="Previous"></button>
       <div class="csa-carousel-viewport">
         <div class="csa-carousel-track">
@@ -1571,13 +1572,14 @@
         </div>
       </div>
       <button class="csa-carousel-arrow csa-carousel-arrow-next" aria-label="Next"></button>
-    </div>
-    <div class="csa-carousel-dots" role="tablist" aria-label="Carousel position">
-      <button type="button" class="csa-carousel-dot csa-carousel-dot-active" aria-label="Card 1" aria-selected="true"></button>
-      <button type="button" class="csa-carousel-dot" aria-label="Card 2" aria-selected="false"></button>
-      <button type="button" class="csa-carousel-dot" aria-label="Card 3" aria-selected="false"></button>
-      <button type="button" class="csa-carousel-dot" aria-label="Card 4" aria-selected="false"></button>
-      <button type="button" class="csa-carousel-dot" aria-label="Card 5" aria-selected="false"></button>
+      </div>
+      <div class="csa-carousel-dots" role="tablist" aria-label="Carousel position">
+        <button type="button" class="csa-carousel-dot csa-carousel-dot-active" aria-label="Card 1" aria-selected="true"></button>
+        <button type="button" class="csa-carousel-dot" aria-label="Card 2" aria-selected="false"></button>
+        <button type="button" class="csa-carousel-dot" aria-label="Card 3" aria-selected="false"></button>
+        <button type="button" class="csa-carousel-dot" aria-label="Card 4" aria-selected="false"></button>
+        <button type="button" class="csa-carousel-dot" aria-label="Card 5" aria-selected="false"></button>
+      </div>
     </div>
 
     <div class="docs-head" style="margin-top:56px">
@@ -2919,7 +2921,7 @@
     if (!allCards.length || allCards.length % 3 !== 0) return;
     const realCount = allCards.length / 3;
     const middleIndex = Math.floor(realCount / 2);
-    const dots = Array.from(root.parentElement.querySelectorAll(':scope > .csa-carousel-dots .csa-carousel-dot'));
+    const dots = Array.from(root.querySelectorAll(':scope > .csa-carousel-dots .csa-carousel-dot'));
 
     let cardWidth, setWidth, centerOffset, x = 0, vx = 0, isDown = false, startX = 0, startXAtDown = 0,
         lastMoveX = 0, lastMoveT = 0, moved = false, momentumId = null;
