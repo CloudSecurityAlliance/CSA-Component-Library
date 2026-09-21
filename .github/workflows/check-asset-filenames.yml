@@ -1,0 +1,23 @@
+name: Check asset filenames
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check-filenames:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Enforce lowercase-and-dash filenames in src/assets
+        run: |
+          bad=$(find src/assets src/docs/assets -type f \
+            | sed 's|.*/||' \
+            | grep -E '[^a-z0-9.\-]' || true)
+          if [ -n "$bad" ]; then
+            echo "❌ Non-conforming asset filenames found (only lowercase letters, digits, dots, and dashes are allowed):"
+            echo "$bad"
+            exit 1
+          fi
+          echo "✅ All asset filenames are valid."
