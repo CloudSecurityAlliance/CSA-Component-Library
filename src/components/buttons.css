@@ -196,19 +196,27 @@
    aria-disabled for anything reachable via the same class without the
    native attribute. No :hover rule at all, on purpose (the ask was "no
    hover change"). Surface-aware like the other 3 variants: light pages
-   use n50/n300, dark/black (and the always-dark .csa-hero/.csa-cta,
-   which don't carry data-surface — see the Primary glow rule above for
-   why those need explicit scoping too) use b800/b500 instead, since n50
-   would be nearly invisible against a dark background. */
+   use n50/n300; dark (and the always-dark .csa-hero/.csa-cta, which
+   don't carry data-surface — see the Primary glow rule above for why
+   those need explicit scoping too) uses b800/b500, since n50 would be
+   nearly invisible against a dark background; black uses n800/n500
+   instead — matching the n-scale .csa-card already uses for its own
+   black-surface background/border in surfaces.css, rather than
+   reusing dark's blue-scale tones on a surface that's otherwise
+   neutral, not navy. */
 .csa-btn-disabled, .csa-btn[aria-disabled="true"] {
   background: var(--n50); color: var(--n300); border: 2px solid transparent;
   cursor: not-allowed; pointer-events: none;
 }
-[data-surface="dark"] .csa-btn-disabled, [data-surface="black"] .csa-btn-disabled,
+[data-surface="dark"] .csa-btn-disabled,
 .csa-hero .csa-btn-disabled, .csa-cta .csa-btn-disabled,
-[data-surface="dark"] .csa-btn[aria-disabled="true"], [data-surface="black"] .csa-btn[aria-disabled="true"],
+[data-surface="dark"] .csa-btn[aria-disabled="true"],
 .csa-hero .csa-btn[aria-disabled="true"], .csa-cta .csa-btn[aria-disabled="true"] {
   background: var(--b800); color: var(--b500);
+}
+[data-surface="black"] .csa-btn-disabled,
+[data-surface="black"] .csa-btn[aria-disabled="true"] {
+  background: var(--n800); color: var(--n500);
 }
 
 .csa-btn-sm { padding: 9px 16px; font-size: 13px; min-width: 96px; }
