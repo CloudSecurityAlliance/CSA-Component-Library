@@ -139,7 +139,7 @@
    .csa-icon-glyph primitive in base/icon-glyph.css — this just sizes
    it for the tag context; its 14px default already matches what tags
    need, so no override is required here. That's also why
-   Profile-white.svg (mentioned as already existing for the pressed
+   profile-white.svg (mentioned as already existing for the pressed
    state) isn't wired in separately: masking already renders the glyph
    in solid white the instant the pressed rules above set color:#fff,
    so a second file would only reproduce what currentColor already

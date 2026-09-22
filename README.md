@@ -17,7 +17,7 @@ now, not a mirror of theirs.
   block, the two required font `<link>` tags in `<head>`, and placeholder
   nav/footer/`<main>` you fill in. Build your content with the classes
   documented in the showcase, and pull logos/icons/illustrations from
-  `assets/` by relative path (e.g. `assets/icons/AI-Security.svg`).
+  `assets/` by relative path (e.g. `assets/icons/ai-security.svg`).
 - **Font loading — always the two `<link>` tags, never inlined:** any
   page using this library (whether copied from `dist/csa-library.html`
   as-is, or built by pulling these tokens/components into an existing
@@ -215,15 +215,15 @@ rather than one of the brand guide's fixed chip pairings — badge
 variants and neutral tags being the driving cases. `src/assets/icons/`
 has 6 subfolders — `b500/`, `b300/`, `b100/`, `n400/`, `o300/`, `o700/`
 — each holding the same 120 base icons recolored to that one token.
-Both the folder and the filename carry the color (`Calendar-b500.svg`
-inside `b500/`, matching the pre-existing `Calendar-b100`/`-b300`/
+Both the folder and the filename carry the color (`calendar-b500.svg`
+inside `b500/`, matching the pre-existing `calendar-b100`/`-b300`/
 `-b500.svg` files this pattern was modeled on) — the folder groups them
 for browsing, the suffix keeps the color self-evident even if a file
 is ever copied out on its own:
-`<img class="csa-icon" src="../assets/icons/b500/Calendar-b500.svg">`.
+`<img class="csa-icon" src="../assets/icons/b500/calendar-b500.svg">`.
 
-The 3 gradient sub-brand marks (`AI-brand.svg`, `Cloud-brand.svg`,
-`Zero-Trust-brand.svg`) are excluded from every color folder — they're
+The 3 gradient sub-brand marks (`ai-brand.svg`, `cloud-brand.svg`,
+`zero-trust-brand.svg`) are excluded from every color folder — they're
 multi-tone marks built from a gradient fill, not single-color icons, so
 flattening them to one token color would break the mark rather than
 recolor it.
