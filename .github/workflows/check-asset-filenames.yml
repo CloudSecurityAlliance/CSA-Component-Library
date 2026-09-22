@@ -13,8 +13,7 @@ jobs:
       - name: Enforce lowercase-and-dash filenames in src/assets
         run: |
           bad=$(find src/assets -type f \
-            | sed 's|.*/||' \
-            | grep -E '[^a-z0-9.\-]' || true)
+            | grep -E '[^a-z0-9./\-]' || true)
           if [ -n "$bad" ]; then
             echo "❌ Non-conforming asset filenames found (only lowercase letters, digits, dots, and dashes are allowed):"
             echo "$bad"
