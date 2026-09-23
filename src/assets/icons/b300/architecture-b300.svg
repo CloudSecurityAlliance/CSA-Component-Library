@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+<symbol  id="Architecture" viewBox="-15 -15 30 30">
+	<path fill="#0093FF" d="M13.99,15H7H0c-0.56,0-1.01-0.45-1.01-1.01V7c0-0.56,0.45-1.01,1.01-1.01h5.99V0
+		c0-0.56,0.45-1.01,1.01-1.01h7C14.55-1.01,15-0.56,15,0v7v7C15,14.55,14.55,15,13.99,15z M12.98,8H8v4.98h4.98V8z M1.01,12.98h4.98
+		V8H1.01V12.98z M12.98,1.01H8v4.98h4.98V1.01z"/>
+	<path fill="#0093FF" d="M13.99-5.99H7H1.01V0c0,0.56-0.45,1.01-1.01,1.01h-5.99V7v7C-5.99,14.55-6.44,15-7,15h-7
+		c-0.56,0-1.01-0.45-1.01-1.01V7V0v-7v-7c0-0.56,0.45-1.01,1.01-1.01h7h7h7h7c0.56,0,1.01,0.45,1.01,1.01v7
+		C15-6.44,14.55-5.99,13.99-5.99z M-1.01-5.99h-4.98v4.98h4.98V-5.99z M-8,1.01h-4.98v4.98H-8V1.01z M-12.98-1.01H-8v-4.98h-4.98
+		V-1.01z M-12.98,12.98H-8V8h-4.98V12.98z M-12.98-8H-8v-4.98h-4.98V-8z M-5.99-8h4.98v-4.98h-4.98V-8z M1.01-8h4.98v-4.98H1.01V-8z
+		 M12.98-12.98H8V-8h4.98V-12.98z"/>
+</symbol>
+<use xlink:href="#Architecture"  width="30" height="30" x="-15" y="-15" transform="matrix(4 0 0 -4 60 60)" overflow="visible"/>
+</svg>

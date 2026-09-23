@@ -31,7 +31,10 @@
   padding: 14px 16px;
   /* Shape */
   border-radius: 12px;
-  border: 1px solid var(--n75);
+  /* n50, not n75 — matches the resting border this library already uses
+     elsewhere on white/n25 (.csa-pagination-btn, pagination.css); n75
+     read a step darker than that established convention. */
+  border: 1px solid var(--n50);
   /* Color */
   background: rgba(255,255,255,.02);
   color: inherit;
@@ -61,14 +64,16 @@
 }
 
 /* ── Selected state ─────────────────────────────────────── */
+/* No :hover override once selected — border-color already wins on this
+   rule by source order (declared after .csa-action:hover, same
+   specificity), and the shadow doesn't change on hover either. A second
+   color/lift shift on top of a tile that's already reading as "selected"
+   would be a redundant signal. */
 .csa-action[aria-selected="true"] {
   border-color: var(--o700);
   background: var(--o25);
   border-left-width: 4px;
-}
-.csa-action[aria-selected="true"]:hover {
-  border-color: var(--o600);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow);
 }
 
 /* ── Arrow modifier ─────────────────────────────────────── */
@@ -88,17 +93,14 @@
 }
 .csa-action-arrow:hover::after                              { color: var(--n100); }
 .csa-action-arrow[aria-selected="true"]::after              { color: var(--o700); }
-.csa-action-arrow[aria-selected="true"]:hover::after        { color: var(--o600); }
 
 [data-surface="dark"] .csa-action-arrow::after              { color: var(--b600); }
 [data-surface="dark"] .csa-action-arrow:hover::after        { color: var(--b500); }
 [data-surface="dark"] .csa-action-arrow[aria-selected="true"]::after       { color: var(--o500); }
-[data-surface="dark"] .csa-action-arrow[aria-selected="true"]:hover::after { color: var(--o400); }
 
 [data-surface="black"] .csa-action-arrow::after             { color: var(--n700); }
 [data-surface="black"] .csa-action-arrow:hover::after       { color: var(--n600); }
 [data-surface="black"] .csa-action-arrow[aria-selected="true"]::after       { color: var(--o500); }
-[data-surface="black"] .csa-action-arrow[aria-selected="true"]:hover::after { color: var(--o400); }
 
 /* ── Surface-aware — dark ───────────────────────────────── */
 [data-surface="dark"] .csa-action {
@@ -113,9 +115,7 @@
   border-color: var(--o500);
   /* o500 (#FF7A00) at 8% opacity — no ramp token at this depth */
   background: rgba(255, 122, 0, .08);
-}
-[data-surface="dark"] .csa-action[aria-selected="true"]:hover {
-  border-color: var(--o400);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25), 0 18px 40px -18px rgba(0, 0, 0, .55);
 }
 
 /* ── Surface-aware — black ──────────────────────────────── */
@@ -129,7 +129,5 @@
 [data-surface="black"] .csa-action[aria-selected="true"] {
   border-color: var(--o500);
   background: rgba(255, 122, 0, .08);
-}
-[data-surface="black"] .csa-action[aria-selected="true"]:hover {
-  border-color: var(--o400);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .25), 0 18px 40px -18px rgba(0, 0, 0, .55);
 }

@@ -71,7 +71,19 @@
 .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
 .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
 
-/* ---- Neutral (n25) background — one ramp step up so tags stay visible against their own n25 host ---- */
+/* ---- Neutral (n25) background — one ramp step up so tags stay visible against their own n25 host ----
+   Pairing rule, so the wrong variant never gets picked by accident:
+   .csa-bg-n25 only belongs on an ancestor whose OWN rendered background
+   really is n25 (the page, or a plain n25 panel) — never combine it
+   with something that then forces the immediate container to a
+   DIFFERENT color (e.g. a wrapper carrying .csa-bg-n25 purely to turn a
+   nested .csa-card white). That mismatch — tags escalated for n25
+   sitting on a card that's actually white — is exactly the bug this
+   comment exists to prevent; it was shipped once in this project's own
+   docs showcase before being caught and fixed. If a card needs to be
+   white specifically, style that card directly (background/border
+   inline, or its own class) rather than reaching for .csa-bg-n25 on an
+   ancestor. */
 .csa-bg-n25 .csa-tag-neutral { background: var(--n50); }
 .csa-bg-n25 .csa-tag-blue    { background: var(--b50); }
 .csa-bg-n25 .csa-tag-orange  { background: var(--o50); }
@@ -127,7 +139,7 @@
    .csa-icon-glyph primitive in base/icon-glyph.css — this just sizes
    it for the tag context; its 14px default already matches what tags
    need, so no override is required here. That's also why
-   Profile-white.svg (mentioned as already existing for the pressed
+   profile-white.svg (mentioned as already existing for the pressed
    state) isn't wired in separately: masking already renders the glyph
    in solid white the instant the pressed rules above set color:#fff,
    so a second file would only reproduce what currentColor already

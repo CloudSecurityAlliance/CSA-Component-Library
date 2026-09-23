@@ -20,34 +20,49 @@
        a visible seam. Only build this if the app genuinely needs it.
    Markup contract per carousel:
      <div class="csa-carousel">
-       <button class="csa-carousel-arrow csa-carousel-arrow-prev">...</button>
-       <div class="csa-carousel-viewport">
-         <div class="csa-carousel-track">
-           <!-- .csa-carousel-card items (3x clone sets if implementing
-                the infinite-loop pattern — see the showcase demo) -->
+       <div class="csa-carousel-row">
+         <button class="csa-carousel-arrow csa-carousel-arrow-prev">...</button>
+         <div class="csa-carousel-viewport">
+           <div class="csa-carousel-track">
+             <!-- .csa-carousel-card items (3x clone sets if implementing
+                  the infinite-loop pattern — see the showcase demo) -->
+           </div>
          </div>
+         <button class="csa-carousel-arrow csa-carousel-arrow-next">...</button>
        </div>
-       <button class="csa-carousel-arrow csa-carousel-arrow-next">...</button>
+       <div class="csa-carousel-dots">
+         <!-- .csa-carousel-dot items, optional — see below -->
+       </div>
      </div>
-   .csa-carousel itself is a flex row of exactly those three children
-   (arrow, viewport, arrow) — the arrows take up their own real space
-   in that row rather than sitting absolutely positioned on top of the
-   viewport, so they can never overlap the cards no matter how wide the
-   arrows or how narrow the cards are. .csa-carousel-viewport is the
-   flex-shrink target (flex:1; min-width:0 — the min-width is what lets
-   a flex item shrink below its content's natural width, which a
-   viewport that needs to clip a wider track always wants).
+   .csa-carousel is the outer wrapper — a plain flex column stacking
+   .csa-carousel-row above .csa-carousel-dots, so copying the one
+   .csa-carousel block always brings the dots with it. (An earlier
+   version of this file had the dots as a sibling *after* .csa-carousel
+   instead of a child — easy to miss when copying just the block you
+   can see is "the carousel," which is exactly what happened on a real
+   page. Nesting it removes that trap entirely.) .csa-carousel-row is
+   the flex row of exactly those three children (arrow, viewport,
+   arrow) — the arrows take up their own real space in that row rather
+   than sitting absolutely positioned on top of the viewport, so they
+   can never overlap the cards no matter how wide the arrows or how
+   narrow the cards are. .csa-carousel-viewport is the flex-shrink
+   target (flex:1; min-width:0 — the min-width is what lets a flex item
+   shrink below its content's natural width, which a viewport that
+   needs to clip a wider track always wants).
    .csa-dragging is a hook this CSS already reads (switches the track's
    cursor to grabbing) — toggle it while a drag is in progress, if your
    implementation supports dragging.
 
-   .csa-carousel-dots (optional) is a row of progress dots below the
-   viewport — .csa-carousel-dot is the base state, .csa-carousel-dot-active
-   the current page. Which dot is active is real app state (it tracks
-   scroll/drag position, same as the drag/arrow behavior above) — this
-   library only styles the two states, your implementation decides how
-   many dots to render and which one gets the active class, and updates
-   it on scroll/drag/arrow-click.
+   .csa-carousel-dots (optional — omit the element entirely if you
+   don't need it, .csa-carousel's own gap only ever applies between
+   children that exist) is a row of progress dots below
+   .csa-carousel-row — .csa-carousel-dot is the base state,
+   .csa-carousel-dot-active the current page. Which dot is active is
+   real app state (it tracks scroll/drag position, same as the
+   drag/arrow behavior above) — this library only styles the two
+   states, your implementation decides how many dots to render and
+   which one gets the active class, and updates it on
+   scroll/drag/arrow-click.
 
    No edge fade: cards are narrow enough relative to the viewport that
    the next card visibly peeks in from the side, which reads as "more
@@ -62,7 +77,8 @@
    purely so the page is interactive to browse — see src/docs/index.html.
    That script is not part of the library and isn't bundled by build.mjs.)
    ========================================================= */
-.csa-carousel { display: flex; align-items: center; gap: 16px; }
+.csa-carousel { display: flex; flex-direction: column; gap: 24px; }
+.csa-carousel-row { display: flex; align-items: center; gap: 16px; }
 .csa-carousel-viewport { flex: 1; min-width: 0; overflow: hidden; }
 
 .csa-carousel-track { display: flex; gap: 20px; cursor: grab; will-change: transform; touch-action: pan-y; }
@@ -124,7 +140,7 @@
    resets font/color on form controls, not appearance/border chrome
    (font: inherit below is now redundant with that global reset, kept
    anyway so this rule stays self-contained if it's ever copied out). */
-.csa-carousel-dots { display: flex; justify-content: center; align-items: center; gap: 7px; margin-top: 24px; }
+.csa-carousel-dots { display: flex; justify-content: center; align-items: center; gap: 7px; }
 .csa-carousel-dot {
   appearance: none; border: none; font: inherit;
   width: 8px; height: 8px; padding: 0; border-radius: 99px;
@@ -134,7 +150,7 @@
 
 @media (max-width: 900px) { .csa-carousel-card { flex: 0 0 70%; max-width: 328px; } }
 @media (max-width: 560px) {
-  .csa-carousel { gap: 10px; }
+  .csa-carousel-row { gap: 10px; }
   .csa-carousel-arrow { width: 40px; height: 40px; }
   .csa-carousel-arrow svg { width: 18px; height: 18px; }
   .csa-carousel-card { flex: 0 0 88%; }

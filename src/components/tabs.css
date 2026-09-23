@@ -54,6 +54,7 @@
 [data-surface="black"] .csa-tablist { border-bottom-color: var(--n700); }
 
 .csa-tab {
+  position: relative; z-index: 0;
   appearance: none; background: transparent; border: none; cursor: pointer;
   font-family: inherit; font-size: 14.5px; font-weight: 600;
   color: var(--n300); padding: 12px 16px 14px;
@@ -63,9 +64,34 @@
 [data-surface="dark"] .csa-tab { color: var(--n100); }
 [data-surface="black"] .csa-tab { color: var(--n300); }
 
+/* Hover fill is a separate ::before, not the tab's own background —
+   inset stops short of the tab's bottom edge (where .csa-tablist's
+   own border-bottom, or the active tab's indicator, lives) so the
+   rounded highlight box floats just above that line instead of
+   touching it. position:relative + z-index:0 on .csa-tab (above)
+   gives this its own local stacking context, so z-index:-1 here only
+   drops it behind the tab's own label text, not behind the page. */
+.csa-tab::before {
+  content: ''; position: absolute; z-index: -1;
+  inset: 4px 2px 8px; border-radius: 8px;
+  background: transparent; transition: background-color .18s;
+}
+/* n50, not n25 — n25 would be invisible against an n25 page (the same
+   escalation problem tags.css/toggles.css already document), and n50
+   still reads clearly on plain white too. At 50% opacity (not flat)
+   so it softens rather than fully overriding whatever's underneath —
+   rgba, since a CSS variable can't be given partial opacity directly;
+   #DDE6EF (--n50) at 50%. */
 .csa-tab:hover { color: var(--b500); }
+.csa-tab:hover::before { background: rgba(221,230,239,.5); }
+/* One ramp step lighter than each surface's own page background
+   (surfaces.css: b700/black) — the same "lift, don't sink" logic
+   filters.css's row hover uses; a darker fill here would read as a
+   hole in the tab row instead of a highlight. */
 [data-surface="dark"] .csa-tab:hover { color: #fff; }
+[data-surface="dark"] .csa-tab:hover::before { background: var(--b600); }
 [data-surface="black"] .csa-tab:hover { color: #fff; }
+[data-surface="black"] .csa-tab:hover::before { background: var(--n700); }
 
 .csa-tab-active,
 .csa-tab-active:hover {

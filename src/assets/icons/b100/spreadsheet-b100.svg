@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+<symbol  id="Spreadsheet" viewBox="-15 -15 30 30">
+	<path fill="#66BEFF" d="M12.42,15h-24.84c-1.43,0-2.58-1.16-2.58-2.58v-24.84c0-1.43,1.16-2.58,2.58-2.58h24.84
+		c1.43,0,2.58,1.16,2.58,2.58v24.84C15,13.84,13.84,15,12.42,15z M12.98,12.42V7.68H-3.7v5.3h16.12
+		C12.73,12.98,12.98,12.73,12.98,12.42z M-5.72-1.01v-4.65h-7.26v4.65H-5.72z M-12.98,1.01v4.65h7.26V1.01H-12.98z M-3.7-1.01h16.69
+		v-4.65H-3.7V-1.01z M-3.7,1.01v4.65h16.69V1.01H-3.7z M-12.42,12.98h6.7v-5.3h-7.26v4.74C-12.98,12.73-12.73,12.98-12.42,12.98z
+		 M-12.98-12.42v4.74h7.26v-5.3h-6.7C-12.73-12.98-12.98-12.73-12.98-12.42z M12.42-12.98H-3.7v5.3h16.69v-4.74
+		C12.98-12.73,12.73-12.98,12.42-12.98z"/>
+</symbol>
+<use xlink:href="#Spreadsheet"  width="30" height="30" x="-15" y="-15" transform="matrix(4 0 0 -4 60 60)" overflow="visible"/>
+</svg>

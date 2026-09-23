@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+<symbol  id="LLM_Cube" viewBox="-13.41 -15 26.82 30">
+	<path fill="#0093FF" d="M11.85,8.65L1.56,14.58c-0.96,0.55-2.16,0.56-3.12,0l-10.29-5.94c-0.96-0.56-1.56-1.59-1.56-2.7V-5.94
+		c0-1.11,0.6-2.15,1.56-2.7l10.29-5.94C-1.08-14.86-0.54-15,0-15s1.08,0.14,1.56,0.42l10.29,5.94c0.96,0.56,1.56,1.59,1.56,2.7V5.94
+		C13.41,7.06,12.81,8.09,11.85,8.65z M-0.54,12.82c0.17,0.1,0.36,0.15,0.54,0.15c0.19,0,0.38-0.05,0.54-0.15l9.84-5.68L0,1.14
+		l-10.39,6L-0.54,12.82z M-10.83-6.88c-0.33,0.19-0.54,0.55-0.54,0.94v11.3l10.36-5.98v-11.93L-10.83-6.88z M10.83-6.88l-9.81-5.67
+		v11.93l10.36,5.98v-11.3C11.37-6.32,11.17-6.68,10.83-6.88z"/>
+</symbol>
+<use xlink:href="#LLM_Cube"  width="26.82" height="30" x="-13.41" y="-15" transform="matrix(4 0 0 -4 60 60)" overflow="visible"/>
+</svg>

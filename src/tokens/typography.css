@@ -66,7 +66,8 @@ h1.csa-subtitle, h2.csa-subtitle, h3.csa-subtitle, h4.csa-subtitle {
 h1, h1.csa-title, h1.csa-subtitle { font-size: clamp(40px, 5.8vw, 66px); letter-spacing: -.03em; }
 h2, h2.csa-title, h2.csa-subtitle { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; }
 h3, h3.csa-title, h3.csa-subtitle { font-size: 22px; letter-spacing: -.02em; }
-h4, h4.csa-title, h4.csa-subtitle { font-weight: 700; }
+h4, h4.csa-subtitle { font-weight: 700; }
+h4.csa-title { font-weight: 700; letter-spacing: 0; }
 
 .csa-muted { color: var(--n300); }
 

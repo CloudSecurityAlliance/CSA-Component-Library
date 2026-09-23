@@ -46,24 +46,24 @@
    color) keeps the base n500. */
 .csa-pagination-btn[aria-current="page"] { background: var(--b500); border-color: var(--b500); color: #fff; }
 .csa-pagination-btn:disabled { color: var(--n200); border-color: var(--n50); cursor: not-allowed; }
-/* Prev's disabled state (page 1) borrows .csa-btn-disabled's exact
-   colors (buttons.css) rather than this component's own plain-
-   disabled treatment above — same fill-not-just-faded-text look as
-   every other disabled control in this library, and higher
+/* Prev/Next's disabled state (first/last page) borrows .csa-btn-
+   disabled's exact colors (buttons.css) rather than this component's
+   own plain-disabled treatment above — same fill-not-just-faded-text
+   look as every other disabled control in this library, and higher
    specificity (two classes) than the plain :disabled rule above wins
    it automatically. */
-.csa-pagination-prev:disabled { background: var(--n50); color: var(--n300); border-color: transparent; }
+.csa-pagination-prev:disabled, .csa-pagination-next:disabled { background: var(--n50); color: var(--n300); border-color: transparent; }
 
 /* ---- Surface-aware — dark ---- */
 [data-surface="dark"] .csa-pagination-btn { border-color: var(--b600); color: var(--n75); background: transparent; }
 [data-surface="dark"] .csa-pagination-btn:hover { border-color: var(--b500); }
 [data-surface="dark"] .csa-pagination-btn[aria-current="page"] { background: var(--b300); border-color: var(--b300); color: #fff; }
 [data-surface="dark"] .csa-pagination-btn:disabled { color: var(--b600); border-color: var(--b700); }
-[data-surface="dark"] .csa-pagination-prev:disabled { background: var(--b800); color: var(--b500); border-color: transparent; }
+[data-surface="dark"] .csa-pagination-prev:disabled, [data-surface="dark"] .csa-pagination-next:disabled { background: var(--b800); color: var(--b500); border-color: transparent; }
 
 /* ---- Surface-aware — black ---- */
 [data-surface="black"] .csa-pagination-btn { border-color: var(--n700); color: var(--n75); background: transparent; }
 [data-surface="black"] .csa-pagination-btn:hover { border-color: var(--n600); }
 [data-surface="black"] .csa-pagination-btn[aria-current="page"] { background: var(--b300); border-color: var(--b300); color: #fff; }
 [data-surface="black"] .csa-pagination-btn:disabled { color: var(--n600); border-color: var(--n800); }
-[data-surface="black"] .csa-pagination-prev:disabled { background: var(--n800); color: var(--n500); border-color: transparent; }
+[data-surface="black"] .csa-pagination-prev:disabled, [data-surface="black"] .csa-pagination-next:disabled { background: var(--n800); color: var(--n500); border-color: transparent; }
