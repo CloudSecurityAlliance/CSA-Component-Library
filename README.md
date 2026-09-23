@@ -112,18 +112,20 @@ be authoritative in the ambiguous cases:
   `- light blue.png` (no `bg`) — but no plain `- dark.png`/`- light.png`
   like every other illustration has. Looks like the plain variants got
   exported under the wrong name.
-- **Virtual Event** has 5 files but two are `- dark blue bg copy.png` /
-  `- light blue bg copy.png` sitting alongside non-`copy` versions of the
-  same two — and they're not identical (the `copy` files are ~25–35%
-  larger). No `- dark.png`/`- light.png` plain variants exist at all for
-  this one. Can't tell which of the two (copy vs. non-copy) is the
-  current export.
-- **AI Threat Radar** and **Blueprint** each have one file named
-  `- dark_1.png`/`- light_1.png` instead of `- dark.png`/`- light.png` —
-  likely just an export-tool artifact (no competing non-`_1` file exists
-  for either), safe to rename if you want the clean pattern.
 - **TAISE Group Training** has 6 files: both `- white.png` and
   `- white bg.png`, where every other illustration only has one.
+
+Two more were resolved during the lowercase/dash filename cleanup:
+**Virtual Event**'s `-dark-blue-bg-copy.png`/`-light-blue-bg-copy.png`
+were checked against their non-`copy` siblings — both `copy` files
+actually rendered on a plain white/transparent background, not the
+blue background their filename claimed (visually identical to
+`virtual-event-white-bg.png`), so they were mislabeled duplicates, not
+a real second export; deleted rather than renamed. **AI Threat Radar**
+and **Blueprint**'s `-dark_1.png`/`-light_1.png` were confirmed to be
+the real dark/light variants (no competing file existed) and renamed
+to the plain `-dark.png`/`-light.png` pattern every other illustration
+uses.
 
 ## Class naming
 
