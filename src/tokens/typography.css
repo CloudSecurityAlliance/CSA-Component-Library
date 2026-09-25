@@ -45,7 +45,6 @@ body { font-family: var(--font); }
 
 .csa-title:has(+ .csa-subtitle) { margin-bottom: 8px; }
 
-h1, h2, h3, h4,
 h1.csa-title, h2.csa-title, h3.csa-title, h4.csa-title,
 h1.csa-subtitle, h2.csa-subtitle, h3.csa-subtitle, h4.csa-subtitle {
   color: var(--b800);
@@ -63,10 +62,10 @@ h1.csa-subtitle, h2.csa-subtitle, h3.csa-subtitle, h4.csa-subtitle {
    extend — sizing elsewhere in this library matches this plain h1
    directly rather than any one source page's specific value, since
    this doc outlives the source HTML it was extracted from). */
-h1, h1.csa-title, h1.csa-subtitle { font-size: clamp(40px, 5.8vw, 66px); letter-spacing: -.03em; }
-h2, h2.csa-title, h2.csa-subtitle { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; }
-h3, h3.csa-title, h3.csa-subtitle { font-size: 22px; letter-spacing: -.02em; }
-h4, h4.csa-title, h4.csa-subtitle { font-weight: 700; }
+h1.csa-title, h1.csa-subtitle { font-size: clamp(40px, 5.8vw, 66px); letter-spacing: -.03em; }
+h2.csa-title, h2.csa-subtitle { font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; }
+h3.csa-title, h3.csa-subtitle { font-size: 22px; letter-spacing: -.02em; }
+h4.csa-title, h4.csa-subtitle { font-weight: 700; }
 
 .csa-muted { color: var(--n300); }
 
