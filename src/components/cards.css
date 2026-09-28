@@ -100,6 +100,19 @@
    Same offsets/blur/spread, just black and notably more opaque. */
 [data-surface="dark"] .csa-card-hover:hover, [data-surface="black"] .csa-card-hover:hover { box-shadow: 0 2px 6px rgba(0,0,0,.25), 0 18px 40px -18px rgba(0,0,0,.55); }
 
+/* Raised — a stronger, always-on elevation for a card that needs more
+   emphasis than the rest of a grid around it, without changing its
+   background/border (those stay exactly what .csa-card's own
+   surface-aware rules in surfaces.css already give it — this is a pure
+   modifier, always paired with .csa-card). Swaps the base --shadow-sm
+   for the bigger --shadow token: the same shadow .csa-card-hover
+   reaches for on :hover, just resting instead of hover-triggered. */
+.csa-card-raised { box-shadow: var(--shadow); }
+/* Same reasoning as .csa-card-hover's own dark/black override above —
+   --shadow's navy tint has too little contrast against a dark/black
+   background; identical value, reused rather than inventing a new one. */
+[data-surface="dark"] .csa-card-raised, [data-surface="black"] .csa-card-raised { box-shadow: 0 2px 6px rgba(0,0,0,.25), 0 18px 40px -18px rgba(0,0,0,.55); }
+
 /* Media card — image fills the top edge-to-edge (16:9 by default), text
    sits below in its own padded body. Unlike .csa-card, the outer shell
    carries no padding of its own — .csa-card-media-body does instead —

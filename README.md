@@ -17,7 +17,7 @@ now, not a mirror of theirs.
   block, the two required font `<link>` tags in `<head>`, and placeholder
   nav/footer/`<main>` you fill in. Build your content with the classes
   documented in the showcase, and pull logos/icons/illustrations from
-  `assets/` by relative path (e.g. `assets/icons/AI-Security.svg`).
+  `assets/` by relative path (e.g. `assets/icons/ai-security.svg`).
 - **Font loading — always the two `<link>` tags, never inlined:** any
   page using this library (whether copied from `dist/csa-library.html`
   as-is, or built by pulling these tokens/components into an existing
@@ -100,7 +100,7 @@ they stay traceable back to the original design files.
 | Folder | Count | Format | Naming |
 |---|---|---|---|
 | `logos/` | 164 | PNG | Mixed — CSA certification/program logos (`{Program}-logo-{CMYK\|RGB\|grayscale\|white}.png`) plus ~52 one-off badges (Credly, membership, STAR, council) |
-| `icons/` | 606 | SVG | 101 unique icons × 6 color variants each: base, `-CSA-blue`, `-light-blue`, `-red-orange`, `-white`, `-yellow-orange` |
+| `icons/` | 840 (726 SVG + 114 PNG) | mostly SVG | 120 unique icons × 6 color variants each: base, `-CSA-blue`, `-light-blue`, `-red-orange`, `-white`, `-yellow-orange`. The 19 most recently added icons (AI-Automation, Click, Clock, Connect, Delete, Document-Locked, Export, Folder-Locked, Gate, Info, Laptop-Locked, Phone-Locked, Safe, Scan-LLM, Strategy, Support, Target, Window, Window-Locked) also ship a PNG alongside each SVG variant; the original 101 remain SVG-only |
 | `illustrations/` | 182 | PNG | ~33 scenes × 5 variants each: `- dark`, `- light`, `- white bg`, `- dark blue bg`, `- light blue bg` |
 
 A handful of illustration files break that 5-variant pattern — flagging
@@ -112,18 +112,20 @@ be authoritative in the ambiguous cases:
   `- light blue.png` (no `bg`) — but no plain `- dark.png`/`- light.png`
   like every other illustration has. Looks like the plain variants got
   exported under the wrong name.
-- **Virtual Event** has 5 files but two are `- dark blue bg copy.png` /
-  `- light blue bg copy.png` sitting alongside non-`copy` versions of the
-  same two — and they're not identical (the `copy` files are ~25–35%
-  larger). No `- dark.png`/`- light.png` plain variants exist at all for
-  this one. Can't tell which of the two (copy vs. non-copy) is the
-  current export.
-- **AI Threat Radar** and **Blueprint** each have one file named
-  `- dark_1.png`/`- light_1.png` instead of `- dark.png`/`- light.png` —
-  likely just an export-tool artifact (no competing non-`_1` file exists
-  for either), safe to rename if you want the clean pattern.
 - **TAISE Group Training** has 6 files: both `- white.png` and
   `- white bg.png`, where every other illustration only has one.
+
+Two more were resolved during the lowercase/dash filename cleanup:
+**Virtual Event**'s `-dark-blue-bg-copy.png`/`-light-blue-bg-copy.png`
+were checked against their non-`copy` siblings — both `copy` files
+actually rendered on a plain white/transparent background, not the
+blue background their filename claimed (visually identical to
+`virtual-event-white-bg.png`), so they were mislabeled duplicates, not
+a real second export; deleted rather than renamed. **AI Threat Radar**
+and **Blueprint**'s `-dark_1.png`/`-light_1.png` were confirmed to be
+the real dark/light variants (no competing file existed) and renamed
+to the plain `-dark.png`/`-light.png` pattern every other illustration
+uses.
 
 ## Class naming
 
@@ -156,14 +158,15 @@ level that isn't unified to 900.
 | File | Source |
 |---|---|
 | `surfaces.css` | Built fresh per spec — light/gradient/dark backgrounds + surface-aware `.csa-card` |
-| `cards.css` | `.csa-card` shell synthesized from a handful of bespoke card patterns seen across CSA's early pages (no shared class existed at the time); `.csa-card-glass` adds a 16px radius and surface-aware text color on top of the spec's base CSS. Also: `.csa-card-hover` (lift/shadow/border-color modifier, matching the hover treatment consistently used across CSA's early interactive cards), `.csa-card-media` (16:9 image-top card, surface-aware like `.csa-card`), `.csa-card-reveal` (4:3 photo card — kicker + heading sit permanently on a thin frosted-glass strip at the bottom; `.csa-card-reveal-more`/`-more-inner` grow that strip on hover via a `grid-template-rows` 0fr→1fr transition, not `max-height`, so it fits body copy of any length without a guessed cutoff; always dark regardless of page surface), `.csa-go` (shared CTA link utility, `font-size:14.5px` to read as a peer of body copy rather than a caption — `--b500` default, `--b300` on hover and on dark surfaces; promoted out of `carousel.css` where it started), `.csa-card-brand-cloud`/`-ai`/`-zt` (one per CSA sub-brand, white-background only, no `data-surface` variants — top-down fill + gradient border via the same double-background-clip trick buttons.css uses for a gradient border, plus a non-uniform border-width and a hard gradient stop so the border-box layer also carries a solid 4px top accent bar; border gradient (not the top accent, not the fill) swaps colors on `:hover`, and `.csa-go` is recolored to match each brand's own accent), and `.csa-card-quote` (testimonial card — quote glyph, body copy, then a footer with a headshot slot, name, and title; the headshot is a plain `<img>`, not a mask, since a photo doesn't need to recolor with surrounding text the way an icon glyph does). An icon as a card's first child just needs `.csa-icon` — no new class |
-| `buttons.css` | `.csa-btn-primary` is always `--o500` — no blue variant, no surface-conditional switching. 4 standardized variants, all surface-aware (work unmodified on light/gradient/dark/black): `.csa-btn-primary`, `.csa-btn-secondary`, `.csa-btn-tertiary`, `.csa-btn-disabled`. `.csa-btn-light`/`.csa-btn-ghost`/`.csa-btn-onnavy` are retired — Disabled replaces Light, Secondary is Ghost renamed (it already worked on dark surfaces unmodified, making Onnavy redundant there). Replaces `.btn-gold`/`.btn-gold-outline` (removed) |
+| `cards.css` | `.csa-card` shell synthesized from a handful of bespoke card patterns seen across CSA's early pages (no shared class existed at the time); `.csa-card-glass` adds a 16px radius and surface-aware text color on top of the spec's base CSS. Also: `.csa-card-hover` (lift/shadow/border-color modifier, matching the hover treatment consistently used across CSA's early interactive cards), `.csa-card-media` (16:9 image-top card, surface-aware like `.csa-card`), `.csa-card-reveal` (4:3 photo card — kicker + heading sit permanently on a thin frosted-glass strip at the bottom; `.csa-card-reveal-more`/`-more-inner` grow that strip on hover via a `grid-template-rows` 0fr→1fr transition, not `max-height`, so it fits body copy of any length without a guessed cutoff; always dark regardless of page surface), `.csa-go` (shared CTA link utility, `font-size:14.5px` to read as a peer of body copy rather than a caption — `--b500` default, `--b300` on hover and on dark surfaces; promoted out of `carousel.css` where it started), `.csa-card-brand-cloud`/`-ai`/`-zt` (one per CSA sub-brand, white-background only, no `data-surface` variants — top-down fill + gradient border via the same double-background-clip trick buttons.css uses for a gradient border, plus a non-uniform border-width and a hard gradient stop so the border-box layer also carries a solid 4px top accent bar; border gradient (not the top accent, not the fill) swaps colors on `:hover`, and `.csa-go` is recolored to match each brand's own accent), `.csa-card-quote` (testimonial card — quote glyph, body copy, then a footer with a headshot slot, name, and title; the headshot is a plain `<img>`, not a mask, since a photo doesn't need to recolor with surrounding text the way an icon glyph does), and `.csa-card-raised` (always-on elevation for a card that needs more emphasis than the rest of its grid — swaps the base `--shadow-sm` for the bigger `--shadow` token, the same shadow `.csa-card-hover` only shows on `:hover`; background/border are untouched, so it's a pure modifier always paired with `.csa-card`; dark/black reuse `.csa-card-hover`'s own black shadow value rather than a new one). An icon as a card's first child just needs `.csa-icon` — no new class |
+| `buttons.css` | `.csa-btn-primary` is always `--o500` — no blue variant, no surface-conditional switching. 4 standardized variants, all surface-aware (work unmodified on light/gradient/dark/black): `.csa-btn-primary`, `.csa-btn-secondary`, `.csa-btn-tertiary`, `.csa-btn-disabled`. `.csa-btn-light`/`.csa-btn-ghost`/`.csa-btn-onnavy` are retired — Disabled replaces Light, Secondary is Ghost renamed (it already worked on dark surfaces unmodified, making Onnavy redundant there). Replaces `.btn-gold`/`.btn-gold-outline` (removed). Disabled's colors are surface-aware per surface, not just light-vs-dark: black uses its own `n800`/`n500` values (matching the n-scale `.csa-card` already uses for its own black-surface background/border), rather than reusing dark's blue-scale `b800`/`b500` on a surface that's otherwise neutral, not navy |
+| `action.css` | A surface-aware interactive tile for `<a>` or `<button>` — shares `.csa-card`'s border treatment (`n50` resting border, matching `.csa-pagination-btn`'s convention). `aria-selected="true"` (the same attribute used for selected items in listboxes/grids/tab lists) switches it to an orange border + warm tint, plus a resting `--shadow` drop shadow (dark/black get their own higher-contrast black shadow, same technique as `.csa-card-hover`'s dark override in `cards.css`) so a selected tile reads as chosen even before a pointer gets near it — deliberately static once selected, with no further color/lift shift on `:hover`, since a second signal on top of an already-selected tile read as redundant. Dark surface additionally gets a `backdrop-filter: blur(3px)`. `.csa-action-arrow` adds a trailing chevron that tracks every state the border goes through via `currentColor`. Wrap multiple in `.csa-actions` to stack them in a full-width column, 10px gap |
 | `badges.css` | The original extracted-as-is glass pill (`.csa-badge-hot`, the spec's "Eyebrow") has been retired. Ships `.csa-badge-primary`/`-secondary`/`-outlined` instead — designed fresh, icon + italic label, surface-aware (light/gradient share one treatment, dark/black another). Icon is either a plain `<img>` (when a pre-colored file exists for the exact color, e.g. Calendar's b500/b100/b300/white variants) or the shared `.csa-icon-glyph` mask primitive (`base/icon-glyph.css`) when it doesn't |
 | `nav.css` | Extracted as-is — two real variants, see below. **Not shown in the showcase** (removed per your request) — the component still ships, it's just not documented on the showcase page |
-| `hero.css` | Built fresh per spec, informed by the shared real hero structure; also houses `.csa-cta` (the closing promo band, a pattern repeated across most of CSA's early program pages). `.csa-hero-glass`/`-light`/`-dark` nest a plain `.csa-card-glass` inside a `.csa-hero-photo` hero — recreates an earlier glass-panel-over-photo hero treatment used on a couple of CSA's early pages before it was later simplified to a plain gradient (identical values to `.csa-card-glass`'s own dark variant); every text color inside is set explicitly rather than left to the `.csa-hero`/`.csa-card-glass` cascade, since nesting one inside the other creates real specificity collisions between them |
-| `icons.css` | Sizing only (default 48px) — color/background treatment is baked into each SVG file in `src/assets/icons/`, see "Icons" below |
-| `carousel.css` | Visuals extracted as-is from an early drag/momentum carousel built for one of CSA's program pages, generalized to support multiple carousels per page. Card background is white (not `--n25`) so it reads against a gray section. Cards run narrow enough that the next one peeks into view instead of using an edge fade to hint "more to scroll" — no `--csa-carousel-bg`/background-matching to keep track of on whatever section it sits in. `.csa-carousel-dots`/`.csa-carousel-dot`/`.csa-carousel-dot-active` are an optional progress-dots row below the viewport; which dot is active is real app state (tracks scroll/drag position), same as the rest of the carousel's behavior. **No shipped JS** — see "Styling only, not behavior" below; the drag/momentum/infinite-loop/dot-sync interaction is a BEHAVIOR SPEC comment at the top of the file, not code |
-| `tabs.css` | **Designed fresh** — no tabs UI existed elsewhere in the brand system at the time (checked for tablist/tab-panel patterns; none found). **No shipped JS** — see "Styling only, not behavior" below; the WAI-ARIA tabs interaction is a BEHAVIOR SPEC comment at the top of the file, not code |
+| `hero.css` | Built fresh per spec, informed by the shared real hero structure; also houses `.csa-cta` (the closing promo band, a pattern repeated across most of CSA's early program pages). `.csa-hero-glass`/`-light`/`-dark` nest a plain `.csa-card-glass` inside a `.csa-hero-photo` hero — recreates an earlier glass-panel-over-photo hero treatment used on a couple of CSA's early pages before it was later simplified to a plain gradient (identical values to `.csa-card-glass`'s own dark variant); every text color inside is set explicitly rather than left to the `.csa-hero`/`.csa-card-glass` cascade, since nesting one inside the other creates real specificity collisions between them. `.csa-hero-split-graphic` — promoted from the STAR Program's "Learn about STAR" hero, reused as-is across 4 of its pages before landing here — has no glass panel; content floats directly on the photo, and `.csa-wrap` itself becomes a plain 2-column grid (`1.2fr auto`, 48px gap) with a single graphic (`.csa-hero-split-img`, a logo/wordmark, not an overlapping illustration) vertically centered on the right; below 1050px it drops to one column, image centered and capped at 200px |
+| `icons.css` | Sizing only (default 48px, `.csa-icon-small` 32px, `.csa-icon-large` 56px) — color/background treatment is baked into each SVG file in `src/assets/icons/`, see "Icons" below. Also documents the `b500`/`b300`/`b100`/`n400`/`o300`/`o700` token-color subfolders (badge/tag use) |
+| `carousel.css` | Visuals extracted as-is from an early drag/momentum carousel built for one of CSA's program pages, generalized to support multiple carousels per page. `.csa-carousel` is the outer wrapper — a flex column stacking `.csa-carousel-row` (the arrow/viewport/arrow flex row, its own class now) above `.csa-carousel-dots`, so copying the one `.csa-carousel` block always brings the dots with it; they used to be a sibling *after* `.csa-carousel` instead of a child, which a real page's dev team missed entirely when copying just the block that looked like "the carousel." Card background is white (not `--n25`) so it reads against a gray section. Cards run narrow enough that the next one peeks into view instead of using an edge fade to hint "more to scroll" — no `--csa-carousel-bg`/background-matching to keep track of on whatever section it sits in. `.csa-carousel-dots`/`.csa-carousel-dot`/`.csa-carousel-dot-active` are an optional progress-dots row below `.csa-carousel-row`; which dot is active is real app state (tracks scroll/drag position), same as the rest of the carousel's behavior. **No shipped JS** — see "Styling only, not behavior" below; the drag/momentum/infinite-loop/dot-sync interaction is a BEHAVIOR SPEC comment at the top of the file, not code |
+| `tabs.css` | **Designed fresh** — no tabs UI existed elsewhere in the brand system at the time (checked for tablist/tab-panel patterns; none found). `.csa-tab:hover` gets a rounded `n50` background (`b600`/`n700` on dark/black — one ramp step lighter than that surface's own page background, not darker, so the hover reads as a lift rather than a hole; `n50` rather than `n25` on light so it still shows up against an `n25` page). The fill lives on a `::before` inset short of the tab's own bottom edge, not the tab's own background, so the rounded highlight floats above `.csa-tablist`'s border-bottom (or the active tab's own indicator) instead of touching it. **No shipped JS** — see "Styling only, not behavior" below; the WAI-ARIA tabs interaction is a BEHAVIOR SPEC comment at the top of the file, not code |
 | `toggles.css` | Two switch patterns extracted from RiskRubric.ai (an existing CSA property): `.csa-toggle-icon` (compact switch, icon per state — that page's own dark-mode switch, thumb slide added since the reference's own thumb doesn't move) and `.csa-toggle-segmented` (two-option segmented control with a sliding highlight — that page's "10 highest/lowest scoring" filter). Segmented toggle colors copied exactly as they render there; the icon toggle's resting-track color is flat library tokens instead (n25/n50/b800 by surface) rather than the reference's own semi-transparent value, for consistency with the rest of the library's "one ramp step off the page" convention. `.csa-toggle-icon-confirm` is a second icon-toggle variant on the same button — X/checkmark instead of sun/moon, green (`--g200`/`--g100`) instead of orange for "on" — for a generic enable/disable toggle rather than one specifically about dark mode. **No shipped JS** — the entire visual state of both is driven by one attribute (`aria-pressed` / `data-selected`) the app flips on click, same minimal contract as `.csa-tag-filter` |
 | `tables.css` | Built fresh per your spec — a generic data table: n50 grid lines, a b500 header row, alternating white/n25 body rows. `.csa-table-wrap` exists solely to round the table's corners (12px) — `overflow:hidden` on a separate wrapper, since a `<table>` with `border-collapse:collapse` (needed for single, non-doubled n50 lines between cells) doesn't reliably respect its own `border-radius` across browsers |
 
@@ -206,9 +209,31 @@ communicate importance, not decoration. The showcase's Icons section
 renders this whole table live with a real icon (`Shield-Keyhole`) so
 it's a working reference, not just a static picture.
 
+### Token-color variants (badges, neutral tags)
+
+A separate mechanism from the 6 approved combinations above, for
+contexts that need an icon to match an arbitrary surrounding color
+rather than one of the brand guide's fixed chip pairings — badge
+variants and neutral tags being the driving cases. `src/assets/icons/`
+has 6 subfolders — `b500/`, `b300/`, `b100/`, `n400/`, `o300/`, `o700/`
+— each holding the same 120 base icons recolored to that one token.
+Both the folder and the filename carry the color (`calendar-b500.svg`
+inside `b500/`, matching the pre-existing `calendar-b100`/`-b300`/
+`-b500.svg` files this pattern was modeled on) — the folder groups them
+for browsing, the suffix keeps the color self-evident even if a file
+is ever copied out on its own:
+`<img class="csa-icon" src="../assets/icons/b500/calendar-b500.svg">`.
+
+The 3 gradient sub-brand marks (`ai-brand.svg`, `cloud-brand.svg`,
+`zero-trust-brand.svg`) are excluded from every color folder — they're
+multi-tone marks built from a gradient fill, not single-color icons, so
+flattening them to one token color would break the mark rather than
+recolor it.
+
 This is step one of three you asked for — establishing the color/background
-foundation. Layout examples that feature icons, and adding icons to
-badges, are follow-ups, not done yet.
+foundation. Layout examples that feature icons are still a follow-up;
+adding icons to badges and neutral tags now has its token-color source
+files (above) ready to use.
 
 ## Border radius nesting
 

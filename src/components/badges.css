@@ -44,13 +44,13 @@
    free without needing a new file generated per color. See the "on
    dark" hero-glass-dark example in the docs for the glyph route in use.
 
-   Calendar-b500/b100/b300.svg are new files generated for this spec
+   calendar-b500/b100/b300.svg are new files generated for this spec
    (not part of the original 6-file brand-guide icon export): the brand
    guide only ships colored "chip" icons (a solid background circle +
-   white glyph — see Calendar-CSA-blue.svg) or flat glyph-only icons in
-   navy/white (Calendar.svg / Calendar-white.svg). These badges need a
+   white glyph — see calendar-csa-blue.svg) or flat glyph-only icons in
+   navy/white (calendar.svg / calendar-white.svg). These badges need a
    flat colored glyph with NO background shape of its own, so each was
-   made by copying Calendar.svg (glyph-only) and swapping its one
+   made by copying calendar.svg (glyph-only) and swapping its one
    hardcoded navy fill to the target token's hex — not by recoloring
    the chip icon, which would carry an unwanted background shape along
    with it. */

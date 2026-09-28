@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 30.1.0, SVG Export Plug-In . SVG Version: 9.03 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+<symbol  id="Calendar" viewBox="-15 -15 30 30">
+	<path fill="#0093FF" d="M12.42,12.48h-5.4v1.51c0,0.56-0.45,1.01-1.01,1.01S5,14.55,5,13.99v-1.51h-9.99v1.51
+		C-4.99,14.55-5.44,15-6,15s-1.01-0.45-1.01-1.01v-1.51h-5.41c-1.43,0-2.58-1.16-2.58-2.58v-22.32c0-1.43,1.16-2.58,2.58-2.58h24.84
+		c1.43,0,2.58,1.16,2.58,2.58V9.9C15,11.32,13.84,12.48,12.42,12.48z M-12.42,10.46h5.41V8.8c0-0.56,0.45-1.01,1.01-1.01
+		s1.01,0.45,1.01,1.01v1.67H5V8.8c0-0.56,0.45-1.01,1.01-1.01S7.02,8.24,7.02,8.8v1.67h5.4c0.31,0,0.56-0.25,0.56-0.56V5.24h-25.97
+		V9.9C-12.98,10.21-12.73,10.46-12.42,10.46z M12.42-12.98h-24.84c-0.31,0-0.56,0.25-0.56,0.56V3.22h25.97v-15.64
+		C12.98-12.73,12.73-12.98,12.42-12.98z"/>
+	<rect x="-8.65" y="-3.5" fill="#0093FF" width="4.08" height="2.99"/>
+	<rect x="-2.04" y="-3.5" fill="#0093FF" width="4.08" height="2.99"/>
+	<rect x="4.57" y="-3.5" fill="#0093FF" width="4.08" height="2.99"/>
+	<rect x="-8.65" y="-8.93" fill="#0093FF" width="4.08" height="2.99"/>
+	<rect x="-2.04" y="-8.93" fill="#0093FF" width="4.08" height="2.99"/>
+	<rect x="4.57" y="-8.93" fill="#0093FF" width="4.08" height="2.99"/>
+</symbol>
+<use xlink:href="#Calendar"  width="30" height="30" x="-15" y="-15" transform="matrix(4 0 0 -4 60 60)" overflow="visible"/>
+</svg>
