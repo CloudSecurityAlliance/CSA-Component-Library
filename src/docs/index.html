@@ -2210,7 +2210,7 @@
     <div class="docs-head">
       <span class="csa-kicker">Layout</span>
       <h2>Grid</h2>
-      <p>A CSS Grid system equivalent to Bulma's <code>.grid</code> / <code>.cell</code>. <code>.csa-grid</code> defaults to 12 columns; use <code>.csa-grid-{2–6}</code> for common equal-column card grids or set <code>--col-count</code> inline for any other count. <code>.csa-cell-col-{1–12}</code> spans a cell across multiple columns; <code>.csa-cell-row-{1–6}</code> spans it across multiple rows. Unlike <code>.csa-columns</code> (flexbox, 1D), <code>.csa-grid</code> supports true 2D placement.</p>
+      <p>A CSS Grid system equivalent to Bulma's <code>.grid</code> / <code>.cell</code>. <code>.csa-grid</code> defaults to 12 columns; use <code>.csa-grid-{2–6}</code> for common equal-column card grids or set <code>--col-count</code> inline for any other count. <code>.csa-cell-col-{1–12}</code> spans a cell across multiple columns; <code>.csa-cell-row-{1–6}</code> spans it across multiple rows. Unlike <code>.csa-columns</code> (flexbox, 1D), <code>.csa-grid</code> supports true 2D placement. Responsive breakpoint prefixes (<code>sm</code> ≥576 px, <code>md</code> ≥768 px, <code>lg</code> ≥1024 px) let both column count and cell spans change at named viewport widths: <code>.csa-grid-{sm|md|lg}-{1–6}</code> on the container, <code>.csa-cell-col-{sm|md|lg}-{1–12}</code> on cells.</p>
       <div class="csa-rule"></div>
     </div>
 
@@ -2325,6 +2325,40 @@
         <div class="csa-cell csa-cell-fill">
           <div class="docs-col-box" style="justify-content:center;display:flex;align-items:center">Short content</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Responsive breakpoints -->
+    <div class="docs-label" style="margin-top:32px">Responsive breakpoints — resize the viewport to see collapse</div>
+    <p style="font-size:14px;color:var(--n400);margin:8px 0 16px">Mobile-first: unprefixed classes apply at all sizes; <code>sm</code>/<code>md</code>/<code>lg</code> classes layer on top at ≥576/768/1024 px. Use <code>.csa-grid-{sm|md|lg}-{1–6}</code> on the container to change column count; <code>.csa-cell-col-{sm|md|lg}-{1–12}</code> on cells to change their span.</p>
+
+    <div class="docs-col-group">
+      <div style="font-size:12px;color:var(--n300);font-family:ui-monospace,Menlo,monospace;margin-bottom:8px">.csa-grid-1 .csa-grid-md-2 .csa-grid-lg-4 — card grid: 1-col → 2-col → 4-col</div>
+      <div class="csa-grid csa-grid-1 csa-grid-md-2 csa-grid-lg-4">
+        <div class="csa-cell docs-col-box">Card A</div>
+        <div class="csa-cell docs-col-box">Card B</div>
+        <div class="csa-cell docs-col-box">Card C</div>
+        <div class="csa-cell docs-col-box">Card D</div>
+      </div>
+    </div>
+
+    <div class="docs-col-group">
+      <div style="font-size:12px;color:var(--n300);font-family:ui-monospace,Menlo,monospace;margin-bottom:8px">.csa-grid-1 .csa-grid-lg-4 + .csa-cell-col-lg-1 / -3 — sidebar layout: stacked → 25%/75% side-by-side</div>
+      <div class="csa-grid csa-grid-1 csa-grid-lg-4">
+        <div class="csa-cell csa-cell-col-lg-1 docs-col-box">Sidebar (col-lg-1)</div>
+        <div class="csa-cell csa-cell-col-lg-3 docs-col-box">Main content (col-lg-3)</div>
+      </div>
+    </div>
+
+    <div class="docs-col-group">
+      <div style="font-size:12px;color:var(--n300);font-family:ui-monospace,Menlo,monospace;margin-bottom:8px">.csa-grid-1 .csa-grid-sm-2 .csa-grid-md-3 — three-step collapse</div>
+      <div class="csa-grid csa-grid-1 csa-grid-sm-2 csa-grid-md-3">
+        <div class="csa-cell docs-col-box">A</div>
+        <div class="csa-cell docs-col-box">B</div>
+        <div class="csa-cell docs-col-box">C</div>
+        <div class="csa-cell docs-col-box">D</div>
+        <div class="csa-cell docs-col-box">E</div>
+        <div class="csa-cell docs-col-box">F</div>
       </div>
     </div>
   </div>
