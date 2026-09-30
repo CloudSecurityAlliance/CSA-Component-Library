@@ -92,8 +92,11 @@
    affected either way: they already force border-color: transparent
    explicitly at both rest and :hover to protect their own gradient
    border, so this rule never reached them to begin with. */
-.csa-card-hover { transition: .18s; cursor: pointer; }
+.csa-card-hover { position: relative; transition: .18s; cursor: pointer; }
 .csa-card-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+/* Stretch the csa-go link to cover the whole card. Any other interactive
+   element inside the card needs position:relative + z-index:1 to stay clickable. */
+.csa-card-hover .csa-go::after { content: ""; position: absolute; inset: 0; }
 /* --shadow is a navy-tinted, low-opacity shadow — reads fine lifting off
    a light/gradient page, but that same navy-on-navy has too little
    contrast to read against the dark surface's own navy background.
