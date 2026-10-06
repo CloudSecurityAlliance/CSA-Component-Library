@@ -204,6 +204,7 @@ body { background: var(--n25); color: var(--n700); }
 .ico-variant-btn:hover { border-color: var(--b300); color: var(--b400); }
 .ico-variant-btn.active { background: var(--b500); border-color: var(--b500); color: white; }
 .ico-variant-btn[data-variant="white"].active { background: var(--n700); border-color: var(--n700); }
+.ico-variant-sep { width: 1px; height: 24px; background: var(--n75); align-self: center; flex-shrink: 0; }
 
 .ico-count { margin-left: auto; font-size: 12.5px; color: var(--n300); white-space: nowrap; }
 
@@ -282,7 +283,13 @@ body { background: var(--n25); color: var(--n700); }
       <button class="ico-variant-btn" data-variant="white">White</button>
       <button class="ico-variant-btn" data-variant="red-orange">Red Orange</button>
       <button class="ico-variant-btn" data-variant="yellow-orange">Yellow Orange</button>
+      <span class="ico-variant-sep"></span>
+      <button class="ico-variant-btn" data-variant="b100">B100</button>
+      <button class="ico-variant-btn" data-variant="b300">B300</button>
       <button class="ico-variant-btn" data-variant="b500">B500</button>
+      <button class="ico-variant-btn" data-variant="n400">N400</button>
+      <button class="ico-variant-btn" data-variant="o300">O300</button>
+      <button class="ico-variant-btn" data-variant="o700">O700</button>
     </div>
     <span class="ico-count" id="icoCount"></span>
   </div>
@@ -307,7 +314,12 @@ body { background: var(--n25); color: var(--n700); }
     'white':        { suffix: '-white',        dir: '',      dark: true,  mono: true  },
     'red-orange':   { suffix: '-red-orange',   dir: '',      dark: false, mono: false },
     'yellow-orange':{ suffix: '-yellow-orange',dir: '',      dark: false, mono: false },
-    'b500':         { suffix: '-b500',         dir: 'b500/', dark: false, mono: false },
+    'b100':         { suffix: '-b100',         dir: 'b100/', dark: false, mono: true  },
+    'b300':         { suffix: '-b300',         dir: 'b300/', dark: false, mono: true  },
+    'b500':         { suffix: '-b500',         dir: 'b500/', dark: false, mono: true  },
+    'n400':         { suffix: '-n400',         dir: 'n400/', dark: false, mono: true  },
+    'o300':         { suffix: '-o300',         dir: 'o300/', dark: false, mono: true  },
+    'o700':         { suffix: '-o700',         dir: 'o700/', dark: false, mono: true  },
   };
 
   var grid      = document.getElementById('icoGrid');
