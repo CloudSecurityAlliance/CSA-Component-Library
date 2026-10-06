@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="../base/reset.css">
 <link rel="stylesheet" href="../base/icon-glyph.css">
 <link rel="stylesheet" href="../base/utility.css">
+<link rel="stylesheet" href="../base/spacing-helpers.css">
+<link rel="stylesheet" href="../base/color-helpers.css">
 <link rel="stylesheet" href="../components/surfaces.css">
 <link rel="stylesheet" href="../components/action.css">
 <link rel="stylesheet" href="../components/cards.css">
@@ -480,6 +482,7 @@
         <a href="#type">Typography</a>
         <a href="#spacing">Spacing</a>
         <a href="#spacing-helpers">Spacing helpers</a>
+        <a href="#color-helpers">Color helpers</a>
         <a href="#surfaces">Surfaces</a>
         <a href="#buttons">Buttons</a>
         <a href="#action">Action</a>
@@ -697,6 +700,36 @@
       <div class="docs-type-row"><span class="docs-type-tag">.csa-mx-auto</span><span style="font-size:13px;color:var(--n400)">Center a block element horizontally</span></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-px-4</span><span style="font-size:13px;color:var(--n400)">16px left + right padding</span></div>
       <div class="docs-type-row" style="border:none;padding-bottom:0"><span class="docs-type-tag">.csa-py-5</span><span style="font-size:13px;color:var(--n400)">24px top + bottom padding</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- COLOR HELPERS                                                 -->
+<!-- ============================================================ -->
+<section class="docs-section" id="color-helpers">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Helpers</span>
+      <h2>Color helpers</h2>
+      <p>One utility class per color token for text and background. Both use <code>!important</code> so they work as overrides anywhere in the component stack. Tokens match the ramp in <a href="#colors">Color palette</a> — same letter+ramp naming, e.g. <code>--b300</code> → <code>.csa-color-b300</code> and <code>.csa-bg-b300</code>.</p>
+      <div class="csa-rule"></div>
+    </div>
+
+    <div class="docs-panel" style="margin-bottom:20px">
+      <div class="docs-label">Pattern</div>
+      <div class="docs-type-row"><span class="docs-type-tag">.csa-color-{token}</span><span style="font-size:13px;color:var(--n400)">Sets <code>color</code> — text, icons, and SVG <code>fill</code>/<code>stroke</code> via <code>currentColor</code></span></div>
+      <div class="docs-type-row" style="border:none;padding-bottom:0"><span class="docs-type-tag">.csa-bg-{token}</span><span style="font-size:13px;color:var(--n400)">Sets <code>background-color</code></span></div>
+    </div>
+
+    <div class="docs-panel" style="margin-bottom:20px">
+      <div class="docs-label">Background — <code>.csa-bg-{token}</code></div>
+      <div id="colorHelpersBg"></div>
+    </div>
+
+    <div class="docs-panel">
+      <div class="docs-label">Text color — <code>.csa-color-{token}</code> (shown on <code>--n800</code> to make every step readable)</div>
+      <div id="colorHelpersText"></div>
     </div>
   </div>
 </section>
@@ -3437,6 +3470,89 @@
     links.classList.remove('docs-topbar-links-open');
     toggle.setAttribute('aria-expanded', 'false');
   }));
+})();
+
+/* Docs-only: render color-helper swatches for .csa-bg-{token} and
+   .csa-color-{token}. Applies the actual utility classes to each swatch
+   so the classes are simultaneously documented and exercised. */
+(function () {
+  const FAMILIES = [
+    ['b','Blue'], ['o','Orange'], ['t','Teal'],
+    ['p','Purple'], ['g','Green'], ['r','Red'], ['n','Neutral'],
+  ];
+  const RAMPS = ['25','50','75','100','200','300','400','500','600','700','800'];
+
+  function makeSwatchRow(letter, name, mode) {
+    const row = document.createElement('div');
+    row.className = 'docs-swatchrow';
+    const label = document.createElement('div');
+    label.className = 'docs-swatchrow-label';
+    label.textContent = name;
+    row.appendChild(label);
+    const grid = document.createElement('div');
+    grid.className = 'docs-swatchgrid';
+    RAMPS.forEach(ramp => {
+      const cls = `csa-${mode}-${letter}${ramp}`;
+      const swatch = document.createElement('div');
+      swatch.className = 'docs-swatch';
+      if (mode === 'bg') {
+        swatch.innerHTML =
+          `<div class="docs-swatch-color ${cls}"></div>` +
+          `<div class="docs-swatch-meta"><code>.${cls}</code></div>`;
+      } else {
+        swatch.innerHTML =
+          `<div class="docs-swatch-color" style="background:var(--n800);display:flex;align-items:center;justify-content:center">` +
+            `<span class="${cls}" style="font-size:22px;font-weight:800;line-height:56px">Aa</span>` +
+          `</div>` +
+          `<div class="docs-swatch-meta"><code>.${cls}</code></div>`;
+      }
+      grid.appendChild(swatch);
+    });
+    row.appendChild(grid);
+    return row;
+  }
+
+  function makeWbRow(mode) {
+    const row = document.createElement('div');
+    row.className = 'docs-swatchrow';
+    const label = document.createElement('div');
+    label.className = 'docs-swatchrow-label';
+    label.textContent = 'White & Black';
+    row.appendChild(label);
+    const flex = document.createElement('div');
+    flex.style.cssText = 'display:flex;gap:8px';
+    ['white', 'black'].forEach(name => {
+      const cls = `csa-${mode}-${name}`;
+      const swatch = document.createElement('div');
+      swatch.className = 'docs-swatch';
+      swatch.style.width = '100px';
+      if (mode === 'bg') {
+        swatch.innerHTML =
+          `<div class="docs-swatch-color ${cls}"></div>` +
+          `<div class="docs-swatch-meta"><code>.${cls}</code></div>`;
+      } else {
+        const bg = name === 'black' ? 'var(--n100)' : 'var(--n800)';
+        swatch.innerHTML =
+          `<div class="docs-swatch-color" style="background:${bg};display:flex;align-items:center;justify-content:center">` +
+            `<span class="${cls}" style="font-size:22px;font-weight:800;line-height:56px">Aa</span>` +
+          `</div>` +
+          `<div class="docs-swatch-meta"><code>.${cls}</code></div>`;
+      }
+      flex.appendChild(swatch);
+    });
+    row.appendChild(flex);
+    return row;
+  }
+
+  const bgEl   = document.getElementById('colorHelpersBg');
+  const textEl = document.getElementById('colorHelpersText');
+  if (!bgEl || !textEl) return;
+  FAMILIES.forEach(([l, n]) => {
+    bgEl.appendChild(makeSwatchRow(l, n, 'bg'));
+    textEl.appendChild(makeSwatchRow(l, n, 'color'));
+  });
+  bgEl.appendChild(makeWbRow('bg'));
+  textEl.appendChild(makeWbRow('color'));
 })();
 
 /* Docs-only: the "preview cards on a background" toggle above the Cards

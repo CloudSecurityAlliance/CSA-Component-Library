@@ -67,7 +67,8 @@
    One shared base: same border/radius/padding/transition regardless of
    which of the three this is, so a form mixing all three reads as one
    consistent row of controls rather than three subtly different shapes. */
-.csa-input, .csa-textarea, .csa-select {
+.csa-input, .csa-textarea, .csa-select,
+input.csa-input, textarea.csa-textarea, select.csa-select {
   display: block; width: 100%;
   padding: 12px 16px; border-radius: 10px;
   border: 1px solid var(--n75); background: #fff; color: var(--n500);

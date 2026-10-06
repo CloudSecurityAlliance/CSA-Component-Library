@@ -1,0 +1,105 @@
+/* =========================================================
+   CSA Component Library — Color Helpers
+   Text-color and background-color utility classes for every
+   color token defined in tokens/colors.css.
+
+   Naming:  .csa-color-{token}   → color (text)
+            .csa-bg-{token}      → background-color
+   Tokens:  b/o/t/p/g/r/n + ramp (25–800), plus white & black
+   All use !important so they work as overrides anywhere.
+   ========================================================= */
+
+/* ── BLUE ───────────────────────────────────────────────── */
+.csa-color-b25  { color: var(--b25)  !important; } .csa-bg-b25  { background-color: var(--b25)  !important; }
+.csa-color-b50  { color: var(--b50)  !important; } .csa-bg-b50  { background-color: var(--b50)  !important; }
+.csa-color-b75  { color: var(--b75)  !important; } .csa-bg-b75  { background-color: var(--b75)  !important; }
+.csa-color-b100 { color: var(--b100) !important; } .csa-bg-b100 { background-color: var(--b100) !important; }
+.csa-color-b200 { color: var(--b200) !important; } .csa-bg-b200 { background-color: var(--b200) !important; }
+.csa-color-b300 { color: var(--b300) !important; } .csa-bg-b300 { background-color: var(--b300) !important; }
+.csa-color-b400 { color: var(--b400) !important; } .csa-bg-b400 { background-color: var(--b400) !important; }
+.csa-color-b500 { color: var(--b500) !important; } .csa-bg-b500 { background-color: var(--b500) !important; }
+.csa-color-b600 { color: var(--b600) !important; } .csa-bg-b600 { background-color: var(--b600) !important; }
+.csa-color-b700 { color: var(--b700) !important; } .csa-bg-b700 { background-color: var(--b700) !important; }
+.csa-color-b800 { color: var(--b800) !important; } .csa-bg-b800 { background-color: var(--b800) !important; }
+
+/* ── ORANGE ─────────────────────────────────────────────── */
+.csa-color-o25  { color: var(--o25)  !important; } .csa-bg-o25  { background-color: var(--o25)  !important; }
+.csa-color-o50  { color: var(--o50)  !important; } .csa-bg-o50  { background-color: var(--o50)  !important; }
+.csa-color-o75  { color: var(--o75)  !important; } .csa-bg-o75  { background-color: var(--o75)  !important; }
+.csa-color-o100 { color: var(--o100) !important; } .csa-bg-o100 { background-color: var(--o100) !important; }
+.csa-color-o200 { color: var(--o200) !important; } .csa-bg-o200 { background-color: var(--o200) !important; }
+.csa-color-o300 { color: var(--o300) !important; } .csa-bg-o300 { background-color: var(--o300) !important; }
+.csa-color-o400 { color: var(--o400) !important; } .csa-bg-o400 { background-color: var(--o400) !important; }
+.csa-color-o500 { color: var(--o500) !important; } .csa-bg-o500 { background-color: var(--o500) !important; }
+.csa-color-o600 { color: var(--o600) !important; } .csa-bg-o600 { background-color: var(--o600) !important; }
+.csa-color-o700 { color: var(--o700) !important; } .csa-bg-o700 { background-color: var(--o700) !important; }
+.csa-color-o800 { color: var(--o800) !important; } .csa-bg-o800 { background-color: var(--o800) !important; }
+
+/* ── TEAL ───────────────────────────────────────────────── */
+.csa-color-t25  { color: var(--t25)  !important; } .csa-bg-t25  { background-color: var(--t25)  !important; }
+.csa-color-t50  { color: var(--t50)  !important; } .csa-bg-t50  { background-color: var(--t50)  !important; }
+.csa-color-t75  { color: var(--t75)  !important; } .csa-bg-t75  { background-color: var(--t75)  !important; }
+.csa-color-t100 { color: var(--t100) !important; } .csa-bg-t100 { background-color: var(--t100) !important; }
+.csa-color-t200 { color: var(--t200) !important; } .csa-bg-t200 { background-color: var(--t200) !important; }
+.csa-color-t300 { color: var(--t300) !important; } .csa-bg-t300 { background-color: var(--t300) !important; }
+.csa-color-t400 { color: var(--t400) !important; } .csa-bg-t400 { background-color: var(--t400) !important; }
+.csa-color-t500 { color: var(--t500) !important; } .csa-bg-t500 { background-color: var(--t500) !important; }
+.csa-color-t600 { color: var(--t600) !important; } .csa-bg-t600 { background-color: var(--t600) !important; }
+.csa-color-t700 { color: var(--t700) !important; } .csa-bg-t700 { background-color: var(--t700) !important; }
+.csa-color-t800 { color: var(--t800) !important; } .csa-bg-t800 { background-color: var(--t800) !important; }
+
+/* ── PURPLE ─────────────────────────────────────────────── */
+.csa-color-p25  { color: var(--p25)  !important; } .csa-bg-p25  { background-color: var(--p25)  !important; }
+.csa-color-p50  { color: var(--p50)  !important; } .csa-bg-p50  { background-color: var(--p50)  !important; }
+.csa-color-p75  { color: var(--p75)  !important; } .csa-bg-p75  { background-color: var(--p75)  !important; }
+.csa-color-p100 { color: var(--p100) !important; } .csa-bg-p100 { background-color: var(--p100) !important; }
+.csa-color-p200 { color: var(--p200) !important; } .csa-bg-p200 { background-color: var(--p200) !important; }
+.csa-color-p300 { color: var(--p300) !important; } .csa-bg-p300 { background-color: var(--p300) !important; }
+.csa-color-p400 { color: var(--p400) !important; } .csa-bg-p400 { background-color: var(--p400) !important; }
+.csa-color-p500 { color: var(--p500) !important; } .csa-bg-p500 { background-color: var(--p500) !important; }
+.csa-color-p600 { color: var(--p600) !important; } .csa-bg-p600 { background-color: var(--p600) !important; }
+.csa-color-p700 { color: var(--p700) !important; } .csa-bg-p700 { background-color: var(--p700) !important; }
+.csa-color-p800 { color: var(--p800) !important; } .csa-bg-p800 { background-color: var(--p800) !important; }
+
+/* ── GREEN ──────────────────────────────────────────────── */
+.csa-color-g25  { color: var(--g25)  !important; } .csa-bg-g25  { background-color: var(--g25)  !important; }
+.csa-color-g50  { color: var(--g50)  !important; } .csa-bg-g50  { background-color: var(--g50)  !important; }
+.csa-color-g75  { color: var(--g75)  !important; } .csa-bg-g75  { background-color: var(--g75)  !important; }
+.csa-color-g100 { color: var(--g100) !important; } .csa-bg-g100 { background-color: var(--g100) !important; }
+.csa-color-g200 { color: var(--g200) !important; } .csa-bg-g200 { background-color: var(--g200) !important; }
+.csa-color-g300 { color: var(--g300) !important; } .csa-bg-g300 { background-color: var(--g300) !important; }
+.csa-color-g400 { color: var(--g400) !important; } .csa-bg-g400 { background-color: var(--g400) !important; }
+.csa-color-g500 { color: var(--g500) !important; } .csa-bg-g500 { background-color: var(--g500) !important; }
+.csa-color-g600 { color: var(--g600) !important; } .csa-bg-g600 { background-color: var(--g600) !important; }
+.csa-color-g700 { color: var(--g700) !important; } .csa-bg-g700 { background-color: var(--g700) !important; }
+.csa-color-g800 { color: var(--g800) !important; } .csa-bg-g800 { background-color: var(--g800) !important; }
+
+/* ── RED ────────────────────────────────────────────────── */
+.csa-color-r25  { color: var(--r25)  !important; } .csa-bg-r25  { background-color: var(--r25)  !important; }
+.csa-color-r50  { color: var(--r50)  !important; } .csa-bg-r50  { background-color: var(--r50)  !important; }
+.csa-color-r75  { color: var(--r75)  !important; } .csa-bg-r75  { background-color: var(--r75)  !important; }
+.csa-color-r100 { color: var(--r100) !important; } .csa-bg-r100 { background-color: var(--r100) !important; }
+.csa-color-r200 { color: var(--r200) !important; } .csa-bg-r200 { background-color: var(--r200) !important; }
+.csa-color-r300 { color: var(--r300) !important; } .csa-bg-r300 { background-color: var(--r300) !important; }
+.csa-color-r400 { color: var(--r400) !important; } .csa-bg-r400 { background-color: var(--r400) !important; }
+.csa-color-r500 { color: var(--r500) !important; } .csa-bg-r500 { background-color: var(--r500) !important; }
+.csa-color-r600 { color: var(--r600) !important; } .csa-bg-r600 { background-color: var(--r600) !important; }
+.csa-color-r700 { color: var(--r700) !important; } .csa-bg-r700 { background-color: var(--r700) !important; }
+.csa-color-r800 { color: var(--r800) !important; } .csa-bg-r800 { background-color: var(--r800) !important; }
+
+/* ── NEUTRAL ────────────────────────────────────────────── */
+.csa-color-n25  { color: var(--n25)  !important; } .csa-bg-n25  { background-color: var(--n25)  !important; }
+.csa-color-n50  { color: var(--n50)  !important; } .csa-bg-n50  { background-color: var(--n50)  !important; }
+.csa-color-n75  { color: var(--n75)  !important; } .csa-bg-n75  { background-color: var(--n75)  !important; }
+.csa-color-n100 { color: var(--n100) !important; } .csa-bg-n100 { background-color: var(--n100) !important; }
+.csa-color-n200 { color: var(--n200) !important; } .csa-bg-n200 { background-color: var(--n200) !important; }
+.csa-color-n300 { color: var(--n300) !important; } .csa-bg-n300 { background-color: var(--n300) !important; }
+.csa-color-n400 { color: var(--n400) !important; } .csa-bg-n400 { background-color: var(--n400) !important; }
+.csa-color-n500 { color: var(--n500) !important; } .csa-bg-n500 { background-color: var(--n500) !important; }
+.csa-color-n600 { color: var(--n600) !important; } .csa-bg-n600 { background-color: var(--n600) !important; }
+.csa-color-n700 { color: var(--n700) !important; } .csa-bg-n700 { background-color: var(--n700) !important; }
+.csa-color-n800 { color: var(--n800) !important; } .csa-bg-n800 { background-color: var(--n800) !important; }
+
+/* ── WHITE / BLACK ──────────────────────────────────────── */
+.csa-color-white { color: var(--white) !important; } .csa-bg-white { background-color: var(--white) !important; }
+.csa-color-black { color: var(--black) !important; } .csa-bg-black { background-color: var(--black) !important; }
