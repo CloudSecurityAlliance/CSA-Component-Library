@@ -301,13 +301,13 @@ body { background: var(--n25); color: var(--n700); }
   var ICONS = ${iconData};
 
   var VARIANTS = {
-    'default':      { suffix: '',              dir: '',      dark: false },
-    'csa-blue':     { suffix: '-csa-blue',     dir: '',      dark: false },
-    'light-blue':   { suffix: '-light-blue',   dir: '',      dark: false },
-    'white':        { suffix: '-white',        dir: '',      dark: true  },
-    'red-orange':   { suffix: '-red-orange',   dir: '',      dark: false },
-    'yellow-orange':{ suffix: '-yellow-orange',dir: '',      dark: false },
-    'b500':         { suffix: '-b500',         dir: 'b500/', dark: false },
+    'default':      { suffix: '',              dir: '',      dark: false, mono: true  },
+    'csa-blue':     { suffix: '-csa-blue',     dir: '',      dark: false, mono: false },
+    'light-blue':   { suffix: '-light-blue',   dir: '',      dark: false, mono: false },
+    'white':        { suffix: '-white',        dir: '',      dark: true,  mono: true  },
+    'red-orange':   { suffix: '-red-orange',   dir: '',      dark: false, mono: false },
+    'yellow-orange':{ suffix: '-yellow-orange',dir: '',      dark: false, mono: false },
+    'b500':         { suffix: '-b500',         dir: 'b500/', dark: false, mono: false },
   };
 
   var grid      = document.getElementById('icoGrid');
@@ -344,7 +344,7 @@ body { background: var(--n25); color: var(--n700); }
     }
     card.appendChild(img);
     card.appendChild(nameEl);
-    card.addEventListener('click', function () { copyName(icon.name); });
+    card.addEventListener('click', function () { copyIcon(icon); });
     grid.appendChild(card);
     return { el: card, img: img, icon: icon };
   });
@@ -381,9 +381,19 @@ body { background: var(--n25); color: var(--n700); }
     countEl.textContent = visible + ' of ' + ICONS.length + ' icons';
   }
 
-  function copyName(name) {
-    navigator.clipboard.writeText(name).then(function () {
-      toast.textContent = 'Copied: ' + name;
+  function iconHtml(icon, variantId) {
+    var v = VARIANTS[variantId];
+    var src = icon.brand
+      ? 'assets/icons/' + icon.name + '.svg'
+      : 'assets/icons/' + v.dir + icon.name + v.suffix + '.svg';
+    var cls = 'csa-icon' + (v.mono ? ' csa-icon-mono' : '');
+    return '<img class="' + cls + '" src="' + src + '" alt="">';
+  }
+
+  function copyIcon(icon) {
+    var snippet = iconHtml(icon, currentVariant);
+    navigator.clipboard.writeText(snippet).then(function () {
+      toast.textContent = 'Copied: ' + snippet;
       toast.classList.add('show');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1800);
