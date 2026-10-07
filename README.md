@@ -270,6 +270,12 @@ visibility:
   is `--b300` (those early pages hardcoded the hero kicker to blue,
   `#0093ff`), while `.csa-cta`'s stays `--o500` (matching the other dark
   blocks on those same pages — advisory/mission/sage — which use orange).
+- **`.csa-kicker-blue`** is a color-only modifier for the kicker, combined
+  with either `.csa-kicker` or `.csa-kicker-sub` (the same pairing pattern
+  as `.csa-tag-blue`) rather than being two separate `-blue` classes.
+  `--b500` on light/gradient, `--b200` on dark/black. It isn't wired into
+  `.csa-hero`/`.csa-cta` — their always-dark kicker colors (above) override
+  it by design, and hero kickers are already blue.
 - **`.csa-card`'s shape (radius/padding/shadow)** has no single spec value
   — none of those early pages used a shared `.card` class, each had
   bespoke one-off variants in the 14–16px radius / 28–32px padding
