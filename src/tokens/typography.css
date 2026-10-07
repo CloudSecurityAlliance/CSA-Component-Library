@@ -71,6 +71,8 @@ h4.csa-title { font-weight: 700; letter-spacing: 0; }
 .csa-muted { color: var(--n300); }
 
 .csa-hr { border: none; border-top: 1px solid var(--n50); margin: 0; }
+[data-surface="dark"] .csa-hr { border-top-color: var(--b600); }
+[data-surface="black"] .csa-hr { border-top-color: var(--n700); }
 
 .csa-block { 
   font-size: 18px; 
