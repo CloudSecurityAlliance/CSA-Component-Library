@@ -84,13 +84,13 @@
    white specifically, style that card directly (background/border
    inline, or its own class) rather than reaching for .csa-bg-n25 on an
    ancestor. */
-.csa-bg-n25 .csa-tag-neutral { background: var(--n50); }
-.csa-bg-n25 .csa-tag-blue    { background: var(--b50); }
-.csa-bg-n25 .csa-tag-orange  { background: var(--o50); }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-neutral { background: var(--n50); }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-blue    { background: var(--b50); }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-orange  { background: var(--o50); }
 
-.csa-bg-n25 .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
-.csa-bg-n25 .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
-.csa-bg-n25 .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
 
 /* Pressed state here is identical to White's — but it still needs its
    own .csa-bg-n25-scoped copy, not just the shared rule above, purely
@@ -100,9 +100,9 @@
    background while pressed's white text stayed — illegible. Matching
    the hover rule's specificity here (same 4 selectors) is what makes
    pressed reliably win while the mouse is still over the tag. */
-.csa-bg-n25 .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
-.csa-bg-n25 .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
-.csa-bg-n25 .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
+:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
 
 /* ---- Dark + black backgrounds (identical except the pressed text color) ---- */
 [data-surface="dark"] .csa-tag-neutral, [data-surface="black"] .csa-tag-neutral {
