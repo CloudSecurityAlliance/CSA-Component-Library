@@ -90,6 +90,9 @@
 }
 
 .csa-badge-outlined { background: transparent; border-color: var(--b400); color: var(--b500); }
+/* b100, not b300: b300 text is only ~3.3:1 against the dark b700 surface,
+   below the 4.5:1 AA minimum for this size; b100 clears it. Pair with the
+   calendar-b100.svg-style (b100/) icon file, not b300, to match. */
 [data-surface="dark"] .csa-badge-outlined, [data-surface="black"] .csa-badge-outlined {
-  color: var(--b300);
+  color: var(--b100);
 }
