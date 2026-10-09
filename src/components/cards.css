@@ -308,7 +308,15 @@
 }
 .csa-card-reveal-panel {
   display: flex; flex-direction: column; max-height: 100%;
-  padding: 22px 32px 32px; /* less on top than the sides/bottom — the strip's resting height is just kicker+heading, so a full 32px above reads as more empty space than the 32px beside/below actual text */
+  padding: 22px 33px 33px; /* less on top than the sides/bottom — the strip's resting height is just kicker+heading, so a full 32px above reads as more empty space than the 32px beside/below actual text. 33, not 32: the 1px bleed below is added back so text sits exactly where it did */
+  /* 1px bleed past the card's left/right/bottom edges (the card's own
+     overflow:hidden + radius clips it, so it's never visible). Without
+     it, a card that lands on a fractional pixel position — the middle
+     card of a 3-up grid usually does — can have its backdrop-filter
+     region rounded inward on the GPU, leaving one device-pixel column of
+     raw, un-darkened photo at the card's edge. Seen as a bright sliver on
+     the middle showcase reveal card. */
+  margin: 0 -1px -1px;
   /* Glass material and light/dark values: see the Frost glass section
      at the top of this file. The panel's sides and rounded bottom are
      the photo card's own edges, so its edge treatment runs along the top
