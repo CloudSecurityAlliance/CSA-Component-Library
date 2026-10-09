@@ -332,6 +332,21 @@
     0 0 1px rgb(var(--glass-line) / calc(var(--glass-rim) * .7)),
     0 1.5px 3px rgb(var(--glass-line) / var(--glass-frost));
 }
+/* Grain that holds still while the panel grows. The shared grain layer
+   is sized to its panel, so here — where the panel's height animates on
+   hover — the texture was re-laid every frame (crawling upward with the
+   top edge, or resampled at a new sub-pixel offset when anchored to the
+   bottom), read as shimmer along the card's bottom. Instead the layer is
+   a fixed size anchored to the panel's bottom edge, which doesn't move,
+   and the panel clips it to its own box (clip-path, not overflow:hidden,
+   so the panel doesn't become a scroll container). Measured: zero
+   frame-to-frame change in the bottom strip during the reveal. */
+.csa-card-reveal-panel { clip-path: inset(0); }
+.csa-card-reveal-panel::after {
+  top: auto; bottom: 0;
+  height: max(100%, 1200px);
+  background-position: 0 100%;
+}
 .csa-card-reveal-head { flex-shrink: 0; }
 .csa-card-reveal-overlay h3 { color: #fff; }
 /* Same 20px as .csa-card h3 above — margin:8px 0 0 rather than a
