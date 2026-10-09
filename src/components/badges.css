@@ -54,9 +54,9 @@
    hardcoded navy fill to the target token's hex — not by recoloring
    the chip icon, which would carry an unwanted background shape along
    with it. */
-.csa-badge-primary, .csa-badge-secondary, .csa-badge-outlined { font-style: italic; }
-.csa-badge-primary img, .csa-badge-secondary img, .csa-badge-outlined img,
-.csa-badge-primary .csa-icon-glyph, .csa-badge-secondary .csa-icon-glyph, .csa-badge-outlined .csa-icon-glyph {
+.csa-badge-primary, .csa-badge-secondary, .csa-badge-outlined, .csa-badge-orange { font-style: italic; }
+.csa-badge-primary img, .csa-badge-secondary img, .csa-badge-outlined img, .csa-badge-orange img,
+.csa-badge-primary .csa-icon-glyph, .csa-badge-secondary .csa-icon-glyph, .csa-badge-outlined .csa-icon-glyph, .csa-badge-orange .csa-icon-glyph {
   width: 15px; height: 15px; display: block;
 }
 
@@ -90,6 +90,31 @@
 }
 
 .csa-badge-outlined { background: transparent; border-color: var(--b400); color: var(--b500); }
+/* b100, not b300: b300 text is only ~3.3:1 against the dark b700 surface,
+   below the 4.5:1 AA minimum for this size; b100 clears it. Pair with the
+   calendar-b100.svg-style (b100/) icon file, not b300, to match. */
 [data-surface="dark"] .csa-badge-outlined, [data-surface="black"] .csa-badge-outlined {
-  color: var(--b300);
+  color: var(--b100);
+}
+
+/* Orange — a warm accent variant. On light surfaces it's a solid o700 pill
+   (o600 border) with white text and a white icon (the existing -white.svg
+   files, e.g. calendar-white.svg). On dark/black it flips to the
+   translucent treatment Secondary uses: o400 (#FF9100) at 20% fill, o400
+   border, and o200 text — with the matching o200/ token-color icon files
+   (src/assets/icons/o200/, e.g. o200/calendar-o200.svg). .csa-hero/.csa-cta
+   are listed alongside the [data-surface] pair for the same reason as
+   Secondary above (always-dark, never carry data-surface), and
+   .csa-hero-light restores the light treatment, mirroring Secondary. */
+.csa-badge-orange { background: var(--o700); border-color: var(--o600); color: #fff; }
+[data-surface="dark"] .csa-badge-orange, [data-surface="black"] .csa-badge-orange,
+.csa-hero .csa-badge-orange, .csa-cta .csa-badge-orange {
+  background: rgba(255,145,0,.2); /* --o400 (#FF9100) at 20% */
+  border-color: var(--o400);
+  color: var(--o200);
+}
+.csa-hero-light .csa-badge-orange {
+  background: var(--o700);
+  border-color: var(--o600);
+  color: #fff;
 }

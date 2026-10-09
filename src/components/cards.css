@@ -13,7 +13,9 @@
    20px-rounded .involve band) used 12px. Default here is 16px, the
    standalone case; if you nest card-glass inside another rounded
    container, scale its radius down to keep corners proportional —
-   see the general nesting note this file's radii follow.
+   see the general nesting note this file's radii follow. Set it via
+   --glass-radius, not border-radius: the glass's inset edge line
+   derives its own corner radius from that value (see below).
    ========================================================= */
 .csa-card {
   border-radius: 16px;
@@ -34,35 +36,181 @@
    differs by layout even though size doesn't. */
 .csa-card h3, .csa-card-media-body h3 { font-size: 20px; margin: 12px 0 10px; }
 
-.csa-card-glass {
-  border-radius: 16px;
-  background: rgba(255,255,255,.8);
-  box-shadow: 0 4px 30px rgba(0,0,0,.1);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  border: 1px solid rgba(255,255,255,.5);
-  color: var(--b800);
+/* =========================================================
+   Frost glass — the material shared by .csa-card-glass (and the
+   .csa-hero-glass panels built on it, hero.css) and .csa-card-reveal-
+   panel. Tuned against CSA's own Illustrator marketing comps, which
+   measured as: dark glass DARKENS the backdrop rather than covering it
+   (light behind keeps its hue and glows through, instead of the gray
+   veil a semi-opaque navy fill gives), light glass is ~60% white over
+   the blur, grain is subtle (~0.5–2% luminance), and the edge is one
+   even light line set just inside the card's edge. Deliberately a matte
+   frost, not Apple-style liquid glass: no refraction, no specular
+   highlights. One backdrop-filter per panel; everything else is static.
+
+   Layers:
+     element   backdrop blur + brightness (depth) + saturate, plus a thin
+               tint fill. The darkening lives IN the backdrop-filter
+               because CSS can't blend a pseudo-element with an element's
+               own backdrop-filter output — it also caps how bright dark
+               glass can ever get, so white text keeps a contrast floor
+               on any backdrop.
+     ::before  the edge: a 1px line inset 1px from the card's edge (a
+               sliver of clear glass between them reads as a bevel), soft
+               1px both ways, a faint inner frost, and an optional faint
+               hairline on the true edge (--glass-outer, dark only — dark
+               glass over near-black otherwise has no visible edge). On
+               card-glass a top-to-bottom mask fades it toward the bottom
+               (--glass-fade), like light entering from above.
+     ::after   grain — a static SVG noise tile split into white and black
+               specks (zero-mean, normal blend: texture without tint).
+   Both pseudo-elements sit at z-index:-1 inside the panel's own stacking
+   context (isolation:isolate) — above its fill, below all content — so
+   no child ever needs position/z-index added to stay on top.
+
+   Light vs dark is a set of --glass-* values. DARK IS THE DEFAULT on every
+   surface: measured, dark glass holds body-text contrast over almost any
+   backdrop (the darkening caps its brightness), while light glass only
+   works over lighter imagery — over dark photos it turns gray and body
+   text drops to ~2-3:1. Light glass is opt-in: .csa-card-glass-light, or
+   .csa-hero-glass-light for the hero panel. The reveal panel is always
+   dark — it's a photo card, so its glass is there for contrast against
+   the image, not to match the page.
+
+   Because the dark panel can now sit on a light page, it sets its own
+   text colors (headings, body, kickers, .csa-go, .csa-hr) instead of
+   inheriting the page surface's. Other surface-aware components nested
+   inside (buttons, badges, tags, form fields…) key off [data-surface],
+   so for those put data-surface="dark" on the glass card itself — the
+   glass background still wins over the surface's own background.
+   blur()/brightness() are written out literally per tone, not as
+   variables: older Safari handled var() inside -webkit-backdrop-filter
+   poorly, and these two values are what everything else is tuned around.
+   ========================================================= */
+.csa-card-glass,
+.csa-card-reveal-panel {
+  position: relative;
+  isolation: isolate;
+  background: var(--glass-fill);
 }
-.csa-card-glass h1, .csa-card-glass h2, .csa-card-glass h3, .csa-card-glass h4 { color: var(--b800); }
-.csa-card-glass p { color: var(--n500); }
+.csa-card-glass {
+  --glass-radius: 16px;
+  border-radius: var(--glass-radius);
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / calc(var(--glass-shadow) * .35)),
+    0 28px 60px -28px rgb(0 0 0 / var(--glass-shadow));
+  color: #fff;
+}
+/* Dark (default) text set — the dark-surface colors, applied by the panel
+   itself so they hold on any page surface. */
+.csa-card-glass h1, .csa-card-glass h2, .csa-card-glass h3, .csa-card-glass h4 { color: #fff; }
+.csa-card-glass p { color: var(--n75); }
+.csa-card-glass .csa-kicker, .csa-card-glass .csa-kicker-sub { color: var(--o500); }
+.csa-card-glass .csa-kicker-blue { color: var(--b200); }
+.csa-card-glass .csa-go { color: var(--b300); }
+.csa-card-glass .csa-go:hover { color: var(--b100); }
+.csa-card-glass .csa-hr { border-top-color: var(--b600); }
+/* Light text set — the light-surface colors, for the opt-in light glass.
+   Compound selector (.csa-card-glass.csa-card-glass-light) so it outranks
+   both the dark set above and any [data-surface="dark"] page rules. */
+.csa-card-glass.csa-card-glass-light, .csa-hero-glass-light .csa-card-glass { color: var(--b800); }
+:is(.csa-card-glass.csa-card-glass-light, .csa-hero-glass-light .csa-card-glass) :is(h1, h2, h3, h4) { color: var(--b800); }
+:is(.csa-card-glass.csa-card-glass-light, .csa-hero-glass-light .csa-card-glass) p { color: var(--n500); }
+/* Kickers: card-glass-light only — the light hero panel keeps hero.css's
+   own b500 kicker, which this compound selector would otherwise outrank. */
+.csa-card-glass.csa-card-glass-light :is(.csa-kicker, .csa-kicker-sub) { color: var(--o700); }
+.csa-card-glass.csa-card-glass-light .csa-kicker-blue { color: var(--b500); }
+:is(.csa-card-glass.csa-card-glass-light, .csa-hero-glass-light .csa-card-glass) .csa-go { color: var(--b500); }
+:is(.csa-card-glass.csa-card-glass-light, .csa-hero-glass-light .csa-card-glass) .csa-go:hover { color: var(--b300); }
+:is(.csa-card-glass.csa-card-glass-light, .csa-hero-glass-light .csa-card-glass) .csa-hr { border-top-color: var(--n50); }
 /* Same 20px as .csa-card h3 above — own margin only, see that rule's
    comment for why h3 is sized per-context but kept at one shared size. */
 .csa-card-glass h3 { font-size: 20px; margin: 8px 0 6px; }
 
-[data-surface="dark"] .csa-card-glass,
-[data-surface="black"] .csa-card-glass {
-  background: rgba(12,32,64,.8);
-  box-shadow: 0 4px 30px rgba(0,0,0,.1);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  border: 1px solid rgba(0,62,119,.5);
-  color: #fff;
+/* Dark glass — the default for card-glass (any surface, including
+   .csa-hero-glass-dark) and for the reveal panel. */
+.csa-card-glass,
+.csa-card-reveal-panel {
+  --glass-fill: rgb(0 62 119 / .16);   /* --b600: a thin blue cast, not a cover */
+  --glass-line: 196 230 255;           /* --b50: picks up the glass's blue */
+  --glass-rim: .23;
+  --glass-frost: .05;
+  --glass-outer: .06;
+  --glass-fade: .5;
+  --glass-shadow: .5;
+  -webkit-backdrop-filter: blur(8px) brightness(.45) saturate(1.3);
+  backdrop-filter: blur(8px) brightness(.45) saturate(1.3);
 }
-[data-surface="dark"] .csa-card-glass h1, [data-surface="dark"] .csa-card-glass h2,
-[data-surface="dark"] .csa-card-glass h3, [data-surface="dark"] .csa-card-glass h4,
-[data-surface="black"] .csa-card-glass h1, [data-surface="black"] .csa-card-glass h2,
-[data-surface="black"] .csa-card-glass h3, [data-surface="black"] .csa-card-glass h4 { color: #fff; }
-[data-surface="dark"] .csa-card-glass p, [data-surface="black"] .csa-card-glass p { color: var(--n75); }
+/* Light glass — opt-in. Higher specificity than the dark default above,
+   so it wins on any surface. */
+.csa-card-glass.csa-card-glass-light,
+.csa-hero-glass-light .csa-card-glass {
+  --glass-fill: rgb(255 255 255 / .6);
+  --glass-line: 255 255 255;
+  --glass-rim: .64;    /* higher than dark on purpose: measured, it's the value that reads the same weight as dark's line on white glass */
+  --glass-frost: .1;
+  --glass-outer: 0;    /* light glass already has a visible edge */
+  --glass-fade: .6;
+  --glass-shadow: .18;
+  -webkit-backdrop-filter: blur(8px) brightness(1.02) saturate(1.3) contrast(1.1);
+  backdrop-filter: blur(8px) brightness(1.02) saturate(1.3) contrast(1.1);
+}
+
+/* Edge + grain layers (see the Frost glass comment above). */
+.csa-card-glass::before, .csa-card-glass::after,
+.csa-card-reveal-panel::before, .csa-card-reveal-panel::after {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+}
+.csa-card-glass::before {
+  inset: 1px;
+  border-radius: max(0px, calc(var(--glass-radius) - 1px));
+  box-shadow:
+    inset 0 0 1px 1px rgb(var(--glass-line) / var(--glass-rim)),
+    0 0 1px 0 rgb(var(--glass-line) / calc(var(--glass-rim) * .7)),
+    inset 0 0 3px rgb(var(--glass-line) / var(--glass-frost));
+  /* The outer hairline is this layer's outline, pushed out to the card's
+     true edge, so it fades with the line instead of staying full-strength
+     at the bottom. */
+  outline: 1px solid rgb(var(--glass-line) / var(--glass-outer));
+  outline-offset: 0;
+  /* A mask normally also clips whatever spills past its box — here the
+     line's outer softness and the outline — so the mask image is drawn
+     larger than the box and mask-clip:no-clip lets them through.
+     Unprefixed on purpose: -webkit-mask-clip has no no-clip value. */
+  mask-image: linear-gradient(to bottom, #000 8px, rgb(0 0 0 / calc(1 - var(--glass-fade))) calc(100% - 8px));
+  mask-size: calc(100% + 18px) calc(100% + 18px);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-clip: no-clip;
+}
+.csa-card-glass::after,
+.csa-card-reveal-panel::after {
+  inset: 0; border-radius: inherit;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n' x='0' y='0' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 3 0 0 0 -1.5' result='w'/><feColorMatrix in='t' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 0 0 0 1.5' result='b'/><feMerge><feMergeNode in='w'/><feMergeNode in='b'/></feMerge></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 200px;
+  opacity: .04;
+}
+
+/* Fallbacks: no backdrop-filter support, or the viewer asked the OS for
+   reduced transparency — go near-opaque in the old solid colors. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .csa-card-glass,
+  .csa-card-reveal-panel { --glass-fill: rgb(12 32 64 / .92); }
+  .csa-card-glass.csa-card-glass-light,
+  .csa-hero-glass-light .csa-card-glass { --glass-fill: rgb(255 255 255 / .92); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .csa-card-glass,
+  .csa-card-reveal-panel { --glass-fill: rgb(12 32 64 / .92); }
+  .csa-card-glass.csa-card-glass-light,
+  .csa-hero-glass-light .csa-card-glass { --glass-fill: rgb(255 255 255 / .92); }
+}
+/* Windows High Contrast drops backgrounds and box-shadows, which would
+   leave the panel with no outline at all — give it a real border. */
+@media (forced-colors: active) {
+  .csa-card-glass { border: 1px solid CanvasText; }
+  .csa-card-reveal-panel { border-top: 1px solid CanvasText; }
+}
 
 /* Icon sitting at the top of a card — .csa-card + a .csa-icon needs no
    new class, just spacing between the icon and the text below it. */
@@ -160,10 +308,44 @@
 }
 .csa-card-reveal-panel {
   display: flex; flex-direction: column; max-height: 100%;
-  padding: 22px 32px 32px; /* less on top than the sides/bottom — the strip's resting height is just kicker+heading, so a full 32px above reads as more empty space than the 32px beside/below actual text */
-  background: rgba(12,32,64,.8);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  padding: 22px 33px 33px; /* less on top than the sides/bottom — the strip's resting height is just kicker+heading, so a full 32px above reads as more empty space than the 32px beside/below actual text. 33, not 32: the 1px bleed below is added back so text sits exactly where it did */
+  /* 1px bleed past the card's left/right/bottom edges (the card's own
+     overflow:hidden + radius clips it, so it's never visible). Without
+     it, a card that lands on a fractional pixel position — the middle
+     card of a 3-up grid usually does — can have its backdrop-filter
+     region rounded inward on the GPU, leaving one device-pixel column of
+     raw, un-darkened photo at the card's edge. Seen as a bright sliver on
+     the middle showcase reveal card. */
+  margin: 0 -1px -1px;
+  /* Glass material and light/dark values: see the Frost glass section
+     at the top of this file. The panel's sides and rounded bottom are
+     the photo card's own edges, so its edge treatment runs along the top
+     only — one horizontal line 1px below the top (no bottom fade: there's
+     nothing below it to fade), and the outer hairline top-only too. No
+     drop shadow: the card clips it, so it would only smudge the photo. */
+  box-shadow: inset 0 1px 0 rgb(var(--glass-line) / var(--glass-outer));
+}
+.csa-card-reveal-panel::before {
+  inset: 1px 0 auto 0; height: 1px;
+  background: rgb(var(--glass-line) / var(--glass-rim));
+  box-shadow:
+    0 0 1px rgb(var(--glass-line) / calc(var(--glass-rim) * .7)),
+    0 1.5px 3px rgb(var(--glass-line) / var(--glass-frost));
+}
+/* Grain that holds still while the panel grows. The shared grain layer
+   is sized to its panel, so here — where the panel's height animates on
+   hover — the texture was re-laid every frame (crawling upward with the
+   top edge, or resampled at a new sub-pixel offset when anchored to the
+   bottom), read as shimmer along the card's bottom. Instead the layer is
+   a fixed size anchored to the panel's bottom edge, which doesn't move,
+   and the panel clips it to its own box (clip-path, not overflow:hidden,
+   so the panel doesn't become a scroll container). Measured: zero
+   frame-to-frame change in the bottom strip during the reveal. */
+.csa-card-reveal-panel { clip-path: inset(0); }
+.csa-card-reveal-panel::after {
+  top: auto; bottom: 0;
+  height: max(100%, 1200px);
+  background-position: 0 100%;
 }
 .csa-card-reveal-head { flex-shrink: 0; }
 .csa-card-reveal-overlay h3 { color: #fff; }
@@ -174,20 +356,6 @@
 .csa-card-reveal-head h3 { font-size: 20px; margin: 8px 0 0; }
 .csa-card-reveal-overlay .csa-kicker-sub { color: var(--o500); }
 
-/* EXPERIMENTAL — light glass on dark surface only. The reveal card is
-   intentionally NOT surface-aware everywhere else (see the note above):
-   it's a photo card, so the dark glass panel is there for contrast
-   against the image, not to match the page. This is a one-off swap to
-   try a light panel specifically when the page itself is already dark
-   (mirrors .csa-card-glass's own light variant). Self-contained — to
-   revert to the standard dark glass here too, just delete this block. */
-[data-surface="dark"] .csa-card-reveal-panel,
-[data-surface="black"] .csa-card-reveal-panel {
-  background: rgba(255,255,255,.82);
-  border: 1px solid rgba(255,255,255,.5);
-}
-[data-surface="dark"] .csa-card-reveal-overlay h3, [data-surface="black"] .csa-card-reveal-overlay h3 { color: var(--b800); }
-[data-surface="dark"] .csa-card-reveal-overlay .csa-kicker-sub, [data-surface="black"] .csa-card-reveal-overlay .csa-kicker-sub { color: var(--o700); }
 
 .csa-card-reveal-more { display: grid; grid-template-rows: 0fr; min-height: 0; transition: grid-template-rows .4s ease; }
 /* overflow-y flips from hidden to auto, but not at the moment hover
@@ -235,21 +403,10 @@
 /* Resting is already b300 here (the panel's own dark glass needs a
    lighter blue than the library default, regardless of page surface),
    so the general .csa-go:hover rule (also b300) was a no-op on hover —
-   same bug as the dark-surface case below, just in the default state. */
+   the same reason dark/black surfaces step .csa-go:hover up to b100. */
 .csa-card-reveal-more-inner .csa-go:hover { color: var(--b100); }
 .csa-card-reveal:hover .csa-card-reveal-more { grid-template-rows: 1fr; }
 
-/* EXPERIMENTAL light-glass-on-dark, continued (see .csa-card-reveal-panel
-   above) — same n75/b300 light-on-dark pairing flipped to the standard
-   n500/b500 dark-on-light pairing used everywhere else in the library. */
-[data-surface="dark"] .csa-card-reveal-more-inner p, [data-surface="black"] .csa-card-reveal-more-inner p { color: var(--n500); }
-[data-surface="dark"] .csa-card-reveal-more-inner .csa-go, [data-surface="black"] .csa-card-reveal-more-inner .csa-go { color: var(--b500); }
-/* Explicit override, not a fallthrough: without this, the new dark/black
-   .csa-go:hover → b100 rule above would win here too (matching
-   specificity, later in the file) — but b100 is too pale to read against
-   this panel's light glass background, unlike everywhere else .csa-go
-   appears on dark/black. Keep this one hovering to b300 instead. */
-[data-surface="dark"] .csa-card-reveal-more-inner .csa-go:hover, [data-surface="black"] .csa-card-reveal-more-inner .csa-go:hover { color: var(--b300); }
 
 /* =========================================================
    Brand Cards — one per CSA sub-brand (Cloud, AI, Zero Trust). White-

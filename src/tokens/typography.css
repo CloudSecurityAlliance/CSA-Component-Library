@@ -71,6 +71,8 @@ h4.csa-title { font-weight: 700; letter-spacing: 0; }
 .csa-muted { color: var(--n300); }
 
 .csa-hr { border: none; border-top: 1px solid var(--n50); margin: 0; }
+[data-surface="dark"] .csa-hr { border-top-color: var(--b600); }
+[data-surface="black"] .csa-hr { border-top-color: var(--n700); }
 
 .csa-block { 
   font-size: 18px; 
@@ -115,6 +117,19 @@ h4.csa-title { font-weight: 700; letter-spacing: 0; }
   color: var(--o700);
 }
 [data-surface="dark"] .csa-kicker-sub, [data-surface="black"] .csa-kicker-sub { color: var(--o500); }
+
+/* Kicker-blue — a color-only modifier, combined with either base class
+   (<span class="csa-kicker csa-kicker-blue"> or
+   <span class="csa-kicker-sub csa-kicker-blue">), the same way
+   .csa-tag-blue pairs with either tag type. Size, font and spacing stay
+   in the base class; this only swaps orange for blue: b500 on
+   light/gradient, b200 on dark/black. The dark/black rule needs its own
+   selector at the same weight as the base kicker's dark rule above, and
+   sits after it, or orange would win on dark surfaces. Not wired into
+   .csa-hero/.csa-cta, which have their own always-dark kicker colors
+   (hero.css) — a blue modifier inside those is overridden by design. */
+.csa-kicker-blue { color: var(--b500); }
+[data-surface="dark"] .csa-kicker-blue, [data-surface="black"] .csa-kicker-blue { color: var(--b200); }
 
 /* Rule — small accent bar sitting under a kicker+heading+paragraph
    intro. Extracted as-is for shape/size (.rule, identical across all 4

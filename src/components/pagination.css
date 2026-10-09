@@ -60,6 +60,8 @@
 [data-surface="dark"] .csa-pagination-btn[aria-current="page"] { background: var(--b300); border-color: var(--b300); color: #fff; }
 [data-surface="dark"] .csa-pagination-btn:disabled { color: var(--b600); border-color: var(--b700); }
 [data-surface="dark"] .csa-pagination-prev:disabled, [data-surface="dark"] .csa-pagination-next:disabled { background: var(--b800); color: var(--b500); border-color: transparent; }
+/* Deep tone: band is already b800, so the disabled fill steps up to b700 */
+[data-surface="dark"][data-tone="deep"] .csa-pagination-prev:disabled, [data-surface="dark"][data-tone="deep"] .csa-pagination-next:disabled { background: var(--b700); }
 
 /* ---- Surface-aware — black ---- */
 [data-surface="black"] .csa-pagination-btn { border-color: var(--n700); color: var(--n75); background: transparent; }
