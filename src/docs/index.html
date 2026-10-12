@@ -1047,6 +1047,28 @@
         <p style="font-size:14.5px">Carries the elevated shadow at rest, no hover needed — the same shadow <code>.csa-card-hover</code> only shows on hover.</p>
       </div>
 
+      <div class="docs-label" style="margin-top:32px">Disabled card — <code>.csa-card-disabled</code>, works on any card variant</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px;align-items:start">
+        <div class="csa-card csa-card-disabled">
+          <span class="csa-kicker-sub">Standard card</span>
+          <h3 class="csa-title">Card heading goes here</h3>
+          <p style="font-size:14.5px">This card is unavailable. All interaction is blocked and the whole card fades to 40% opacity.</p>
+        </div>
+        <div class="csa-card csa-card-hover csa-card-disabled">
+          <span class="csa-kicker-sub">Hover card</span>
+          <h3 class="csa-title">Card heading goes here</h3>
+          <p style="font-size:14.5px">Hover lift is suppressed when <code>.csa-card-disabled</code> is combined with <code>.csa-card-hover</code>.</p>
+          <a class="csa-go" href="#">Learn more →</a>
+        </div>
+        <div class="csa-card csa-card-hover csa-card-brand-cloud csa-card-disabled">
+          <img class="csa-icon csa-icon-mono" src="../assets/icons/cloud-b500.svg" alt="">
+          <span class="csa-kicker-sub">Brand card</span>
+          <h3 class="csa-title">Card heading goes here</h3>
+          <p style="font-size:14.5px">Works on brand and glass variants too — opacity mutes everything uniformly.</p>
+          <a class="csa-go" href="#">Learn more →</a>
+        </div>
+      </div>
+
       <div class="docs-label" style="margin-top:32px">Standard cards with image — <code>.csa-card-media</code>, 16:9</div>
       <div class="docs-card-row-3">
         <div class="csa-card-media">
