@@ -33,15 +33,21 @@
    from the spec's literal text, which called for --b50 here.
    .csa-card-media shares this treatment — same shell, just with an
    image bled to the top edge instead of uniform padding (see cards.css). */
-[data-surface] .csa-card, [data-surface] .csa-card-media { background: var(--n25); border: 1px solid var(--n50); }
+[data-surface] .csa-card, [data-surface] .csa-card-media,
+[data-surface].csa-card, [data-surface].csa-card-media { background: var(--n25); border: 1px solid var(--n50); }
 [data-surface="gradient"] .csa-card, [data-surface="gradient"] .csa-card-media,
 [data-surface="light"][data-tone="neutral"] .csa-card, [data-surface="light"][data-tone="neutral"] .csa-card-media,
-[data-surface="light"].csa-bg-n25 .csa-card, [data-surface="light"].csa-bg-n25 .csa-card-media { background: #fff; border: 1px solid var(--n50); }
-[data-surface="dark"] .csa-card, [data-surface="dark"] .csa-card-media { background: var(--b800); border: 1px solid var(--b600); }
+[data-surface="light"].csa-bg-n25 .csa-card, [data-surface="light"].csa-bg-n25 .csa-card-media,
+[data-surface="gradient"].csa-card, [data-surface="gradient"].csa-card-media,
+[data-surface="light"][data-tone="neutral"].csa-card, [data-surface="light"][data-tone="neutral"].csa-card-media,
+[data-surface="light"].csa-bg-n25.csa-card, [data-surface="light"].csa-bg-n25.csa-card-media { background: #fff; border: 1px solid var(--n50); }
+[data-surface="dark"] .csa-card, [data-surface="dark"] .csa-card-media,
+[data-surface="dark"].csa-card, [data-surface="dark"].csa-card-media { background: var(--b800); border: 1px solid var(--b600); }
 /* Black surface's card is a neutral n800/n700 pair rather than the dark
    surface's navy b800/b600 — n800 is lighter than the near-black page
    background, so the card still reads as a raised, distinct surface. */
-[data-surface="black"] .csa-card, [data-surface="black"] .csa-card-media { background: var(--n800); border: 1px solid var(--n700); }
+[data-surface="black"] .csa-card, [data-surface="black"] .csa-card-media,
+[data-surface="black"].csa-card, [data-surface="black"].csa-card-media { background: var(--n800); border: 1px solid var(--n700); }
 
 /* =========================================================
    Tones — a second, optional data attribute that nudges a surface
@@ -67,4 +73,6 @@
 
 [data-surface="dark"][data-tone="deep"] { background: var(--b800); }
 [data-surface="dark"][data-tone="deep"] .csa-card,
-[data-surface="dark"][data-tone="deep"] .csa-card-media { background: var(--b700); border: 1px solid var(--b600); }
+[data-surface="dark"][data-tone="deep"] .csa-card-media,
+[data-surface="dark"][data-tone="deep"].csa-card,
+[data-surface="dark"][data-tone="deep"].csa-card-media { background: var(--b700); border: 1px solid var(--b600); }
