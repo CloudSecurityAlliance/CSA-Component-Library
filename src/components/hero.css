@@ -91,9 +91,10 @@
    of the 4 reference pages (mythos-cyber-capable-ai.html, csai-
    foundation-hub.html) used this exact shape in an earlier iteration —
    their currently-published versions simplified the hero down to a
-   plain gradient with no glass panel, but the original panel's values
-   are identical to .csa-card-glass's own dark variant, which is what
-   this recreates. width:fit-content on the panel (not full-bleed)
+   plain gradient with no glass panel. That original panel used the
+   values .csa-card-glass's dark variant had at the time; it now uses
+   the current frost glass material (cards.css) like every other glass
+   panel. width:fit-content on the panel (not full-bleed)
    matches that original — it hugs its own content instead of spanning
    the hero's full width.
 
@@ -199,14 +200,11 @@
 .csa-hero-glass-light .csa-card-glass .csa-sub { color: var(--n500); }
 .csa-hero-glass-light .csa-card-glass .csa-mission { color: var(--n400); }
 
-/* Background/border copied from .csa-card-glass's own
-   [data-surface="dark"] override (cards.css) — not reused via that
-   attribute directly, since .csa-hero deliberately never carries
-   data-surface (see the comment at the top of this file). */
-.csa-hero-glass-dark .csa-card-glass {
-  background: rgba(12,32,64,.8);
-  border-color: rgba(0,62,119,.5);
-}
+/* Glass material: dark is .csa-card-glass's own default (cards.css), so
+   .csa-hero-glass-dark needs nothing extra for it; .csa-hero-glass-light
+   .csa-card-glass is listed in cards.css's light list alongside
+   .csa-card-glass-light. One copy of the values either way. Text colors
+   stay here, explicit, for the reasons in the Hero-glass comment above. */
 .csa-hero-glass-dark .csa-card-glass h1 { color: #fff; }
 .csa-hero-glass-dark .csa-card-glass .csa-sub { color: var(--n75); }
 .csa-hero-glass-dark .csa-card-glass .csa-mission { color: var(--n100); }

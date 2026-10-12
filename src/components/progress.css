@@ -61,4 +61,6 @@
    see .csa-toggle-icon-track) — the fill colors themselves stay as-is,
    already bright enough to read on either. */
 [data-surface="dark"] .csa-progress { background: var(--b800); }
+/* Deep tone: the band is already b800, so the track steps up to b700 */
+[data-surface="dark"][data-tone="deep"] .csa-progress { background: var(--b700); }
 [data-surface="black"] .csa-progress { background: var(--n700); }

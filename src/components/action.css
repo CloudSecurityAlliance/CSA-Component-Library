@@ -44,8 +44,10 @@
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
-  /* Transitions */
-  transition: border-color .15s, box-shadow .15s, background .15s;
+  /* Transitions — border-left-width is listed alongside border-color so
+     the selected state's thin-to-thick left border animates in rather
+     than snapping; without it only the color fades. */
+  transition: border-color .15s, border-left-width .15s, box-shadow .15s, background .15s;
   text-align: left;
   font-size: 90%;
   line-height: 1.2;

@@ -35,9 +35,36 @@
    image bled to the top edge instead of uniform padding (see cards.css). */
 [data-surface] .csa-card, [data-surface] .csa-card-media { background: var(--n25); border: 1px solid var(--n50); }
 [data-surface="gradient"] .csa-card, [data-surface="gradient"] .csa-card-media,
+[data-surface="light"][data-tone="neutral"] .csa-card, [data-surface="light"][data-tone="neutral"] .csa-card-media,
 [data-surface="light"].csa-bg-n25 .csa-card, [data-surface="light"].csa-bg-n25 .csa-card-media { background: #fff; border: 1px solid var(--n50); }
 [data-surface="dark"] .csa-card, [data-surface="dark"] .csa-card-media { background: var(--b800); border: 1px solid var(--b600); }
 /* Black surface's card is a neutral n800/n700 pair rather than the dark
    surface's navy b800/b600 — n800 is lighter than the near-black page
    background, so the card still reads as a raised, distinct surface. */
 [data-surface="black"] .csa-card, [data-surface="black"] .csa-card-media { background: var(--n800); border: 1px solid var(--n700); }
+
+/* =========================================================
+   Tones — a second, optional data attribute that nudges a surface
+   one step without becoming a new surface. A tone only changes the
+   band and card fills (plus the few inset fills that would otherwise
+   vanish into them, in their own component files); every text-color
+   and component rule keyed to data-surface keeps applying unchanged.
+
+     <section data-surface="light" data-tone="neutral">  n25 band, white cards
+     <section data-surface="dark"  data-tone="deep">     b800 band, b700 cards
+
+   "neutral" is the formalised form of the older .csa-bg-n25 hook,
+   which still works on a light surface as an alias (and now sets the
+   band color itself, rather than needing an inline background).
+   "deep" reverses dark's band/card pairing: the band drops to b800,
+   so cards step up to b700 — dark's own b800 cards would disappear
+   into it. Anything else that sits on dark in b800 (progress track,
+   toggle tracks, disabled pagination) gets the same one-step reversal
+   in its own component file.
+   ========================================================= */
+[data-surface="light"][data-tone="neutral"],
+[data-surface="light"].csa-bg-n25 { background: var(--n25); }
+
+[data-surface="dark"][data-tone="deep"] { background: var(--b800); }
+[data-surface="dark"][data-tone="deep"] .csa-card,
+[data-surface="dark"][data-tone="deep"] .csa-card-media { background: var(--b700); border: 1px solid var(--b600); }
