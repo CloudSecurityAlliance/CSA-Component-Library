@@ -7,7 +7,7 @@
    colors are copied exactly as they render there. The icon toggle's
    resting-state track deliberately isn't: the reference's own value
    (a semi-transparent n300 wash) is now flat tokens instead — n25 on
-   white, n50 on an n25 page (.csa-bg-n25, same escalation idea as
+   white, n50 on an n25 page (data-tone="neutral", same escalation idea as
    .csa-toggle-segmented and tags.css), b800 on the navy dark surface —
    so it stays visually consistent with the rest of this library's
    "one ramp step off the page" convention for a resting control
@@ -70,7 +70,11 @@
    is itself n25, this track needs to step up a ramp level to still
    read as its own distinct shape. Border steps up alongside it (n50→n75,
    still at 50% opacity) for the same reason. */
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-toggle-icon-track { background: var(--n50); border-color: rgba(195,209,222,.35); /* --n75 (#C3D1DE) at 35% */ }
+[data-tone="neutral"] .csa-toggle-icon-track { background: var(--n50); border-color: rgba(195,209,222,.35); /* --n75 (#C3D1DE) at 35% */ }
+/* Same step-up inside a card on a light surface (the card is itself n25) —
+   see tags.css's "Inside a card on a light surface" block for the
+   :where() context and why it carries no specificity. */
+:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-toggle-icon-track { background: var(--n50); border-color: rgba(195,209,222,.35); }
 /* Shadow color matches .csa-toggle-segmented-highlight's own per-surface
    shadow below (same rgba values, just this component's own long-
    standing 0 2px 6px offset/blur rather than copying that one's 0 1px
@@ -154,12 +158,13 @@
   border-radius: 999px;
 }
 /* Same escalation idea tags.css already uses for .csa-tag-neutral: on a
-   page whose own background is literally n25 (.csa-bg-n25 — see that
+   page whose own background is literally n25 (data-tone="neutral" — see that
    file's comment on the convention), this track's default n25 would
    blend straight into the page with no visible edge, so it bumps one
    ramp step to n50 there instead. Border steps up alongside it (n50→n75,
    still at 50% opacity), same pairing .csa-toggle-icon-track uses. */
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-toggle-segmented { background: var(--n50); border-color: rgba(195,209,222,.35); /* --n75 (#C3D1DE) at 35% */ }
+[data-tone="neutral"] .csa-toggle-segmented { background: var(--n50); border-color: rgba(195,209,222,.35); /* --n75 (#C3D1DE) at 35% */ }
+:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-toggle-segmented { background: var(--n50); border-color: rgba(195,209,222,.35); } /* card step-up, see .csa-toggle-icon-track above */
 .csa-toggle-segmented-highlight {
   position: absolute; top: 4px; left: 4px;
   width: calc(50% - 6px); height: calc(100% - 8px);
