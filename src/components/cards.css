@@ -409,6 +409,131 @@
 
 
 /* =========================================================
+   Flip card — .csa-card-flip, a card with a front and a back
+   that turns over on click (CSS only, no script). Both faces are regular
+   .csa-card elements, so they pick up the surface's card colours/border.
+
+   Markup contract (the id/for pair must be unique per card):
+     <div class="csa-card-flip">
+       <input type="checkbox" class="csa-card-flip-toggle csa-sr-only" id="flip-1" aria-label="More about …">
+       <div class="csa-card-flip-inner">
+         <div class="csa-card csa-card-flip-front">
+           <label class="csa-card-flip-hit" for="flip-1"></label>
+           <span class="csa-card-flip-cue" aria-hidden="true"><svg>…</svg></span>
+           …front content…
+         </div>
+         <div class="csa-card csa-card-flip-back">
+           <label class="csa-card-flip-hit" for="flip-1"></label>
+           <span class="csa-card-flip-cue" aria-hidden="true"><svg>…</svg></span>
+           …back content, links included…
+         </div>
+       </div>
+     </div>
+
+   - Click: a visually hidden checkbox holds the flipped state. Each face
+     is covered by a <label> for it (.csa-card-flip-hit), so a click
+     anywhere on the card flips it; links on the back sit above the label
+     and stay clickable. Keyboard: Tab reaches the checkbox (focus ring on
+     the card), Space flips it, then Tab reaches the back's links.
+   - Hover: the card tilts 12° in the direction it will turn, hinting that
+     it flips, and lifts with the library's raised-card shadow (also shown
+     on keyboard focus). The corner cue icon shows on touch screens only, where
+     there's no hover tilt or pointer cursor to give that hint.
+   - Both faces share one grid cell, so the card is as tall as its taller
+     face and the two always match; in a .csa-grid row every card
+     stretches to the row's tallest.
+   - Whichever face is turned away is visibility:hidden (once the turn
+     passes halfway), so it can't catch clicks and the back's links aren't
+     reachable by Tab until the card is turned over.
+   - Reduced motion: no rotation or tilt, the faces cross-fade instead. */
+.csa-card-flip { position: relative; perspective: 1200px; }
+.csa-card-flip-inner {
+  display: grid; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.3, 1.3, .5, 1); /* slight overshoot as it lands */
+}
+/* 24px padding rather than .csa-card's 32px — the component's own value,
+   same as .csa-card-media-body, to keep a grid of these compact. */
+.csa-card-flip-front, .csa-card-flip-back {
+  grid-area: 1 / 1; position: relative; padding: 24px;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+.csa-card-flip-back {
+  transform: rotateY(180deg);
+  display: flex; flex-direction: column; justify-content: space-between;
+  visibility: hidden; transition: visibility 0s .3s, box-shadow .3s ease; /* hide once it's turned away */
+}
+.csa-card-flip-hit { position: absolute; inset: 0; z-index: 1; border-radius: inherit; cursor: pointer; }
+.csa-card-flip-back a { position: relative; z-index: 2; }
+/* Belt and braces for the click: some browsers (Safari especially) order
+   layers inside a 3D-transformed card by depth and can ignore the
+   z-index above, letting the text sit over the label — a click on the
+   words then selects text instead of flipping. So the face content
+   ignores the pointer outright (clicks fall through to the label),
+   except links, and the card's text isn't selectable. */
+.csa-card-flip-front > :not(.csa-card-flip-hit),
+.csa-card-flip-back > :not(.csa-card-flip-hit):not(a) { pointer-events: none; }
+.csa-card-flip-front, .csa-card-flip-back { -webkit-user-select: none; user-select: none; }
+.csa-card-flip-back .csa-go { margin-top: 16px; align-self: flex-start; }
+.csa-card-flip-cue {
+  position: absolute; top: 8px; right: 8px; width: 16px; height: 16px; /* inside the 24px padding, clear of content */
+  color: var(--b300); opacity: .6; transition: opacity .2s ease; pointer-events: none;
+}
+.csa-card-flip-cue svg { display: block; width: 100%; height: 100%; }
+/* The cue is for touch only — with a mouse the hover tilt and pointer
+   cursor already say "this turns over"; touch has neither. */
+@media (hover: hover) and (pointer: fine) { .csa-card-flip-cue { display: none; } }
+
+/* Hover tilt (peek), flipped state, and the flipped card's own peek back. */
+.csa-card-flip:hover .csa-card-flip-inner { transform: rotateY(12deg); }
+.csa-card-flip-toggle:checked + .csa-card-flip-inner { transform: rotateY(180deg); }
+.csa-card-flip:hover .csa-card-flip-toggle:checked + .csa-card-flip-inner { transform: rotateY(168deg); }
+.csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-back { visibility: visible; transition-delay: 0s; }
+/* The face turned away still catches clicks unless it's hidden too — so the
+   front hides (after the turn) while flipped, leaving the back's link and
+   label clickable. */
+.csa-card-flip-front { transition: visibility 0s, box-shadow .3s ease; }
+.csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-front { visibility: hidden; transition-delay: .3s, 0s; }
+.csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > * { outline: 2px solid var(--b300); outline-offset: 3px; }
+
+/* Lift shadow while hovered or keyboard-focused — so it's there through the
+   tilt and the turn. It sits on the faces, so it tilts and turns with the
+   card rather than staying flat. Values are the library's own raised-card
+   shadow — --shadow's two layers on light surfaces, and the darker black
+   stack .csa-card-hover:hover / .csa-card-raised use on dark and black —
+   with one addition: a sideways offset that follows the turn, falling
+   left on the front and right on the back (--flip-shadow-dir: -1 / 1;
+   4px on the tight layer, 16px on the soft one). */
+.csa-card-flip-front { --flip-shadow-dir: -1; }
+.csa-card-flip-back  { --flip-shadow-dir: 1; }
+.csa-card-flip:hover .csa-card-flip-inner > *,
+.csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > * {
+  box-shadow:
+    calc(var(--flip-shadow-dir) * 4px) 2px 6px rgba(12,35,64,.06),
+    calc(var(--flip-shadow-dir) * 16px) 18px 40px -18px rgba(12,35,64,.22);
+}
+[data-surface="dark"] .csa-card-flip:hover .csa-card-flip-inner > *,
+[data-surface="dark"] .csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > *,
+[data-surface="black"] .csa-card-flip:hover .csa-card-flip-inner > *,
+[data-surface="black"] .csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > * {
+  box-shadow:
+    calc(var(--flip-shadow-dir) * 4px) 2px 6px rgba(0,0,0,.25),
+    calc(var(--flip-shadow-dir) * 16px) 18px 40px -18px rgba(0,0,0,.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csa-card-flip-inner { transition: none; }
+  .csa-card-flip:hover .csa-card-flip-inner,
+  .csa-card-flip-toggle:checked + .csa-card-flip-inner,
+  .csa-card-flip:hover .csa-card-flip-toggle:checked + .csa-card-flip-inner { transform: none; }
+  .csa-card-flip-back { transform: none; opacity: 0; }
+  .csa-card-flip-front, .csa-card-flip-back { transition: opacity .2s ease, visibility 0s .2s, box-shadow .3s ease; }
+  .csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-front { opacity: 0; transition: opacity .2s ease, visibility 0s .2s, box-shadow .3s ease; }
+  .csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-back { opacity: 1; transition-delay: 0s; }
+}
+
+
+/* =========================================================
    Brand Cards — one per CSA sub-brand (Cloud, AI, Zero Trust). White-
    background only by design (no [data-surface] variants) — sit below
    card-glass in the showcase, outside the data-surface="light" demo
