@@ -105,10 +105,15 @@
    itself so they hold on any page surface. */
 .csa-card-glass h1, .csa-card-glass h2, .csa-card-glass h3, .csa-card-glass h4 { color: #fff; }
 .csa-card-glass p { color: var(--n75); }
-.csa-card-glass .csa-kicker, .csa-card-glass .csa-kicker-sub { color: var(--o500); }
-.csa-card-glass .csa-kicker-blue { color: var(--b200); }
-.csa-card-glass .csa-go { color: var(--b300); }
-.csa-card-glass .csa-go:hover { color: var(--b100); }
+.csa-card-glass .csa-kicker, .csa-card-glass .csa-kicker-sub { color: var(--o200); } /* o500 dropped to ~4:1 over lighter photo areas; o200 is 6:1+. The glass hero panel keeps hero.css's own kicker color (later file, same weight) */
+.csa-card-glass .csa-kicker-blue { color: var(--b100); } /* b200 dropped to ~4.2:1 over lighter photo areas; b100 is 5.3:1+ */
+/* Links: white, n75 on hover — same as the reveal card's link (see
+   .csa-card-reveal-more-inner .csa-go); b300 read poorly on the glass's
+   navy cast. The [data-surface] copies outrank the dark/black surfaces'
+   own .csa-go rules, which come later in this file at the same weight;
+   the light-glass link rules below still outrank these. */
+.csa-card-glass .csa-go, [data-surface] .csa-card-glass .csa-go { color: #fff; }
+.csa-card-glass .csa-go:hover, [data-surface] .csa-card-glass .csa-go:hover { color: var(--n75); }
 .csa-card-glass .csa-hr { border-top-color: var(--b600); }
 /* Light text set — the light-surface colors, for the opt-in light glass.
    Compound selector (.csa-card-glass.csa-card-glass-light) so it outranks
@@ -354,7 +359,7 @@
    reveal-on-hover copy, which has its own top spacing
    (.csa-card-reveal-more-inner's padding-top) instead. */
 .csa-card-reveal-head h3 { font-size: 20px; margin: 8px 0 0; }
-.csa-card-reveal-overlay .csa-kicker-sub { color: var(--o500); }
+.csa-card-reveal-overlay .csa-kicker-sub { color: var(--o200); } /* same dark glass as .csa-card-glass — matches its o200 kickers */
 
 
 .csa-card-reveal-more { display: grid; grid-template-rows: 0fr; min-height: 0; transition: grid-template-rows .4s ease; }
@@ -399,12 +404,14 @@
   padding-top: 14px;
 }
 .csa-card-reveal-more-inner p { color: var(--n75); }
-.csa-card-reveal-more-inner .csa-go { color: var(--b300); }
-/* Resting is already b300 here (the panel's own dark glass needs a
-   lighter blue than the library default, regardless of page surface),
-   so the general .csa-go:hover rule (also b300) was a no-op on hover —
-   the same reason dark/black surfaces step .csa-go:hover up to b100. */
-.csa-card-reveal-more-inner .csa-go:hover { color: var(--b100); }
+/* White link, n75 on hover. The panel is always dark glass over a photo
+   (regardless of page surface), and the usual dark-surface blue (b300)
+   had poor contrast against its navy cast — white reads clearly and
+   matches the panel's heading. Hover steps down to n75 (the panel's own
+   body-text color) rather than up, since there's nothing brighter than
+   white to step to. */
+.csa-card-reveal-more-inner .csa-go { color: #fff; }
+.csa-card-reveal-more-inner .csa-go:hover { color: var(--n75); }
 .csa-card-reveal:hover .csa-card-reveal-more { grid-template-rows: 1fr; }
 
 

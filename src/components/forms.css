@@ -185,6 +185,7 @@ input.csa-input, textarea.csa-textarea, select.csa-select {
 [data-surface="dark"] .csa-input:hover, [data-surface="dark"] .csa-textarea:hover, [data-surface="dark"] .csa-select:hover { border-color: var(--b500); }
 [data-surface="dark"] .csa-label { color: var(--n100); }
 [data-surface="dark"] .csa-field-hint { color: var(--n200); }
+[data-surface="dark"] .csa-field-error { color: var(--r100); } /* r400 is 2.4:1 here and r200 4.3:1; r100 is 5.3:1+ */
 [data-surface="dark"] .csa-checkbox, [data-surface="dark"] .csa-radio { color: var(--n75); }
 [data-surface="dark"] .csa-checkbox-box, [data-surface="dark"] .csa-radio-box { background: transparent; border-color: var(--b500); }
 [data-surface="dark"] .csa-checkbox:hover .csa-checkbox-box, [data-surface="dark"] .csa-radio:hover .csa-radio-box { border-color: var(--b400); }
@@ -205,7 +206,8 @@ input.csa-input, textarea.csa-textarea, select.csa-select {
 }
 [data-surface="black"] .csa-input:hover, [data-surface="black"] .csa-textarea:hover, [data-surface="black"] .csa-select:hover { border-color: var(--n600); }
 [data-surface="black"] .csa-label { color: var(--n100); }
-[data-surface="black"] .csa-field-hint { color: var(--n300); }
+[data-surface="black"] .csa-field-hint { color: var(--n200); } /* n300 was 4.3:1 on black, under AA */
+[data-surface="black"] .csa-field-error { color: var(--r100); }
 [data-surface="black"] .csa-checkbox, [data-surface="black"] .csa-radio { color: var(--n75); }
 [data-surface="black"] .csa-checkbox-box, [data-surface="black"] .csa-radio-box { background: transparent; border-color: var(--n600); }
 [data-surface="black"] .csa-checkbox:hover .csa-checkbox-box, [data-surface="black"] .csa-radio:hover .csa-radio-box { border-color: var(--n400); }
