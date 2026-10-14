@@ -142,7 +142,7 @@ console.log('Copied src/docs/assets/ -> dist/preview/assets/ (demo photos only â
 // Reads src/assets/icons/ at build time so new icons appear automatically
 // on the next build without editing this file. Color variants are derived
 // from the base name: {name}-csa-blue.svg, b500/{name}-b500.svg, etc.
-const VARIANT_SUFFIXES = ['-csa-blue','-light-blue','-white','-red-orange','-yellow-orange','-b100','-b300','-b500','-n400','-o300','-o700'];
+const VARIANT_SUFFIXES = ['-csa-blue','-light-blue','-white','-red-orange','-yellow-orange','-b100','-b300','-b500','-n400','-o200','-o300','-o700'];
 const BRAND_NAMES = new Set(['ai-brand', 'cloud-brand', 'zero-trust-brand']);
 
 const allRootIcons = readdirSync(join(__dirname, 'src/assets/icons'))
@@ -288,6 +288,7 @@ body { background: var(--n25); color: var(--n700); }
       <button class="ico-variant-btn" data-variant="b300">B300</button>
       <button class="ico-variant-btn" data-variant="b500">B500</button>
       <button class="ico-variant-btn" data-variant="n400">N400</button>
+      <button class="ico-variant-btn" data-variant="o200">O200</button>
       <button class="ico-variant-btn" data-variant="o300">O300</button>
       <button class="ico-variant-btn" data-variant="o700">O700</button>
     </div>
@@ -318,6 +319,7 @@ body { background: var(--n25); color: var(--n700); }
     'b300':         { suffix: '-b300',         dir: 'b300/', dark: false, mono: true  },
     'b500':         { suffix: '-b500',         dir: 'b500/', dark: false, mono: true  },
     'n400':         { suffix: '-n400',         dir: 'n400/', dark: false, mono: true  },
+    'o200':         { suffix: '-o200',         dir: 'o200/', dark: false, mono: true  },
     'o300':         { suffix: '-o300',         dir: 'o300/', dark: false, mono: true  },
     'o700':         { suffix: '-o700',         dir: 'o700/', dark: false, mono: true  },
   };

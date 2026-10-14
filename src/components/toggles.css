@@ -74,7 +74,7 @@
 /* Same step-up inside a card on a light surface (the card is itself n25) —
    see tags.css's "Inside a card on a light surface" block for the
    :where() context and why it carries no specificity. */
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-toggle-icon-track { background: var(--n50); border-color: rgba(195,209,222,.35); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-toggle-icon-track { background: var(--n50); border-color: rgba(195,209,222,.35); }
 /* Shadow color matches .csa-toggle-segmented-highlight's own per-surface
    shadow below (same rgba values, just this component's own long-
    standing 0 2px 6px offset/blur rather than copying that one's 0 1px
@@ -164,7 +164,7 @@
    ramp step to n50 there instead. Border steps up alongside it (n50→n75,
    still at 50% opacity), same pairing .csa-toggle-icon-track uses. */
 [data-tone="neutral"] .csa-toggle-segmented { background: var(--n50); border-color: rgba(195,209,222,.35); /* --n75 (#C3D1DE) at 35% */ }
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-toggle-segmented { background: var(--n50); border-color: rgba(195,209,222,.35); } /* card step-up, see .csa-toggle-icon-track above */
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-toggle-segmented { background: var(--n50); border-color: rgba(195,209,222,.35); } /* card step-up, see .csa-toggle-icon-track above */
 .csa-toggle-segmented-highlight {
   position: absolute; top: 4px; left: 4px;
   width: calc(50% - 6px); height: calc(100% - 8px);

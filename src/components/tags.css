@@ -73,28 +73,30 @@
 
 /* ---- Inside a card on a light surface — automatic step-up ----
    A light surface's .csa-card / .csa-card-media is itself n25 (see
-   surfaces.css), so a neutral tag inside one would vanish into it just
-   like on an n25 band. Same one-step escalation as the neutral tone
-   below, applied automatically so no hook is needed on the card.
-   Skipped where the card is white instead: inside a gradient surface
-   and inside the neutral tone.
+   surfaces.css) — whether the card sits inside a data-surface="light"
+   section or carries data-surface="light" itself — so a neutral tag
+   inside one would vanish into it just like on an n25 band. Same
+   one-step escalation as the neutral tone below, applied automatically
+   so no hook is needed on the card. Skipped where the card is white
+   instead: a gradient surface or the neutral tone, on the card itself
+   or around it.
    The whole context is wrapped in :where() so it adds no specificity:
    these rules land at the same weight as the White defaults above and
    win only by coming later, so every [data-surface="dark"/"black"]
    rule below still beats them when a dark section is nested inside a
    light page. Hover/pressed keep White's order (pressed last) for the
    same hover-vs-pressed reason given in the neutral block below. */
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-neutral { background: var(--n50); }
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-blue    { background: var(--b50); }
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-orange  { background: var(--o50); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-neutral { background: var(--n50); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-blue    { background: var(--b50); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-orange  { background: var(--o50); }
 
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
 
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
-:where([data-surface="light"] :is(.csa-card, .csa-card-media):not([data-surface="gradient"] *, [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
 
 /* ---- Neutral (n25) background — one ramp step up so tags stay visible against their own n25 host ----
    Pairing rule, so the wrong variant never gets picked by accident:
