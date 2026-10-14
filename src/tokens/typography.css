@@ -25,6 +25,15 @@
 :root {
   --font: 'azo-sans-web','Red Hat Text',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --font-kicker: "peridot-pe-variable", sans-serif;
+
+  /* Small text sizes — the two steps below body (16px) and .csa-block
+     (18px), so the scale reads 12 / 14.5 / 16 / 18. Components use these
+     values directly (buttons, .csa-go, tabs, form hints...); pages use
+     the matching classes, .csa-block-small and .csa-caption, below.
+     14.5 is the library's one deliberate half size — it's what buttons,
+     links and card copy were already set at; don't add others. */
+  --text-small: 14.5px;
+  --text-caption: 12px;
 }
 
 body { font-family: var(--font); }
@@ -82,6 +91,34 @@ h4.csa-title { font-weight: 700; letter-spacing: 0; }
   color: var(--n500); 
 }
 
+/* Block-small — .csa-block's smaller sibling for short paragraphs: card
+   copy, notes, supporting text that's still meant to be read as prose.
+   Same shape as .csa-block, scaled down (lighter margins so it sits
+   comfortably inside cards). */
+.csa-block-small {
+  font-size: var(--text-small);
+  margin-top: 8px;
+  margin-bottom: 8px;
+  line-height: 1.55;
+  color: var(--n500);
+}
+[data-surface="dark"] .csa-block-small, [data-surface="black"] .csa-block-small { color: var(--n75); }
+
+/* Caption — small supporting text: dates, bylines, read times, counts,
+   footnotes, image captions, helper text. Short lines only; anything
+   paragraph-length should be .csa-block-small instead. No margins — it's
+   often inline (a <span> in a card footer). The colors are the lightest
+   grays that still pass WCAG AA (4.5:1) at 12px: n400 on white/n25,
+   n200 on dark/black and their cards (--n300, the usual "muted" gray,
+   fails at this size). The [data-surface] copy outranks the surfaces'
+   own `[data-surface] p` text colors when the caption is a <p>. */
+.csa-caption, [data-surface] .csa-caption {
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  color: var(--n400);
+}
+[data-surface="dark"] .csa-caption, [data-surface="black"] .csa-caption { color: var(--n200); }
+
 /* Kicker — short punchy section eyebrow label ("THE PROGRAM").
    Surface-aware: orange-700 on light/gradient, orange-500 on dark.
 
@@ -110,7 +147,7 @@ h4.csa-title { font-weight: 700; letter-spacing: 0; }
 /* Kicker-sub — see the usage rule in the .csa-kicker comment above. */
 .csa-kicker-sub {
   font-family: var(--font-kicker);
-  font-size: 11.5px;
+  font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
   font-variation-settings: 'wght' 400, 'wdth' 125, 'ital' 0;

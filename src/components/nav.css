@@ -32,7 +32,7 @@
 }
 
 /* Variant 1: hub nav link row + CTA */
-.csa-nav-links { display: flex; gap: 30px; font-size: 14.5px; font-weight: 500; }
+.csa-nav-links { display: flex; gap: 30px; font-size: var(--text-small); font-weight: 500; }
 .csa-nav-links a { color: var(--n500); }
 .csa-nav-links a:hover { color: var(--b500); }
 @media (max-width: 940px) { .csa-nav-links { display: none; } }

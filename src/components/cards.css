@@ -224,7 +224,7 @@
    On dark/black, resting color is ALSO b300, so hover needs its own
    step lighter (b100) — otherwise hovering would show no visible change
    at all, since :hover's b300 would just match the resting color. */
-.csa-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 14.5px; font-weight: 500; color: var(--b500); transition: .15s; }
+.csa-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: var(--text-small); font-weight: 500; color: var(--b500); transition: .15s; }
 .csa-go:hover { color: var(--b300); }
 [data-surface="dark"] .csa-go, [data-surface="black"] .csa-go { color: var(--b300); }
 [data-surface="dark"] .csa-go:hover, [data-surface="black"] .csa-go:hover { color: var(--b100); }
@@ -667,16 +667,16 @@
    cards stretched to equal height, regardless of how long any one quote
    runs — the body grows to fill the leftover space instead of the footer
    just trailing wherever the text happens to end. */
-.csa-card-quote-body { font-size: 14.5px; color: var(--n500); margin-top: 12px; flex: 1; }
+.csa-card-quote-body { font-size: var(--text-small); color: var(--n500); margin-top: 12px; flex: 1; }
 .csa-card-quote-footer {
   display: flex; align-items: center; gap: 12px;
   border-top: 1px solid var(--n25); margin-top: 24px; padding-top: 16px;
 }
 .csa-card-quote-avatar { width: 48px; height: 48px; flex-shrink: 0; display: block; }
-.csa-card-quote-name { font-size: 15.5px; font-weight: 700; color: var(--b800); }
-.csa-card-quote-title { font-size: 14px; color: var(--n300); margin-top: 2px; }
+.csa-card-quote-name { font-size: 16px; font-weight: 700; color: var(--b800); }
+.csa-card-quote-title { font-size: var(--text-caption); color: var(--n400); margin-top: 2px; }
 
 [data-surface="dark"] .csa-card-quote-body, [data-surface="black"] .csa-card-quote-body { color: var(--n75); }
 [data-surface="dark"] .csa-card-quote-footer, [data-surface="black"] .csa-card-quote-footer { border-top-color: var(--b600); }
 [data-surface="dark"] .csa-card-quote-name, [data-surface="black"] .csa-card-quote-name { color: #fff; }
-[data-surface="dark"] .csa-card-quote-title, [data-surface="black"] .csa-card-quote-title { color: var(--n100); }
+[data-surface="dark"] .csa-card-quote-title, [data-surface="black"] .csa-card-quote-title { color: var(--n200); }

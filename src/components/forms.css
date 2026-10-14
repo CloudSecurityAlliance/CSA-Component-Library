@@ -58,10 +58,10 @@
 /* ---- Shared field stack ---- */
 .csa-field { display: flex; flex-direction: column; gap: 6px; }
 .csa-label { font-size: 14px; font-weight: 600; color: var(--n500); }
-.csa-field-hint { font-size: 13px; color: var(--n300); }
+.csa-field-hint { font-size: var(--text-caption); color: var(--n400); } /* caption size + color, see .csa-caption */
 /* r400, not r500 — r500 is calibrated for large-area fills (a filled
    badge/button), too dark and low-contrast for small running text. */
-.csa-field-error { font-size: 13px; color: var(--r400); font-weight: 600; }
+.csa-field-error { font-size: var(--text-caption); color: var(--r400); font-weight: 600; }
 
 /* ---- Text input, textarea, select ----
    One shared base: same border/radius/padding/transition regardless of
@@ -133,7 +133,7 @@ input.csa-input, textarea.csa-textarea, select.csa-select {
    input's :checked/:focus-visible state via the ~ sibling combinator. */
 .csa-checkbox, .csa-radio {
   display: inline-flex; align-items: center; gap: 10px;
-  cursor: pointer; font-size: 14.5px; color: var(--n500);
+  cursor: pointer; font-size: var(--text-small); color: var(--n500);
 }
 .csa-checkbox input, .csa-radio input {
   position: absolute; opacity: 0; width: 18px; height: 18px; margin: 0;

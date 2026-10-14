@@ -26,7 +26,7 @@
 .csa-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   padding: 13px 22px; border-radius: 8px;
-  font-weight: 400; font-size: 14.5px;
+  font-weight: 400; font-size: var(--text-small);
   border: 1px solid transparent; transition: .18s; cursor: pointer;
   min-width: 120px;
   transition: .35s ease;
