@@ -67,7 +67,7 @@
   padding-bottom: 16px; border-bottom: 1px solid var(--n50);
 }
 .csa-filters-title {
-  font-size: 22px; font-weight: 800; letter-spacing: -.02em; 
+  font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--b800);
 }
 .csa-filters-clear { font-size: var(--text-caption); font-weight: 700; color: var(--n400); text-decoration: underline; transition: color .15s; }
 .csa-filters-clear:hover { color: var(--n500); }
@@ -111,15 +111,15 @@
 .csa-filter-grade-btn[data-grade="f"][aria-pressed="true"] { background: rgba(207,67,0,.2); border-color: var(--o700); color: var(--o700); }
 
 /* ---- Surface-aware — dark/black ----
-   Filters/Clear all match this library's standard label-on-dark/black
-   color (--n100, the same token .docs-label uses site-wide) rather
-   than two different faded grays. Grade's RESTING (unselected) look is
+   The Filters title is white, like the group titles (b800 on light);
+   Clear all uses this library's standard label-on-dark/black color
+   (--n100, the same token .docs-label uses site-wide). Grade's RESTING (unselected) look is
    this library's own surface-aware neutral-outline treatment — its
    SELECTED state above is already surface-independent (confirmed
    identical in both of the reference's own light/dark modes), so
    there's nothing to override here for that part. */
 [data-surface="dark"] .csa-filters-head { border-bottom-color: var(--b600); }
-[data-surface="dark"] .csa-filters-title { color: var(--n100); }
+[data-surface="dark"] .csa-filters-title { color: #fff; }
 [data-surface="dark"] .csa-filter-group-title { color: #fff; }
 [data-surface="dark"] .csa-filters-clear { color: var(--n100); }
 [data-surface="dark"] .csa-filters-clear:hover { color: #fff; }
@@ -131,7 +131,7 @@
 [data-surface="dark"] .csa-filter-grade-btn:hover { border-color: var(--b500); }
 
 [data-surface="black"] .csa-filters-head { border-bottom-color: var(--n700); }
-[data-surface="black"] .csa-filters-title { color: var(--n100); }
+[data-surface="black"] .csa-filters-title { color: #fff; }
 [data-surface="black"] .csa-filter-group-title { color: #fff; }
 [data-surface="black"] .csa-filters-clear { color: var(--n100); }
 [data-surface="black"] .csa-filters-clear:hover { color: #fff; }
