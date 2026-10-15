@@ -419,6 +419,18 @@
    the same reason dark/black surfaces step .csa-go:hover up to b100. */
 .csa-card-reveal-more-inner .csa-go:hover { color: var(--b100); }
 .csa-card-reveal:hover .csa-card-reveal-more { grid-template-rows: 1fr; }
+/* Stretch the csa-go link over the glass panel, same idea as
+   .csa-card-hover. Only the panel, not the whole card: the panel is the
+   link's containing block (position + backdrop-filter) and its clip-path
+   (the grain clip above) also clips hit-testing, so a bigger hit area
+   can't reach the photo above it. Its containing block being the panel,
+   not the scrolling -more-inner, also keeps it from being clipped while
+   the copy is collapsed. */
+.csa-card-reveal .csa-go::after { content: ""; position: absolute; inset: 0; }
+/* With a link, drop the card-wide pointer so the cursor only turns into
+   a hand over the panel (the link's stretched ::after above) — the photo
+   above it isn't clickable, and the cursor shouldn't suggest otherwise. */
+.csa-card-reveal:has(.csa-go) { cursor: auto; }
 
 
 /* =========================================================
