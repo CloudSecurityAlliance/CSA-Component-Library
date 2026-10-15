@@ -430,6 +430,18 @@
    white to step to. */
 .csa-card-reveal-more-inner .csa-go { color: #fff; }
 .csa-card-reveal-more-inner .csa-go:hover { color: var(--n75); }
+/* Larger tap target for the link alone (the panel itself isn't a link):
+   invisible padding — 10px above/below, 14px either side — cancelled by
+   equal negative margins, so the text doesn't move and the hit area grows
+   from ~23px to ~44px tall. The 10px top keeps clear of the copy above
+   (the link's usual 20px gap = 10 margin + 10 padding). The scrolling
+   -more-inner clips at its edges, so it reaches 14px further left (into
+   the panel's own padding) to fit the left extension, and 10px further
+   down while open — :hover only, for the same reason as its padding-top
+   above: unconditional bottom padding would stop the row collapsing to 0. */
+.csa-card-reveal-more-inner .csa-go { padding: 10px 14px; margin: 10px -14px -10px; }
+.csa-card-reveal-more-inner { margin-left: -14px; padding-left: 14px; }
+.csa-card-reveal:hover .csa-card-reveal-more-inner { padding-bottom: 10px; margin-bottom: -10px; max-height: calc(100% + 10px); } /* max-height: the base 100% would cap it at the row and cut the extra 10px back off */
 .csa-card-reveal:hover .csa-card-reveal-more { grid-template-rows: 1fr; }
 /* Only the .csa-go link itself is clickable — the panel is deliberately
    not a stretched link target. With a link present, drop the card-wide
