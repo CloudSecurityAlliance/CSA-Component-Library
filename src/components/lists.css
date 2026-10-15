@@ -1,0 +1,34 @@
+/* =========================================================
+   CSA Component Library — Lists
+   Bulleted (or numbered) body-copy lists. Opt-in via a class rather
+   than a bare ul/ol selector: reset.css zeroes list padding globally,
+   and plenty of structural markup (navs, menus, the host site's own
+   widgets) is built on <ul> and must stay unstyled.
+
+   Markup contract:
+     <ul class="csa-list">
+       <li>Item one</li>
+       <li>Item two</li>
+     </ul>
+
+   Works on <ol> too — ::marker colors the number the same way.
+   Marker color follows the kicker's surface rule (o700 on light/
+   gradient, o500 on dark/black) so bullets read as the same orange
+   accent; item text inherits the surface's body color like <p>.
+   ========================================================= */
+
+.csa-list {
+  padding-left: .5em;
+  line-height: 1.7;
+  margin: 0;
+}
+.csa-list > li + li { margin-top: 6px; }
+.csa-list > li::marker { color: var(--o700); }
+
+[data-surface="light"] .csa-list, [data-surface="gradient"] .csa-list { color: var(--n500); }
+[data-surface="dark"] .csa-list, [data-surface="black"] .csa-list { color: var(--n75); }
+[data-surface="dark"] .csa-list > li::marker,
+[data-surface="black"] .csa-list > li::marker { color: var(--o500); }
+
+/* Nested lists keep the indent and accent; they just tighten up. */
+.csa-list .csa-list { margin-top: 6px; }
