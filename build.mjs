@@ -44,6 +44,7 @@ const COMPONENT_CSS_FILES = [
   'columns.css',
   'grid.css',
   'sep.css',
+  'lists.css',
 ];
 const css = [
   readFiles('src/tokens', TOKEN_FILES),

@@ -150,7 +150,7 @@
    #FF7A00 → rgb(255,122,0) (see colors.css). transition overrides the
    base .csa-btn's .18s to match Primary/Secondary's .35s pace. */
 .csa-btn-tertiary, .csa-btn-tertiary:visited { background: transparent; border: 2px solid transparent; color: var(--o500); transition: .35s ease; }
-.csa-btn-tertiary:hover { background: rgba(255,122,0,.2); }
+.csa-btn-tertiary:hover { background: rgba(255,122,0,.2); color: var(--o500); } 
 /* Persistent underline (not just on :hover) — a text-only button has no
    fill or border to read as clickable at rest, so the line is the
    resting affordance. On hover it retracts away and disappears (the

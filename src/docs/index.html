@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="../components/columns.css">
 <link rel="stylesheet" href="../components/grid.css">
 <link rel="stylesheet" href="../components/sep.css">
+<link rel="stylesheet" href="../components/lists.css">
 
 <style>
 /* =========================================================
@@ -503,6 +504,7 @@
         <a href="#columns">Columns</a>
         <a href="#grid">Grid</a>
         <a href="#sep">Sep</a>
+        <a href="#lists">Lists</a>
         <a href="#hero-examples">Hero examples</a>
         <a href="#real-layouts">Real layouts</a>
       </div>
@@ -2529,6 +2531,87 @@
             <span>45 Events</span>
             <span>12 Chapters</span>
           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- LISTS                                                          -->
+<!-- ============================================================ -->
+<section class="csa-section" id="lists" data-surface="light">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2 class="csa-title">Lists</h2>
+      <p>Add <code>.csa-list</code> to a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> for body-copy lists. Bullets (or numbers) take the kicker's orange accent and follow <code>data-surface</code>: o700 on light and gradient, o500 on dark and black. Item text inherits the surface's body color. Opt-in by class, so structural <code>&lt;ul&gt;</code> markup like navs stays unstyled.</p>
+    </div>
+
+    <div class="csa-grid csa-grid-2">
+
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Light surface</div>
+        <div data-surface="light" style="padding:24px;border-radius:12px">
+          <ul class="csa-list">
+            <li>Assess cloud and AI controls against the CCM</li>
+            <li>Publish results to the STAR Registry
+              <ul class="csa-list">
+                <li>Level 1 self-assessment</li>
+                <li>Level 2 third-party audit</li>
+              </ul>
+            </li>
+            <li>Keep your listing current year over year</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Dark surface</div>
+        <div data-surface="dark" style="padding:24px;border-radius:12px">
+          <ul class="csa-list">
+            <li>Assess cloud and AI controls against the CCM</li>
+            <li>Publish results to the STAR Registry
+              <ul class="csa-list">
+                <li>Level 1 self-assessment</li>
+                <li>Level 2 third-party audit</li>
+              </ul>
+            </li>
+            <li>Keep your listing current year over year</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Black surface</div>
+        <div data-surface="black" style="padding:24px;border-radius:12px">
+          <ul class="csa-list">
+            <li>Assess cloud and AI controls against the CCM</li>
+            <li>Publish results to the STAR Registry
+              <ul class="csa-list">
+                <li>Level 1 self-assessment</li>
+                <li>Level 2 third-party audit</li>
+              </ul>
+            </li>
+            <li>Keep your listing current year over year</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="csa-cell csa-card">
+        <div class="csa-kicker">Gradient surface — ol</div>
+        <div data-surface="gradient" style="padding:24px;border-radius:12px">
+          <ol class="csa-list">
+            <li>Assess cloud and AI controls against the CCM</li>
+            <li>Publish results to the STAR Registry
+              <ul class="csa-list">
+                <li>Level 1 self-assessment</li>
+                <li>Level 2 third-party audit</li>
+              </ul>
+            </li>
+            <li>Keep your listing current year over year</li>
+          </ol>
         </div>
       </div>
 
