@@ -69,7 +69,7 @@
 .csa-filters-title {
   font-size: 22px; font-weight: 800; letter-spacing: -.02em; 
 }
-.csa-filters-clear { font-size: 12px; font-weight: 700; color: var(--n300); text-decoration: underline; transition: color .15s; }
+.csa-filters-clear { font-size: var(--text-caption); font-weight: 700; color: var(--n400); text-decoration: underline; transition: color .15s; }
 .csa-filters-clear:hover { color: var(--n500); }
 
 /* No gap here — .csa-filter-row supplies its own 5px top/bottom

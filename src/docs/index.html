@@ -483,7 +483,6 @@
         <a href="#type">Typography</a>
         <a href="#spacing">Spacing</a>
         <a href="#spacing-helpers">Spacing helpers</a>
-        <a href="#color-helpers">Color helpers</a>
         <a href="#surfaces">Surfaces</a>
         <a href="#buttons">Buttons</a>
         <a href="#action">Action</a>
@@ -531,7 +530,7 @@
     <div class="docs-head">
       <span class="csa-kicker">Tokens</span>
       <h2 class="csa-title">Color palette</h2>
-      <p>CSA's primary palette, the three brand sub-palettes (Cloud, AI, Zero Trust), and the full extended 7×11 ramp. Hex values render live from <code>tokens/colors.css</code>; CMYK/PMS are print specs from the brand guide and can't be derived from a hex value, so those are entered directly.</p>
+      <p>CSA's primary palette, the three brand sub-palettes (Cloud, AI, Zero Trust), the full extended 7×11 ramp, and the <code>.csa-color-*</code> / <code>.csa-bg-*</code> helper classes. Hex values render live from <code>tokens/colors.css</code>; CMYK/PMS are print specs from the brand guide and can't be derived from a hex value, so those are entered directly.</p>
       <div class="csa-rule"></div>
     </div>
 
@@ -542,6 +541,7 @@
         <button type="button" class="csa-tab" role="tab" id="tab-colors-ai" aria-selected="false" tabindex="-1" aria-controls="panel-colors-ai">Brand Palette: AI</button>
         <button type="button" class="csa-tab" role="tab" id="tab-colors-zt" aria-selected="false" tabindex="-1" aria-controls="panel-colors-zt">Brand Palette: Zero Trust</button>
         <button type="button" class="csa-tab" role="tab" id="tab-colors-extended" aria-selected="false" tabindex="-1" aria-controls="panel-colors-extended">Extended Palette</button>
+        <button type="button" class="csa-tab" role="tab" id="tab-colors-helpers" aria-selected="false" tabindex="-1" aria-controls="panel-colors-helpers">Color Helpers</button>
       </div>
 
       <div class="csa-tabpanel csa-tabpanel-active" role="tabpanel" id="panel-colors-primary" aria-labelledby="tab-colors-primary" style="margin-top:26px">
@@ -571,6 +571,25 @@
         <p style="font-size:14.5px;color:var(--n500);max-width:640px;margin-bottom:22px">7 families × 11-step ramps (25–800), named <code>--{letter}{ramp}</code>. Swatches below are generated from the actual CSS custom properties, not hardcoded.</p>
         <div id="paletteGrid"></div>
       </div>
+
+      <div class="csa-tabpanel" role="tabpanel" id="panel-colors-helpers" aria-labelledby="tab-colors-helpers" hidden style="margin-top:26px">
+        <p style="font-size:14.5px;color:var(--n500);max-width:640px;margin-bottom:22px">One utility class per color token for text and background. Both use <code>!important</code> so they work as overrides anywhere in the component stack. Same letter+ramp naming as the Extended Palette, e.g. <code>--b300</code> &rarr; <code>.csa-color-b300</code> and <code>.csa-bg-b300</code>.</p>
+        <div class="docs-panel" style="margin-bottom:20px">
+          <div class="docs-label">Pattern</div>
+          <div class="docs-type-row"><span class="docs-type-tag">.csa-color-{token}</span><span style="font-size:13px;color:var(--n400)">Sets <code>color</code> — text, icons, and SVG <code>fill</code>/<code>stroke</code> via <code>currentColor</code></span></div>
+          <div class="docs-type-row" style="border:none;padding-bottom:0"><span class="docs-type-tag">.csa-bg-{token}</span><span style="font-size:13px;color:var(--n400)">Sets <code>background-color</code></span></div>
+        </div>
+
+        <div class="docs-panel" style="margin-bottom:20px">
+          <div class="docs-label">Background — <code>.csa-bg-{token}</code></div>
+          <div id="colorHelpersBg"></div>
+        </div>
+
+        <div class="docs-panel">
+          <div class="docs-label">Text color — <code>.csa-color-{token}</code> (shown on <code>--n800</code> to make every step readable)</div>
+          <div id="colorHelpersText"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -592,7 +611,9 @@
       <div class="docs-type-row"><span class="docs-type-tag">h3.csa-title</span><div class="docs-type-sample"><h3 class="csa-title">Practitioners set the agenda</h3></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">h4.csa-title</span><div class="docs-type-sample"><h4 class="csa-title">Board &amp; executive briefings</h4></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">body / p</span><div class="docs-type-sample"><p>Data loss, destructive automation, and failed recovery will rise sharply as AI agents spread — resilience is what lets an organization take the hit and keep operating.</p></div></div>
-      <div class="docs-type-row"><span class="docs-type-tag">p.csa-block</span><div class="docs-type-sample"><p class="csa-block">Data loss, destructive automation, and failed recovery will rise sharply as AI agents spread — resilience is what lets an organization take the hit and keep operating.</p><p style="font-size:12px;color:var(--n400);margin-top:6px">18px · line-height 1.6 · color <code>--n500</code> · 12px top &amp; bottom margin</p></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">p.csa-block</span><div class="docs-type-sample"><p class="csa-block">Data loss, destructive automation, and failed recovery will rise sharply as AI agents spread — resilience is what lets an organization take the hit and keep operating.</p><p class="csa-caption" style="margin-top:6px">18px · line-height 1.6 · color <code>--n500</code> · 12px top &amp; bottom margin</p></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">p.csa-block-small</span><div class="docs-type-sample"><p class="csa-block-small" style="margin-top:0">Data loss, destructive automation, and failed recovery will rise sharply as AI agents spread — resilience is what lets organizations keep operating when something goes wrong.</p><p class="csa-caption" style="margin-top:6px">14.5px (<code>--text-small</code>) · line-height 1.55 · color --n500 · 8px top &amp; bottom margin · short paragraphs: card copy, notes. Buttons, links, tabs and nav use the same value.</p></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">.csa-caption</span><div class="docs-type-sample"><span class="csa-caption">Published Oct 6, 2026 · 8 min read · PDF, 2.4 MB</span><p class="csa-caption" style="margin-top:6px">12px (<code>--text-caption</code>) · line-height 1.5 · color --n400 (--n200 on dark/black) · no margin · dates, bylines, footnotes, captions, form hints. Short lines only.</p></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-kicker</span><div class="docs-type-sample"><span class="csa-kicker">Why now</span></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-kicker-sub</span><div class="docs-type-sample"><span class="csa-kicker-sub">Founding Benefactor</span></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-kicker-blue</span><div class="docs-type-sample">
@@ -610,14 +631,14 @@
               <span class="csa-kicker-sub csa-kicker-blue">Founding Benefactor</span>
             </div>
           </div>
-          <p style="font-size:12px;color:var(--n400);margin-top:6px">Color-only modifier — combine with <code>.csa-kicker</code> or <code>.csa-kicker-sub</code>. <code>--b500</code> on light/gradient, <code>--b200</code> on dark/black.</p>
+          <p class="csa-caption" style="margin-top:6px">Color-only modifier — combine with <code>.csa-kicker</code> or <code>.csa-kicker-sub</code>. <code>--b500</code> on light/gradient, <code>--b200</code> on dark/black.</p>
        </div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-rule</span><div class="docs-type-sample"><div class="csa-rule"></div></div></div>
       <div class="docs-type-row"><span class="docs-type-tag">hr.csa-hr</span><div class="docs-type-sample">
           <div>Section 1</div>
           <hr class="csa-hr">
           <div>Section 2</div>
-          <p style="font-size:12px;color:var(--n400);margin-top:6px">A small horizontal separator with color --n50, to use between sections</p>
+          <p class="csa-caption" style="margin-top:6px">A small horizontal separator with color --n50, to use between sections</p>
        </div></div>
       <div class="docs-type-row"><span class="docs-type-tag">.csa-go</span><div class="docs-type-sample"><a class="csa-go" href="#" style="margin-top:0">Learn more →</a></div></div>
       <div class="docs-type-row">
@@ -637,6 +658,8 @@
           <span class="csa-kicker-sub">Founding Benefactor</span>
           <div class="csa-rule" style="margin-top:0"></div>
           <a class="csa-go" href="#" style="margin-top:0">Learn more →</a>
+          <p class="csa-block-small" style="margin:0;flex-basis:100%">Short supporting paragraph in <code>.csa-block-small</code>.</p>
+          <span class="csa-caption" style="flex-basis:100%">Published Oct 6, 2026 · 8 min read</span>
         </div>
       </div>
     </div>
@@ -707,36 +730,6 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- COLOR HELPERS                                                 -->
-<!-- ============================================================ -->
-<section class="docs-section" id="color-helpers">
-  <div class="csa-wrap">
-    <div class="docs-head">
-      <span class="csa-kicker">Helpers</span>
-      <h2>Color helpers</h2>
-      <p>One utility class per color token for text and background. Both use <code>!important</code> so they work as overrides anywhere in the component stack. Tokens match the ramp in <a href="#colors">Color palette</a> — same letter+ramp naming, e.g. <code>--b300</code> → <code>.csa-color-b300</code> and <code>.csa-bg-b300</code>.</p>
-      <div class="csa-rule"></div>
-    </div>
-
-    <div class="docs-panel" style="margin-bottom:20px">
-      <div class="docs-label">Pattern</div>
-      <div class="docs-type-row"><span class="docs-type-tag">.csa-color-{token}</span><span style="font-size:13px;color:var(--n400)">Sets <code>color</code> — text, icons, and SVG <code>fill</code>/<code>stroke</code> via <code>currentColor</code></span></div>
-      <div class="docs-type-row" style="border:none;padding-bottom:0"><span class="docs-type-tag">.csa-bg-{token}</span><span style="font-size:13px;color:var(--n400)">Sets <code>background-color</code></span></div>
-    </div>
-
-    <div class="docs-panel" style="margin-bottom:20px">
-      <div class="docs-label">Background — <code>.csa-bg-{token}</code></div>
-      <div id="colorHelpersBg"></div>
-    </div>
-
-    <div class="docs-panel">
-      <div class="docs-label">Text color — <code>.csa-color-{token}</code> (shown on <code>--n800</code> to make every step readable)</div>
-      <div id="colorHelpersText"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
 <!-- SURFACES                                                      -->
 <!-- ============================================================ -->
 <section class="docs-section" id="surfaces">
@@ -789,7 +782,7 @@
     <div class="docs-head" style="margin-top:56px">
       <span class="csa-kicker">Surface tones</span>
       <h3 class="csa-title" style="font-size:28px">Neutral and deep</h3>
-      <p>An optional second attribute, <code>data-tone="..."</code>, nudges a surface one step without becoming a new surface. A tone only changes the band and card fills — every text color and component rule keyed to <code>data-surface</code> keeps applying unchanged. <code>data-tone="neutral"</code> on a light surface gives an n25 band with white cards (the older <code>.csa-bg-n25</code> class still works as an alias). <code>data-tone="deep"</code> on a dark surface drops the band to b800 and lifts cards to b700; progress tracks, toggle tracks, and disabled pagination step up to b700 too, so they don't vanish into the band.</p>
+      <p>An optional second attribute, <code>data-tone="..."</code>, nudges a surface one step without becoming a new surface. A tone only changes the band and card fills — every text color and component rule keyed to <code>data-surface</code> keeps applying unchanged. <code>data-tone="neutral"</code> on a light surface gives an n25 band with white cards. It replaces the older <code>.csa-bg-n25</code> hook — that class is now only a plain background color helper and no longer adjusts what's inside it. <code>data-tone="deep"</code> on a dark surface drops the band to b800 and lifts cards to b700; progress tracks, toggle tracks, and disabled pagination step up to b700 too, so they don't vanish into the band.</p>
       <div class="csa-rule"></div>
     </div>
     <div class="docs-surfaces docs-tones">
@@ -981,7 +974,7 @@
     <div class="docs-head">
       <span class="csa-kicker">Components</span>
       <h2 class="csa-title">Cards</h2>
-      <p><code>.csa-card</code> is surface-aware (see Surfaces above). Six variants below: standard, icon, hover-with-CTA, media (16:9), reveal-on-hover (4:3), and frosted-glass.</p>
+      <p><code>.csa-card</code> is surface-aware (see Surfaces above). Variants below: standard, icon, hover-with-CTA, flip, raised, media (16:9), reveal-on-hover (4:3), frosted-glass, and brand.</p>
       <div class="csa-rule"></div>
       <div class="csa-tabs" style="margin-top:18px">
         <div class="csa-tablist" role="tablist" aria-label="Preview cards on a background">
@@ -1042,6 +1035,64 @@
         </div>
       </div>
 
+      <div class="docs-label" style="margin-top:32px">Flip cards — <code>.csa-card-flip</code>, click (or Space) to turn over; hover tilts it</div>
+      <div class="docs-card-row-3" style="align-items:stretch">
+        <div class="csa-card-flip">
+          <input type="checkbox" class="csa-card-flip-toggle csa-sr-only" id="docs-flip-1" aria-label="More about Cloud Security">
+          <div class="csa-card-flip-inner">
+            <div class="csa-card csa-card-flip-front">
+              <label class="csa-card-flip-hit" for="docs-flip-1"></label>
+              <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
+              <img class="csa-icon csa-icon-large docs-icon-not-dark" src="../assets/icons/cloud-security-light-blue.svg" alt="">
+              <img class="csa-icon csa-icon-large docs-icon-only-dark" src="../assets/icons/cloud-security-csa-blue.svg" alt="">
+              <h3 class="csa-title">Cloud Security</h3>
+            </div>
+            <div class="csa-card csa-card-flip-back">
+              <label class="csa-card-flip-hit" for="docs-flip-1"></label>
+              <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
+              <p style="font-size:14.5px;margin:0">Placeholder back-of-card copy — a short description of what this card links to.</p>
+              <a class="csa-go" href="#">Learn more <span aria-hidden="true">&rarr;</span><span class="csa-sr-only"> — Cloud Security</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="csa-card-flip">
+          <input type="checkbox" class="csa-card-flip-toggle csa-sr-only" id="docs-flip-2" aria-label="More about AI Safety">
+          <div class="csa-card-flip-inner">
+            <div class="csa-card csa-card-flip-front">
+              <label class="csa-card-flip-hit" for="docs-flip-2"></label>
+              <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
+              <img class="csa-icon csa-icon-large docs-icon-not-dark" src="../assets/icons/ai-security-light-blue.svg" alt="">
+              <img class="csa-icon csa-icon-large docs-icon-only-dark" src="../assets/icons/ai-security-csa-blue.svg" alt="">
+              <h3 class="csa-title">AI Safety</h3>
+            </div>
+            <div class="csa-card csa-card-flip-back">
+              <label class="csa-card-flip-hit" for="docs-flip-2"></label>
+              <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
+              <p style="font-size:14.5px;margin:0">Placeholder back-of-card copy. Both faces share one grid cell, so the card is as tall as its taller face.</p>
+              <a class="csa-go" href="#">Learn more <span aria-hidden="true">&rarr;</span><span class="csa-sr-only"> — AI Safety</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="csa-card-flip">
+          <input type="checkbox" class="csa-card-flip-toggle csa-sr-only" id="docs-flip-3" aria-label="More about Compliance">
+          <div class="csa-card-flip-inner">
+            <div class="csa-card csa-card-flip-front">
+              <label class="csa-card-flip-hit" for="docs-flip-3"></label>
+              <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
+              <img class="csa-icon csa-icon-large docs-icon-not-dark" src="../assets/icons/checklist-light-blue.svg" alt="">
+              <img class="csa-icon csa-icon-large docs-icon-only-dark" src="../assets/icons/checklist-csa-blue.svg" alt="">
+              <h3 class="csa-title">Compliance</h3>
+            </div>
+            <div class="csa-card csa-card-flip-back">
+              <label class="csa-card-flip-hit" for="docs-flip-3"></label>
+              <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
+              <p style="font-size:14.5px;margin:0">Placeholder back-of-card copy, a little longer than its neighbors, to show every card in a stretched row matching the tallest one without the faces ever drifting out of step.</p>
+              <a class="csa-go" href="#">Learn more <span aria-hidden="true">&rarr;</span><span class="csa-sr-only"> — Compliance</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="docs-label" style="margin-top:32px">Raised card — <code>.csa-card-raised</code>, for more emphasis than the rest of a grid</div>
       <div class="csa-card csa-card-raised" style="margin-top:14px">
         <span class="csa-kicker-sub">Standard card</span>
@@ -1063,7 +1114,7 @@
           <a class="csa-go" href="#">Learn more →</a>
         </div>
         <div class="csa-card csa-card-hover csa-card-brand-cloud csa-card-disabled">
-          <img class="csa-icon csa-icon-mono" src="../assets/icons/cloud-b500.svg" alt="">
+          <img class="csa-icon csa-icon-mono" src="../assets/icons/b500/cloud-b500.svg" alt="">
           <span class="csa-kicker-sub">Brand card</span>
           <h3 class="csa-title">Card heading goes here</h3>
           <p style="font-size:14.5px">Works on brand and glass variants too — opacity mutes everything uniformly.</p>
@@ -1301,7 +1352,7 @@
           </div>
         </div>
       </div>
-      <div class="docs-surface-demo csa-bg-n25" style="background:var(--n25)">
+      <div class="docs-surface-demo" data-surface="light" data-tone="neutral">
         <div class="docs-label" style="margin-bottom:14px">Neutral background</div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -1417,7 +1468,7 @@
           <button type="button" class="csa-toggle-segmented-option">Option 2</button>
         </div>
       </div>
-      <div class="docs-surface-demo csa-bg-n25" style="background:var(--n25)">
+      <div class="docs-surface-demo" data-surface="light" data-tone="neutral">
         <div class="docs-label" style="margin-bottom:14px">Neutral background</div>
         <div style="display:flex;gap:12px">
           <button type="button" class="csa-toggle-icon" aria-pressed="false" aria-label="Toggle dark mode">
@@ -1708,7 +1759,7 @@
       <p>The <code>.csa-card-quote</code> card — a quote glyph, body copy, then a footer with name and title (the headshot is optional). Shown here as a static 3-card row, but with more than 3 testimonials, drop them into the same <code>.csa-carousel</code> markup used above — arrows and progress dots included — instead of stacking them all in a row.</p>
       <div class="csa-rule"></div>
     </div>
-    <div data-surface="light" class="csa-bg-n25" style="background:var(--n25)">
+    <div data-surface="light" data-tone="neutral">
       <div class="docs-card-row-3" style="align-items:stretch">
         <div class="csa-card csa-card-quote">
           <span class="csa-card-quote-mark">&ldquo;</span>

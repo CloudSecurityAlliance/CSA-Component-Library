@@ -105,10 +105,15 @@
    itself so they hold on any page surface. */
 .csa-card-glass h1, .csa-card-glass h2, .csa-card-glass h3, .csa-card-glass h4 { color: #fff; }
 .csa-card-glass p { color: var(--n75); }
-.csa-card-glass .csa-kicker, .csa-card-glass .csa-kicker-sub { color: var(--o500); }
-.csa-card-glass .csa-kicker-blue { color: var(--b200); }
-.csa-card-glass .csa-go { color: var(--b300); }
-.csa-card-glass .csa-go:hover { color: var(--b100); }
+.csa-card-glass .csa-kicker, .csa-card-glass .csa-kicker-sub { color: var(--o200); } /* o500 dropped to ~4:1 over lighter photo areas; o200 is 6:1+. The glass hero panel keeps hero.css's own kicker color (later file, same weight) */
+.csa-card-glass .csa-kicker-blue { color: var(--b100); } /* b200 dropped to ~4.2:1 over lighter photo areas; b100 is 5.3:1+ */
+/* Links: white, n75 on hover — same as the reveal card's link (see
+   .csa-card-reveal-more-inner .csa-go); b300 read poorly on the glass's
+   navy cast. The [data-surface] copies outrank the dark/black surfaces'
+   own .csa-go rules, which come later in this file at the same weight;
+   the light-glass link rules below still outrank these. */
+.csa-card-glass .csa-go, [data-surface] .csa-card-glass .csa-go { color: #fff; }
+.csa-card-glass .csa-go:hover, [data-surface] .csa-card-glass .csa-go:hover { color: var(--n75); }
 .csa-card-glass .csa-hr { border-top-color: var(--b600); }
 /* Light text set — the light-surface colors, for the opt-in light glass.
    Compound selector (.csa-card-glass.csa-card-glass-light) so it outranks
@@ -186,10 +191,15 @@
 .csa-card-glass::after,
 .csa-card-reveal-panel::after {
   inset: 0; border-radius: inherit;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n' x='0' y='0' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 3 0 0 0 -1.5' result='w'/><feColorMatrix in='t' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 0 0 0 1.5' result='b'/><feMerge><feMergeNode in='w'/><feMergeNode in='b'/></feMerge></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n' x='0' y='0' width='100%' height='100%' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 3 0 0 0 -1.5' result='w'/><feColorMatrix in='t' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 0 0 0 1.5' result='b'/><feMerge><feMergeNode in='w'/><feMergeNode in='b'/></feMerge></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   background-size: 200px;
   opacity: .04;
 }
+/* The grain filter's width/height='100%' matter: left out, an SVG filter
+   region defaults to 120% of the tile, so stitchTiles joins the noise up
+   on a 240px tile that's then cut off at 200px — every tile edge became a
+   faint visible seam (seen as a vertical line ~200px into the reveal
+   panel). At 100% the noise stitches exactly at the tile's own edges. */
 
 /* Fallbacks: no backdrop-filter support, or the viewer asked the OS for
    reduced transparency — go near-opaque in the old solid colors. */
@@ -224,7 +234,7 @@
    On dark/black, resting color is ALSO b300, so hover needs its own
    step lighter (b100) — otherwise hovering would show no visible change
    at all, since :hover's b300 would just match the resting color. */
-.csa-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 14.5px; font-weight: 500; color: var(--b500); transition: .15s; }
+.csa-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: var(--text-small); font-weight: 500; color: var(--b500); transition: .15s; }
 .csa-go:hover { color: var(--b300); }
 [data-surface="dark"] .csa-go, [data-surface="black"] .csa-go { color: var(--b300); }
 [data-surface="dark"] .csa-go:hover, [data-surface="black"] .csa-go:hover { color: var(--b100); }
@@ -367,7 +377,7 @@
    reveal-on-hover copy, which has its own top spacing
    (.csa-card-reveal-more-inner's padding-top) instead. */
 .csa-card-reveal-head h3 { font-size: 20px; margin: 8px 0 0; }
-.csa-card-reveal-overlay .csa-kicker-sub { color: var(--o500); }
+.csa-card-reveal-overlay .csa-kicker-sub { color: var(--o200); } /* same dark glass as .csa-card-glass — matches its o200 kickers */
 
 
 .csa-card-reveal-more { display: grid; grid-template-rows: 0fr; min-height: 0; transition: grid-template-rows .4s ease; }
@@ -412,12 +422,14 @@
   padding-top: 14px;
 }
 .csa-card-reveal-more-inner p { color: var(--n75); }
-.csa-card-reveal-more-inner .csa-go { color: var(--b300); }
-/* Resting is already b300 here (the panel's own dark glass needs a
-   lighter blue than the library default, regardless of page surface),
-   so the general .csa-go:hover rule (also b300) was a no-op on hover —
-   the same reason dark/black surfaces step .csa-go:hover up to b100. */
-.csa-card-reveal-more-inner .csa-go:hover { color: var(--b100); }
+/* White link, n75 on hover. The panel is always dark glass over a photo
+   (regardless of page surface), and the usual dark-surface blue (b300)
+   had poor contrast against its navy cast — white reads clearly and
+   matches the panel's heading. Hover steps down to n75 (the panel's own
+   body-text color) rather than up, since there's nothing brighter than
+   white to step to. */
+.csa-card-reveal-more-inner .csa-go { color: #fff; }
+.csa-card-reveal-more-inner .csa-go:hover { color: var(--n75); }
 .csa-card-reveal:hover .csa-card-reveal-more { grid-template-rows: 1fr; }
 /* Stretch the csa-go link over the glass panel, same idea as
    .csa-card-hover. Only the panel, not the whole card: the panel is the
@@ -431,6 +443,131 @@
    a hand over the panel (the link's stretched ::after above) — the photo
    above it isn't clickable, and the cursor shouldn't suggest otherwise. */
 .csa-card-reveal:has(.csa-go) { cursor: auto; }
+
+
+/* =========================================================
+   Flip card — .csa-card-flip, a card with a front and a back
+   that turns over on click (CSS only, no script). Both faces are regular
+   .csa-card elements, so they pick up the surface's card colours/border.
+
+   Markup contract (the id/for pair must be unique per card):
+     <div class="csa-card-flip">
+       <input type="checkbox" class="csa-card-flip-toggle csa-sr-only" id="flip-1" aria-label="More about …">
+       <div class="csa-card-flip-inner">
+         <div class="csa-card csa-card-flip-front">
+           <label class="csa-card-flip-hit" for="flip-1"></label>
+           <span class="csa-card-flip-cue" aria-hidden="true"><svg>…</svg></span>
+           …front content…
+         </div>
+         <div class="csa-card csa-card-flip-back">
+           <label class="csa-card-flip-hit" for="flip-1"></label>
+           <span class="csa-card-flip-cue" aria-hidden="true"><svg>…</svg></span>
+           …back content, links included…
+         </div>
+       </div>
+     </div>
+
+   - Click: a visually hidden checkbox holds the flipped state. Each face
+     is covered by a <label> for it (.csa-card-flip-hit), so a click
+     anywhere on the card flips it; links on the back sit above the label
+     and stay clickable. Keyboard: Tab reaches the checkbox (focus ring on
+     the card), Space flips it, then Tab reaches the back's links.
+   - Hover: the card tilts 12° in the direction it will turn, hinting that
+     it flips, and lifts with the library's raised-card shadow (also shown
+     on keyboard focus). The corner cue icon shows on touch screens only, where
+     there's no hover tilt or pointer cursor to give that hint.
+   - Both faces share one grid cell, so the card is as tall as its taller
+     face and the two always match; in a .csa-grid row every card
+     stretches to the row's tallest.
+   - Whichever face is turned away is visibility:hidden (once the turn
+     passes halfway), so it can't catch clicks and the back's links aren't
+     reachable by Tab until the card is turned over.
+   - Reduced motion: no rotation or tilt, the faces cross-fade instead. */
+.csa-card-flip { position: relative; perspective: 1200px; }
+.csa-card-flip-inner {
+  display: grid; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.3, 1.3, .5, 1); /* slight overshoot as it lands */
+}
+/* 24px padding rather than .csa-card's 32px — the component's own value,
+   same as .csa-card-media-body, to keep a grid of these compact. */
+.csa-card-flip-front, .csa-card-flip-back {
+  grid-area: 1 / 1; position: relative; padding: 24px;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+.csa-card-flip-back {
+  transform: rotateY(180deg);
+  display: flex; flex-direction: column; justify-content: space-between;
+  visibility: hidden; transition: visibility 0s .3s, box-shadow .3s ease; /* hide once it's turned away */
+}
+.csa-card-flip-hit { position: absolute; inset: 0; z-index: 1; border-radius: inherit; cursor: pointer; }
+.csa-card-flip-back a { position: relative; z-index: 2; }
+/* Belt and braces for the click: some browsers (Safari especially) order
+   layers inside a 3D-transformed card by depth and can ignore the
+   z-index above, letting the text sit over the label — a click on the
+   words then selects text instead of flipping. So the face content
+   ignores the pointer outright (clicks fall through to the label),
+   except links, and the card's text isn't selectable. */
+.csa-card-flip-front > :not(.csa-card-flip-hit),
+.csa-card-flip-back > :not(.csa-card-flip-hit):not(a) { pointer-events: none; }
+.csa-card-flip-front, .csa-card-flip-back { -webkit-user-select: none; user-select: none; }
+.csa-card-flip-back .csa-go { margin-top: 16px; align-self: flex-start; }
+.csa-card-flip-cue {
+  position: absolute; top: 8px; right: 8px; width: 16px; height: 16px; /* inside the 24px padding, clear of content */
+  color: var(--b300); opacity: .6; transition: opacity .2s ease; pointer-events: none;
+}
+.csa-card-flip-cue svg { display: block; width: 100%; height: 100%; }
+/* The cue is for touch only — with a mouse the hover tilt and pointer
+   cursor already say "this turns over"; touch has neither. */
+@media (hover: hover) and (pointer: fine) { .csa-card-flip-cue { display: none; } }
+
+/* Hover tilt (peek), flipped state, and the flipped card's own peek back. */
+.csa-card-flip:hover .csa-card-flip-inner { transform: rotateY(12deg); }
+.csa-card-flip-toggle:checked + .csa-card-flip-inner { transform: rotateY(180deg); }
+.csa-card-flip:hover .csa-card-flip-toggle:checked + .csa-card-flip-inner { transform: rotateY(168deg); }
+.csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-back { visibility: visible; transition-delay: 0s; }
+/* The face turned away still catches clicks unless it's hidden too — so the
+   front hides (after the turn) while flipped, leaving the back's link and
+   label clickable. */
+.csa-card-flip-front { transition: visibility 0s, box-shadow .3s ease; }
+.csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-front { visibility: hidden; transition-delay: .3s, 0s; }
+.csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > * { outline: 2px solid var(--b300); outline-offset: 3px; }
+
+/* Lift shadow while hovered or keyboard-focused — so it's there through the
+   tilt and the turn. It sits on the faces, so it tilts and turns with the
+   card rather than staying flat. Values are the library's own raised-card
+   shadow — --shadow's two layers on light surfaces, and the darker black
+   stack .csa-card-hover:hover / .csa-card-raised use on dark and black —
+   with one addition: a sideways offset that follows the turn, falling
+   left on the front and right on the back (--flip-shadow-dir: -1 / 1;
+   4px on the tight layer, 16px on the soft one). */
+.csa-card-flip-front { --flip-shadow-dir: -1; }
+.csa-card-flip-back  { --flip-shadow-dir: 1; }
+.csa-card-flip:hover .csa-card-flip-inner > *,
+.csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > * {
+  box-shadow:
+    calc(var(--flip-shadow-dir) * 4px) 2px 6px rgba(12,35,64,.06),
+    calc(var(--flip-shadow-dir) * 16px) 18px 40px -18px rgba(12,35,64,.22);
+}
+[data-surface="dark"] .csa-card-flip:hover .csa-card-flip-inner > *,
+[data-surface="dark"] .csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > *,
+[data-surface="black"] .csa-card-flip:hover .csa-card-flip-inner > *,
+[data-surface="black"] .csa-card-flip-toggle:focus-visible + .csa-card-flip-inner > * {
+  box-shadow:
+    calc(var(--flip-shadow-dir) * 4px) 2px 6px rgba(0,0,0,.25),
+    calc(var(--flip-shadow-dir) * 16px) 18px 40px -18px rgba(0,0,0,.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .csa-card-flip-inner { transition: none; }
+  .csa-card-flip:hover .csa-card-flip-inner,
+  .csa-card-flip-toggle:checked + .csa-card-flip-inner,
+  .csa-card-flip:hover .csa-card-flip-toggle:checked + .csa-card-flip-inner { transform: none; }
+  .csa-card-flip-back { transform: none; opacity: 0; }
+  .csa-card-flip-front, .csa-card-flip-back { transition: opacity .2s ease, visibility 0s .2s, box-shadow .3s ease; }
+  .csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-front { opacity: 0; transition: opacity .2s ease, visibility 0s .2s, box-shadow .3s ease; }
+  .csa-card-flip-toggle:checked + .csa-card-flip-inner .csa-card-flip-back { opacity: 1; transition-delay: 0s; }
+}
 
 
 /* =========================================================
@@ -567,16 +704,16 @@
    cards stretched to equal height, regardless of how long any one quote
    runs — the body grows to fill the leftover space instead of the footer
    just trailing wherever the text happens to end. */
-.csa-card-quote-body { font-size: 14.5px; color: var(--n500); margin-top: 12px; flex: 1; }
+.csa-card-quote-body { font-size: var(--text-small); color: var(--n500); margin-top: 12px; flex: 1; }
 .csa-card-quote-footer {
   display: flex; align-items: center; gap: 12px;
   border-top: 1px solid var(--n25); margin-top: 24px; padding-top: 16px;
 }
 .csa-card-quote-avatar { width: 48px; height: 48px; flex-shrink: 0; display: block; }
-.csa-card-quote-name { font-size: 15.5px; font-weight: 700; color: var(--b800); }
-.csa-card-quote-title { font-size: 14px; color: var(--n300); margin-top: 2px; }
+.csa-card-quote-name { font-size: 16px; font-weight: 700; color: var(--b800); }
+.csa-card-quote-title { font-size: var(--text-caption); color: var(--n400); margin-top: 2px; }
 
 [data-surface="dark"] .csa-card-quote-body, [data-surface="black"] .csa-card-quote-body { color: var(--n75); }
 [data-surface="dark"] .csa-card-quote-footer, [data-surface="black"] .csa-card-quote-footer { border-top-color: var(--b600); }
 [data-surface="dark"] .csa-card-quote-name, [data-surface="black"] .csa-card-quote-name { color: #fff; }
-[data-surface="dark"] .csa-card-quote-title, [data-surface="black"] .csa-card-quote-title { color: var(--n100); }
+[data-surface="dark"] .csa-card-quote-title, [data-surface="black"] .csa-card-quote-title { color: var(--n200); }

@@ -11,3 +11,12 @@
   flex-direction: column;
   align-items: center;
 }
+
+/* Visually hidden, but still read by screen readers and still focusable.
+   For text that only assistive tech needs (e.g. naming the target of a
+   repeated "View Working Group" link) and for native controls that drive
+   a CSS-only component without being seen (the .csa-card-flip checkbox). */
+.csa-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}

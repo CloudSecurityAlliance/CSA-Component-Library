@@ -73,7 +73,7 @@
 .csa-accordion-trigger {
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
   cursor: pointer; list-style: none;
-  padding: 20px 0; font-weight: 700; font-size: 17.5px; letter-spacing: -.01em;
+  padding: 20px 0; font-weight: 700; font-size: 18px; letter-spacing: -.01em;
   color: var(--b800);
 }
 .csa-accordion-trigger::-webkit-details-marker { display: none; }
@@ -97,5 +97,5 @@
   max-height: var(--csa-accordion-max-height, 900px);
   padding-bottom: 22px;
 }
-.csa-accordion-panel p { font-size: 15.5px; line-height: 1.65; color: var(--n500); max-width: 74ch; }
+.csa-accordion-panel p { font-size: 16px; line-height: 1.65; color: var(--n500); max-width: 74ch; }
 .csa-accordion-panel p + p { margin-top: 10px; }

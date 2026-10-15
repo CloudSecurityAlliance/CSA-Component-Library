@@ -29,7 +29,7 @@
    diverge.
    Every rule below is written twice on purpose: once for a plain white
    page, once escalated a ramp step for a literal n25 background (see
-   .csa-bg-n25, the same escalation hook .csa-card already uses in
+   data-tone="neutral", the same tone .csa-card already responds to in
    surfaces.css) — without that step, an n25-background tag would be
    invisible sitting on an n25 page. Dark and black share one set of
    rules (identical per spec), diverging only in the pressed-state text
@@ -71,38 +71,66 @@
 .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
 .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
 
+/* ---- Inside a card on a light surface — automatic step-up ----
+   A light surface's .csa-card / .csa-card-media is itself n25 (see
+   surfaces.css) — whether the card sits inside a data-surface="light"
+   section or carries data-surface="light" itself — so a neutral tag
+   inside one would vanish into it just like on an n25 band. Same
+   one-step escalation as the neutral tone below, applied automatically
+   so no hook is needed on the card. Skipped where the card is white
+   instead: a gradient surface or the neutral tone, on the card itself
+   or around it.
+   The whole context is wrapped in :where() so it adds no specificity:
+   these rules land at the same weight as the White defaults above and
+   win only by coming later, so every [data-surface="dark"/"black"]
+   rule below still beats them when a dark section is nested inside a
+   light page. Hover/pressed keep White's order (pressed last) for the
+   same hover-vs-pressed reason given in the neutral block below. */
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-neutral { background: var(--n50); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-blue    { background: var(--b50); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-orange  { background: var(--o50); }
+
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
+
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
+:where(:is([data-surface="light"] .csa-card, [data-surface="light"] .csa-card-media, [data-surface="light"].csa-card, [data-surface="light"].csa-card-media):not([data-surface="gradient"], [data-surface="gradient"] *, [data-tone="neutral"], [data-tone="neutral"] *)) .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
+
 /* ---- Neutral (n25) background — one ramp step up so tags stay visible against their own n25 host ----
    Pairing rule, so the wrong variant never gets picked by accident:
-   .csa-bg-n25 only belongs on an ancestor whose OWN rendered background
-   really is n25 (the page, or a plain n25 panel) — never combine it
-   with something that then forces the immediate container to a
-   DIFFERENT color (e.g. a wrapper carrying .csa-bg-n25 purely to turn a
-   nested .csa-card white). That mismatch — tags escalated for n25
+   data-tone="neutral" only belongs on an ancestor whose OWN rendered
+   background really is n25 (the page, or a plain n25 panel) — never
+   combine it with something that then forces the immediate container
+   to a DIFFERENT color (e.g. a wrapper carrying the tone purely to turn
+   a nested .csa-card white). That mismatch — tags escalated for n25
    sitting on a card that's actually white — is exactly the bug this
    comment exists to prevent; it was shipped once in this project's own
    docs showcase before being caught and fixed. If a card needs to be
    white specifically, style that card directly (background/border
-   inline, or its own class) rather than reaching for .csa-bg-n25 on an
-   ancestor. */
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-neutral { background: var(--n50); }
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-blue    { background: var(--b50); }
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-orange  { background: var(--o50); }
+   inline, or its own class) rather than reaching for the tone on an
+   ancestor. (This used to key off .csa-bg-n25 too; that name is now a
+   plain color-helpers.css utility and no longer escalates anything.) */
+[data-tone="neutral"] .csa-tag-neutral { background: var(--n50); }
+[data-tone="neutral"] .csa-tag-blue    { background: var(--b50); }
+[data-tone="neutral"] .csa-tag-orange  { background: var(--o50); }
 
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
+[data-tone="neutral"] .csa-tag-filter.csa-tag-neutral:hover { background: var(--n75); }
+[data-tone="neutral"] .csa-tag-filter.csa-tag-blue:hover    { background: var(--b75); }
+[data-tone="neutral"] .csa-tag-filter.csa-tag-orange:hover  { background: var(--o75); }
 
 /* Pressed state here is identical to White's — but it still needs its
-   own .csa-bg-n25-scoped copy, not just the shared rule above, purely
+   own tone-scoped copy, not just the shared rule above, purely
    for specificity: the hover rule right above it is 4 selectors deep
-   (.csa-bg-n25 + 2 classes + :hover) and beats the shared pressed rule's
+   ([data-tone] + 2 classes + :hover) and beats the shared pressed rule's
    3, so hovering a pressed tag was falling back to the light hover
    background while pressed's white text stayed — illegible. Matching
    the hover rule's specificity here (same 4 selectors) is what makes
    pressed reliably win while the mouse is still over the tag. */
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
-:is(.csa-bg-n25, [data-tone="neutral"]) .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
+[data-tone="neutral"] .csa-tag-filter.csa-tag-neutral[aria-pressed="true"] { background: var(--n400); color: #fff; }
+[data-tone="neutral"] .csa-tag-filter.csa-tag-blue[aria-pressed="true"]    { background: var(--b500); color: #fff; }
+[data-tone="neutral"] .csa-tag-filter.csa-tag-orange[aria-pressed="true"]  { background: var(--o700); color: #fff; }
 
 /* ---- Dark + black backgrounds (identical except the pressed text color) ---- */
 [data-surface="dark"] .csa-tag-neutral, [data-surface="black"] .csa-tag-neutral {

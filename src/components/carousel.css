@@ -97,7 +97,7 @@
 .csa-carousel-card img { width: 100%; height: auto; display: block; pointer-events: none; -webkit-user-drag: none; }
 .csa-carousel-card .csa-carousel-card-body { padding: 22px; display: flex; flex-direction: column; flex: 1; }
 .csa-carousel-card h3 { font-size: 17px; margin-bottom: 8px; }
-.csa-carousel-card p { font-size: 13.5px; color: var(--n300); flex: 1; }
+.csa-carousel-card p { font-size: var(--text-small); color: var(--n400); flex: 1; } /* card copy: small-text size; n300 failed AA */
 /* .csa-go is a shared utility now — see cards.css */
 
 /* 44px (down from an earlier 52px) and a stronger two-layer shadow —

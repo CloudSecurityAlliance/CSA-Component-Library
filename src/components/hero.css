@@ -171,7 +171,7 @@
    panel's own width:fit-content actually measures) rather than being
    capped to match it. */
 .csa-hero-glass .csa-card-glass .csa-sub { font-size: clamp(18px, 2vw, 22px); max-width: 54ch; line-height: 1.5; }
-.csa-hero-glass .csa-card-glass .csa-mission { margin-top: 16px; font-size: 15.5px; max-width: 52ch; }
+.csa-hero-glass .csa-card-glass .csa-mission { margin-top: 16px; font-size: 16px; max-width: 52ch; }
 .csa-hero-glass .csa-card-glass .csa-hero-cta { margin-top: 26px; }
 /* .csa-hero-cta is deliberately width:fit-content above (so the row
    never forces the panel wider than its longest line on desktop) — but

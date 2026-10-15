@@ -26,7 +26,7 @@
 .csa-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
   padding: 13px 22px; border-radius: 8px;
-  font-weight: 400; font-size: 14.5px;
+  font-weight: 400; font-size: var(--text-small);
   border: 1px solid transparent; transition: .18s; cursor: pointer;
   min-width: 120px;
   transition: .35s ease;
@@ -150,7 +150,8 @@
    #FF7A00 → rgb(255,122,0) (see colors.css). transition overrides the
    base .csa-btn's .18s to match Primary/Secondary's .35s pace. */
 .csa-btn-tertiary, .csa-btn-tertiary:visited { background: transparent; border: 2px solid transparent; color: var(--o500); transition: .35s ease; }
-.csa-btn-tertiary:hover { background: rgba(255,122,0,.2); color: var(--o500); } 
+/* color restated so the base .csa-btn:hover white (same specificity, earlier) can't win */
+.csa-btn-tertiary:hover { background: rgba(255,122,0,.2); color: var(--o500); }
 /* Persistent underline (not just on :hover) — a text-only button has no
    fill or border to read as clickable at rest, so the line is the
    resting affordance. On hover it retracts away and disappears (the
