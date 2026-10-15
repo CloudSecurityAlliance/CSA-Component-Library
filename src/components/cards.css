@@ -193,6 +193,11 @@
   inset: 0; border-radius: inherit;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n' x='0' y='0' width='100%' height='100%' color-interpolation-filters='sRGB'><feTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch' result='t'/><feColorMatrix in='t' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 3 0 0 0 -1.5' result='w'/><feColorMatrix in='t' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -3 0 0 0 1.5' result='b'/><feMerge><feMergeNode in='w'/><feMergeNode in='b'/></feMerge></filter><rect width='100%' height='100%' filter='url%28%23n%29'/></svg>");
   background-size: 200px;
+  /* Stated, not left to the default: some host pages reset every
+     element's background to no-repeat (cloudsecurityalliance.org's
+     application.css does: `*, ::before, ::after { background-repeat:
+     no-repeat }`), which left only the first 200px tile of grain. */
+  background-repeat: repeat;
   opacity: .04;
 }
 /* The grain filter's width/height='100%' matter: left out, an SVG filter
