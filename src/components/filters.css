@@ -67,7 +67,7 @@
   padding-bottom: 16px; border-bottom: 1px solid var(--n50);
 }
 .csa-filters-title {
-  font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--n300);
+  font-size: 22px; font-weight: 800; letter-spacing: -.02em; 
 }
 .csa-filters-clear { font-size: 12px; font-weight: 700; color: var(--n300); text-decoration: underline; transition: color .15s; }
 .csa-filters-clear:hover { color: var(--n500); }
