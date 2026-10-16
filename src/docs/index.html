@@ -640,7 +640,25 @@
           <div>Section 2</div>
           <p class="csa-caption" style="margin-top:6px">A small horizontal separator with color --n50, to use between sections</p>
        </div></div>
-      <div class="docs-type-row"><span class="docs-type-tag">.csa-go</span><div class="docs-type-sample"><a class="csa-go" href="#" style="margin-top:0">Learn more →</a></div></div>
+      <div class="docs-type-row"><span class="docs-type-tag">.csa-go</span><div class="docs-type-sample">
+          <a class="csa-go" href="#" style="margin-top:0">Learn more</a>
+          <p class="csa-caption" style="margin-top:6px">The arrow is drawn by the link (an SVG mask in the link's own color, so it follows surfaces and hover) — don't type "→" into the text. It's hidden automatically if the link already has an <code>&lt;svg&gt;</code>, <code>&lt;img&gt;</code> or <code>&lt;i&gt;</code> icon; <code>.csa-go-no-arrow</code> opts out.</p>
+          <div class="docs-label" style="margin-top:16px">Side-by-side: SVG arrow vs. the old typed arrow (demo only — remove once the arrow is signed off)</div>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+            <div data-surface="light" style="flex:1 1 220px;padding:16px 18px;border-radius:12px;border:1px solid var(--n50);display:grid;grid-template-columns:auto auto;gap:10px 22px;align-items:center;justify-content:start">
+              <span class="csa-caption">SVG (new)</span><a class="csa-go" href="#" style="margin-top:0">Learn more</a>
+              <span class="csa-caption">Text (old)</span><a class="csa-go csa-go-no-arrow" href="#" style="margin-top:0">Learn more →</a>
+            </div>
+            <div data-surface="dark" style="flex:1 1 220px;padding:16px 18px;border-radius:12px;border:1px solid var(--n50);display:grid;grid-template-columns:auto auto;gap:10px 22px;align-items:center;justify-content:start">
+              <span class="csa-caption">SVG (new)</span><a class="csa-go" href="#" style="margin-top:0">Learn more</a>
+              <span class="csa-caption">Text (old)</span><a class="csa-go csa-go-no-arrow" href="#" style="margin-top:0">Learn more →</a>
+            </div>
+            <div data-surface="light" style="flex:1 1 220px;padding:16px 18px;border-radius:12px;border:1px solid var(--n50);display:grid;grid-template-columns:auto auto;gap:10px 22px;align-items:center;justify-content:start">
+              <span class="csa-caption">SVG (new)</span><a class="csa-go" href="#" style="margin-top:0;font-size:20px">Learn more</a>
+              <span class="csa-caption">Text (old)</span><a class="csa-go csa-go-no-arrow" href="#" style="margin-top:0;font-size:20px">Learn more →</a>
+            </div>
+          </div>
+       </div></div>
       <div class="docs-type-row">
         <span class="docs-type-tag">.csa-title<br>.csa-subtitle</span>
         <div class="docs-type-sample">
@@ -657,7 +675,7 @@
           <span class="csa-kicker">Why now</span>
           <span class="csa-kicker-sub">Founding Benefactor</span>
           <div class="csa-rule" style="margin-top:0"></div>
-          <a class="csa-go" href="#" style="margin-top:0">Learn more →</a>
+          <a class="csa-go" href="#" style="margin-top:0">Learn more</a>
           <p class="csa-block-small" style="margin:0;flex-basis:100%">Short supporting paragraph in <code>.csa-block-small</code>.</p>
           <span class="csa-caption" style="flex-basis:100%">Published Oct 6, 2026 · 8 min read</span>
         </div>
@@ -1025,13 +1043,13 @@
           <span class="csa-kicker-sub">Standard card</span>
           <h3 class="csa-title">Card heading goes here</h3>
           <p style="font-size:14.5px">Hover this card to see the lift and shadow.</p>
-          <a class="csa-go" href="#">Learn more →</a>
+          <a class="csa-go" href="#">Learn more</a>
         </div>
         <div class="csa-card csa-card-hover">
           <span class="csa-kicker-sub">Standard card</span>
           <h3 class="csa-title">Card heading goes here</h3>
           <p style="font-size:14.5px">Hover this card to see the lift and shadow.</p>
-          <a class="csa-go" href="#">Learn more →</a>
+          <a class="csa-go" href="#">Learn more</a>
         </div>
       </div>
 
@@ -1051,7 +1069,7 @@
               <label class="csa-card-flip-hit" for="docs-flip-1"></label>
               <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
               <p style="font-size:14.5px;margin:0">Placeholder back-of-card copy — a short description of what this card links to.</p>
-              <a class="csa-go" href="#">Learn more <span aria-hidden="true">&rarr;</span><span class="csa-sr-only"> — Cloud Security</span></a>
+              <a class="csa-go" href="#">Learn more<span class="csa-sr-only"> — Cloud Security</span></a>
             </div>
           </div>
         </div>
@@ -1069,7 +1087,7 @@
               <label class="csa-card-flip-hit" for="docs-flip-2"></label>
               <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
               <p style="font-size:14.5px;margin:0">Placeholder back-of-card copy. Both faces share one grid cell, so the card is as tall as its taller face.</p>
-              <a class="csa-go" href="#">Learn more <span aria-hidden="true">&rarr;</span><span class="csa-sr-only"> — AI Safety</span></a>
+              <a class="csa-go" href="#">Learn more<span class="csa-sr-only"> — AI Safety</span></a>
             </div>
           </div>
         </div>
@@ -1087,7 +1105,7 @@
               <label class="csa-card-flip-hit" for="docs-flip-3"></label>
               <span class="csa-card-flip-cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></span>
               <p style="font-size:14.5px;margin:0">Placeholder back-of-card copy, a little longer than its neighbors, to show every card in a stretched row matching the tallest one without the faces ever drifting out of step.</p>
-              <a class="csa-go" href="#">Learn more <span aria-hidden="true">&rarr;</span><span class="csa-sr-only"> — Compliance</span></a>
+              <a class="csa-go" href="#">Learn more<span class="csa-sr-only"> — Compliance</span></a>
             </div>
           </div>
         </div>
@@ -1111,14 +1129,14 @@
           <span class="csa-kicker-sub">Hover card</span>
           <h3 class="csa-title">Card heading goes here</h3>
           <p style="font-size:14.5px">Hover lift is suppressed when <code>.csa-card-disabled</code> is combined with <code>.csa-card-hover</code>.</p>
-          <a class="csa-go" href="#">Learn more →</a>
+          <a class="csa-go" href="#">Learn more</a>
         </div>
         <div class="csa-card csa-card-hover csa-card-brand-cloud csa-card-disabled">
           <img class="csa-icon csa-icon-mono" src="../assets/icons/b500/cloud-b500.svg" alt="">
           <span class="csa-kicker-sub">Brand card</span>
           <h3 class="csa-title">Card heading goes here</h3>
           <p style="font-size:14.5px">Works on brand and glass variants too — opacity mutes everything uniformly.</p>
-          <a class="csa-go" href="#">Learn more →</a>
+          <a class="csa-go" href="#">Learn more</a>
         </div>
       </div>
 
@@ -1163,7 +1181,7 @@
             <div class="csa-card-reveal-more">
               <div class="csa-card-reveal-more-inner">
                 <p style="font-size:13.5px">Placeholder body copy revealed with a dark glass overlay on hover — long enough to prove the reveal panel grows to fit a full paragraph without clipping or feeling cramped against the card's edges.</p>
-                <a class="csa-go" href="#">Learn more →</a>
+                <a class="csa-go" href="#">Learn more</a>
               </div>
             </div>
           </div>
@@ -1180,7 +1198,7 @@
             <div class="csa-card-reveal-more">
               <div class="csa-card-reveal-more-inner">
                 <p style="font-size:13.5px">Placeholder body copy revealed with a dark glass overlay on hover — long enough to prove the reveal panel grows to fit a full paragraph without clipping or feeling cramped against the card's edges.</p>
-                <a class="csa-go" href="#">Learn more →</a>
+                <a class="csa-go" href="#">Learn more</a>
               </div>
             </div>
           </div>
@@ -1197,7 +1215,7 @@
             <div class="csa-card-reveal-more">
               <div class="csa-card-reveal-more-inner">
                 <p style="font-size:13.5px">Placeholder body copy revealed with a dark glass overlay on hover — long enough to prove the reveal panel grows to fit a full paragraph without clipping or feeling cramped against the card's edges.</p>
-                <a class="csa-go" href="#">Learn more →</a>
+                <a class="csa-go" href="#">Learn more</a>
               </div>
             </div>
           </div>
@@ -1231,21 +1249,21 @@
         <span class="csa-kicker-sub">Cloud</span>
         <h3 class="csa-title">Card heading goes here</h3>
         <p style="font-size:14.5px">Placeholder body copy for the Cloud sub-brand card.</p>
-        <a class="csa-go" href="#">Learn more →</a>
+        <a class="csa-go" href="#">Learn more</a>
       </div>
       <div class="csa-card csa-card-hover csa-card-brand-ai">
         <img class="csa-icon" src="../assets/icons/ai-brand.svg" alt="">
         <span class="csa-kicker-sub">Artificial Intelligence</span>
         <h3 class="csa-title">Card heading goes here</h3>
         <p style="font-size:14.5px">Placeholder body copy for the AI sub-brand card.</p>
-        <a class="csa-go" href="#">Learn more →</a>
+        <a class="csa-go" href="#">Learn more</a>
       </div>
       <div class="csa-card csa-card-hover csa-card-brand-zt">
         <img class="csa-icon" src="../assets/icons/zero-trust-brand.svg" alt="">
         <span class="csa-kicker-sub">Zero Trust</span>
         <h3 class="csa-title">Card heading goes here</h3>
         <p style="font-size:14.5px">Placeholder body copy for the Zero Trust sub-brand card.</p>
-        <a class="csa-go" href="#">Learn more →</a>
+        <a class="csa-go" href="#">Learn more</a>
       </div>
     </div>
   </div>
@@ -1723,23 +1741,23 @@
       <div class="csa-carousel-viewport">
         <div class="csa-carousel-track">
           <!-- clone (before) -->
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">AI Controls Matrix v1.1</h3><p>247 control objectives across 18 security domains.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Quantum Computing &amp; AI</h3><p>Breakthrough opportunities and emerging security challenges.</p><span class="csa-go">Download now →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">STAR Registry adds AIUC-1</h3><p>Independently validated AI agent security certification.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Cloud Controls Matrix v4.1</h3><p>197 control objectives spanning 17 security domains.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Zero Trust Advancement Center</h3><p>Guidance and maturity models for zero trust adoption.</p><span class="csa-go">Explore now →</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">AI Controls Matrix v1.1</h3><p>247 control objectives across 18 security domains.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Quantum Computing &amp; AI</h3><p>Breakthrough opportunities and emerging security challenges.</p><span class="csa-go">Download now</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">STAR Registry adds AIUC-1</h3><p>Independently validated AI agent security certification.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Cloud Controls Matrix v4.1</h3><p>197 control objectives spanning 17 security domains.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Zero Trust Advancement Center</h3><p>Guidance and maturity models for zero trust adoption.</p><span class="csa-go">Explore now</span></div></a>
           <!-- real -->
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">AI Controls Matrix v1.1</h3><p>247 control objectives across 18 security domains.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Quantum Computing &amp; AI</h3><p>Breakthrough opportunities and emerging security challenges.</p><span class="csa-go">Download now →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">STAR Registry adds AIUC-1</h3><p>Independently validated AI agent security certification.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Cloud Controls Matrix v4.1</h3><p>197 control objectives spanning 17 security domains.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Zero Trust Advancement Center</h3><p>Guidance and maturity models for zero trust adoption.</p><span class="csa-go">Explore now →</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">AI Controls Matrix v1.1</h3><p>247 control objectives across 18 security domains.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Quantum Computing &amp; AI</h3><p>Breakthrough opportunities and emerging security challenges.</p><span class="csa-go">Download now</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">STAR Registry adds AIUC-1</h3><p>Independently validated AI agent security certification.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Cloud Controls Matrix v4.1</h3><p>197 control objectives spanning 17 security domains.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Zero Trust Advancement Center</h3><p>Guidance and maturity models for zero trust adoption.</p><span class="csa-go">Explore now</span></div></a>
           <!-- clone (after) -->
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">AI Controls Matrix v1.1</h3><p>247 control objectives across 18 security domains.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Quantum Computing &amp; AI</h3><p>Breakthrough opportunities and emerging security challenges.</p><span class="csa-go">Download now →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">STAR Registry adds AIUC-1</h3><p>Independently validated AI agent security certification.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Cloud Controls Matrix v4.1</h3><p>197 control objectives spanning 17 security domains.</p><span class="csa-go">Learn more →</span></div></a>
-          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Zero Trust Advancement Center</h3><p>Guidance and maturity models for zero trust adoption.</p><span class="csa-go">Explore now →</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">AI Controls Matrix v1.1</h3><p>247 control objectives across 18 security domains.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Quantum Computing &amp; AI</h3><p>Breakthrough opportunities and emerging security challenges.</p><span class="csa-go">Download now</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">STAR Registry adds AIUC-1</h3><p>Independently validated AI agent security certification.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Cloud Controls Matrix v4.1</h3><p>197 control objectives spanning 17 security domains.</p><span class="csa-go">Learn more</span></div></a>
+          <a class="csa-carousel-card" draggable="false" href="#"><div class="csa-carousel-card-body"><h3 class="csa-title">Zero Trust Advancement Center</h3><p>Guidance and maturity models for zero trust adoption.</p><span class="csa-go">Explore now</span></div></a>
         </div>
       </div>
       <button class="csa-carousel-arrow csa-carousel-arrow-next" aria-label="Next"></button>
@@ -2934,7 +2952,7 @@
               <h2 class="csa-title" style="font-size:32px;line-height:38px;letter-spacing:-.02em">Browse models that have been scored</h2>
               <p style="font-size:15px;line-height:24px;color:var(--n500);margin-top:10px;max-width:640px">The highest and lowest composite scores currently published, to show the spread you are choosing within.</p>
             </div>
-            <a href="#" class="csa-go" style="margin-top:0">View the full rankings →</a>
+            <a href="#" class="csa-go" style="margin-top:0">View the full rankings</a>
           </div>
 
           <div class="csa-toggle-segmented" data-selected="a" style="margin-top:24px">
