@@ -241,15 +241,43 @@
 /* CTA link — b500 by default (matches the reference pages' .go/.rel
    link color everywhere: .conn .go, .ann .go, .rcard .go, etc.), b300 on
    hover and on dark surfaces (kept in sync with the arrow-link precedent,
-   distinct from the o500 used for kickers/buttons on dark). Arrow is
-   typed directly into the link text ("Learn more →"), same as the 4 pages.
-   On dark/black, resting color is ALSO b300, so hover needs its own
+   distinct from the o500 used for kickers/buttons on dark). The arrow
+   is drawn by the link itself (see .csa-go::before below) — don't type
+   one into the link text. On dark/black, resting color is ALSO b300, so hover needs its own
    step lighter (b100) — otherwise hovering would show no visible change
    at all, since :hover's b300 would just match the resting color. */
 .csa-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: var(--text-small); font-weight: 500; color: var(--b500); transition: .15s; }
 .csa-go:hover { color: var(--b300); }
 [data-surface="dark"] .csa-go, [data-surface="black"] .csa-go { color: var(--b300); }
 [data-surface="dark"] .csa-go:hover, [data-surface="black"] .csa-go:hover { color: var(--b100); }
+/* The arrow. An SVG drawn as a mask and filled with currentColor, so it
+   follows every link color, surface and hover state above with no extra
+   rules. Replaces the typed "→": azo-sans has no arrow glyph, so a text
+   arrow always came from whatever fallback font the page had (the
+   generic sans-serif on cloudsecurityalliance.org), and looked different
+   on every page and OS. Sized to the text arrow it replaces (measured:
+   ~10.5 x 8.7px ink at 14.5px) — 0.76em x 0.66em, so it keeps the same
+   footprint at any font size.
+   ::before, not ::after: ::after is the stretched click area on
+   .csa-card-hover and .csa-card-reveal links. `order: 1` moves it after
+   the text inside the inline-flex link; the link's 6px gap spaces it.
+   Decorative, so screen readers skip it (they read a typed → aloud).
+   Hidden automatically when the link already carries its own icon (an
+   <svg>, <img> or Font Awesome <i>); .csa-go-no-arrow opts out. */
+.csa-go::before {
+  content: ""; order: 1; flex-shrink: 0;
+  width: .76em; height: .66em;
+  position: relative; top: .03em; /* the text arrow sat a hair below the link's middle */
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M1 5h10M7.25 1.25 11 5 7.25 8.75'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M1 5h10M7.25 1.25 11 5 7.25 8.75'/></svg>") center / contain no-repeat;
+}
+.csa-go:has(> svg, > img, > i)::before, .csa-go.csa-go-no-arrow::before { display: none; }
+/* Windows High Contrast replaces background colors, which would blank
+   the masked arrow — paint it in the system link color instead. */
+@media (forced-colors: active) {
+  .csa-go::before { forced-color-adjust: none; background-color: LinkText; }
+}
 
 /* Hover card — a .csa-card modifier. Lift + shadow on hover, matching
    the identical pattern used across all 4 reference pages for
