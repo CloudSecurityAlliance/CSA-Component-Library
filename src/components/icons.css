@@ -61,7 +61,8 @@
    vertically centered, with a fixed gap between them. Inline-flex so
    it sits in a line of text or a flex row without forcing a new block.
    Works with any icon: a .csa-icon <img> (any size modifier) or a
-   .csa-icon-glyph. Override --icon-text-gap to adjust the spacing.
+   .csa-icon-glyph, or a plain <img>/<svg> (sized 14px by default, see
+   below). Override --icon-text-gap to adjust the spacing.
 
      <span class="csa-icon-text">
        <img class="csa-icon csa-icon-small" src="…" alt="">
@@ -76,3 +77,12 @@
   gap: var(--icon-text-gap);
 }
 .csa-icon-text > .csa-icon { flex-shrink: 0; }
+/* A plain inline icon (an <img> or <svg> without .csa-icon's chip
+   sizing — e.g. a small monochrome icon in front of a kicker label) is
+   14px by default, so markup needn't set its own width. This CSS size
+   overrides an HTML width="" attribute; change it per use with
+   --icon-text-size. .csa-icon chips and .csa-icon-glyph keep their own
+   sizes. */
+.csa-icon-text > img:not(.csa-icon), .csa-icon-text > svg:not(.csa-icon) {
+  width: var(--icon-text-size, 14px); height: var(--icon-text-size, 14px); flex-shrink: 0;
+}

@@ -1644,10 +1644,11 @@
     </div>
 
     <div class="docs-label" style="margin:32px 0 14px">Icon with text — <code>.csa-icon-text</code></div>
-    <p style="font-size:14.5px;margin-bottom:18px">Puts an icon and text inline, vertically centered, with an 8px gap. Override <code>--icon-text-gap</code> to change the spacing. Works with any <code>.csa-icon</code> size or a <code>.csa-icon-glyph</code>.</p>
+    <p style="font-size:14.5px;margin-bottom:18px">Puts an icon and text inline, vertically centered, with an 8px gap. Override <code>--icon-text-gap</code> to change the spacing. Works with any <code>.csa-icon</code> size or a <code>.csa-icon-glyph</code>; a plain <code>&lt;img&gt;</code>/<code>&lt;svg&gt;</code> icon is sized 14px (override with <code>--icon-text-size</code>).</p>
     <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start">
       <span class="csa-icon-text"><img class="csa-icon csa-icon-small" src="../assets/icons/shield-keyhole-light-blue.svg" alt=""><span>Small chip icon with a label</span></span>
       <span class="csa-icon-text"><img class="csa-icon" src="../assets/icons/shield-keyhole-csa-blue.svg" alt=""><span>Default 48px chip icon with a label</span></span>
+      <span class="csa-kicker-sub csa-kicker-blue"><span class="csa-icon-text"><img src="../assets/icons/b500/spreadsheet-b500.svg" alt=""><span>Plain 14px icon with a kicker label</span></span></span>
       <span class="csa-icon-text" style="--icon-text-gap:16px"><span class="csa-icon-glyph" style="--icon-glyph:url(../assets/icons/profile.svg)"></span><span>Glyph icon, tracks the text color (16px gap)</span></span>
     </div>
   </div>
