@@ -274,18 +274,16 @@
   mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'><path d='M1 5h10M7.25 1.25 11 5 7.25 8.75'/></svg>") center / contain no-repeat;
 }
 .csa-go:has(> svg, > img, > i)::before, .csa-go.csa-go-no-arrow::before { display: none; }
-/* Hover (and keyboard focus): the arrow nudges right and back, looping
-   while the link is hovered. Kept small — 0.18em, ~2.5px at 14.5px — and
-   transform-only, so it never shifts the text or reflows the link.
-   Hover cards and reveal cards get it too: their stretched click area is
-   the link's own ::after, so hovering the card hovers the link. */
-@keyframes csa-go-nudge {
-  0%, 100% { transform: translateX(0); }
-  50%      { transform: translateX(.18em); }
-}
-.csa-go:hover::before, .csa-go:focus-visible::before { animation: csa-go-nudge .9s ease-in-out infinite; }
+/* Hover (and keyboard focus): the arrow slides right and stays there
+   until the pointer leaves, then eases back. Kept small — 0.18em, ~2.5px
+   at 14.5px — and transform-only, so it never shifts the text or reflows
+   the link. Hover cards and reveal cards get it too: their stretched
+   click area is the link's own ::after, so hovering the card hovers the
+   link. Reduced motion: it still moves, just without the slide. */
+.csa-go::before { transition: transform .2s ease; }
+.csa-go:hover::before, .csa-go:focus-visible::before { transform: translateX(.18em); }
 @media (prefers-reduced-motion: reduce) {
-  .csa-go:hover::before, .csa-go:focus-visible::before { animation: none; }
+  .csa-go::before { transition: none; }
 }
 /* Windows High Contrast replaces background colors, which would blank
    the masked arrow — paint it in the system link color instead. */
