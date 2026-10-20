@@ -1642,6 +1642,14 @@
         <div class="docs-icon-swatch"><div class="docs-icon-swatch-bg" data-surface="dark"><img class="csa-icon" src="../assets/icons/shield-keyhole-red-orange.svg" alt=""></div><div class="docs-icon-swatch-label">B700</div></div>
       </div>
     </div>
+
+    <div class="docs-label" style="margin:32px 0 14px">Icon with text — <code>.csa-icon-text</code></div>
+    <p style="font-size:14.5px;margin-bottom:18px">Puts an icon and text inline, vertically centered, with an 8px gap. Override <code>--icon-text-gap</code> to change the spacing. Works with any <code>.csa-icon</code> size or a <code>.csa-icon-glyph</code>.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+      <span class="csa-icon-text"><img class="csa-icon csa-icon-small" src="../assets/icons/shield-keyhole-light-blue.svg" alt=""><span>Small chip icon with a label</span></span>
+      <span class="csa-icon-text"><img class="csa-icon" src="../assets/icons/shield-keyhole-csa-blue.svg" alt=""><span>Default 48px chip icon with a label</span></span>
+      <span class="csa-icon-text" style="--icon-text-gap:16px"><span class="csa-icon-glyph" style="--icon-glyph:url(../assets/icons/profile.svg)"></span><span>Glyph icon, tracks the text color (16px gap)</span></span>
+    </div>
   </div>
 
   <!-- Nested inside #icons (not a new .docs-section sibling) on purpose,

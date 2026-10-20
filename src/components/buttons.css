@@ -140,7 +140,7 @@
    of flattening to the same color as the fill — border-color and
    background-color are plain solid values here, so this needs no
    crossfade workaround, unlike Primary's gradient fill/border. */
-.csa-btn-secondary:hover { background: var(--o600); border-color: var(--o400); color: #fff; }
+.csa-btn-secondary:hover { background: var(--o600); border-color: var(--o400); color: #fff; transition: .35s ease; } 
 /* works unmodified on both light and dark surfaces */
 
 /* No fill, no border (kept as a matching 2px transparent so it lines up

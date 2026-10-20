@@ -56,3 +56,23 @@
    so it's a small standalone utility rather than a new data-surface value. */
 .csa-bg-tint { background: var(--b50); }
 
+
+/* Icon + text — an icon and a run of text side by side on one line,
+   vertically centered, with a fixed gap between them. Inline-flex so
+   it sits in a line of text or a flex row without forcing a new block.
+   Works with any icon: a .csa-icon <img> (any size modifier) or a
+   .csa-icon-glyph. Override --icon-text-gap to adjust the spacing.
+
+     <span class="csa-icon-text">
+       <img class="csa-icon csa-icon-small" src="…" alt="">
+       <span>Label text</span>
+     </span>
+
+   flex-shrink:0 keeps the icon at its size when the text wraps. */
+.csa-icon-text {
+  --icon-text-gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--icon-text-gap);
+}
+.csa-icon-text > .csa-icon { flex-shrink: 0; }
