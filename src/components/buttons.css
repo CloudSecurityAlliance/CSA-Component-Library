@@ -259,7 +259,7 @@
        <button class="csa-bookmark-btn" type="button" aria-pressed="false" aria-label="Save {title}">
          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75A1.75 1.75 0 0 1 7.75 2h8.5A1.75 1.75 0 0 1 18 3.75V21l-6-4-6 4V3.75Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
        </button>
-       <div class="csa-card-media-body">… <a class="csa-go" href="…">View publication</a></div>
+       <div class="csa-card-media-body">… <a class="csa-go" href="…">View publication <span aria-hidden="true">&rarr;</span></a></div>
      </article>
 
    BEHAVIOR SPEC — not implemented here: the app flips aria-pressed on
