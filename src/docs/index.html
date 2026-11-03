@@ -885,6 +885,52 @@
         </div>
       </div>
     </div>
+
+    <div class="docs-panel" style="margin-top:18px">
+      <div class="docs-label">.csa-bookmark-btn — icon-only toggle pinned to a card's top-right corner</div>
+      <p class="csa-block-small" style="margin:0 0 16px;color:var(--n300)">State is <code>aria-pressed</code>; click to toggle. It sits above the card's stretched <code>.csa-go</code> link with <code>z-index:1</code>, so the card and the button each take their own clicks. Surface-aware: white pill on light, the surface's card color on dark and black.</p>
+      <div class="csa-grid csa-grid-1 csa-grid-md-3">
+        <div class="csa-cell" data-surface="light" style="padding:18px;border-radius:14px">
+          <div class="docs-label">Light — resting</div>
+          <article class="csa-card-media csa-card-hover">
+            <div class="csa-card-media-img"><img src="assets/our-first-briefing.jpg" alt=""></div>
+            <button class="csa-bookmark-btn" type="button" aria-pressed="false" aria-label="Save Insert Publication Title Here">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75A1.75 1.75 0 0 1 7.75 2h8.5A1.75 1.75 0 0 1 18 3.75V21l-6-4-6 4V3.75Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="csa-card-media-body">
+              <h3 class="csa-title">Insert Publication Title Here</h3>
+              <a class="csa-go" href="#">View publication</a>
+            </div>
+          </article>
+        </div>
+        <div class="csa-cell" data-surface="dark" style="padding:18px;border-radius:14px">
+          <div class="docs-label">Dark — pressed</div>
+          <article class="csa-card-media csa-card-hover">
+            <div class="csa-card-media-img"><img src="assets/our-first-briefing.jpg" alt=""></div>
+            <button class="csa-bookmark-btn" type="button" aria-pressed="true" aria-label="Save Insert Publication Title Here">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75A1.75 1.75 0 0 1 7.75 2h8.5A1.75 1.75 0 0 1 18 3.75V21l-6-4-6 4V3.75Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="csa-card-media-body">
+              <h3 class="csa-title">Insert Publication Title Here</h3>
+              <a class="csa-go" href="#">View publication</a>
+            </div>
+          </article>
+        </div>
+        <div class="csa-cell" data-surface="black" style="padding:18px;border-radius:14px">
+          <div class="docs-label">Black — resting</div>
+          <article class="csa-card-media csa-card-hover">
+            <div class="csa-card-media-img"><img src="assets/our-first-briefing.jpg" alt=""></div>
+            <button class="csa-bookmark-btn" type="button" aria-pressed="false" aria-label="Save Insert Publication Title Here">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75A1.75 1.75 0 0 1 7.75 2h8.5A1.75 1.75 0 0 1 18 3.75V21l-6-4-6 4V3.75Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="csa-card-media-body">
+              <h3 class="csa-title">Insert Publication Title Here</h3>
+              <a class="csa-go" href="#">View publication</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -3583,6 +3629,13 @@
 /* Demo-only: removable tag — removes its parent .csa-tag-removable from
    the DOM, per the BEHAVIOR SPEC in tags.css. */
 (function () {
+  document.querySelectorAll('.csa-bookmark-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      btn.setAttribute('aria-pressed', String(btn.getAttribute('aria-pressed') !== 'true'));
+    });
+  });
+
   document.querySelectorAll('.csa-tag-remove').forEach(btn => {
     btn.addEventListener('click', () => {
       btn.closest('.csa-tag-removable')?.remove();
