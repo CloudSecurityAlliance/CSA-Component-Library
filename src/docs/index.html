@@ -43,6 +43,7 @@
 <link rel="stylesheet" href="../components/latest-brief.css">
 <link rel="stylesheet" href="../components/promo-band.css">
 <link rel="stylesheet" href="../components/team.css">
+<link rel="stylesheet" href="../components/modal.css">
 
 <style>
 /* =========================================================
@@ -510,6 +511,7 @@
         <a href="#latest-brief">Latest brief</a>
         <a href="#promo-band">Promo band</a>
         <a href="#team">Team</a>
+        <a href="#modal">Modal</a>
         <a href="#hero-examples">Hero examples</a>
         <a href="#real-layouts">Real layouts</a>
       </div>
@@ -2944,6 +2946,40 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MODAL                                                          -->
+<!-- ============================================================ -->
+<section class="docs-section" id="modal">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2 class="csa-title">Modal</h2>
+      <p>A centered white dialog over a dim navy scrim, with no script: a <code>&lt;dialog class="csa-modal" popover&gt;</code> opened by a button with <code>popovertarget</code> and closed by one with <code>popovertargetaction="hide"</code>. Escape and a click outside close it too. It's non-modal: the page behind stays focusable and scrollable. For a true modal, open the same dialog with <code>showModal()</code> from script; the styles apply unchanged.</p>
+      <div class="csa-rule"></div>
+    </div>
+    <button type="button" class="csa-btn csa-btn-secondary" popovertarget="docs-modal">What do content types mean?</button>
+
+    <dialog class="csa-modal" id="docs-modal" popover aria-labelledby="docs-modal-title">
+      <div class="csa-modal-head">
+        <h3 class="csa-title" id="docs-modal-title">What do content types mean?</h3>
+        <button class="csa-modal-close" type="button" popovertarget="docs-modal" popovertargetaction="hide" aria-label="Close">&times;</button>
+      </div>
+      <p class="csa-modal-sub csa-caption">A quick guide to how resources are categorized in the Research Library.</p>
+      <hr class="csa-hr csa-mb-5">
+      <dl class="csa-modal-list">
+        <dt><img class="csa-modal-icon" src="../assets/icons/document.svg" alt="">Publication</dt>
+        <dd class="csa-block-small">Official CSA research publications&mdash;whitepapers, guidance, and technical reports developed by working groups and industry experts.</dd>
+        <dt><img class="csa-modal-icon" src="../assets/icons/data.svg" alt="">Survey Report</dt>
+        <dd class="csa-block-small">Data-driven reports built from original CSA survey research, capturing industry trends and practitioner sentiment.</dd>
+        <dt><img class="csa-modal-icon" src="../assets/icons/spreadsheet.svg" alt="">Control Framework</dt>
+        <dd class="csa-block-small">Structured sets of security controls and requirements used to assess and guide cloud and AI security practices.</dd>
+        <dt><img class="csa-modal-icon" src="../assets/icons/pathway.svg" alt="">Mapping</dt>
+        <dd class="csa-block-small">Cross-references that align CSA frameworks and controls with other industry standards, regulations, and control sets.</dd>
+      </dl>
+    </dialog>
   </div>
 </section>
 

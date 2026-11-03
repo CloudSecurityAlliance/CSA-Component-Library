@@ -48,6 +48,7 @@ const COMPONENT_CSS_FILES = [
   'latest-brief.css',
   'promo-band.css',
   'team.css',
+  'modal.css',
 ];
 const css = [
   readFiles('src/tokens', TOKEN_FILES),
