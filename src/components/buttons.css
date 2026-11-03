@@ -105,7 +105,11 @@
    every supported browser; #F25D00/#FFA600 are o600/o300's literal
    values (see colors.css). o300 reads better than o600 against a dark/
    black page background, so dark surfaces get their own brighter glow. */
-.csa-btn-primary:hover { box-shadow: 0 0 24px 2px rgba(242,93,0,.5); }
+/* transition restated on :hover (as .csa-btn-secondary:hover does): host
+   pages' own `a:hover { transition: color .3s }` (cloudsecurityalliance.org's
+   application.css has one) outranks the plain .csa-btn-primary rule while
+   hovered, so the glow snapped on with no fade-in. */
+.csa-btn-primary:hover { box-shadow: 0 0 24px 2px rgba(242,93,0,.5); transition: box-shadow .35s ease; }
 /* .csa-hero/.csa-cta are the always-dark bespoke backgrounds noted in
    hero.css — they don't carry data-surface, so they need to be listed
    here explicitly too or a primary button inside them (e.g. the hero CTA)
@@ -140,7 +144,7 @@
    of flattening to the same color as the fill — border-color and
    background-color are plain solid values here, so this needs no
    crossfade workaround, unlike Primary's gradient fill/border. */
-.csa-btn-secondary:hover { background: var(--o600); border-color: var(--o400); color: #fff; }
+.csa-btn-secondary:hover { background: var(--o600); border-color: var(--o400); color: #fff; transition: .35s ease; } 
 /* works unmodified on both light and dark surfaces */
 
 /* No fill, no border (kept as a matching 2px transparent so it lines up
@@ -151,7 +155,7 @@
    base .csa-btn's .18s to match Primary/Secondary's .35s pace. */
 .csa-btn-tertiary, .csa-btn-tertiary:visited { background: transparent; border: 2px solid transparent; color: var(--o500); transition: .35s ease; }
 /* color restated so the base .csa-btn:hover white (same specificity, earlier) can't win */
-.csa-btn-tertiary:hover { background: rgba(255,122,0,.2); color: var(--o500); }
+.csa-btn-tertiary:hover { background: rgba(255,122,0,.2); color: var(--o500); transition: .35s ease; } /* transition restated for the same host a:hover reason as Primary/Secondary */
 /* Persistent underline (not just on :hover) — a text-only button has no
    fill or border to read as clickable at rest, so the line is the
    resting affordance. On hover it retracts away and disappears (the
@@ -229,3 +233,66 @@
 .csa-btn-block { display: flex; width: 100%; justify-content: center; }
 
 .csa-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* =========================================================
+   Bookmark toggle — a circular icon-only button pinned to a card's
+   top-right corner. Styled to match the live bookmark on
+   cloudsecurityalliance.org/star/resources: a 34px circle, 75% white
+   fill with a 1px n50 border (no drop shadow; the border is what
+   separates it from the photo), and an n300 glyph. Hover goes to a
+   solid white fill with a b800 glyph. Pressed fills the glyph and
+   turns it orange, the same accent .csa-tag-filter's
+   [aria-pressed="true"] uses. The glyph is a stroked outline rather
+   than the live site's Font Awesome icon, so pressed can fill it from
+   CSS.
+
+   z-index: on a .csa-card-hover card the .csa-go link is stretched
+   over the whole card (cards.css), and since it comes later in the
+   source it would paint over the button and take its clicks.
+   z-index:1 keeps the button on top. The card gets position:relative
+   from :has() below if it doesn't already have it (.csa-card-hover
+   does).
+
+   Markup contract:
+     <article class="csa-card-media csa-card-hover">
+       <div class="csa-card-media-img"><img src="…" alt=""></div>
+       <button class="csa-bookmark-btn" type="button" aria-pressed="false" aria-label="Save {title}">
+         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75A1.75 1.75 0 0 1 7.75 2h8.5A1.75 1.75 0 0 1 18 3.75V21l-6-4-6 4V3.75Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+       </button>
+       <div class="csa-card-media-body">… <a class="csa-go" href="…">View publication</a></div>
+     </article>
+
+   BEHAVIOR SPEC — not implemented here: the app flips aria-pressed on
+   click (and calls preventDefault if the card itself is a link), same
+   one-attribute contract as .csa-tag-filter. Keep the aria-label fixed
+   ("Save …"); aria-pressed already tells assistive tech the state.
+
+   Surfaces: the live style on light/gradient. Dark and black use the
+   same recipe in their own colors (the live site only has light): the
+   surface's card color at 75% with that surface's card border, an n100
+   glyph turning white on hover, and an o300 pressed glyph.
+   ========================================================= */
+.csa-card:has(> .csa-bookmark-btn), .csa-card-media:has(> .csa-bookmark-btn) { position: relative; }
+.csa-bookmark-btn {
+  position: absolute; top: 12px; right: 12px; z-index: 1;
+  width: 34px; height: 34px; border-radius: 50%; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.75); border: 1px solid var(--n50); cursor: pointer;
+  color: var(--n300);
+  transition: background-color .18s, color .18s;
+}
+.csa-bookmark-btn:hover { background: var(--white); color: var(--b800); }
+.csa-bookmark-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; }
+.csa-bookmark-btn svg { width: 16px; height: 16px; }
+.csa-bookmark-btn[aria-pressed="true"] { color: var(--o600); }
+.csa-bookmark-btn[aria-pressed="true"] svg path { fill: currentColor; }
+
+/* rgba of b800 #0C2040 / n800 #191929 at the same .75 as the white circle */
+[data-surface="dark"] .csa-bookmark-btn { background: rgba(12,32,64,.75); border-color: var(--b600); color: var(--n100); }
+[data-surface="dark"] .csa-bookmark-btn:hover { background: var(--b800); color: var(--white); }
+[data-surface="black"] .csa-bookmark-btn { background: rgba(25,25,41,.75); border-color: var(--n700); color: var(--n100); }
+[data-surface="black"] .csa-bookmark-btn:hover { background: var(--n800); color: var(--white); }
+[data-surface="dark"] .csa-bookmark-btn:focus-visible,
+[data-surface="black"] .csa-bookmark-btn:focus-visible { outline-color: var(--b300); }
+[data-surface="dark"] .csa-bookmark-btn[aria-pressed="true"],
+[data-surface="black"] .csa-bookmark-btn[aria-pressed="true"] { color: var(--o300); }

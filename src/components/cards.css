@@ -101,6 +101,16 @@
     0 28px 60px -28px rgb(0 0 0 / var(--glass-shadow));
   color: #fff;
 }
+/* .csa-card + .csa-card-glass on one element: the surfaces' card rules
+   ([data-surface] .csa-card / [data-surface="dark"] .csa-card, and the
+   deep tone's) outrank the glass by specificity and painted a solid card
+   fill + 1px border over it — a navy card with the glass's own inset edge
+   line drawn inside it, read as an extra layer behind the glass. These
+   match those rules' weight (and come later), so glass keeps its own
+   thin fill and its border-free edge on any surface. */
+.csa-card.csa-card-glass,
+[data-surface] .csa-card.csa-card-glass,
+[data-surface].csa-card.csa-card-glass { background: var(--glass-fill); border: 0; }
 /* Dark (default) text set — the dark-surface colors, applied by the panel
    itself so they hold on any page surface. */
 .csa-card-glass h1, .csa-card-glass h2, .csa-card-glass h3, .csa-card-glass h4 { color: #fff; }

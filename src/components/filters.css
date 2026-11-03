@@ -56,10 +56,42 @@
        </div>
      </div>
 
+   Optional header accessory — to put a control on the same line as a
+   group's title (today: the "i" info button), wrap the title in
+   .csa-filter-group-head. The title keeps its own styles; the head
+   takes over its bottom margin and pushes the accessory to the right:
+       <div class="csa-filter-group">
+         <div class="csa-filter-group-head">
+           <div class="csa-filter-group-title">Content Type</div>
+           <button type="button" class="csa-filter-info-btn" popovertarget="content-type-help" aria-label="What do content types mean?" title="What do content types mean?">
+             <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.4"/><line x1="10" y1="9" x2="10" y2="14.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/></svg>
+           </button>
+         </div>
+         ...rows...
+       </div>
+   The info button only styles the trigger; what it opens is up to the
+   page. In the Research Library it opens a .csa-modal (modal.css) via
+   popovertarget, with no script.
+
+   "Show more" for a long list — show the first rows, put the rest in
+   .csa-filter-topic-extra (hidden), and end the group with the button:
+       <div class="csa-filter-group">
+         <div class="csa-filter-group-title">Topic</div>
+         ...first 9 rows...
+         <div class="csa-filter-topic-extra" id="topic-extra" hidden>
+           ...remaining rows...
+         </div>
+         <button type="button" class="csa-filter-show-more-btn" aria-expanded="false" aria-controls="topic-extra">+ Show more</button>
+       </div>
+
    BEHAVIOR SPEC — not implemented here: .csa-filter-grade-btn's
    aria-pressed is flipped by the app on click, same minimal contract
    as .csa-tag-filter (tags.css) — every visual change is plain CSS
    keyed off that attribute alone.
+   .csa-filter-show-more-btn toggles the hidden attribute on the block
+   its aria-controls names, flips its own aria-expanded to match, and
+   swaps its label ("+ Show more" / "− Show less"). Leave a checked
+   row's state alone when the block collapses: hidden rows still filter.
    ========================================================= */
 .csa-filters { display: flex; flex-direction: column; gap: 24px; }
 .csa-filters-head {
@@ -80,6 +112,22 @@
 .csa-filter-group { display: flex; flex-direction: column; }
 .csa-filter-group-title { font-size: 12px; font-weight: 700; color: var(--b700); margin-bottom: 8px; }
 
+/* Header accessory slot — see the markup contract above. */
+.csa-filter-group-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.csa-filter-group-head .csa-filter-group-title { margin-bottom: 0; }
+
+/* Info button — a 17px circled "i", n300 at rest (a 4.4:1 graphic on
+   white), b500 on hover. Inline SVG drawn in currentColor. */
+.csa-filter-info-btn {
+  width: 17px; height: 17px; flex-shrink: 0; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; border-radius: 50%; background: none; cursor: pointer;
+  color: var(--n300); transition: color .15s;
+}
+.csa-filter-info-btn:hover { color: var(--b500); }
+.csa-filter-info-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; }
+.csa-filter-info-btn svg { width: 15px; height: 15px; }
+
 /* Row hover — the whole row highlights, not just the checkbox/radio
    control, so the entire label reads as the clickable hit target
    RiskRubric's own filter list uses. Negative left/right margin +
@@ -91,6 +139,22 @@
   transition: background-color .15s;
 }
 .csa-filter-row:hover { background: var(--n25); }
+
+/* ---- Show more ----
+   The extra block stacks its rows in a column like the group itself
+   does (.csa-checkbox is inline-flex, so in a plain block short labels
+   would sit side by side). The button is a small link-styled control
+   at the caption size, like .csa-filters-clear. */
+.csa-filter-topic-extra { display: flex; flex-direction: column; }
+.csa-filter-topic-extra[hidden] { display: none; }
+.csa-filter-show-more-btn {
+  align-self: flex-start; margin-top: 4px; padding: 0;
+  background: none; border: none; cursor: pointer; text-align: left;
+  font-size: var(--text-caption); font-weight: 700; color: var(--b500);
+  transition: color .15s;
+}
+.csa-filter-show-more-btn:hover { color: var(--b300); }
+.csa-filter-show-more-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; border-radius: 2px; }
 
 /* ---- Grade quick-filter ---- */
 .csa-filter-grade { display: flex; gap: 6px; }
@@ -129,6 +193,8 @@
 [data-surface="dark"] .csa-filter-row:hover { background: var(--b600); }
 [data-surface="dark"] .csa-filter-grade-btn { border-color: var(--b600); color: var(--n100); background: transparent; }
 [data-surface="dark"] .csa-filter-grade-btn:hover { border-color: var(--b500); }
+[data-surface="dark"] .csa-filter-info-btn { color: var(--n100); }
+[data-surface="dark"] .csa-filter-info-btn:hover { color: var(--white); }
 
 [data-surface="black"] .csa-filters-head { border-bottom-color: var(--n700); }
 [data-surface="black"] .csa-filters-title { color: #fff; }
@@ -142,3 +208,15 @@
 [data-surface="black"] .csa-filter-row:hover { background: var(--n700); }
 [data-surface="black"] .csa-filter-grade-btn { border-color: var(--n700); color: var(--n100); background: transparent; }
 [data-surface="black"] .csa-filter-grade-btn:hover { border-color: var(--n600); }
+[data-surface="black"] .csa-filter-info-btn { color: var(--n100); }
+[data-surface="black"] .csa-filter-info-btn:hover { color: var(--white); }
+[data-surface="dark"] .csa-filter-info-btn:focus-visible,
+[data-surface="black"] .csa-filter-info-btn:focus-visible { outline-color: var(--b300); }
+/* b100, not .csa-go's b300: b300 is 4.46:1 on the b700 dark surface,
+   just under AA for 12px text. */
+[data-surface="dark"] .csa-filter-show-more-btn,
+[data-surface="black"] .csa-filter-show-more-btn { color: var(--b100); }
+[data-surface="dark"] .csa-filter-show-more-btn:hover,
+[data-surface="black"] .csa-filter-show-more-btn:hover { color: var(--white); }
+[data-surface="dark"] .csa-filter-show-more-btn:focus-visible,
+[data-surface="black"] .csa-filter-show-more-btn:focus-visible { outline-color: var(--b300); }

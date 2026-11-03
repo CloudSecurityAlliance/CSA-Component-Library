@@ -1,0 +1,81 @@
+/* =========================================================
+   CSA Component Library — Modal
+   A centered white dialog over a dim navy scrim, from the Research
+   Library prototype's "What do content types mean?" panel.
+
+   No script: it's a <dialog popover>, opened by any button with
+   popovertarget="{id}" and closed by one with popovertargetaction="hide".
+   popover (= popover="auto") gives light dismiss for free: Escape and a
+   click outside both close it, and the browser returns focus to the
+   button that opened it.
+
+   Markup contract:
+     <button type="button" class="csa-btn csa-btn-secondary" popovertarget="ct-help">What do content types mean?</button>
+
+     <dialog class="csa-modal" id="ct-help" popover aria-labelledby="ct-help-title">
+       <div class="csa-modal-head">
+         <h3 class="csa-title" id="ct-help-title">What do content types mean?</h3>
+         <button class="csa-modal-close" type="button" popovertarget="ct-help" popovertargetaction="hide" aria-label="Close">&times;</button>
+       </div>
+       <p class="csa-modal-sub csa-caption">One-line intro.</p>
+       <hr class="csa-hr csa-mb-5">
+       <dl class="csa-modal-list">                      (optional body: term + description pairs)
+         <dt><img class="csa-modal-icon" src="…" alt="">Publication</dt>
+         <dd class="csa-block-small">Description.</dd>
+         …
+       </dl>
+     </dialog>
+   Any content works in place of the <dl>; .csa-modal-list is just the
+   term/description layout the Research Library uses.
+
+   Put the <dialog> at the end of <body>, outside any data-surface
+   section. It always renders light, and the text colors below are
+   restated so a dark ancestor can't turn its heading white on white,
+   but keeping it out of sections avoids surprises from other
+   surface-aware components inside it.
+
+   Centering: the base reset (margin:0 on *) removes the UA's
+   margin:auto centering for popovers and dialogs, so it's restated
+   here: position:fixed + inset:0 + margin:auto + height:fit-content.
+
+   Non-modal: a popover dialog doesn't make the page behind it inert.
+   Keyboard focus isn't trapped (Tab can leave the dialog for the page
+   behind) and the page still scrolls. For a true modal, open the same
+   <dialog> (without the popover attribute) with dialog.showModal() from
+   script; the styles here, ::backdrop included, apply unchanged, and
+   the close button becomes a <form method="dialog"> button or calls
+   dialog.close().
+   ========================================================= */
+.csa-modal {
+  position: fixed; inset: 0; margin: auto; height: fit-content;
+  width: calc(100% - 40px); max-width: 540px; max-height: 85vh; overflow-y: auto;
+  padding: 30px 32px; border: none; border-radius: 16px;
+  background: var(--white); color: var(--n500);
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+/* b800 #0C2040 at 60% — a literal, since older browsers don't let
+   ::backdrop see custom properties */
+.csa-modal::backdrop { background: rgba(12,32,64,.6); }
+
+/* Always light, whatever section the markup sits in. */
+.csa-modal :is(h1, h2, h3, h4) { color: var(--b800); }
+.csa-modal :is(p, dd) { color: var(--n500); }
+.csa-modal .csa-caption { color: var(--n400); }
+
+.csa-modal-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 4px; }
+.csa-modal-head h3 { margin: 0; }
+.csa-modal-close {
+  flex-shrink: 0; padding: 4px; border: none; background: none; cursor: pointer;
+  font-size: 24px; line-height: 1; color: var(--n300); transition: color .15s;
+}
+.csa-modal-close:hover { color: var(--b800); }
+.csa-modal-close:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; border-radius: 4px; }
+.csa-modal-sub { margin: 0 0 20px; } /* size and color from .csa-caption */
+
+.csa-modal-list dt {
+  display: flex; align-items: center; gap: 9px; margin-top: 18px;
+  font-size: var(--text-small); font-weight: 700; color: var(--b800);
+}
+.csa-modal-list dt:first-child { margin-top: 0; }
+.csa-modal-list dd { margin: 6px 0 0; line-height: 1.6; }
+.csa-modal-icon { width: 20px; height: 20px; flex-shrink: 0; }

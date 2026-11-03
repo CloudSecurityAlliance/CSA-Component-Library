@@ -1,0 +1,66 @@
+/* =========================================================
+   CSA Component Library — Promo band
+   A full-width b500 band: icon, h3 and a short paragraph on the left,
+   a two-line CTA with a large arrow on the right. From the Research
+   Overview prototype's "Great Research Doesn't Only Follow One Path"
+   band.
+
+   Not a new surface. The library has no b500 surface, and adding one
+   (data-surface="blue") would mean a blue variant in every surface-
+   aware component file for what is, so far, one band. Instead the band
+   paints its own b500 and rides on data-surface="dark" for everything
+   inside it: the heading and paragraph take dark's white/n75 (n75 on
+   b500 is 4.9:1, white is 7.6:1).
+   data-surface="dark" is therefore required. Keep the content to what
+   the contract shows: other dark-surface components were tuned for
+   b700/black and some don't hold up on b500 (.csa-go's b300 is 2.4:1
+   there, and .csa-card's b800 fill would read as a hole).
+
+   Markup contract:
+     <section class="csa-promo-band csa-section-medium" data-surface="dark" aria-labelledby="promo-head">
+       <div class="csa-wrap csa-promo-band-row">
+         <div class="csa-promo-band-copy">
+           <img class="csa-icon" src="…/strategy-white.svg" alt="" width="48" height="48">
+           <div>
+             <h3 class="csa-title" id="promo-head">Heading</h3>
+             <p>Short paragraph.</p>
+           </div>
+         </div>
+         <a class="csa-promo-band-link" href="…">
+           <span class="csa-block">Explore how to<br>contribute</span>
+           <svg …aria-hidden="true"> or <img src="…" alt=""> — 48px circled arrow
+         </a>
+       </div>
+     </section>
+
+   Below 760px the row stacks and the CTA moves under the copy,
+   left-aligned.
+   ========================================================= */
+.csa-promo-band, .csa-promo-band[data-surface] { background: var(--b500); }
+
+.csa-promo-band-row { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+.csa-promo-band-copy { max-width: 800px; display: flex; align-items: flex-start; gap: 24px; }
+.csa-promo-band-copy .csa-icon { flex-shrink: 0; }
+.csa-promo-band-copy .csa-title { margin: 0 0 12px; }
+.csa-promo-band-copy p { margin: 0; }
+
+.csa-promo-band-link {
+  flex: none; max-width: 300px;
+  display: flex; align-items: center; gap: 16px;
+  color: var(--white); text-align: right; text-decoration: none;
+}
+.csa-promo-band-link .csa-block { margin: 0; color: var(--white); }
+.csa-promo-band-link > img, .csa-promo-band-link > svg { width: 48px; height: 48px; flex: none; transition: transform .2s; }
+.csa-promo-band-link:hover > img, .csa-promo-band-link:hover > svg,
+.csa-promo-band-link:focus-visible > img, .csa-promo-band-link:focus-visible > svg { transform: translateX(4px); }
+.csa-promo-band-link:hover .csa-block, .csa-promo-band-link:focus-visible .csa-block { text-decoration: underline; }
+.csa-promo-band-link:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .csa-promo-band-link > img, .csa-promo-band-link > svg { transition: none; }
+}
+
+@media (max-width: 760px) {
+  .csa-promo-band-row { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .csa-promo-band-link { text-align: left; }
+}
