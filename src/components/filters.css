@@ -73,10 +73,25 @@
    page. In the Research Library it opens a .csa-modal (modal.css) via
    popovertarget, with no script.
 
+   "Show more" for a long list — show the first rows, put the rest in
+   .csa-filter-topic-extra (hidden), and end the group with the button:
+       <div class="csa-filter-group">
+         <div class="csa-filter-group-title">Topic</div>
+         ...first 9 rows...
+         <div class="csa-filter-topic-extra" id="topic-extra" hidden>
+           ...remaining rows...
+         </div>
+         <button type="button" class="csa-filter-show-more-btn" aria-expanded="false" aria-controls="topic-extra">+ Show more</button>
+       </div>
+
    BEHAVIOR SPEC — not implemented here: .csa-filter-grade-btn's
    aria-pressed is flipped by the app on click, same minimal contract
    as .csa-tag-filter (tags.css) — every visual change is plain CSS
    keyed off that attribute alone.
+   .csa-filter-show-more-btn toggles the hidden attribute on the block
+   its aria-controls names, flips its own aria-expanded to match, and
+   swaps its label ("+ Show more" / "− Show less"). Leave a checked
+   row's state alone when the block collapses: hidden rows still filter.
    ========================================================= */
 .csa-filters { display: flex; flex-direction: column; gap: 24px; }
 .csa-filters-head {
@@ -124,6 +139,22 @@
   transition: background-color .15s;
 }
 .csa-filter-row:hover { background: var(--n25); }
+
+/* ---- Show more ----
+   The extra block stacks its rows in a column like the group itself
+   does (.csa-checkbox is inline-flex, so in a plain block short labels
+   would sit side by side). The button is a small link-styled control
+   at the caption size, like .csa-filters-clear. */
+.csa-filter-topic-extra { display: flex; flex-direction: column; }
+.csa-filter-topic-extra[hidden] { display: none; }
+.csa-filter-show-more-btn {
+  align-self: flex-start; margin-top: 4px; padding: 0;
+  background: none; border: none; cursor: pointer; text-align: left;
+  font-size: var(--text-caption); font-weight: 700; color: var(--b500);
+  transition: color .15s;
+}
+.csa-filter-show-more-btn:hover { color: var(--b300); }
+.csa-filter-show-more-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; border-radius: 2px; }
 
 /* ---- Grade quick-filter ---- */
 .csa-filter-grade { display: flex; gap: 6px; }
@@ -181,3 +212,11 @@
 [data-surface="black"] .csa-filter-info-btn:hover { color: var(--white); }
 [data-surface="dark"] .csa-filter-info-btn:focus-visible,
 [data-surface="black"] .csa-filter-info-btn:focus-visible { outline-color: var(--b300); }
+/* b100, not .csa-go's b300: b300 is 4.46:1 on the b700 dark surface,
+   just under AA for 12px text. */
+[data-surface="dark"] .csa-filter-show-more-btn,
+[data-surface="black"] .csa-filter-show-more-btn { color: var(--b100); }
+[data-surface="dark"] .csa-filter-show-more-btn:hover,
+[data-surface="black"] .csa-filter-show-more-btn:hover { color: var(--white); }
+[data-surface="dark"] .csa-filter-show-more-btn:focus-visible,
+[data-surface="black"] .csa-filter-show-more-btn:focus-visible { outline-color: var(--b300); }

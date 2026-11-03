@@ -1933,7 +1933,7 @@
     <div class="docs-head">
       <span class="csa-kicker">Components</span>
       <h2 class="csa-title">Filters</h2>
-      <p>A filter sidebar — <code>.csa-filters</code> groups a <code>.csa-filter-grade</code> quick-filter and any number of <code>.csa-filter-group</code> checkbox (or radio) lists under a "Clear all" header. A bare layout shell like <code>.csa-actions</code>/<code>.csa-tags</code> — no background or border of its own; checkbox/radio styling itself lives in Forms. Wrap a group title in <code>.csa-filter-group-head</code> to put an accessory on its line, like the <code>.csa-filter-info-btn</code> "i" next to Confidence.</p>
+      <p>A filter sidebar — <code>.csa-filters</code> groups a <code>.csa-filter-grade</code> quick-filter and any number of <code>.csa-filter-group</code> checkbox (or radio) lists under a "Clear all" header. A bare layout shell like <code>.csa-actions</code>/<code>.csa-tags</code> — no background or border of its own; checkbox/radio styling itself lives in Forms. Wrap a group title in <code>.csa-filter-group-head</code> to put an accessory on its line, like the <code>.csa-filter-info-btn</code> "i" next to Confidence. A long list can show its first rows and tuck the rest into <code>.csa-filter-topic-extra</code> behind a <code>.csa-filter-show-more-btn</code> (try Provider).</p>
       <div class="csa-rule"></div>
     </div>
     <div class="docs-3col">
@@ -1970,6 +1970,12 @@
             <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Anthropic</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>CohereLabs</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>OpenAI</span></label>
+            <div class="csa-filter-topic-extra" id="docs-provider-extra-light" hidden>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Google</span></label>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Meta</span></label>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Mistral AI</span></label>
+            </div>
+            <button type="button" class="csa-filter-show-more-btn" aria-expanded="false" aria-controls="docs-provider-extra-light">+ Show more</button>
           </div>
         </div>
       </div>
@@ -2007,6 +2013,12 @@
             <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Anthropic</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>CohereLabs</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>OpenAI</span></label>
+            <div class="csa-filter-topic-extra" id="docs-provider-extra-dark" hidden>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Google</span></label>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Meta</span></label>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Mistral AI</span></label>
+            </div>
+            <button type="button" class="csa-filter-show-more-btn" aria-expanded="false" aria-controls="docs-provider-extra-dark">+ Show more</button>
           </div>
         </div>
       </div>
@@ -2044,6 +2056,12 @@
             <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Anthropic</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>CohereLabs</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>OpenAI</span></label>
+            <div class="csa-filter-topic-extra" id="docs-provider-extra-black" hidden>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Google</span></label>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Meta</span></label>
+              <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>Mistral AI</span></label>
+            </div>
+            <button type="button" class="csa-filter-show-more-btn" aria-expanded="false" aria-controls="docs-provider-extra-black">+ Show more</button>
           </div>
         </div>
       </div>
@@ -3648,6 +3666,16 @@
     btn.addEventListener('click', e => {
       e.preventDefault();
       btn.setAttribute('aria-pressed', String(btn.getAttribute('aria-pressed') !== 'true'));
+    });
+  });
+
+  document.querySelectorAll('.csa-filter-show-more-btn').forEach(btn => {
+    const extra = document.getElementById(btn.getAttribute('aria-controls'));
+    btn.addEventListener('click', () => {
+      const open = extra.hidden;
+      extra.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? '\u2212 Show less' : '+ Show more';
     });
   });
 
