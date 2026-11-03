@@ -45,6 +45,7 @@ const COMPONENT_CSS_FILES = [
   'grid.css',
   'sep.css',
   'lists.css',
+  'latest-brief.css',
 ];
 const css = [
   readFiles('src/tokens', TOKEN_FILES),

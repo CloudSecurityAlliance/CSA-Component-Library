@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="../components/grid.css">
 <link rel="stylesheet" href="../components/sep.css">
 <link rel="stylesheet" href="../components/lists.css">
+<link rel="stylesheet" href="../components/latest-brief.css">
 
 <style>
 /* =========================================================
@@ -504,6 +505,7 @@
         <a href="#grid">Grid</a>
         <a href="#sep">Sep</a>
         <a href="#lists">Lists</a>
+        <a href="#latest-brief">Latest brief</a>
         <a href="#hero-examples">Hero examples</a>
         <a href="#real-layouts">Real layouts</a>
       </div>
@@ -2676,6 +2678,84 @@
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- LATEST BRIEF                                                   -->
+<!-- ============================================================ -->
+<section class="docs-section" id="latest-brief">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2 class="csa-title">Latest brief</h2>
+      <p>The Rapid Research ticker — a thin band, usually right under the hero, that fades through five headlines one at a time. CSS only: one 22.5s keyframe, each <code>.csa-latest-brief-item</code> offset by <code>--i</code> × 4.5s. Hover pauses it; tabbing into a headline stops it and shows the focused one; reduced motion shows the first headline. It stays one row at every width — under 640px the dates and the kicker's label drop out. Exactly five items: the keyframe is written for that count.</p>
+      <div class="csa-rule"></div>
+    </div>
+    <div class="docs-label">Dark surface</div>
+    <aside class="csa-latest-brief csa-py-3" data-surface="dark" aria-label="Latest Rapid Research" style="border-radius:12px">
+      <div class="csa-wrap csa-latest-brief-row">
+        <span class="csa-kicker csa-icon-text">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          <span>Rapid Research</span>
+        </span>
+        <div class="csa-latest-brief-viewport">
+          <span class="csa-latest-brief-item" style="--i:0">
+            <span class="csa-caption">09/15/2026</span>
+            <a href="#"><strong>AI Top News Roundup: Q3 2026</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:1">
+            <span class="csa-caption">08/28/2026</span>
+            <a href="#"><strong>Rapid Take: Agentic AI and Non-Human Identity Risk</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:2">
+            <span class="csa-caption">08/22/2026</span>
+            <a href="#"><strong>Cryptographic Context Injection: When Encryption Defeats AI Guardrails</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:3">
+            <span class="csa-caption">08/06/2026</span>
+            <a href="#"><strong>Rapid Take: EU AI Act Guidance for Cloud Providers</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:4">
+            <span class="csa-caption">08/01/2026</span>
+            <a href="#"><strong>GuardFall: Shell Injection Bypass Defeats AI Coding Agent Guardrails</strong></a>
+          </span>
+        </div>
+        <a class="csa-go" href="#">View all</a>
+      </div>
+    </aside>
+    <div class="docs-label" style="margin-top:24px">Black surface</div>
+    <aside class="csa-latest-brief csa-py-3" data-surface="black" aria-label="Latest Rapid Research" style="border-radius:12px">
+      <div class="csa-wrap csa-latest-brief-row">
+        <span class="csa-kicker csa-icon-text">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+          <span>Rapid Research</span>
+        </span>
+        <div class="csa-latest-brief-viewport">
+          <span class="csa-latest-brief-item" style="--i:0">
+            <span class="csa-caption">09/15/2026</span>
+            <a href="#"><strong>AI Top News Roundup: Q3 2026</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:1">
+            <span class="csa-caption">08/28/2026</span>
+            <a href="#"><strong>Rapid Take: Agentic AI and Non-Human Identity Risk</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:2">
+            <span class="csa-caption">08/22/2026</span>
+            <a href="#"><strong>Cryptographic Context Injection: When Encryption Defeats AI Guardrails</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:3">
+            <span class="csa-caption">08/06/2026</span>
+            <a href="#"><strong>Rapid Take: EU AI Act Guidance for Cloud Providers</strong></a>
+          </span>
+          <span class="csa-latest-brief-item" style="--i:4">
+            <span class="csa-caption">08/01/2026</span>
+            <a href="#"><strong>GuardFall: Shell Injection Bypass Defeats AI Coding Agent Guardrails</strong></a>
+          </span>
+        </div>
+        <a class="csa-go" href="#">View all</a>
+      </div>
+    </aside>
   </div>
 </section>
 
