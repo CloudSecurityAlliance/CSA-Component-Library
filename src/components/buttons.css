@@ -233,3 +233,48 @@
 .csa-btn-block { display: flex; width: 100%; justify-content: center; }
 
 .csa-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* =========================================================
+   Bookmark toggle — a circular icon-only button pinned to a card's
+   top-right corner. Copied from the live bookmark on
+   cloudsecurityalliance.org/star/resources:
+     resting  — 34px circle, 75% white fill, 1px n50 border, n300 glyph
+     pressed  — o700 fill, 1px o500 border, white glyph
+   No drop shadow (the border separates it from the photo) and no hover
+   change, as on the live site. One style on every surface: it sits on
+   the card's photo, not on the surface color, so there are no
+   dark/black variants. The glyph stays an outline in both states.
+
+   z-index: on a .csa-card-hover card the .csa-go link is stretched
+   over the whole card (cards.css), and since it comes later in the
+   source it would paint over the button and take its clicks.
+   z-index:1 keeps the button on top. The card gets position:relative
+   from :has() below if it doesn't already have it (.csa-card-hover
+   does).
+
+   Markup contract:
+     <article class="csa-card-media csa-card-hover">
+       <div class="csa-card-media-img"><img src="…" alt=""></div>
+       <button class="csa-bookmark-btn" type="button" aria-pressed="false" aria-label="Save {title}">
+         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.75A1.75 1.75 0 0 1 7.75 2h8.5A1.75 1.75 0 0 1 18 3.75V21l-6-4-6 4V3.75Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+       </button>
+       <div class="csa-card-media-body">… <a class="csa-go" href="…">View publication <span aria-hidden="true">&rarr;</span></a></div>
+     </article>
+
+   BEHAVIOR SPEC — not implemented here: the app flips aria-pressed on
+   click (and calls preventDefault if the card itself is a link), same
+   one-attribute contract as .csa-tag-filter. Keep the aria-label fixed
+   ("Save …"); aria-pressed already tells assistive tech the state.
+   ========================================================= */
+.csa-card:has(> .csa-bookmark-btn), .csa-card-media:has(> .csa-bookmark-btn) { position: relative; }
+.csa-bookmark-btn {
+  position: absolute; top: 12px; right: 12px; z-index: 1;
+  width: 34px; height: 34px; border-radius: 50%; padding: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.75); border: 1px solid var(--n50); cursor: pointer;
+  color: var(--n300);
+  transition: .18s;
+}
+.csa-bookmark-btn[aria-pressed="true"] { background: var(--o700); border-color: var(--o500); color: var(--white); }
+.csa-bookmark-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; }
+.csa-bookmark-btn svg { width: 16px; height: 16px; }

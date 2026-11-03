@@ -1,0 +1,95 @@
+/* =========================================================
+   CSA Component Library — Latest brief (Rapid Research ticker)
+   A thin band under a hero that fades through five headlines one at a
+   time, from the Research Overview / Library / Contribute prototypes.
+   CSS only: every item runs the same 22.5s keyframe, offset by
+   calc(var(--i) * 4.5s), so each one is visible for its own 4.5s slot.
+   The keyframe's percentages are written for exactly five items
+   (each holds for 1/5 of the cycle); a different count needs a new
+   keyframe and duration, not just more items.
+
+   Markup contract:
+     <aside class="csa-latest-brief csa-py-3" data-surface="dark" aria-label="Latest Rapid Research">
+       <div class="csa-wrap csa-latest-brief-row">
+         <span class="csa-kicker csa-icon-text">
+           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">…</svg>
+           <span>Rapid Research</span>
+         </span>
+         <div class="csa-latest-brief-viewport">
+           <span class="csa-latest-brief-item" style="--i:0">
+             <span class="csa-caption">09/15/2026</span>
+             <a href="…"><strong>Headline</strong></a>
+           </span>
+           …four more, --i:1 through --i:4…
+         </div>
+         <a class="csa-go" href="…">View all <span aria-hidden="true">&rarr;</span></a>
+       </div>
+     </aside>
+
+   Behavior (all CSS):
+     - Hovering the band pauses the cycle.
+     - Keyboard focus on a headline stops the cycle and shows the
+       focused one, so Tab walks through all five in order. This is
+       scoped to the viewport, so tabbing on to "View all" doesn't
+       blank the headline.
+     - pointer-events is animated along with opacity: all five items
+       sit stacked in the same box, so only the visible one may catch
+       hover and clicks.
+     - Reduced motion: no cycling, the first headline stays put (the
+       rest are still reachable by Tab).
+     - It stays one row at every width. The headline truncates with an
+       ellipsis; under 640px the dates hide and the kicker's label text
+       is visually hidden, leaving the icon (the aside's aria-label
+       still names the band).
+
+   Surfaces: built for dark (and black). Headline links are b800 on a
+   light surface so the band still reads if it's ever placed there.
+   ========================================================= */
+.csa-latest-brief-row { display: flex; align-items: center; gap: 24px; }
+.csa-latest-brief .csa-kicker { flex: none; }
+.csa-latest-brief .csa-go { flex: none; margin-top: 0; white-space: nowrap; }
+
+/* 28px is the box the stacked items share: one line of 16px text at
+   the base 1.6 line-height (25.6px) plus room for the slide. */
+.csa-latest-brief-viewport { position: relative; flex: 1; min-width: 0; height: 28px; overflow: hidden; }
+.csa-latest-brief-item {
+  position: absolute; inset: 0; display: flex; align-items: center; gap: 12px;
+  opacity: 0; transform: translateY(10px); pointer-events: none;
+  animation: csa-latest-brief-cycle 22.5s linear infinite backwards;
+  animation-delay: calc(var(--i, 0) * 4.5s);
+}
+.csa-latest-brief-item .csa-caption { flex: none; }
+.csa-latest-brief-item a {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: var(--b800); text-decoration: none;
+}
+[data-surface="dark"] .csa-latest-brief-item a,
+[data-surface="black"] .csa-latest-brief-item a { color: var(--white); }
+.csa-latest-brief-item a:hover { text-decoration: underline; }
+
+@keyframes csa-latest-brief-cycle {
+  0%   { opacity: 0; transform: translateY(10px);  pointer-events: none; }
+  2%   { opacity: 1; transform: none;              pointer-events: auto; }
+  18%  { opacity: 1; transform: none;              pointer-events: auto; }
+  20%  { opacity: 0; transform: translateY(-10px); pointer-events: none; }
+  100% { opacity: 0; transform: translateY(-10px); pointer-events: none; }
+}
+
+.csa-latest-brief:hover .csa-latest-brief-item { animation-play-state: paused; }
+.csa-latest-brief-viewport:focus-within .csa-latest-brief-item { animation: none; opacity: 0; transform: none; }
+.csa-latest-brief-viewport:focus-within .csa-latest-brief-item:focus-within { opacity: 1; z-index: 1; pointer-events: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .csa-latest-brief-item { animation: none; transform: none; }
+  .csa-latest-brief-item:first-child { opacity: 1; pointer-events: auto; }
+}
+
+@media (max-width: 640px) {
+  .csa-latest-brief-row { gap: 10px; }
+  .csa-latest-brief-item .csa-caption { display: none; }
+  /* visually hidden, not display:none, so the label is still read */
+  .csa-latest-brief .csa-kicker > span {
+    position: absolute; width: 1px; height: 1px; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap;
+  }
+}
