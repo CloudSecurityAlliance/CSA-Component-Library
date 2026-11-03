@@ -1485,6 +1485,13 @@
           <button type="button" class="csa-toggle-segmented-option">Option 1</button>
           <button type="button" class="csa-toggle-segmented-option">Option 2</button>
         </div>
+        <div class="docs-label" style="margin-top:20px">Segmented toggle, 3 options — <code>.csa-toggle-segmented-3</code></div>
+        <div class="csa-toggle-segmented csa-toggle-segmented-3" role="group" aria-label="Example three-option toggle" data-selected="1" style="margin-top:8px">
+          <div class="csa-toggle-segmented-highlight"></div>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="true">Artificial Intelligence</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Cloud</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Zero Trust</button>
+        </div>
       </div>
       <div class="docs-surface-demo" data-surface="light" data-tone="neutral">
         <div class="docs-label" style="margin-bottom:14px">Neutral background</div>
@@ -1511,6 +1518,13 @@
           <div class="csa-toggle-segmented-highlight"></div>
           <button type="button" class="csa-toggle-segmented-option">Option 1</button>
           <button type="button" class="csa-toggle-segmented-option">Option 2</button>
+        </div>
+        <div class="docs-label" style="margin-top:20px">Segmented toggle, 3 options — <code>.csa-toggle-segmented-3</code></div>
+        <div class="csa-toggle-segmented csa-toggle-segmented-3" role="group" aria-label="Example three-option toggle" data-selected="1" style="margin-top:8px">
+          <div class="csa-toggle-segmented-highlight"></div>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="true">Artificial Intelligence</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Cloud</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Zero Trust</button>
         </div>
       </div>
       <div class="docs-surface-demo" data-surface="dark">
@@ -1539,6 +1553,13 @@
           <button type="button" class="csa-toggle-segmented-option">Option 1</button>
           <button type="button" class="csa-toggle-segmented-option">Option 2</button>
         </div>
+        <div class="docs-label" style="margin-top:20px">Segmented toggle, 3 options — <code>.csa-toggle-segmented-3</code></div>
+        <div class="csa-toggle-segmented csa-toggle-segmented-3" role="group" aria-label="Example three-option toggle" data-selected="1" style="margin-top:8px">
+          <div class="csa-toggle-segmented-highlight"></div>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="true">Artificial Intelligence</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Cloud</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Zero Trust</button>
+        </div>
       </div>
       <div class="docs-surface-demo" data-surface="black">
         <div class="docs-label" style="margin-bottom:14px">Black background</div>
@@ -1565,6 +1586,13 @@
           <div class="csa-toggle-segmented-highlight"></div>
           <button type="button" class="csa-toggle-segmented-option">Option 1</button>
           <button type="button" class="csa-toggle-segmented-option">Option 2</button>
+        </div>
+        <div class="docs-label" style="margin-top:20px">Segmented toggle, 3 options — <code>.csa-toggle-segmented-3</code></div>
+        <div class="csa-toggle-segmented csa-toggle-segmented-3" role="group" aria-label="Example three-option toggle" data-selected="1" style="margin-top:8px">
+          <div class="csa-toggle-segmented-highlight"></div>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="true">Artificial Intelligence</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Cloud</button>
+          <button type="button" class="csa-toggle-segmented-option" aria-pressed="false">Zero Trust</button>
         </div>
       </div>
     </div>
@@ -3422,14 +3450,21 @@
 })();
 
 /* Demo-only: segmented toggle — sets the parent's data-selected to "a"
-   or "b" depending on which option (first/second child) was clicked,
-   per the BEHAVIOR SPEC in toggles.css. */
+   or "b" depending on which option (first/second child) was clicked, or
+   1|2|3 plus aria-pressed for the three-option variant, per the
+   BEHAVIOR SPEC in toggles.css. */
 (function () {
   document.querySelectorAll('.csa-toggle-segmented').forEach(seg => {
     const options = seg.querySelectorAll('.csa-toggle-segmented-option');
+    const three = seg.classList.contains('csa-toggle-segmented-3');
     options.forEach((option, i) => {
       option.addEventListener('click', () => {
-        seg.setAttribute('data-selected', i === 0 ? 'a' : 'b');
+        if (three) {
+          seg.setAttribute('data-selected', String(i + 1));
+          options.forEach((o, j) => o.setAttribute('aria-pressed', String(j === i)));
+        } else {
+          seg.setAttribute('data-selected', i === 0 ? 'a' : 'b');
+        }
       });
     });
   });
