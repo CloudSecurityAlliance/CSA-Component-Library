@@ -41,6 +41,7 @@
 <link rel="stylesheet" href="../components/sep.css">
 <link rel="stylesheet" href="../components/lists.css">
 <link rel="stylesheet" href="../components/latest-brief.css">
+<link rel="stylesheet" href="../components/promo-band.css">
 
 <style>
 /* =========================================================
@@ -506,6 +507,7 @@
         <a href="#sep">Sep</a>
         <a href="#lists">Lists</a>
         <a href="#latest-brief">Latest brief</a>
+        <a href="#promo-band">Promo band</a>
         <a href="#hero-examples">Hero examples</a>
         <a href="#real-layouts">Real layouts</a>
       </div>
@@ -2756,6 +2758,35 @@
         <a class="csa-go" href="#">View all</a>
       </div>
     </aside>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PROMO BAND                                                     -->
+<!-- ============================================================ -->
+<section class="docs-section" id="promo-band">
+  <div class="csa-wrap">
+    <div class="docs-head">
+      <span class="csa-kicker">Components</span>
+      <h2 class="csa-title">Promo band</h2>
+      <p>A full-width <code>--b500</code> band — icon, h3 and a short paragraph, with a two-line CTA and a large arrow on the right that nudges forward on hover. It isn't a new surface: the band paints its own b500 and needs <code>data-surface="dark"</code> so the heading and paragraph take dark's white/n75. Keep the content to the pieces shown; other dark-surface components (<code>.csa-go</code>, cards) weren't tuned for b500. Stacks below 760px.</p>
+      <div class="csa-rule"></div>
+    </div>
+    <section class="csa-promo-band csa-section-medium" data-surface="dark" aria-labelledby="docs-promo-head" style="border-radius:16px">
+      <div class="csa-wrap csa-promo-band-row">
+        <div class="csa-promo-band-copy">
+          <img class="csa-icon" src="../assets/icons/strategy-white.svg" alt="" width="48" height="48">
+          <div>
+            <h3 class="csa-title" id="docs-promo-head">Great Research Doesn&rsquo;t Only Follow One Path</h3>
+            <p>Independent experts also bring their own research to CSA, and anyone can help shape research through peer reviews and surveys. Consider contributing your research to the CSA community.</p>
+          </div>
+        </div>
+        <a class="csa-promo-band-link" href="#">
+          <span class="csa-block">Explore how to<br>contribute</span>
+          <svg viewBox="0 0 30 30" fill="currentColor" aria-hidden="true"><path d="M15,0C6.72,0,0,6.72,0,15s6.72,15,15,15,15-6.72,15-15S23.28,0,15,0ZM15,27.98c-7.16,0-12.98-5.82-12.98-12.98S7.84,2.02,15,2.02s12.98,5.82,12.98,12.98-5.82,12.98-12.98,12.98Z"/><path d="M15.86,8.55c-.39-.39-1.03-.39-1.43,0s-.39,1.03,0,1.43l4.02,4.02h-10.05c-.56,0-1.01.45-1.01,1.01s.45,1.01,1.01,1.01h10.05l-4.02,4.02c-.39.39-.39,1.03,0,1.43.2.2.45.3.71.3s.52-.1.71-.3l5.74-5.74c.19-.19.3-.45.3-.71s-.11-.52-.3-.71l-5.74-5.74Z"/></svg>
+        </a>
+      </div>
+    </section>
   </div>
 </section>
 

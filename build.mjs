@@ -46,6 +46,7 @@ const COMPONENT_CSS_FILES = [
   'sep.css',
   'lists.css',
   'latest-brief.css',
+  'promo-band.css',
 ];
 const css = [
   readFiles('src/tokens', TOKEN_FILES),
