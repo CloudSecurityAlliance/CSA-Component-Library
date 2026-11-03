@@ -1,0 +1,90 @@
+CSA Component Library License
+
+Copyright (c) 2026 Cloud Security Alliance. All rights reserved.
+
+This repository, including its source code, stylesheets, design tokens,
+build scripts, documentation, and brand assets (together, the "Materials"),
+is the proprietary property of Cloud Security Alliance ("CSA"). The
+Materials are made publicly viewable for convenience only. Public
+visibility does not grant any license or right to use them, except as
+expressly stated below.
+
+1. Authorized Users
+
+   This license is granted only to:
+
+   (a) CSA employees, contractors, and volunteers acting on CSA's behalf;
+       and
+   (b) individuals and organizations that CSA has authorized in writing
+       to use the Materials
+
+   (each, an "Authorized User"). Anyone else may view the Materials but
+   receives no right to use, copy, modify, or distribute them.
+
+2. Permitted Use
+
+   Subject to the terms of this license, CSA grants each Authorized User a
+   limited, non-exclusive, non-transferable, non-sublicensable, revocable
+   license to use, copy, and modify the Materials solely to create web
+   pages, user interfaces, and other materials for CSA, on CSA's behalf, or
+   as otherwise approved by CSA in writing.
+
+3. Restrictions
+
+   Authorized Users may not:
+
+   (a) distribute, publish, sell, sublicense, or otherwise make the
+       Materials, or any modified version of them, available to any third
+       party, except as part of work delivered under Section 2;
+   (b) use the Materials, in whole or in part, for any product, service,
+       website, or project that is not covered by Section 2;
+   (c) use the Materials in any way that suggests CSA sponsorship,
+       endorsement, certification, or affiliation that does not exist; or
+   (d) remove or alter any copyright, trademark, or license notice in the
+       Materials.
+
+4. Trademarks and Brand Assets
+
+   CSA's names, logos, certification and program marks, badges, icons, and
+   illustrations, including those in src/assets/, are trademarks or
+   copyrighted works of CSA. This license grants no rights in CSA's
+   trademarks. Authorized Users may use them only as Section 2 permits and
+   in line with the CSA Brand Guide and any other brand guidance CSA
+   provides.
+
+5. Third-Party Materials
+
+   Some content in this repository belongs to third parties and is not
+   licensed by CSA. This includes partner and vendor logos and demo
+   photography in src/docs/assets/ that appear only to illustrate
+   components. All such content remains the property of its owners and is
+   subject to their own terms. Web fonts referenced by the Materials
+   (Adobe Fonts / Typekit and Google Fonts) are not included in the
+   Materials and are governed by their providers' terms.
+
+6. Termination
+
+   This license ends automatically if an Authorized User breaches any of
+   its terms, or when CSA withdraws that user's authorization. On
+   termination, the user must stop using the Materials and delete all
+   copies in their possession, except for work already delivered to CSA
+   under Section 2.
+
+7. No Warranty
+
+   THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+8. Limitation of Liability
+
+   IN NO EVENT SHALL CSA BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
+   ARISING FROM, OUT OF, OR IN CONNECTION WITH THE MATERIALS OR THEIR USE.
+
+9. Reservation of Rights
+
+   CSA reserves all rights not expressly granted in this license.
+
+For permission requests or questions about this license, contact Cloud
+Security Alliance.
