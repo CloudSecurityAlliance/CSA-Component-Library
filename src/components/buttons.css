@@ -236,15 +236,14 @@
 
 /* =========================================================
    Bookmark toggle — a circular icon-only button pinned to a card's
-   top-right corner. Styled to match the live bookmark on
-   cloudsecurityalliance.org/star/resources: a 34px circle, 75% white
-   fill with a 1px n50 border (no drop shadow; the border is what
-   separates it from the photo), and an n300 glyph. Hover goes to a
-   solid white fill with a b800 glyph. Pressed fills the glyph and
-   turns it orange, the same accent .csa-tag-filter's
-   [aria-pressed="true"] uses. The glyph is a stroked outline rather
-   than the live site's Font Awesome icon, so pressed can fill it from
-   CSS.
+   top-right corner. Copied from the live bookmark on
+   cloudsecurityalliance.org/star/resources:
+     resting  — 34px circle, 75% white fill, 1px n50 border, n300 glyph
+     pressed  — o700 fill, 1px o500 border, white glyph
+   No drop shadow (the border separates it from the photo) and no hover
+   change, as on the live site. One style on every surface: it sits on
+   the card's photo, not on the surface color, so there are no
+   dark/black variants. The glyph stays an outline in both states.
 
    z-index: on a .csa-card-hover card the .csa-go link is stretched
    over the whole card (cards.css), and since it comes later in the
@@ -266,11 +265,6 @@
    click (and calls preventDefault if the card itself is a link), same
    one-attribute contract as .csa-tag-filter. Keep the aria-label fixed
    ("Save …"); aria-pressed already tells assistive tech the state.
-
-   Surfaces: the live style on light/gradient. Dark and black use the
-   same recipe in their own colors (the live site only has light): the
-   surface's card color at 75% with that surface's card border, an n100
-   glyph turning white on hover, and an o300 pressed glyph.
    ========================================================= */
 .csa-card:has(> .csa-bookmark-btn), .csa-card-media:has(> .csa-bookmark-btn) { position: relative; }
 .csa-bookmark-btn {
@@ -279,20 +273,8 @@
   display: inline-flex; align-items: center; justify-content: center;
   background: rgba(255,255,255,.75); border: 1px solid var(--n50); cursor: pointer;
   color: var(--n300);
-  transition: background-color .18s, color .18s;
+  transition: .18s;
 }
-.csa-bookmark-btn:hover { background: var(--white); color: var(--b800); }
+.csa-bookmark-btn[aria-pressed="true"] { background: var(--o700); border-color: var(--o500); color: var(--white); }
 .csa-bookmark-btn:focus-visible { outline: 2px solid var(--b500); outline-offset: 2px; }
 .csa-bookmark-btn svg { width: 16px; height: 16px; }
-.csa-bookmark-btn[aria-pressed="true"] { color: var(--o600); }
-.csa-bookmark-btn[aria-pressed="true"] svg path { fill: currentColor; }
-
-/* rgba of b800 #0C2040 / n800 #191929 at the same .75 as the white circle */
-[data-surface="dark"] .csa-bookmark-btn { background: rgba(12,32,64,.75); border-color: var(--b600); color: var(--n100); }
-[data-surface="dark"] .csa-bookmark-btn:hover { background: var(--b800); color: var(--white); }
-[data-surface="black"] .csa-bookmark-btn { background: rgba(25,25,41,.75); border-color: var(--n700); color: var(--n100); }
-[data-surface="black"] .csa-bookmark-btn:hover { background: var(--n800); color: var(--white); }
-[data-surface="dark"] .csa-bookmark-btn:focus-visible,
-[data-surface="black"] .csa-bookmark-btn:focus-visible { outline-color: var(--b300); }
-[data-surface="dark"] .csa-bookmark-btn[aria-pressed="true"],
-[data-surface="black"] .csa-bookmark-btn[aria-pressed="true"] { color: var(--o300); }
