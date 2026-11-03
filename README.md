@@ -45,6 +45,15 @@ now, not a mirror of theirs.
   node build.mjs
   ```
 
+## License
+
+Proprietary — see [`LICENSE`](LICENSE). This repo is public so it's easy
+to share, but public doesn't mean open: only CSA staff and people CSA has
+authorized in writing may use it, and only to build pages and UI for CSA
+or as CSA approves. Using CSA logos and marks also has to follow the CSA
+Brand Guide. Partner logos and demo photos in `src/docs/assets/` belong
+to their owners and aren't covered by the license.
+
 ## Styling only, not behavior
 
 This repo defines how CSA things look; each application defines how they
