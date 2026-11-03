@@ -1933,7 +1933,7 @@
     <div class="docs-head">
       <span class="csa-kicker">Components</span>
       <h2 class="csa-title">Filters</h2>
-      <p>A filter sidebar — <code>.csa-filters</code> groups a <code>.csa-filter-grade</code> quick-filter and any number of <code>.csa-filter-group</code> checkbox (or radio) lists under a "Clear all" header. A bare layout shell like <code>.csa-actions</code>/<code>.csa-tags</code> — no background or border of its own; checkbox/radio styling itself lives in Forms.</p>
+      <p>A filter sidebar — <code>.csa-filters</code> groups a <code>.csa-filter-grade</code> quick-filter and any number of <code>.csa-filter-group</code> checkbox (or radio) lists under a "Clear all" header. A bare layout shell like <code>.csa-actions</code>/<code>.csa-tags</code> — no background or border of its own; checkbox/radio styling itself lives in Forms. Wrap a group title in <code>.csa-filter-group-head</code> to put an accessory on its line, like the <code>.csa-filter-info-btn</code> "i" next to Confidence.</p>
       <div class="csa-rule"></div>
     </div>
     <div class="docs-3col">
@@ -1955,7 +1955,12 @@
             </div>
           </div>
           <div class="csa-filter-group">
-            <div class="csa-filter-group-title">Confidence</div>
+            <div class="csa-filter-group-head">
+              <div class="csa-filter-group-title">Confidence</div>
+              <button type="button" class="csa-filter-info-btn" aria-label="What does confidence mean?" title="What does confidence mean?">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.4"/><line x1="10" y1="9" x2="10" y2="14.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/></svg>
+              </button>
+            </div>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>1 scanner</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>2 scanners</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>3 or more scanners</span></label>
@@ -1987,7 +1992,12 @@
             </div>
           </div>
           <div class="csa-filter-group">
-            <div class="csa-filter-group-title">Confidence</div>
+            <div class="csa-filter-group-head">
+              <div class="csa-filter-group-title">Confidence</div>
+              <button type="button" class="csa-filter-info-btn" aria-label="What does confidence mean?" title="What does confidence mean?">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.4"/><line x1="10" y1="9" x2="10" y2="14.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/></svg>
+              </button>
+            </div>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>1 scanner</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>2 scanners</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>3 or more scanners</span></label>
@@ -2019,7 +2029,12 @@
             </div>
           </div>
           <div class="csa-filter-group">
-            <div class="csa-filter-group-title">Confidence</div>
+            <div class="csa-filter-group-head">
+              <div class="csa-filter-group-title">Confidence</div>
+              <button type="button" class="csa-filter-info-btn" aria-label="What does confidence mean?" title="What does confidence mean?">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="8.5" stroke="currentColor" stroke-width="1.4"/><line x1="10" y1="9" x2="10" y2="14.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.05" fill="currentColor"/></svg>
+              </button>
+            </div>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>1 scanner</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox" checked><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>2 scanners</span></label>
             <label class="csa-filter-row csa-checkbox"><input type="checkbox"><span class="csa-checkbox-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg></span><span>3 or more scanners</span></label>
