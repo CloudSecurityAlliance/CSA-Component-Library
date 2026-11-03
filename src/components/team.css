@@ -1,0 +1,41 @@
+/* =========================================================
+   CSA Component Library — Team card
+   A person in a team grid: squircle photo, name, then title and
+   organization, centered. From the Research Overview prototype's
+   "Meet the CSA Research Team". Not a .csa-card: there's no shell,
+   just the three pieces on the section's own background.
+
+   The photo is cropped by a mask to the same squircle outline as the
+   showcase's headshot placeholder (docs/assets/squircle.svg), so any
+   photo works without being pre-cropped. Compare .csa-card-quote-avatar
+   (cards.css), the plain 48px headshot in a testimonial footer.
+
+   No grid class of its own: lay the cards out with the grid's
+   responsive presets, e.g. two across on phones, three from 768px,
+   five from 1024px:
+
+   Markup contract:
+     <div class="csa-grid csa-grid-2 csa-grid-md-3 csa-grid-lg-5">
+       <div class="csa-cell csa-team-card">
+         <img class="csa-team-avatar" src="…" alt="">
+         <div class="csa-team-name">First Last</div>
+         <div class="csa-team-title csa-caption">Title, Organization</div>
+       </div>
+       …
+     </div>
+
+   alt="" because the name right below already identifies the person.
+   .csa-caption supplies the title's size and surface-aware color.
+   ========================================================= */
+.csa-team-card { text-align: center; }
+
+.csa-team-avatar {
+  width: 96px; height: 96px; object-fit: cover; display: block; margin: 0 auto 14px;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M50,25C50,4.5,45.5,0,25,0S0,4.5,0,25s4.5,25,25,25,25-4.5,25-25Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M50,25C50,4.5,45.5,0,25,0S0,4.5,0,25s4.5,25,25,25,25-4.5,25-25Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+.csa-team-name { font-size: 15px; font-weight: 700; color: var(--b800); }
+.csa-team-title { margin-top: 2px; }
+
+[data-surface="dark"] .csa-team-name, [data-surface="black"] .csa-team-name { color: var(--white); }
