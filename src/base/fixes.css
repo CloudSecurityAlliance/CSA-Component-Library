@@ -1,0 +1,9 @@
+/* Neutral description lists: undo host-page styling of bare dl/dt/dd
+   (e.g. the CSA website's legacy table look). Components layer their own
+   layout on top, as .csa-modal-list does. */
+.csa-dl { display: block; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: none; }
+.csa-dt,
+.csa-dd {
+  display: block; flex: initial; padding: 0; border: 0; background: none;
+  color: inherit; text-align: start; font: inherit;
+}
