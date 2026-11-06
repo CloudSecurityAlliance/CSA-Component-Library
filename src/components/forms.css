@@ -176,7 +176,7 @@ input.csa-input, textarea.csa-textarea, select.csa-select {
    border) since a small control reads better as an outline against a
    filled field than as another filled box next to one. */
 [data-surface="dark"] .csa-input, [data-surface="dark"] .csa-textarea, [data-surface="dark"] .csa-select {
-  background: var(--b800); border-color: var(--b600); color: #fff;
+  background-color: var(--b800); border-color: var(--b600); color: #fff;
 }
 [data-surface="dark"] .csa-input::placeholder, [data-surface="dark"] .csa-textarea::placeholder { color: var(--b400); }
 [data-surface="dark"] .csa-select {
@@ -198,7 +198,7 @@ input.csa-input, textarea.csa-textarea, select.csa-select {
 
 /* ---- Surface-aware — black ---- */
 [data-surface="black"] .csa-input, [data-surface="black"] .csa-textarea, [data-surface="black"] .csa-select {
-  background: var(--n800); border-color: var(--n700); color: #fff;
+  background-color: var(--n800); border-color: var(--n700); color: #fff;
 }
 [data-surface="black"] .csa-input::placeholder, [data-surface="black"] .csa-textarea::placeholder { color: var(--n500); }
 [data-surface="black"] .csa-select {
