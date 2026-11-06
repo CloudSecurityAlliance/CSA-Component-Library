@@ -21,7 +21,14 @@ function readFiles(dir, names) {
 // within components, surfaces before cards/buttons/badges/etc. so later
 // rules can rely on earlier custom properties and base element styles.
 const TOKEN_FILES = ['colors.css', 'typography.css', 'spacing.css', 'shadows.css'];
-const BASE_FILES = ['reset.css', 'icon-glyph.css', 'utility.css', 'spacing-helpers.css', 'color-helpers.css'];
+const BASE_FILES = [
+  'reset.css',
+  'icon-glyph.css',
+  'utility.css',
+  'spacing-helpers.css',
+  'color-helpers.css',
+  'fixes.css'
+];
 const COMPONENT_CSS_FILES = [
   'surfaces.css',
   'action.css',
