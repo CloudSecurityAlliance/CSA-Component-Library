@@ -152,7 +152,7 @@ h4.csa-title { font-weight: 700; letter-spacing: 0; }
 .csa-kicker-sub {
   font-family: var(--font-kicker);
   font-size: 12px;
-  letter-spacing: .08em;
+  letter-spacing: .06em; /* Illustrator tracking 60 */
   text-transform: uppercase;
   font-variation-settings: 'wght' 400, 'wdth' 125, 'ital' 0;
   color: var(--o700);
