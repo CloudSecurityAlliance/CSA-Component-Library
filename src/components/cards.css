@@ -273,7 +273,7 @@
    explicitly at both rest and :hover to protect their own gradient
    border, so this rule never reached them to begin with. */
 .csa-card-hover { position: relative; transition: .18s; cursor: pointer; }
-.csa-card-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.csa-card-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow); transition: 0.18s; }
 /* Stretch the csa-go link to cover the whole card. Any other interactive
    element inside the card needs position:relative + z-index:1 to stay clickable. */
 .csa-card-hover .csa-go::after { content: ""; position: absolute; inset: 0; }
