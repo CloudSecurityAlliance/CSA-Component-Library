@@ -313,6 +313,27 @@
   .csa-hero-split-img { justify-self: center; max-width: 200px; margin-top: 8px; }
 }
 
+/* .csa-hero-pattern — a decorative line pattern pinned to the hero's
+   left edge at full hero height, behind the copy. From the Research
+   Overview/Library/Contribute prototypes, where it sits on
+   .csa-hero-light; works on any hero variant. The image comes from
+   --hero-pattern rather than a url() here: a relative url() in this file
+   breaks once a build concatenates or fingerprints it (Rails' asset
+   pipeline, for one), so the page sets it with a path it can resolve.
+   The shipped pattern is assets/patterns/hero-pattern.png.
+
+   Markup:
+     <section class="csa-hero csa-hero-light csa-hero-pattern"
+              style="--hero-pattern:url('assets/patterns/hero-pattern.png')">
+
+   The layer is absolutely positioned under .csa-wrap, which .csa-hero
+   already makes position:relative; z-index:1 keeps the copy above it. */
+.csa-hero-pattern .csa-wrap { z-index: 1; }
+.csa-hero-pattern::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: var(--hero-pattern, none) left top / auto 100% no-repeat;
+}
+
 /* Closing CTA band */
 .csa-cta {
   position: relative; overflow: hidden;

@@ -3019,7 +3019,7 @@
     <div class="docs-head">
       <span class="csa-kicker">Hero examples</span>
       <h2 class="csa-title">Six hero treatments, built with library classes</h2>
-      <p>Six ways to build a page hero with the library's classes. <code>hero-dark</code> is the standard dark treatment — badge, kicker, h1, sub, and CTA row over a navy diagonal. <code>hero-glass-light</code> and <code>hero-glass-dark</code> restore an earlier glass-panel-over-photo treatment — a frosted <code>.csa-card-glass</code> panel sitting over a full-bleed photo, since simplified elsewhere to a plain gradient background. Shown here as one light and one dark, to cover both. <code>hero-light</code> is a newer, non-glass light variant — same badge/kicker/h1/sub/cta shape as <code>hero-dark</code>, just with light-appropriate colors and a mesh-gradient background instead of the navy diagonal. <code>hero-glass-graphic</code> extends <code>hero-glass</code> with a wide panel and a large graphic overlapping its edge — composes with either <code>-light</code> or <code>-dark</code>, shown here in dark to match its source. <code>hero-split-graphic</code> is the simpler sibling to that — no glass panel, content floats directly on the photo, split into two plain columns by <code>.csa-wrap</code> itself with a single graphic (a logo, not an overlapping illustration) vertically centered on the right. Promoted from the STAR Program's own hero, reused as-is across 4 of its pages.</p>
+      <p>Six ways to build a page hero with the library's classes. <code>hero-dark</code> is the standard dark treatment — badge, kicker, h1, sub, and CTA row over a navy diagonal. <code>hero-glass-light</code> and <code>hero-glass-dark</code> restore an earlier glass-panel-over-photo treatment — a frosted <code>.csa-card-glass</code> panel sitting over a full-bleed photo, since simplified elsewhere to a plain gradient background. Shown here as one light and one dark, to cover both. <code>hero-light</code> is a newer, non-glass light variant — same badge/kicker/h1/sub/cta shape as <code>hero-dark</code>, just with light-appropriate colors and a mesh-gradient background instead of the navy diagonal. It's shown with <code>.csa-hero-pattern</code>, the optional line pattern on the left edge, which works on any hero. <code>hero-glass-graphic</code> extends <code>hero-glass</code> with a wide panel and a large graphic overlapping its edge — composes with either <code>-light</code> or <code>-dark</code>, shown here in dark to match its source. <code>hero-split-graphic</code> is the simpler sibling to that — no glass panel, content floats directly on the photo, split into two plain columns by <code>.csa-wrap</code> itself with a single graphic (a logo, not an overlapping illustration) vertically centered on the right. Promoted from the STAR Program's own hero, reused as-is across 4 of its pages.</p>
       <div class="csa-rule"></div>
     </div>
   </div>
@@ -3055,7 +3055,7 @@
     </div>
 
     <div class="csa-tabpanel" role="tabpanel" id="hero-panel-light" aria-labelledby="hero-tab-light" hidden>
-      <div class="csa-hero csa-hero-light">
+      <div class="csa-hero csa-hero-light csa-hero-pattern" style="--hero-pattern:url('../assets/patterns/hero-pattern.png')">
         <div class="csa-wrap">
           <div class="csa-badges">
             <span class="csa-badge csa-badge-secondary"><img src="../assets/icons/calendar-white.svg" alt="">Launching August 4 · Las Vegas</span>
