@@ -9,6 +9,9 @@ initial build. Those pages have kept evolving independently since; this
 library doesn't track them going forward — it's the canonical version
 now, not a mirror of theirs.
 
+> **Building a page?** Start with [`STYLE.md`](STYLE.md) — a short, copy-paste guide (setup,
+> rules, page structure, component snippets) meant to be handed to a person or an AI tool.
+
 ## Using it
 
 - **Starting a new page:** copy `dist/csa-library.html` *and* the
