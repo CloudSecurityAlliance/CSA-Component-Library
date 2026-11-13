@@ -1,0 +1,934 @@
+{
+ "_source": "Airtable: CSA Digital Asset Repository (appauD7LAV8wyLGuB / tblufa7GFPk6jnMvI), Logo + Badge records, synced 2026-11-04",
+ "files": {
+  "2026-csa-ai-trustworthy-pledge-badge": {
+   "record": "recDExiMdnvpriySR",
+   "title": "AI Trustworthy Pledge",
+   "usage": "Special use only"
+  },
+  "acsp-logo-cmyk": {
+   "record": "rec4zo6kNrKw2FZmx",
+   "title": "ACSP Logo",
+   "usage": "Open to anyone"
+  },
+  "acsp-logo-grayscale": {
+   "record": "rec4zo6kNrKw2FZmx",
+   "title": "ACSP Logo",
+   "usage": "Open to anyone"
+  },
+  "acsp-logo-rgb": {
+   "record": "rec4zo6kNrKw2FZmx",
+   "title": "ACSP Logo",
+   "usage": "Open to anyone"
+  },
+  "acsp-logo-white": {
+   "record": "rec4zo6kNrKw2FZmx",
+   "title": "ACSP Logo",
+   "usage": "Open to anyone"
+  },
+  "aicm-logo": {
+   "record": "rectDM25ut6yQLROi",
+   "title": "AICM Logo",
+   "usage": "Internal use only"
+  },
+  "aicm-logo-reverse": {
+   "record": "rectDM25ut6yQLROi",
+   "title": "AICM Logo",
+   "usage": "Internal use only"
+  },
+  "aicm-logo-reverse-simplified": {
+   "record": "rectDM25ut6yQLROi",
+   "title": "AICM Logo",
+   "usage": "Internal use only"
+  },
+  "aicm-logo-reverse-w-bottom-text": {
+   "record": "rectDM25ut6yQLROi",
+   "title": "AICM Logo",
+   "usage": "Internal use only"
+  },
+  "aicm-logo-simplified": {
+   "record": "rectDM25ut6yQLROi",
+   "title": "AICM Logo",
+   "usage": "Internal use only"
+  },
+  "aicm-logo-w-bottom-text": {
+   "record": "rectDM25ut6yQLROi",
+   "title": "AICM Logo",
+   "usage": "Internal use only"
+  },
+  "caiq-lite-logo": {
+   "record": "rec2YMXLMjYiUZtUz",
+   "title": "CAIQ-Lite",
+   "usage": "Open to anyone"
+  },
+  "caiq-logo-cmyk": {
+   "record": "recHZR21XYyElWmA6",
+   "title": "CAIQ Logo",
+   "usage": "Open to anyone"
+  },
+  "caiq-logo-grayscale": {
+   "record": "recHZR21XYyElWmA6",
+   "title": "CAIQ Logo",
+   "usage": "Open to anyone"
+  },
+  "caiq-logo-rgb": {
+   "record": "recHZR21XYyElWmA6",
+   "title": "CAIQ Logo",
+   "usage": "Open to anyone"
+  },
+  "caiq-logo-white": {
+   "record": "recHZR21XYyElWmA6",
+   "title": "CAIQ Logo",
+   "usage": "Open to anyone"
+  },
+  "ccak-logo-grayscale": {
+   "record": "rec9uYgzXvFUSmdZI",
+   "title": "CCAK Logo",
+   "usage": "Open to anyone"
+  },
+  "ccak-logo-rgb": {
+   "record": "rec9uYgzXvFUSmdZI",
+   "title": "CCAK Logo",
+   "usage": "Open to anyone"
+  },
+  "ccak-logo-white": {
+   "record": "rec9uYgzXvFUSmdZI",
+   "title": "CCAK Logo",
+   "usage": "Open to anyone"
+  },
+  "ccm-lite-logo": {
+   "record": "rec9O26GAlFgwhIXt",
+   "title": "CCM-Lite",
+   "usage": "Open to anyone"
+  },
+  "ccm-lite-logo-reverse": {
+   "record": "rec9O26GAlFgwhIXt",
+   "title": "CCM-Lite",
+   "usage": "Open to anyone"
+  },
+  "ccm-logo-cmyk": {
+   "record": "rec0KIp7H9rpV3mZM",
+   "title": "CCM Logo",
+   "usage": "Open to anyone"
+  },
+  "ccm-logo-grayscale": {
+   "record": "rec0KIp7H9rpV3mZM",
+   "title": "CCM Logo",
+   "usage": "Open to anyone"
+  },
+  "ccm-logo-rgb": {
+   "record": "rec0KIp7H9rpV3mZM",
+   "title": "CCM Logo",
+   "usage": "Open to anyone"
+  },
+  "ccm-logo-white": {
+   "record": "rec0KIp7H9rpV3mZM",
+   "title": "CCM Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-badge": {
+   "record": "rec5yMPLbZNVoUEv9",
+   "title": "CCSK Badge",
+   "usage": "Internal use only"
+  },
+  "ccsk-logo-cmyk": {
+   "record": "rec506stVwas4xXHF",
+   "title": "CCSK Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-logo-grayscale": {
+   "record": "rec506stVwas4xXHF",
+   "title": "CCSK Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-logo-rgb": {
+   "record": "rec506stVwas4xXHF",
+   "title": "CCSK Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-logo-white": {
+   "record": "rec506stVwas4xXHF",
+   "title": "CCSK Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-orb-icon": {
+   "record": "recsfzHRMt5kXmF9e",
+   "title": "CCSK Orb",
+   "usage": "Internal use only"
+  },
+  "ccsk-orb-large": {
+   "record": "recsfzHRMt5kXmF9e",
+   "title": "CCSK Orb",
+   "usage": "Internal use only"
+  },
+  "ccsk-plus-badge": {
+   "record": "rec5nb3P477G3gB6N",
+   "title": "CCSK Plus Badge",
+   "usage": "Internal use only"
+  },
+  "ccsk-plus-logo-horizontal": {
+   "record": "rechi5iCC91fX7qhw",
+   "title": "CCSK Plus Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-plus-logo-horizontal-white": {
+   "record": "rechi5iCC91fX7qhw",
+   "title": "CCSK Plus Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-plus-logo-stacked": {
+   "record": "rechi5iCC91fX7qhw",
+   "title": "CCSK Plus Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-plus-logo-stacked-white": {
+   "record": "rechi5iCC91fX7qhw",
+   "title": "CCSK Plus Logo",
+   "usage": "Open to anyone"
+  },
+  "ccsk-v3-credly-badge": {
+   "record": "recLThENaCrb8Ae7w",
+   "title": "CCSK v3 Credly Badge",
+   "usage": "Special use only"
+  },
+  "ccsk-v4-credly-badge": {
+   "record": "recK3E2cDQ5NhjFsc",
+   "title": "CCSK v4 Credly Badge",
+   "usage": "Special use only"
+  },
+  "ccsk-v4-updated-credly-badge": {
+   "record": "recK3E2cDQ5NhjFsc",
+   "title": "CCSK v4 Credly Badge",
+   "usage": "Special use only"
+  },
+  "ccsk-v5-credly-badge": {
+   "record": "rectxE4R1oujQUMPK",
+   "title": "CCSK v5 Credly Badge",
+   "usage": "Special use only"
+  },
+  "cczt-badge": {
+   "record": "recpeXcIr46K4jDe0",
+   "title": "CCZT badge",
+   "usage": "Internal use only"
+  },
+  "cczt-credly-badge": {
+   "record": "recpUnIsyJbvDAUcD",
+   "title": "CCZT Credly Badge",
+   "usage": "Special use only"
+  },
+  "cczt-logo-cmyk": {
+   "record": "recv8tb8STRBJf0Gl",
+   "title": "CCZT Logo",
+   "usage": "Open to anyone"
+  },
+  "cczt-logo-grayscale": {
+   "record": "recv8tb8STRBJf0Gl",
+   "title": "CCZT Logo",
+   "usage": "Open to anyone"
+  },
+  "cczt-logo-rgb": {
+   "record": "recv8tb8STRBJf0Gl",
+   "title": "CCZT Logo",
+   "usage": "Open to anyone"
+  },
+  "cczt-logo-white": {
+   "record": "recv8tb8STRBJf0Gl",
+   "title": "CCZT Logo",
+   "usage": "Open to anyone"
+  },
+  "chapter-leader-mentor-badge": {
+   "record": "reclNMRkualAVtK3R",
+   "title": "Chapter Leader Mentor Badge",
+   "usage": "Special use only"
+  },
+  "circle-logo-cmyk": {
+   "record": "recgAhmyaUY1Bz8IR",
+   "title": "LEGACY - Circle Logo",
+   "usage": "Legacy"
+  },
+  "circle-logo-rgb": {
+   "record": "recgAhmyaUY1Bz8IR",
+   "title": "LEGACY - Circle Logo",
+   "usage": "Legacy"
+  },
+  "circle-logo-white": {
+   "record": "recgAhmyaUY1Bz8IR",
+   "title": "LEGACY - Circle Logo",
+   "usage": "Legacy"
+  },
+  "cloudbytes-logo-cmyk": {
+   "record": "recobryh3xEWiVriz",
+   "title": "CloudBytes Logo",
+   "usage": "Open to anyone"
+  },
+  "cloudbytes-logo-grayscale": {
+   "record": "recobryh3xEWiVriz",
+   "title": "CloudBytes Logo",
+   "usage": "Open to anyone"
+  },
+  "cloudbytes-logo-rgb": {
+   "record": "recobryh3xEWiVriz",
+   "title": "CloudBytes Logo",
+   "usage": "Open to anyone"
+  },
+  "cloudbytes-logo-white": {
+   "record": "recobryh3xEWiVriz",
+   "title": "CloudBytes Logo",
+   "usage": "Open to anyone"
+  },
+  "corporate-member-ai-safety-leadership-council-badge": {
+   "record": "receq2kWeDOILnmbW",
+   "title": "Corporate Member - AI Safety Leadership Council Badge copy",
+   "usage": "Special use only"
+  },
+  "csa-acronym-grayscale": {
+   "record": "recxjQDe9Q8PDdcsC",
+   "title": "CSA Acronym",
+   "usage": "Special use only"
+  },
+  "csa-acronym-rgb": {
+   "record": "recxjQDe9Q8PDdcsC",
+   "title": "CSA Acronym",
+   "usage": "Special use only"
+  },
+  "csa-acronym-white": {
+   "record": "recxjQDe9Q8PDdcsC",
+   "title": "CSA Acronym",
+   "usage": "Special use only"
+  },
+  "csa-ai-corporate-member-badge": {
+   "record": "recqKu4rCXHfOIDQA",
+   "title": "AI Corporate Member Badge",
+   "usage": "Special use only"
+  },
+  "csa-ai-corporate-member-badge-small": {
+   "record": "recqKu4rCXHfOIDQA",
+   "title": "AI Corporate Member Badge",
+   "usage": "Special use only"
+  },
+  "csa-ai-foundation-logo": {
+   "record": "reclxR5HXN5I2LjiJ",
+   "title": "CSA AI Foundation Logo",
+   "usage": "Special use only"
+  },
+  "csa-ai-foundation-logo-reverse-colors": {
+   "record": "reclxR5HXN5I2LjiJ",
+   "title": "CSA AI Foundation Logo",
+   "usage": "Special use only"
+  },
+  "csa-ai-safety-initiative-logo": {
+   "record": "recw4nzEd5Dy0Bq4y",
+   "title": "CSA AI Safety Initiative Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-ai-safety-initiative-logo-reverse": {
+   "record": "recw4nzEd5Dy0Bq4y",
+   "title": "CSA AI Safety Initiative Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-ai-trustworthy-pledge-badge": {
+   "record": "recDExiMdnvpriySR",
+   "title": "AI Trustworthy Pledge",
+   "usage": "Special use only"
+  },
+  "csa-apac-logo-cmyk": {
+   "record": "recEpn8C6z9CpxkM1",
+   "title": "CSA APAC Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-apac-logo-rgb": {
+   "record": "recEpn8C6z9CpxkM1",
+   "title": "CSA APAC Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-car-champion-badge": {
+   "record": "recXaqK3ebP2W6Gun",
+   "title": "CAR Champion Badge",
+   "usage": "Special use only"
+  },
+  "csa-car-cxo-leadership-council-badge": {
+   "record": "rechzJZ5J9TBkKgLm",
+   "title": "CAR CxO Leadership Council Badge",
+   "usage": "Special use only"
+  },
+  "csa-car-logo": {
+   "record": "recr7qbpFRXraDUxj",
+   "title": "CAR Logo",
+   "usage": "Internal use only"
+  },
+  "csa-car-logo-grayscale": {
+   "record": "recr7qbpFRXraDUxj",
+   "title": "CAR Logo",
+   "usage": "Internal use only"
+  },
+  "csa-car-logo-horizontal": {
+   "record": "recr7qbpFRXraDUxj",
+   "title": "CAR Logo",
+   "usage": "Internal use only"
+  },
+  "csa-car-logo-reverse": {
+   "record": "recr7qbpFRXraDUxj",
+   "title": "CAR Logo",
+   "usage": "Internal use only"
+  },
+  "csa-car-logo-reverse-horizontal": {
+   "record": "recr7qbpFRXraDUxj",
+   "title": "CAR Logo",
+   "usage": "Internal use only"
+  },
+  "csa-car-logo-white": {
+   "record": "recr7qbpFRXraDUxj",
+   "title": "CAR Logo",
+   "usage": "Internal use only"
+  },
+  "csa-chapter-of-excellence": {
+   "record": "recLB2Fr0q6Ftc3Ex",
+   "title": "Chapter of Excellence Badge",
+   "usage": "Special use only"
+  },
+  "csa-cloud-infrastructure-security-training-logo": {
+   "record": "rec2F1VtQd0nIAxtZ",
+   "title": "Cloud Infrastructure Security Training",
+   "usage": "Open to anyone"
+  },
+  "csa-cloud-infrastructure-security-training-logo-grayscale": {
+   "record": "rec2F1VtQd0nIAxtZ",
+   "title": "Cloud Infrastructure Security Training",
+   "usage": "Open to anyone"
+  },
+  "csa-cloud-infrastructure-security-training-logo-white": {
+   "record": "rec2F1VtQd0nIAxtZ",
+   "title": "Cloud Infrastructure Security Training",
+   "usage": "Open to anyone"
+  },
+  "csa-cxo-trust-advisory-council-logo": {
+   "record": "recPmFkjeKvseSiFR",
+   "title": "CxO Trust Advisory Council Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-cxo-trust-advisory-council-logo-grayscale": {
+   "record": "recPmFkjeKvseSiFR",
+   "title": "CxO Trust Advisory Council Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-cxo-trust-advisory-council-logo-white": {
+   "record": "recPmFkjeKvseSiFR",
+   "title": "CxO Trust Advisory Council Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-cxo-trust-initiative-logo": {
+   "record": "recomx5UKc8Su5x2V",
+   "title": "CxO Trust Initiative",
+   "usage": "Open to anyone"
+  },
+  "csa-cxo-trust-initiative-logo-grayscale": {
+   "record": "recomx5UKc8Su5x2V",
+   "title": "CxO Trust Initiative",
+   "usage": "Open to anyone"
+  },
+  "csa-cxo-trust-initiative-logo-white": {
+   "record": "recomx5UKc8Su5x2V",
+   "title": "CxO Trust Initiative",
+   "usage": "Open to anyone"
+  },
+  "csa-emea-logo-cmyk": {
+   "record": "rechnXhdyqWxvGoio",
+   "title": "CSA EMEA Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-emea-logo-rgb": {
+   "record": "rechnXhdyqWxvGoio",
+   "title": "CSA EMEA Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-enterprise-membership-badge": {
+   "record": "recnRIKbYkBQKq1D5",
+   "title": "Enterprise Membership Badge",
+   "usage": "Open to anyone"
+  },
+  "csa-enterprise-membership-badge-internal": {
+   "record": "recnRIKbYkBQKq1D5",
+   "title": "Enterprise Membership Badge",
+   "usage": "Open to anyone"
+  },
+  "csa-exams-platform-logo": {
+   "record": "recW75YLdKReXbZQi",
+   "title": "Exams Platform",
+   "usage": "Internal use only"
+  },
+  "csa-exams-platform-logo-grayscale": {
+   "record": "recW75YLdKReXbZQi",
+   "title": "Exams Platform",
+   "usage": "Internal use only"
+  },
+  "csa-exams-platform-logo-white": {
+   "record": "recW75YLdKReXbZQi",
+   "title": "Exams Platform",
+   "usage": "Internal use only"
+  },
+  "csa-executive-membership-badge": {
+   "record": "rec4gNMvpFFQ1Hakq",
+   "title": "Executive Membership Badge",
+   "usage": "Open to anyone"
+  },
+  "csa-fincloud-security-initiative-logo": {
+   "record": "rec4tjxzioY2bFXQD",
+   "title": "CSA FinCloud Security Initiative Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-fincloud-security-initiative-logo-reverse": {
+   "record": "rec4tjxzioY2bFXQD",
+   "title": "CSA FinCloud Security Initiative Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-gsd-logo": {
+   "record": "recuGkMqoAxxxM9M4",
+   "title": "Global Security Database (GSD)",
+   "usage": "Open to anyone"
+  },
+  "csa-gsd-logo-grayscale": {
+   "record": "recuGkMqoAxxxM9M4",
+   "title": "Global Security Database (GSD)",
+   "usage": "Open to anyone"
+  },
+  "csa-gsd-logo-white": {
+   "record": "recuGkMqoAxxxM9M4",
+   "title": "Global Security Database (GSD)",
+   "usage": "Open to anyone"
+  },
+  "csa-knowledge-center-logo": {
+   "record": "recnj6qFAZCFa8ZSk",
+   "title": "CSA Knowledge Center",
+   "usage": "Legacy"
+  },
+  "csa-knowledge-center-logo-grayscale": {
+   "record": "recnj6qFAZCFa8ZSk",
+   "title": "CSA Knowledge Center",
+   "usage": "Legacy"
+  },
+  "csa-knowledge-center-logo-white": {
+   "record": "recnj6qFAZCFa8ZSk",
+   "title": "CSA Knowledge Center",
+   "usage": "Legacy"
+  },
+  "csa-logo-cmyk": {
+   "record": "recWXcJXE47BnOmUG",
+   "title": "CSA Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-logo-grayscale": {
+   "record": "recWXcJXE47BnOmUG",
+   "title": "CSA Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-logo-rgb": {
+   "record": "recWXcJXE47BnOmUG",
+   "title": "CSA Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-logo-white": {
+   "record": "recWXcJXE47BnOmUG",
+   "title": "CSA Logo",
+   "usage": "Open to anyone"
+  },
+  "csa-premier-ai-safety-ambassador-badge": {
+   "record": "rechXSuZR9AvoTGaL",
+   "title": "CSA Premier AI Safety Ambassador Badge",
+   "usage": "Special use only"
+  },
+  "csa-premier-ai-safety-ambassador-badge-small": {
+   "record": "rechXSuZR9AvoTGaL",
+   "title": "CSA Premier AI Safety Ambassador Badge",
+   "usage": "Special use only"
+  },
+  "csa-presents-startup-pitchapalooza-logo": {
+   "record": "recjfdunq1omhrK0w",
+   "title": "CSA presents Startup Pitchapalooza",
+   "usage": "Special use only"
+  },
+  "csa-presents-startup-pitchapalooza-logo-small": {
+   "record": "recjfdunq1omhrK0w",
+   "title": "CSA presents Startup Pitchapalooza",
+   "usage": "Special use only"
+  },
+  "csa-solution-provider-membership-badge": {
+   "record": "rec3zOD6QOXussuWv",
+   "title": "Solution Provider Membership Badge",
+   "usage": "Open to anyone"
+  },
+  "csa-solution-provider-membership-badge-internal": {
+   "record": "rec3zOD6QOXussuWv",
+   "title": "Solution Provider Membership Badge",
+   "usage": "Open to anyone"
+  },
+  "csa-solution-provider-saas-membership-badge": {
+   "record": "recFFdKW5qfMRBAnA",
+   "title": "Solution Provider SaaS Membership Badge",
+   "usage": "Open to anyone"
+  },
+  "csa-star-attestation-approved-assessment-firm-badge": {
+   "record": "rec3n8GarwXjaUgWd",
+   "title": "STAR Attestation Approved Assessment Firm badge",
+   "usage": "Special use only"
+  },
+  "csa-star-certification-approved-assessment-firm-badge": {
+   "record": "reccqnZwOkqG0PZ0y",
+   "title": "STAR Certification Approved Assessment Firm",
+   "usage": "Special use only"
+  },
+  "csa-startup-membership-badge": {
+   "record": "rec3SAQOcZ8W3oTcz",
+   "title": "Startup Membership badge",
+   "usage": "Open to anyone"
+  },
+  "csa-training-logo": {
+   "record": "recbG1pxoj4TP7Slx",
+   "title": "CSA Training",
+   "usage": "Open to anyone"
+  },
+  "csa-training-logo-grayscale": {
+   "record": "recbG1pxoj4TP7Slx",
+   "title": "CSA Training",
+   "usage": "Open to anyone"
+  },
+  "csa-training-logo-white": {
+   "record": "recbG1pxoj4TP7Slx",
+   "title": "CSA Training",
+   "usage": "Open to anyone"
+  },
+  "csa-trusted-cloud-consultant-badge": {
+   "record": "recprRIEsmZnQ6c9n",
+   "title": "CSA_Trusted_Cloud_Consultant_badge.png.png",
+   "usage": "Special use only"
+  },
+  "csa-trusted-cloud-provider-badge": {
+   "record": "recKIbJlNZaUJCKuy",
+   "title": "Trusted Cloud Provider Badge",
+   "usage": "Special use only"
+  },
+  "csai-excluding-foundation/csai-icon-mark": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-excluding-foundation/csai-icon-mark-white": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-excluding-foundation/csai-lettermark": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-excluding-foundation/csai-lettermark-white": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-excluding-foundation/csai-logo-stacked": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-excluding-foundation/csai-logo-stacked-white": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-excluding-foundation/csai-primary-logo": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-excluding-foundation/csai-primary-logo-white": {
+   "record": "recY6n7J7a590cAKY",
+   "title": "CSAI Acronym",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-icon-mark": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-icon-mark-white": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-lettermark": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-lettermark-white": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-primary-logo": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-primary-logo-stacked": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-primary-logo-stacked-white": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "csai-foundation-primary-logo-white": {
+   "record": "recRhubPbkX2fqzAq",
+   "title": "CSAI Foundation",
+   "usage": "Open to anyone"
+  },
+  "executive-ai-safety-leadership-council-badge": {
+   "record": "recHQ89XjuPEakfb4",
+   "title": "Executive - AI Safety Leadership Council Badge",
+   "usage": "Special use only"
+  },
+  "iso-42001-badge-for-star-registry": {
+   "record": "recx45V86r0nPCc6m",
+   "title": "ISO 42001 Badge",
+   "usage": "Special use only"
+  },
+  "non-profit-ai-safety-leadership-council-badge": {
+   "record": "recTBJDTx6ag7anpA",
+   "title": "Non-Profit - AI Safety Leadership Council Badge copy copy",
+   "usage": "Special use only"
+  },
+  "star-enabled-solution-badge": {
+   "record": "recBelXE2y6X4u4EI",
+   "title": "STAR Enabled Solution Badge",
+   "usage": "Special use only"
+  },
+  "star-for-ai-level-one-badge": {
+   "record": "reciwW7ugJAPwPiZj",
+   "title": "STAR for AI Level One Badge",
+   "usage": "Special use only"
+  },
+  "star-for-ai-level-two-badge": {
+   "record": "recLwqcWWIeX0xy6w",
+   "title": "STAR for AI Level Two Badge",
+   "usage": "Special use only"
+  },
+  "star-for-ai-logo": {
+   "record": "recyAexLIuEqUkX0D",
+   "title": "STAR for AI Logo",
+   "usage": "Internal use only"
+  },
+  "star-for-ai-logo-reverse": {
+   "record": "recyAexLIuEqUkX0D",
+   "title": "STAR for AI Logo",
+   "usage": "Internal use only"
+  },
+  "star-for-ai-logo-reverse-simplified": {
+   "record": "recyAexLIuEqUkX0D",
+   "title": "STAR for AI Logo",
+   "usage": "Internal use only"
+  },
+  "star-for-ai-logo-reverse-w-bottom-text": {
+   "record": "recyAexLIuEqUkX0D",
+   "title": "STAR for AI Logo",
+   "usage": "Internal use only"
+  },
+  "star-for-ai-logo-simplified": {
+   "record": "recyAexLIuEqUkX0D",
+   "title": "STAR for AI Logo",
+   "usage": "Internal use only"
+  },
+  "star-for-ai-logo-w-bottom-text": {
+   "record": "recyAexLIuEqUkX0D",
+   "title": "STAR for AI Logo",
+   "usage": "Internal use only"
+  },
+  "star-for-ai-valid-ai-ted-badge": {
+   "record": "recpjlLOC8S3dCI1A",
+   "title": "STAR for AI Valid-AI-ted Badge",
+   "usage": "Special use only"
+  },
+  "star-level-1-badge": {
+   "record": "recVREzCbJbsIfTki",
+   "title": "STAR Level One Badge: Self-Assessment",
+   "usage": "Special use only"
+  },
+  "star-level-1-continuous-badge": {
+   "record": "recH93iD7BZrKXXwM",
+   "title": "STAR Level One Badge: Continuous",
+   "usage": "Special use only"
+  },
+  "star-level-2-badge": {
+   "record": "recYr73Wh9AS8ADwN",
+   "title": "STAR Level Two Badge",
+   "usage": "Special use only"
+  },
+  "star-logo-cmyk": {
+   "record": "recRUTOKFpgJ5p0Gl",
+   "title": "STAR Logo",
+   "usage": "Open to anyone"
+  },
+  "star-logo-grayscale": {
+   "record": "recRUTOKFpgJ5p0Gl",
+   "title": "STAR Logo",
+   "usage": "Open to anyone"
+  },
+  "star-logo-rgb": {
+   "record": "recRUTOKFpgJ5p0Gl",
+   "title": "STAR Logo",
+   "usage": "Open to anyone"
+  },
+  "star-logo-white": {
+   "record": "recRUTOKFpgJ5p0Gl",
+   "title": "STAR Logo",
+   "usage": "Open to anyone"
+  },
+  "star-platform-logo": {
+   "record": "recpQWN8pRDJpVZea",
+   "title": "STAR Platform",
+   "usage": "Internal use only"
+  },
+  "star-platform-logo-grayscale": {
+   "record": "recpQWN8pRDJpVZea",
+   "title": "STAR Platform",
+   "usage": "Internal use only"
+  },
+  "star-platform-logo-white": {
+   "record": "recpQWN8pRDJpVZea",
+   "title": "STAR Platform",
+   "usage": "Internal use only"
+  },
+  "star-valid-ai-ted-badge": {
+   "record": "recJSmY63xuifbGei",
+   "title": "STAR Valid-AI-ted Badge",
+   "usage": "Special use only"
+  },
+  "star-valid-ai-ted-icon-mark": {
+   "record": "rec6pbO2tATjy4J1S",
+   "title": "STAR Valid-AI-ted Logo",
+   "usage": "Special use only"
+  },
+  "star-valid-ai-ted-icon-mark-reverse": {
+   "record": "rec6pbO2tATjy4J1S",
+   "title": "STAR Valid-AI-ted Logo",
+   "usage": "Special use only"
+  },
+  "star-valid-ai-ted-logo": {
+   "record": "rec6pbO2tATjy4J1S",
+   "title": "STAR Valid-AI-ted Logo",
+   "usage": "Special use only"
+  },
+  "star-valid-ai-ted-logo-reverse": {
+   "record": "rec6pbO2tATjy4J1S",
+   "title": "STAR Valid-AI-ted Logo",
+   "usage": "Special use only"
+  },
+  "star-valid-ai-ted-logo-simplified": {
+   "record": "rec6pbO2tATjy4J1S",
+   "title": "STAR Valid-AI-ted Logo",
+   "usage": "Special use only"
+  },
+  "star-valid-ai-ted-logo-simplified-reverse": {
+   "record": "rec6pbO2tATjy4J1S",
+   "title": "STAR Valid-AI-ted Logo",
+   "usage": "Special use only"
+  },
+  "taise-logo": {
+   "record": "recqthKFDsVBMq2eD",
+   "title": "TAISE Logo",
+   "usage": "Open to anyone"
+  },
+  "taise-logo-csa-neu": {
+   "record": "recqthKFDsVBMq2eD",
+   "title": "TAISE Logo",
+   "usage": "Open to anyone"
+  },
+  "taise-logo-reverse-colors": {
+   "record": "recqthKFDsVBMq2eD",
+   "title": "TAISE Logo",
+   "usage": "Open to anyone"
+  },
+  "taise-logo-reverse-colors-csa-neu": {
+   "record": "recqthKFDsVBMq2eD",
+   "title": "TAISE Logo",
+   "usage": "Open to anyone"
+  },
+  "taise-logo-reverse-w-clear-space": {
+   "record": "recqthKFDsVBMq2eD",
+   "title": "TAISE Logo",
+   "usage": "Open to anyone"
+  },
+  "taise-logo-w-clear-space": {
+   "record": "recqthKFDsVBMq2eD",
+   "title": "TAISE Logo",
+   "usage": "Open to anyone"
+  },
+  "zero-trust-advancement-center-logo": {
+   "record": "rec5eWX9BU9FTH2hw",
+   "title": "ZERO-TRUST-Advancement-Center-logo-grayscale.png",
+   "usage": "Open to anyone"
+  },
+  "zero-trust-advancement-center-logo-grayscale": {
+   "record": "rec5eWX9BU9FTH2hw",
+   "title": "ZERO-TRUST-Advancement-Center-logo-grayscale.png",
+   "usage": "Open to anyone"
+  },
+  "zero-trust-advancement-center-logo-stacked": {
+   "record": "rec5eWX9BU9FTH2hw",
+   "title": "ZERO-TRUST-Advancement-Center-logo-grayscale.png",
+   "usage": "Open to anyone"
+  },
+  "zero-trust-advancement-center-logo-stacked-reverse": {
+   "record": "rec5eWX9BU9FTH2hw",
+   "title": "ZERO-TRUST-Advancement-Center-logo-grayscale.png",
+   "usage": "Open to anyone"
+  },
+  "zero-trust-advancement-center-logo-white": {
+   "record": "rec5eWX9BU9FTH2hw",
+   "title": "ZERO-TRUST-Advancement-Center-logo-grayscale.png",
+   "usage": "Open to anyone"
+  }
+ },
+ "_overrides_note": "Local decisions that win over the Airtable snapshot in \"files\" (applied by build-logo-manifest.py). Keep these when refreshing \"files\" from Airtable.",
+ "overrides": {
+  "aicm-logo": {
+   "usage": "Open to anyone"
+  },
+  "aicm-logo-reverse": {
+   "usage": "Open to anyone"
+  },
+  "aicm-logo-reverse-simplified": {
+   "usage": "Open to anyone"
+  },
+  "aicm-logo-reverse-w-bottom-text": {
+   "usage": "Open to anyone"
+  },
+  "aicm-logo-simplified": {
+   "usage": "Open to anyone"
+  },
+  "aicm-logo-w-bottom-text": {
+   "usage": "Open to anyone"
+  },
+  "star-valid-ai-ted-icon-mark": {
+   "usage": "Open to anyone"
+  },
+  "star-valid-ai-ted-icon-mark-reverse": {
+   "usage": "Open to anyone"
+  },
+  "star-valid-ai-ted-logo": {
+   "usage": "Open to anyone"
+  },
+  "star-valid-ai-ted-logo-reverse": {
+   "usage": "Open to anyone"
+  },
+  "star-valid-ai-ted-logo-simplified": {
+   "usage": "Open to anyone"
+  },
+  "star-valid-ai-ted-logo-simplified-reverse": {
+   "usage": "Open to anyone"
+  }
+ }
+}
