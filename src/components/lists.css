@@ -17,11 +17,17 @@
    accent; item text inherits the surface's body color like <p>.
    ========================================================= */
 
+/* Markers hang outside the text (wrapped lines align under the text,
+   not the bullet), so the padding is sized to the marker: the bullet
+   or number starts at the container's edge, in line with the
+   paragraphs around it. Bullets need .95em, numbers 1.15em ("1. " is
+   wider). Numbers 10 and up hang slightly past the edge. */
 .csa-list {
-  padding-left: .5em;
+  padding-left: .95em;
   line-height: 1.7;
   margin: 0;
 }
+ol.csa-list { padding-left: 1.15em; }
 .csa-list > li + li { margin-top: 6px; }
 .csa-list > li::marker { color: var(--o700); }
 
